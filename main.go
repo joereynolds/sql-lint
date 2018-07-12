@@ -9,7 +9,7 @@ import (
 func main() {
     a := checker.NotFoundColumn{"SELECT * FROM SOMETHING"}
 
-    b := lexer.Tokenize("k")
+    b := lexer.Tokenize("SELECT * FROM SOMETHING AND SOMETHING")
     fmt.Println(b)
 
     checks := []checker.Checker{a}

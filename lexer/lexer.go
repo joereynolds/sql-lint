@@ -2,7 +2,6 @@ package lexer
 
 import (
     "strings"
-    "fmt"
 )
 
 var token = map[string][]string {
@@ -10,34 +9,17 @@ var token = map[string][]string {
     "comment": {"#", "--"},
 }
 
-func Tokenize(query string) map[string][]string {
-    //TODO make this a struct
-    tokens := map [string][]string {
-        //MySQL keywords
-        "keyword": {},
-
-        //MySQL comments (-- or #)
-        "comment": {},
-
-        //Anything we haven't yet figured out
-        "uncategorised": {},
-
-        //Anything after a FROM statement is a table_reference
-        "table_reference": {},
-    }
+func Tokenize(query string) []string {
+    tokens := []string {}
 
     queryString := strings.Split(query, " ")
 
     for _, word := range queryString {
-        //TODO loop through each key of the tokens array instead of hardcoding keyword, comment and uncategorised
-        //TODO retain the order of the statement, we'll need to refactor this a bit to handle that.
         if stringInSlice(word, token["keyword"]) {
-            tokens["keyword"] = append(tokens["keyword"], word)
-        } else if stringInSlice(word, token["comment"]) {
-            tokens["comment"] = append(tokens["comment"], word)
+            tokens = append(tokens, []string{"keyword", word}...)
         } else {
             //TODO once we're happy with the structure as a whole, turn this to a panic
-            fmt.Println("Didn't recognise word '" + word + "', continuing..." )
+            tokens = append(tokens, []string{"unknown token", word}...)
         }
     }
 

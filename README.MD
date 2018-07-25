@@ -1,1 +1,6 @@
-This is the root
+
+To run  
+
+```
+go run main.go
+```

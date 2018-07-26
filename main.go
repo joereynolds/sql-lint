@@ -2,9 +2,9 @@ package main
 
 import (
     "fmt"
-    "sqlcheck/checker"
-    "sqlcheck/lexer"
-    "sqlcheck/lexer/manipulation"
+    "github.com/joereynolds/gauxilium/checker"
+    "github.com/joereynolds/gauxilium/lexer"
+    "github.com/joereynolds/gauxilium/lexer/manipulation"
 )
 
 func main() {

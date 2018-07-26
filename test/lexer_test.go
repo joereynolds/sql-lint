@@ -1,7 +1,7 @@
 package lexer
 
 import (
-    "sqlcheck/lexer"
+    "github.com/joereynolds/gauxilium/lexer"
     "testing"
 )
 

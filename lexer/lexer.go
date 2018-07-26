@@ -5,6 +5,12 @@ import (
     "fmt"
 )
 
+var token = map[string][]string{
+	"keyword":     {"select", "update", "from", "where", "set", "join", "having", "limit", "and", "or", "else", "if", "begin"},
+	"comment":     {"#", "--"},
+    "operator":    {"+", "-", "/",},
+}
+
 // Reads an SQL query and attempts to categorise it into
 // the relevant statement.
 // i.e.
@@ -18,13 +24,11 @@ func Categorise(query string) string {
 		return "delete"
 	}
 
-    panic("Unknown query type, query: " + query)
-}
+	if strings.HasPrefix(strings.ToLower(strings.TrimSpace(query)), "update") {
+		return "update"
+	}
 
-var token = map[string][]string{
-	"keyword":     {"select", "update", "from", "where", "set", "join", "having", "limit"},
-	"select_expr": {"*"},
-	"comment":     {"#", "--"},
+    panic("Unknown query type, query: " + query)
 }
 
 // The entry point for tokenisation.
@@ -39,11 +43,12 @@ func Tokenise(query string) []string {
         tokens = TokeniseSelect(query)
 	case "delete":
 		fmt.Println("delete lexxing here")
+	case "update":
+		fmt.Println("update lexxing here")
 	}
 
 	return tokens
 }
-
 
 func stringInSlice(s string, list []string) bool {
 	for _, item := range list {

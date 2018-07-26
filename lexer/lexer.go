@@ -5,12 +5,6 @@ import (
     "fmt"
 )
 
-var token = map[string][]string{
-	"keyword":     {"select", "update", "from", "where", "set", "join", "having", "limit"},
-	"select_expr": {"*"},
-	"comment":     {"#", "--"},
-}
-
 // Reads an SQL query and attempts to categorise it into
 // the relevant statement.
 // i.e.
@@ -24,7 +18,13 @@ func Categorise(query string) string {
 		return "delete"
 	}
 
-	return "Unknown query"
+    panic("Unknown query type, query: " + query)
+}
+
+var token = map[string][]string{
+	"keyword":     {"select", "update", "from", "where", "set", "join", "having", "limit"},
+	"select_expr": {"*"},
+	"comment":     {"#", "--"},
 }
 
 // The entry point for tokenisation.
@@ -36,24 +36,14 @@ func Tokenise(query string) []string {
 
 	switch category {
 	case "select":
-		fmt.Println("select lexxing here")
+        tokens = TokeniseSelect(query)
 	case "delete":
 		fmt.Println("delete lexxing here")
 	}
 
-	queryString := strings.Split(query, " ")
-
-	for _, word := range queryString {
-		if stringInSlice(word, token["keyword"]) {
-			tokens = append(tokens, []string{"keyword", word}...)
-		} else {
-			//TODO once we're happy with the structure as a whole, turn this to a panic
-			tokens = append(tokens, []string{"unknown token", word}...)
-		}
-	}
-
 	return tokens
 }
+
 
 func stringInSlice(s string, list []string) bool {
 	for _, item := range list {

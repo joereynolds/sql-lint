@@ -1,10 +1,10 @@
 // Checker for columns that cannot be found in a certain table.
 package checker
 
-type NotFoundColumn struct {
+type SelectMissingExpr struct {
     SqlQuery string
 }
 
-func (nfc NotFoundColumn) Check() int {
+func (sme SelectMissingExpr) Check() int {
     return 1
 }

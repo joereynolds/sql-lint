@@ -2,9 +2,9 @@
 package checker
 
 type NotFoundColumn struct {
-    SqlQuery string
+	SqlQuery string
 }
 
 func (nfc NotFoundColumn) Check() int {
-    return 1
+	return 1
 }

@@ -2,9 +2,9 @@
 package checker
 
 type SelectMissingExpr struct {
-    SqlQuery string
+	SqlQuery string
 }
 
 func (sme SelectMissingExpr) Check() int {
-    return 1
+	return 1
 }

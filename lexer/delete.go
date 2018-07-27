@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func TokeniseSelect(query string) []string {
+func TokeniseDelete(query string) []string {
 
 	tokens := []string{}
 	queryString := strings.Split(query, " ")
@@ -14,7 +14,7 @@ func TokeniseSelect(query string) []string {
 
 		if stringInSlice(word, token["keyword"]) {
 			tokens = append(tokens, []string{"keyword", word}...)
-		} else if i > 0 && (lastAdded == "SELECT" || lastAdded == "FROM") {
+		} else if i > 0 && lastAdded == "FROM" {
 			tokens = append(tokens, []string{"table_reference", word}...)
 		} else {
 			//TODO once we're happy with the structure as a whole, turn this to a panic

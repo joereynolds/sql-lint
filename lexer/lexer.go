@@ -1,14 +1,16 @@
 package lexer
 
 import (
+	"fmt"
 	"strings"
-    "fmt"
 )
 
 var token = map[string][]string{
-	"keyword":     {"select", "update", "from", "where", "set", "join", "having", "limit", "and", "or", "else", "if", "begin"},
+	"keyword":     {"select", "delete", "update", "from", "where", "set", "join", "having", "limit", "else", "if", "begin"},
 	"comment":     {"#", "--"},
-    "operator":    {"+", "-", "/",},
+	"boolean":     {"true", "false", "null"},
+	"conditional": {"and", "or"},
+	"operator":    {"+", "-", "/"},
 }
 
 // Reads an SQL query and attempts to categorise it into
@@ -28,7 +30,7 @@ func Categorise(query string) string {
 		return "update"
 	}
 
-    panic("Unknown query type, query: " + query)
+	panic("Unknown query type, query: " + query)
 }
 
 // The entry point for tokenisation.
@@ -40,9 +42,9 @@ func Tokenise(query string) []string {
 
 	switch category {
 	case "select":
-        tokens = TokeniseSelect(query)
+		tokens = TokeniseSelect(query)
 	case "delete":
-		fmt.Println("delete lexxing here")
+		tokens = TokeniseDelete(query)
 	case "update":
 		fmt.Println("update lexxing here")
 	}

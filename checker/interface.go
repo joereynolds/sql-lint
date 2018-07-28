@@ -5,8 +5,8 @@ type Checker interface {
 }
 
 type LintResult struct {
-    Message string
-    HasError int
-    Line int    
-    Column int
+	Message  string
+	HasError int
+	Line     int
+	Column   int
 }

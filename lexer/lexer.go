@@ -30,11 +30,13 @@ func Categorise(query string) string {
 		return "update"
 	}
 
+	if strings.HasPrefix(strings.ToLower(strings.TrimSpace(query)), "insert") {
+		return "insert"
+	}
+
 	panic("Unknown query type, query: " + query)
 }
 
-// The entry point for tokenisation.
-// It proxies through to the relevant lexer depending on what kind of query you supply.
 func Tokenise(query string) []string {
 	tokens := []string{}
 

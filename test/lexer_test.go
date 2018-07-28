@@ -14,23 +14,27 @@ func TestLexerCategorisesQueriesCorrectly(t *testing.T) {
 	}{
 		{
 			// Normal select
-			"select",
 			lexer.Categorise("SELECT * FROM person"),
+			"select",
 		},
 		{
 			// Select with whitespace
-			"select",
 			lexer.Categorise("    SELECT * FROM person"),
+			"select",
 		},
 		{
 			// Select with lowercase
-			"select",
 			lexer.Categorise("    select * from person"),
+			"select",
 		},
 		{
 			// delete
-			"delete",
 			lexer.Categorise("DELETE FROM person WHERE id = 5"),
+			"delete",
+		},
+		{
+			lexer.Categorise("INSERT INTO person"),
+			"insert",
 		},
 	}
 

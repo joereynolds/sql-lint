@@ -12,7 +12,7 @@ func TokeniseDelete(query string) []string {
 	lastAdded := ""
 	for i, word := range queryString {
 
-		if stringInSlice(word, token["keyword"]) {
+		if StringInSlice(word, token["keyword"]) {
 			tokens = append(tokens, []string{"keyword", word}...)
 		} else if i > 0 && lastAdded == "FROM" {
 			tokens = append(tokens, []string{"table_reference", word}...)

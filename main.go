@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	// "github.com/joereynolds/gauxilium/checker"
+	"github.com/joereynolds/gauxilium/checker"
 	"github.com/joereynolds/gauxilium/lexer"
 )
 
@@ -11,10 +11,10 @@ func main() {
 
 	fmt.Println(b)
 
-	// a := checker.NotFoundColumn{"SELECT * FROM person"}
-	// checks := []checker.Checker{a}
+	a := checker.DeleteNoWhere{b}
+	checks := []checker.Checker{a}
 
-	// for _, check := range checks {
-	// 	fmt.Println(check.Check())
-	// }
+	for _, check := range checks {
+		fmt.Println(check.Check())
+	}
 }

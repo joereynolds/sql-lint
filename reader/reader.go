@@ -5,8 +5,8 @@ package reader
 
 import (
 	"fmt"
-    "strings"
 	"io/ioutil"
+	"strings"
 )
 
 // TODO -Make this return an array of queries, ';' is the terminator.

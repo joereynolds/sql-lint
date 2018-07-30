@@ -1,10 +1,25 @@
-// Checker for columns that cannot be found in a certain table.
+// Checker for a query with no column specified in the select.
+// e.g. "SELECT FROM person" is missing * or a column
+
 package checker
 
+import (
+// "github.com/joereynolds/gauxilium/lexer"
+// "regexp"
+// "fmt"
+// "strings"
+)
+
 type SelectMissingExpr struct {
-	SqlQuery string
+	SqlQuery []string
 }
 
-func (sme SelectMissingExpr) Check() int {
-	return 1
+func (sme SelectMissingExpr) Check() LintResult {
+
+	return LintResult{
+		"SELECT statement is missing a column name after `SELECT`.",
+		1,
+		1,
+		1,
+	}
 }

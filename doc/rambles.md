@@ -146,12 +146,13 @@ each check should have a `parse()` method which takes a string, the SQL statemen
 
 #### Error struct   
 
+```
 {
     column int  
     line int    
     message string
 }
-
+```
 
 #### Example (kinda)
 

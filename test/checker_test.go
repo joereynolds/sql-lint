@@ -44,3 +44,21 @@ func TestDeleteCheckerDoesNotWarnIfWherePresent(t *testing.T) {
 		},
 	)
 }
+
+// func TestSelectMissingExprWarnIfMissingColumnOrWildcard(t *testing.T) {
+// 	lex := lexer.Tokenise("SELECT FROM person")
+// 	check := checker.SelectMissingExpr{lex}
+
+// 	actual := check.Check()
+
+// 	assert.Equal(
+// 		t,
+// 		actual,
+// 		checker.LintResult{
+// 			Message:  "",
+// 			HasError: 0,
+// 			Line:     0,
+// 			Column:   0,
+// 		},
+// 	)
+// }

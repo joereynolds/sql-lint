@@ -34,7 +34,7 @@ func Categorise(query string) string {
 		return "insert"
 	}
 
-	panic("Unknown query type, query: " + query)
+	panic("Unknown query type, accepted types are [insert, update, delete, select]. Query: " + query)
 }
 
 func Tokenise(query string) []string {

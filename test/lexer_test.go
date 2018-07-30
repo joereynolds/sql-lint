@@ -59,6 +59,16 @@ func TestLexerCategorisesSelectStatementsCorrectly(t *testing.T) {
 			lexer.TokeniseSelect("SELECT surname FROM person"),
 			[]string{"keyword", "SELECT", "table_reference", "surname", "keyword", "FROM", "table_reference", "person"},
 		},
+		{
+			//Missing a table_reference
+			lexer.TokeniseSelect("SELECT FROM person"),
+			[]string{"keyword", "SELECT", "keyword", "FROM", "table_reference", "person"},
+		},
+		{
+			//KEYWORD in place of table_reference
+			lexer.TokeniseSelect("SELECT UPDATE FROM person"),
+			[]string{"keyword", "SELECT", "keyword", "UPDATE", "keyword", "FROM", "table_reference", "person"},
+		},
 	}
 
 	for _, test := range tables {

@@ -29,22 +29,38 @@ func main() {
 }
 
 func lintQueries(queries []string) {
+
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println(r)
+			os.Exit(2)
+
+		}
+	}()
+
 	for _, query := range queries {
 		fmt.Println("Linting `" + query + "`")
 
-		b := lexer.Tokenise(query)
+		tokenised := lexer.Tokenise(query)
+		category := lexer.Categorise(query)
 
-		deleteNoWhere := checker.DeleteNoWhere{b}
-		selectMissingExpr := checker.SelectMissingExpr{b}
-
-		checks := []checker.Checker{
-			deleteNoWhere,
-			selectMissingExpr,
+		selectChecks := []checker.Checker{
+			checker.SelectMissingExpr{tokenised},
 		}
 
-		for _, check := range checks {
-			fmt.Println(check.Check())
+		deleteChecks := []checker.Checker{
+			checker.DeleteNoWhere{tokenised},
+		}
+
+		switch category {
+		case "select":
+			for _, check := range selectChecks {
+				fmt.Println(check.Check())
+			}
+		case "delete":
+			for _, check := range deleteChecks {
+				fmt.Println(check.Check())
+			}
 		}
 	}
-
 }

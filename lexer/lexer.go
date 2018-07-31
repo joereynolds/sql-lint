@@ -6,7 +6,20 @@ import (
 )
 
 var token = map[string][]string{
-	"keyword":     {"select", "delete", "update", "from", "where", "set", "join", "having", "limit", "else", "if", "begin"},
+	"keyword": {
+		"select",
+		"delete",
+		"update",
+		"from",
+		"where",
+		"set",
+		"join",
+		"having",
+		"limit",
+		"else",
+		"if",
+		"begin",
+	},
 	"comment":     {"#", "--"},
 	"boolean":     {"true", "false", "null"},
 	"conditional": {"and", "or"},

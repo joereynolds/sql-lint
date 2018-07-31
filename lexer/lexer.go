@@ -69,7 +69,7 @@ func Tokenise(query string) []string {
 
 func StringInSlice(s string, list []string) bool {
 	for _, item := range list {
-		if strings.TrimSpace(strings.ToLower(item)) == strings.ToLower(s) {
+		if strings.TrimSpace(strings.ToLower(item)) == strings.TrimSpace(strings.ToLower(s)) {
 			return true
 		}
 	}

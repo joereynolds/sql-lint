@@ -25,6 +25,8 @@ func main() {
 		queryToLint = reader.GetQueriesFromFile(*file)
 	}
 
+	reader.GetQueriesFromFileTwo(*file)
+
 	lintQueries(queryToLint)
 }
 

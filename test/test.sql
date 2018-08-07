@@ -1,10 +1,3 @@
-DELETE 
-FROM
-
-PERSON;
-
-
-
 DELETE FROM 
 person  
 WHERE

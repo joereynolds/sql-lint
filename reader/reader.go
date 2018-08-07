@@ -1,15 +1,18 @@
-// Checker for a query with no column specified in the select.
-// e.g. "SELECT FROM person" is missing * or a column
-
 package reader
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
-// TODO -Make this return an array of queries, ';' is the terminator.
+type Line struct {
+	Content    string
+	LineNumber int
+}
+
 func GetQueriesFromFile(filepath string) []string {
 	content, err := ioutil.ReadFile(filepath)
 
@@ -20,7 +23,36 @@ func GetQueriesFromFile(filepath string) []string {
 	return strings.Split(strings.TrimSpace(string(content)), ";")
 }
 
-// TODO -Make this return an array of queries, ';' is the terminator.
 func GetQueriesFromString(query string) []string {
 	return strings.Split(query, ";")
+}
+
+func GetQueriesFromFileTwo(filepath string) ([]Line, error) {
+
+	file, err := os.Open(filepath)
+	reader := bufio.NewReader(file)
+	lines := []Line{}
+	currentLineNumber := 1
+	defer file.Close()
+
+	if err != nil {
+		return lines, err
+	}
+
+	for {
+		line, err := reader.ReadString('\n')
+
+		lines = append(lines, Line{
+			line,
+			currentLineNumber,
+		})
+
+		currentLineNumber++
+
+		if err != nil {
+			break
+		}
+	}
+
+	return lines, err
 }

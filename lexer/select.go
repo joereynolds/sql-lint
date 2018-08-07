@@ -1,13 +1,14 @@
 package lexer
 
 import (
+	"github.com/joereynolds/gauxilium/reader"
 	"strings"
 )
 
-func TokeniseSelect(query string) []string {
+func TokeniseSelect(query []reader.Line) []string {
 
 	tokens := []string{}
-	queryString := strings.Split(query, " ")
+	queryString := strings.Split(reader.GetQueryFromLineStruct(query), " ")
 
 	lastAdded := ""
 	for i, word := range queryString {
@@ -22,6 +23,5 @@ func TokeniseSelect(query string) []string {
 		}
 		lastAdded = word
 	}
-
 	return tokens
 }

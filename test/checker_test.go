@@ -3,13 +3,14 @@ package lexer
 import (
 	"github.com/joereynolds/gauxilium/checker"
 	"github.com/joereynolds/gauxilium/lexer"
+	"github.com/joereynolds/gauxilium/reader"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestDeleteCheckerWarnsAboutMissingWhere(t *testing.T) {
 
-	lex := lexer.Tokenise("DELETE FROM person")
+	lex := lexer.Tokenise([]reader.Line{reader.Line{Content: "DELETE FROM person"}})
 	check := checker.DeleteNoWhere{lex}
 
 	actual := check.Check()
@@ -28,7 +29,7 @@ func TestDeleteCheckerWarnsAboutMissingWhere(t *testing.T) {
 
 func TestDeleteCheckerDoesNotWarnIfWherePresent(t *testing.T) {
 
-	lex := lexer.Tokenise("DELETE FROM person WHERE name = 'john'")
+	lex := lexer.Tokenise([]reader.Line{reader.Line{Content: "DELETE FROM person WHERE name = 'john'"}})
 	check := checker.DeleteNoWhere{lex}
 
 	actual := check.Check()

@@ -19,53 +19,55 @@ func main() {
 		os.Exit(2)
 	}
 
-	queryToLint := reader.GetQueriesFromString(*query)
-
-	if *file != "" {
-		queryToLint = reader.GetQueriesFromFile(*file)
+	if *query != "" {
+		queryToLint, err := reader.GetQueriesFromString(*query)
+		lintQueries(queryToLint)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return
 	}
 
-	reader.GetQueriesFromFileTwo(*file)
+	if *file != "" {
+		queryToLint, err := reader.GetQueriesFromFile(*file)
+		lintQueries(queryToLint)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return
+	}
 
-	lintQueries(queryToLint)
 }
 
-func lintQueries(queries []string) {
+func lintQueries(queries []reader.Line) {
 
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println(r)
 			os.Exit(2)
-
 		}
 	}()
+	fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
 
-	for _, query := range queries {
-		if len(query) > 0 {
-			fmt.Println(len(query))
-			fmt.Println("Linting `" + query + "`")
+	tokenised := lexer.Tokenise(queries)
+	category := lexer.Categorise(queries)
 
-			tokenised := lexer.Tokenise(query)
-			category := lexer.Categorise(query)
+	selectChecks := []checker.Checker{
+		checker.SelectMissingExpr{tokenised},
+	}
 
-			selectChecks := []checker.Checker{
-				checker.SelectMissingExpr{tokenised},
-			}
+	deleteChecks := []checker.Checker{
+		checker.DeleteNoWhere{tokenised},
+	}
 
-			deleteChecks := []checker.Checker{
-				checker.DeleteNoWhere{tokenised},
-			}
-
-			switch category {
-			case "select":
-				for _, check := range selectChecks {
-					fmt.Println(check.Check())
-				}
-			case "delete":
-				for _, check := range deleteChecks {
-					fmt.Println(check.Check())
-				}
-			}
+	switch category {
+	case "select":
+		for _, check := range selectChecks {
+			fmt.Println(check.Check())
+		}
+	case "delete":
+		for _, check := range deleteChecks {
+			fmt.Println(check.Check())
 		}
 	}
 }

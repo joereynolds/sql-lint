@@ -12,12 +12,12 @@ import (
 func main() {
 	file := flag.String("file", "", "The path of the file to lint")
 	query := flag.String("query", "", "The query to execute")
-    verbose := flag.Bool("verbose", false, "Whether we want more information to be displayed")
+	verbose := flag.Bool("verbose", false, "Whether we want more information to be displayed")
 	flag.Parse()
 
 	if *file == "" && *query == "" {
 		fmt.Println("Please supply either a query with the `--query` flag or a file with the `--file` flag.")
-        return
+		return
 	}
 
 	if *query != "" {
@@ -48,9 +48,9 @@ func lintQueries(queries []reader.Line, verbose bool) {
 		}
 	}()
 
-    if verbose {
-        fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
-    }
+	if verbose {
+		fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
+	}
 
 	tokenised := lexer.Tokenise(queries)
 	category := lexer.Categorise(queries)

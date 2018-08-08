@@ -1,22 +1,22 @@
 package lexer
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
+	"os/exec"
 	"testing"
-    "os/exec"
-    "fmt"
 )
 
 func TestCommandGivesHelpIfNoArgsSupplied(t *testing.T) {
-    actual, err :=  exec.Command("go", "run", "../main.go").CombinedOutput()
+	actual, err := exec.Command("go", "run", "../main.go").CombinedOutput()
 
-    if err != nil {
-        fmt.Println(err)
-    }
+	if err != nil {
+		fmt.Println(err)
+	}
 
-    expected := "Please supply either a query with the `--query` flag or a file with the `--file` flag.\n"
+	expected := "Please supply either a query with the `--query` flag or a file with the `--file` flag.\n"
 
-    assert.Equal(t, expected, string(actual))
+	assert.Equal(t, expected, string(actual))
 }
 
 // func TestCommandThroughActualUse(t *testing.T) {

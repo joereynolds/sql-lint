@@ -48,12 +48,14 @@ func lintQueries(queries []reader.Line, verbose bool) {
 		}
 	}()
 
-	if verbose {
-		fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
-	}
 
 	tokenised := lexer.Tokenise(queries)
 	category := lexer.Categorise(queries)
+
+	if verbose {
+		fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
+        fmt.Println(tokenised)
+	}
 
 	selectChecks := []checker.Checker{
 		checker.SelectMissingExpr{tokenised},

@@ -8,6 +8,7 @@ import (
 type Line struct {
 	Content    string
 	LineNumber int
+    Tokens string
 }
 
 func GetQueriesFromString(query string) ([]Line, error) {
@@ -32,6 +33,7 @@ func GetQueriesFromFile(filepath string) ([]Line, error) {
 		lines = append(lines, Line{
 			line,
 			currentLineNumber,
+            "",
 		})
 
 		currentLineNumber++

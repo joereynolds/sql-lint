@@ -12,60 +12,67 @@ import (
 func main() {
 	file := flag.String("file", "", "The path of the file to lint")
 	query := flag.String("query", "", "The query to execute")
+	verbose := flag.Bool("verbose", false, "Whether we want more information to be displayed")
 	flag.Parse()
 
 	if *file == "" && *query == "" {
 		fmt.Println("Please supply either a query with the `--query` flag or a file with the `--file` flag.")
-		os.Exit(2)
+		return
 	}
 
-	queryToLint := reader.GetQueriesFromString(*query)
+	if *query != "" {
+		queryToLint, err := reader.GetQueriesFromString(*query)
+		lintQueries(queryToLint, *verbose)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return
+	}
 
 	if *file != "" {
-		queryToLint = reader.GetQueriesFromFile(*file)
+		queryToLint, err := reader.GetQueriesFromFile(*file)
+		lintQueries(queryToLint, *verbose)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return
 	}
-
-	reader.GetQueriesFromFileTwo(*file)
-
-	lintQueries(queryToLint)
 }
 
-func lintQueries(queries []string) {
+func lintQueries(queries []reader.Line, verbose bool) {
 
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println(r)
 			os.Exit(2)
-
 		}
 	}()
 
-	for _, query := range queries {
-		if len(query) > 0 {
-			fmt.Println(len(query))
-			fmt.Println("Linting `" + query + "`")
 
-			tokenised := lexer.Tokenise(query)
-			category := lexer.Categorise(query)
+	tokenised := lexer.Tokenise(queries)
+	category := lexer.Categorise(queries)
 
-			selectChecks := []checker.Checker{
-				checker.SelectMissingExpr{tokenised},
-			}
+	if verbose {
+		fmt.Println("Linting `" + reader.GetQueryFromLineStruct(queries) + "`")
+        fmt.Println(tokenised)
+	}
 
-			deleteChecks := []checker.Checker{
-				checker.DeleteNoWhere{tokenised},
-			}
+	selectChecks := []checker.Checker{
+		checker.SelectMissingExpr{tokenised},
+	}
 
-			switch category {
-			case "select":
-				for _, check := range selectChecks {
-					fmt.Println(check.Check())
-				}
-			case "delete":
-				for _, check := range deleteChecks {
-					fmt.Println(check.Check())
-				}
-			}
+	deleteChecks := []checker.Checker{
+		checker.DeleteNoWhere{tokenised},
+	}
+
+	switch category {
+	case "select":
+		for _, check := range selectChecks {
+			fmt.Println(check.Check())
+		}
+	case "delete":
+		for _, check := range deleteChecks {
+			fmt.Println(check.Check())
 		}
 	}
 }

@@ -1,13 +1,14 @@
 package lexer
 
 import (
+	"github.com/joereynolds/gauxilium/reader"
 	"strings"
 )
 
-func TokeniseDelete(query string) []string {
+func TokeniseDelete(query []reader.Line) []string {
 
 	tokens := []string{}
-	queryString := strings.Split(query, " ")
+	queryString := strings.Split(reader.GetQueryFromLineStruct(query), " ")
 
 	lastAdded := ""
 	for i, word := range queryString {

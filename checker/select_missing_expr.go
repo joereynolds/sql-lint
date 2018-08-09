@@ -17,7 +17,7 @@ type SelectMissingExpr struct {
 func (sme SelectMissingExpr) Check() LintResult {
 
 	return LintResult{
-		"SELECT statement is missing a column name after `SELECT`.",
+		"SELECT statement is missing a column name after `SELECT`. This is a hardcoded response. FIXME",
 		1,
 		1,
 		1,

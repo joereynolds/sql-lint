@@ -47,6 +47,6 @@ func TestReaderCorrectlyNumbersFileAndContents(t *testing.T) {
 		},
 	}
 
-	actual, _ := reader.GetQueriesFromFileTwo("./test.sql")
+	actual, _ := reader.GetQueriesFromFile("./test.sql")
 	assert.Equal(t, expected, actual)
 }

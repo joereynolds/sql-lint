@@ -2,32 +2,20 @@ package reader
 
 import (
 	"bufio"
-	"fmt"
-	"io/ioutil"
 	"os"
-	"strings"
 )
 
 type Line struct {
 	Content    string
 	LineNumber int
+    Tokens string
 }
 
-func GetQueriesFromFile(filepath string) []string {
-	content, err := ioutil.ReadFile(filepath)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return strings.Split(strings.TrimSpace(string(content)), ";")
+func GetQueriesFromString(query string) ([]Line, error) {
+	return []Line{Line{Content: query}}, nil
 }
 
-func GetQueriesFromString(query string) []string {
-	return strings.Split(query, ";")
-}
-
-func GetQueriesFromFileTwo(filepath string) ([]Line, error) {
+func GetQueriesFromFile(filepath string) ([]Line, error) {
 
 	file, err := os.Open(filepath)
 	reader := bufio.NewReader(file)
@@ -45,6 +33,7 @@ func GetQueriesFromFileTwo(filepath string) ([]Line, error) {
 		lines = append(lines, Line{
 			line,
 			currentLineNumber,
+            "",
 		})
 
 		currentLineNumber++
@@ -55,4 +44,14 @@ func GetQueriesFromFileTwo(filepath string) ([]Line, error) {
 	}
 
 	return lines, err
+}
+
+func GetQueryFromLineStruct(lines []Line) string {
+	var query string
+
+	for _, line := range lines {
+		query += line.Content
+	}
+
+	return query
 }

@@ -37,6 +37,19 @@ test.each([
             ["table_reference", "last_name"],
             ["keyword", "from"],
             ["table_reference", "person"]
+        ],
+    ],
+    [
+        "SELECT * FROM person WHERE name = 'test'",
+        [
+            ["keyword", "select"],
+            ["table_reference", "*"],
+            ["keyword", "from"],
+            ["table_reference", "person"],
+            ["keyword", "where"],
+            ["???", "name"],
+            ["???", "="],
+            ["???", "'test'"],
         ]
     ]
 ])("It tokenises a select correctly", (query, expected) => {

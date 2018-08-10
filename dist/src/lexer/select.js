@@ -11,8 +11,11 @@ class Select {
             if (tokens_1.TOKENS.keyword.includes(item)) {
                 tokenised.push(["keyword", item]);
             }
-            if (lastToken === "select" || lastToken === "from") {
+            else if (lastToken === "select" || lastToken === "from") {
                 tokenised.push(["table_reference", item]);
+            }
+            else {
+                tokenised.push(["???", item]);
             }
             lastToken = item;
         });

@@ -3,6 +3,7 @@ import { IChecker } from "./interface";
 
 class OddCodePoint implements IChecker {
   public check(query: string): CheckerResult {
+    console.log('called')
     const badCodePoints = [65533];
 
     for (const char of query) {

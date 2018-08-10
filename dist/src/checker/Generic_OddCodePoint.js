@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("./checkerResult");
 class OddCodePoint {
     check(query) {
+        console.log('called');
         const badCodePoints = [65533];
         for (const char of query) {
             const codePoint = char.codePointAt(0);

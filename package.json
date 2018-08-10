@@ -46,5 +46,9 @@
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "test": "jest test"
     },
-    "version": "0.0.2"
+    "version": "0.0.2",
+    "devDependencies": {
+        "prettier": "^1.14.2",
+        "tslint-config-prettier": "^1.14.0"
+    }
 }

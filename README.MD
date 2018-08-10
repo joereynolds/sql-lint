@@ -1,9 +1,10 @@
 ## To run  
 
-First run `npm-link` to build it locally and now you can use `sql-lint`
+Run `./build.sh`, after that, you will have `sql-lint` installed locally.
+This is a workaround until a package is made.
 
 ## To test  
 
 ```
-npm run start //This will run more than just the tests (recommended)
+./build.sh //This will run more than just the tests (recommended)
 ```

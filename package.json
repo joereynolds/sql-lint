@@ -27,7 +27,9 @@
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
-        }
+        },
+        "verbose": true,
+        "testURL": "http://localhost/"
     },
     "keywords": [
         "sql",

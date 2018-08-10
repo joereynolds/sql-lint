@@ -46,5 +46,5 @@
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "test": "jest test"
     },
-    "version": "0.0.1"
+    "version": "0.0.2"
 }

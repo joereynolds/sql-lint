@@ -3,7 +3,7 @@
 import * as program from "commander";
 import * as process from "process";
 
-const version = "0.0.1";
+const version = "0.0.2";
 
 function increaseVerbosity(v: any, total: any) {
     return total + 1;

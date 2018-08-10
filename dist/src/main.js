@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const process = require("process");
-const version = "0.0.1";
+const version = "0.0.2";
 function increaseVerbosity(v, total) {
     return total + 1;
 }

@@ -1,1 +1,0 @@
-- A select should require a `select_expr` immediately after it (for now)

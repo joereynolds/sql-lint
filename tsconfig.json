@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "lib": [
+            "es7"
+        ],
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "outDir": "dist",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ]
+        },
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "target": "es2015"
+    },
+    "exclude": [
+        "dist/**/*"
+    ],
+    "include": [
+        "src/**/*",
+        "./test/**/*"
+    ]
+}

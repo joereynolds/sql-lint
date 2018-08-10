@@ -1,2 +1,4 @@
-go test -v ./...
-go fmt ./...
+npm run build
+npm run lint
+npm run test
+

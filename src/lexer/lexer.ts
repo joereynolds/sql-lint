@@ -1,3 +1,5 @@
+import { ILexer } from "./interface";
+import { Select } from "./select"
 
 function categorise(query: string) {
     query = query.trim().toLowerCase();
@@ -17,4 +19,20 @@ function categorise(query: string) {
     throw new Error(`Unable to categorise query: ${query}`);
 }
 
-export { categorise };
+function tokenise(query: string): string[][] {
+    const category = categorise(query)
+    let tokeniser: ILexer;
+
+    switch (category) {
+        case "select": {
+            tokeniser = new Select();
+        }
+        default:
+            tokeniser = new Select();
+    }
+
+    const tokens = tokeniser.tokenise(query)
+    return tokens;
+}
+
+export { categorise, tokenise };

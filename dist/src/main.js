@@ -14,24 +14,20 @@ program
     .parse(process.argv);
 let query = "";
 if (program.query) {
-    console.log("Linting query");
     query = program.query;
-    console.log(lexer_1.categorise(program.query));
 }
 if (program.file) {
-    // TODO
-    /* query = program.file */
-    console.log("Linting file");
+    query = program.file;
 }
 const selectChecks = [];
 const genericChecks = [
     new Generic_OddCodePoint_1.OddCodePoint()
 ];
 const allChecks = [selectChecks, genericChecks];
+const tokenised = lexer_1.tokenise(query);
 allChecks.forEach((checks) => {
     checks.forEach((check) => {
-        console.log(check.check(query));
+        console.log(check.check(tokenised));
     });
 });
-console.log("working");
 //# sourceMappingURL=main.js.map

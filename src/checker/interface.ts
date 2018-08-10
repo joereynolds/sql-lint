@@ -2,7 +2,7 @@ import { CheckerResult } from "./checkerResult";
 
 
 interface IChecker {
-  check(query: string): CheckerResult;
+  check(query: string[][]): CheckerResult;
 }
 
 export { IChecker };

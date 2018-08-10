@@ -1,6 +1,6 @@
 {
     "bin": {
-        "sql-lint": "./dist/src/main.js"
+        "sql-lint": "./dist/main.js"
     },
     "dependencies": {
         "@types/jest": "^23.3.1",

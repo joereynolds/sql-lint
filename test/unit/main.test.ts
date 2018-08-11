@@ -13,11 +13,18 @@ test("Tokens are populated with a query on instantiation", () => {
 });
 
 test("Tokens can retrieve their content", () => {
-  //
+  const t = new Tokens("SELECT * FROM test");
+  const actual = t.getContent();
+  const expected = "SELECT * FROM test";
+  expect(actual).toEqual(expected);
 });
 
-test("Tokens can retrieve their tokens", () => {
-  //
+test("Tokens can add a token", () => {
+  const t = new Tokens("");
+  t.addToken("keyword");
+  const actual = t.getTokens();
+  const expected = ["keyword"];
+  expect(actual).toEqual(expected);
 });
 
 test("Tokens can retrieve their tokenised content", () => {

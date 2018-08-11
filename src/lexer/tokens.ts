@@ -11,7 +11,7 @@ class Tokens {
      * The tokens that have come from tokenising the query
      * i.e. ["keyword", "table_reference", "keyword", "table_reference"]
      */
-    public tokens: string;
+    public tokens: string[] = [];
 
     /**
      * The tokens and the query together
@@ -33,15 +33,19 @@ class Tokens {
     }
 
     public getTokens(): string[] {
-        return ["nothing"]
+        return this.tokens;
     }
 
     public getContent(): string {
-        return "nothing";
+        return this.content;
     }
 
     public addToken(token: string): void {
-        console.log('t');
+        this.tokens.push(token);
+    }
+
+    public addTokenised(tokenised: string[]) {
+        //
     }
 }
 

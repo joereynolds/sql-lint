@@ -2,8 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../../src/lexer/lexer");
 const select_1 = require("../../src/lexer/select");
+const tokens_1 = require("../../src/lexer/tokens");
 test("The framework is running", () => {
     expect(1).toEqual(1);
+});
+test("Tokens are populated with a query on instantiation", () => {
+    const actual = new tokens_1.Tokens("SELECT * FROM test");
+    const expected = "SELECT * FROM test";
+    expect(actual.content).toEqual(expected);
+});
+test("Tokens can retrieve their content", () => {
+    //
+});
+test("Tokens can retrieve their tokens", () => {
+    //
+});
+test("Tokens can retrieve their tokenised content", () => {
+    //
 });
 test.each([
     // SELECT statements
@@ -37,7 +52,7 @@ test.each([
             ["table_reference", "last_name"],
             ["keyword", "from"],
             ["table_reference", "person"]
-        ],
+        ]
     ],
     [
         "SELECT * FROM person WHERE name = 'test'",
@@ -49,7 +64,7 @@ test.each([
             ["keyword", "where"],
             ["???", "name"],
             ["???", "="],
-            ["???", "'test'"],
+            ["???", "'test'"]
         ]
     ]
 ])("It tokenises a select correctly", (query, expected) => {

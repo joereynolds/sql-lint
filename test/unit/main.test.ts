@@ -1,8 +1,27 @@
 import { categorise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
+import { Tokens } from "../../src/lexer/tokens";
 
 test("The framework is running", () => {
   expect(1).toEqual(1);
+});
+
+test("Tokens are populated with a query on instantiation", () => {
+  const actual = new Tokens("SELECT * FROM test");
+  const expected = "SELECT * FROM test";
+  expect(actual.content).toEqual(expected);
+});
+
+test("Tokens can retrieve their content", () => {
+  //
+});
+
+test("Tokens can retrieve their tokens", () => {
+  //
+});
+
+test("Tokens can retrieve their tokenised content", () => {
+  //
 });
 
 test.each([
@@ -42,7 +61,7 @@ test.each([
       ["table_reference", "last_name"],
       ["keyword", "from"],
       ["table_reference", "person"]
-    ],
+    ]
   ],
   [
     "SELECT * FROM person WHERE name = 'test'",
@@ -54,7 +73,7 @@ test.each([
       ["keyword", "where"],
       ["???", "name"],
       ["???", "="],
-      ["???", "'test'"],
+      ["???", "'test'"]
     ]
   ]
 ])("It tokenises a select correctly", (query, expected) => {

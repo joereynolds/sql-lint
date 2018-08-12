@@ -19,6 +19,12 @@ You should put the following in there for more intelligent errors to come throug
 {
     "host": "localhost",
     "user": "root",
-    "pass": "password"
+    "password": "password"
 }
+```
+
+## Troubleshooting
+
+```
+GRANT SELECT, SHOW VIEW, PROCESS, REPLICATION CLIENT ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY 'hunter2';
 ```

@@ -24,7 +24,20 @@ program
 
 let query = null;
 
-const config = fs.readFileSync("/home/joe/.config/sql-lint/config.json").toString();
+const config = JSON.parse(fs.readFileSync("/home/joe/.config/sql-lint/config.json", "utf8"));
+
+const connection = mysql.createConnection({
+    host: config.host,
+    user: config.user,
+    password: config.password
+});
+
+connection.connect(err => {
+    if (err) {
+        return console.warn(err);
+    }
+    return console.log(`Connected as ${connection.threadId}`);
+});
 
 if (program.query) {
     query = program.query;

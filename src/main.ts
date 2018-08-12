@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as program from "commander";
+import * as fs from "fs";
 import * as process from "process";
 
 import { categorise, tokenise } from "./lexer/lexer"
@@ -20,7 +21,7 @@ program
     .parse(process.argv);
 
 
-let query = "";
+let query = null;
 
 if (program.query) {
     query = program.query;
@@ -28,6 +29,10 @@ if (program.query) {
 
 if (program.file) {
     query = program.file 
+}
+
+if (!program.file && !program.query) {
+    query = fs.readFileSync(0).toString();
 }
 
 const selectChecks: IChecker[] = [];

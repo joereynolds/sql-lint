@@ -8,3 +8,9 @@ This is a workaround until a package is made.
 ```
 ./build.sh //This will run more than just the tests (recommended)
 ```
+
+## Configuration
+
+A configuration file for `sql-lint` should reside in `~/.config/sql-lint/config.json`
+
+You should put the following in there for more intelligent errors to come through

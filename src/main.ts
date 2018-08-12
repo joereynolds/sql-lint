@@ -20,7 +20,6 @@ program
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
     .parse(process.argv);
 
-
 let query = null;
 
 if (program.query) {

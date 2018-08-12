@@ -28,7 +28,22 @@ test("Tokens can add a token", () => {
 });
 
 test("Tokens can retrieve their tokenised content", () => {
-  //
+  const t = new Tokens("SELECT * FROM test");
+
+  t.addTokenised(["keyword", "select"]);
+  t.addTokenised(["table_reference", "*"]);
+  t.addTokenised(["keyword", "from"]);
+  t.addTokenised(["table_reference", "test"]);
+
+  const actual = t.getTokenised();
+  const expected = [
+    ["keyword", "select"],
+    ["table_reference", "*"],
+    ["keyword", "from"],
+    ["table_reference", "test"]
+  ];
+
+  expect(actual).toEqual(expected);
 });
 
 test.each([
@@ -85,6 +100,6 @@ test.each([
   ]
 ])("It tokenises a select correctly", (query, expected) => {
   const tokeniser = new Select();
-  const actual = tokeniser.tokenise(query);
+  const actual = tokeniser.tokenise(query).getTokenised();
   expect(actual).toEqual(expected);
 });

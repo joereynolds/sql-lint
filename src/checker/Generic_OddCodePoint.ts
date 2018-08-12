@@ -1,12 +1,13 @@
+import { Tokens } from "../lexer/tokens";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";
 
 class OddCodePoint implements IChecker {
-  public check(query: string[][]): CheckerResult {
+  public check(query: Tokens): CheckerResult {
+
     const badCodePoints = [65533];
 
-    for (const token of query) {
-    for (const char of token) {
+    for (const char of query.getContent()) {
       const codePoint = char.codePointAt(0);
 
       if (codePoint !== undefined) {
@@ -14,7 +15,6 @@ class OddCodePoint implements IChecker {
           return new CheckerResult(0, "Bad code point", "")
         }
       }
-    }
     }
     return new CheckerResult(0, "", "");
   }

@@ -1,5 +1,6 @@
 import { ILexer } from "./interface";
 import { Select } from "./select"
+import { Tokens } from "./tokens";
 
 function categorise(query: string) {
     query = query.trim().toLowerCase();
@@ -19,7 +20,7 @@ function categorise(query: string) {
     throw new Error(`Unable to categorise query: ${query}`);
 }
 
-function tokenise(query: string): string[][] {
+function tokenise(query: string): Tokens {
     const category = categorise(query)
     let tokeniser: ILexer;
 

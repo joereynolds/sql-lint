@@ -5,6 +5,7 @@ import * as process from "process";
 
 import { categorise, tokenise } from "./lexer/lexer"
 
+import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
 import { IChecker } from "./checker/interface";
 import { Select } from "./lexer/select"
@@ -30,9 +31,11 @@ if (program.file) {
 }
 
 const selectChecks: IChecker[] = [];
+const deleteChecks: IChecker[] = [];
 
 const genericChecks: IChecker[] = [
-    new OddCodePoint()
+    new OddCodePoint(),
+    new MissingWhere()
 ]
 
 const allChecks = [selectChecks, genericChecks];

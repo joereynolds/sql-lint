@@ -14,3 +14,11 @@ This is a workaround until a package is made.
 A configuration file for `sql-lint` should reside in `~/.config/sql-lint/config.json`
 
 You should put the following in there for more intelligent errors to come through
+
+```
+{
+    "host": "localhost",
+    "user": "root",
+    "pass": "password"
+}
+```

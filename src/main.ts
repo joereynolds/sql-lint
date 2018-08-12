@@ -4,6 +4,8 @@ import * as program from "commander";
 import * as fs from "fs";
 import * as process from "process";
 
+import * as mysql from "mysql";
+
 import { categorise, tokenise } from "./lexer/lexer"
 
 import { MissingWhere } from "./checker/Delete_MissingWhere";
@@ -21,6 +23,8 @@ program
     .parse(process.argv);
 
 let query = null;
+
+const config = fs.readFileSync("/home/joe/.config/sql-lint/config.json").toString();
 
 if (program.query) {
     query = program.query;

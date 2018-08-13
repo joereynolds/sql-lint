@@ -103,3 +103,32 @@ test.each([
   const actual = tokeniser.tokenise(query).getTokenised();
   expect(actual).toEqual(expected);
 });
+
+test.each([
+    [
+        'symfony.gigs.venue', 
+        {
+        "database": "symfony", 
+        "table": "gigs", 
+        "column": "venue"
+        },
+    ],
+    [
+        'gigs', 
+        {
+        "table": "gigs", 
+        },
+    ],
+    [
+        'symfony.gigs', 
+        {
+        "database": "symfony", 
+        "table": "gigs", 
+        },
+    ],
+])("Table references are correctly categorised", (tableReference, expected) => {
+    const tokeniser = new Select();
+    const actual = tokeniser.extractTableReference(tableReference);
+    expect(actual).toEqual(expected);
+})
+

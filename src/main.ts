@@ -2,16 +2,16 @@
 
 import * as program from "commander";
 import * as fs from "fs";
+import * as os from "os";
 import * as process from "process";
-
-import * as mysql from "mysql";
 
 import { categorise, tokenise } from "./lexer/lexer"
 
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
 import { IChecker } from "./checker/interface";
-import { Select } from "./lexer/select"
+import { Database } from "./database";
+import { Select } from "./lexer/select";
 
 const version = "0.0.2";
 
@@ -24,20 +24,12 @@ program
 
 let query = null;
 
-const config = JSON.parse(fs.readFileSync("/home/joe/.config/sql-lint/config.json", "utf8"));
 
-const connection = mysql.createConnection({
-    host: config.host,
-    user: config.user,
-    password: config.password
-});
+const config = JSON.parse(fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8"));
 
-connection.connect(err => {
-    if (err) {
-        return console.warn(err);
-    }
-    return console.log(`Connected as ${connection.threadId}`);
-});
+const db = new Database(config.host, config.user, config.password)
+
+db.getDatabases(db.connection);
 
 if (program.query) {
     query = program.query;
@@ -67,3 +59,5 @@ allChecks.forEach((checks) => {
         console.log(check.check(tokenised));
     })
 });
+
+db.connection.end();

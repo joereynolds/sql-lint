@@ -25,7 +25,7 @@ class Database {
         return connection;
     }
 
-    public getDatabases(connection: mysql.Connection) {
+    public getDatabases(connection: mysql.Connection): string[] {
         const databases: string[] = [];
         connection.query('SHOW DATABASES', (error, results, fields) => {
             if (error) {

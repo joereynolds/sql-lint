@@ -1,23 +1,22 @@
+import { Database } from "../database";
 import { Tokens } from "../lexer/tokens";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";
 
-class OddCodePoint implements IChecker {
+class DatabaseNotFound implements IChecker {
+  public db: Database;
+  constructor(db: Database) {
+    this.db = db;
+  }
   public check(query: Tokens): CheckerResult {
+      const tokenised = query.getTokenised();
+      const tableReference = tokenised[1][1];
 
-    const badCodePoints = [65533];
-
-    for (const char of query.getContent()) {
-      const codePoint = char.codePointAt(0);
-
-      if (codePoint !== undefined) {
-        if (badCodePoints.includes(codePoint)) {
-          return new CheckerResult(0, "Bad code point", "")
-        }
+      if (!this.db.getDatabases(this.db.connection).includes(tableReference)) {
+          return new CheckerResult(0, `Database '${tableReference}' does not exist.`, "");
       }
-    }
     return new CheckerResult(0, "", "");
   }
 }
 
-export { OddCodePoint };
+export { DatabaseNotFound };

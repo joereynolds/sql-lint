@@ -1,6 +1,7 @@
 import { ILexer } from "./interface";
 import { Select } from "./select"
 import { Tokens } from "./tokens";
+import { Use } from "./use";
 
 function categorise(query: string) {
     query = query.trim().toLowerCase();
@@ -32,8 +33,11 @@ function tokenise(query: string): Tokens {
         case "select": {
             tokeniser = new Select();
         }
+        case "use": {
+            tokeniser = new Use();
+        }
         default:
-            tokeniser = new Select();
+            tokeniser = new Use();
     }
 
     const tokens = tokeniser.tokenise(query)

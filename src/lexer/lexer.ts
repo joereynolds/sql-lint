@@ -17,6 +17,10 @@ function categorise(query: string) {
         return "update";
     }
 
+    if (query.startsWith("use")) {
+        return "use";
+    }
+
     throw new Error(`Unable to categorise query: ${query}`);
 }
 

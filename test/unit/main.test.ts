@@ -1,6 +1,7 @@
 import { categorise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
 import { Tokens } from "../../src/lexer/tokens";
+import { Use } from "../../src/lexer/use";
 
 test("The framework is running", () => {
   expect(1).toEqual(1);
@@ -60,7 +61,10 @@ test.each([
   ["   SELECT    * FROM person", "select"],
 
   // A statement with a lowercase keyword
-  [" select * from person", "select"]
+  [" select * from person", "select"],
+  ["USE symfony", "use"]
+
+
 ])("Queries are categorised correctly", (query, expected) => {
   const actual = categorise(query);
   expect(actual).toEqual(expected);
@@ -100,6 +104,34 @@ test.each([
   ]
 ])("It tokenises a select correctly", (query, expected) => {
   const tokeniser = new Select();
+  const actual = tokeniser.tokenise(query).getTokenised();
+  expect(actual).toEqual(expected);
+});
+
+
+test.each([
+  [
+    "USE",
+    [
+      ["keyword", "use"],
+    ]
+  ],
+  [
+    "USE symfony",
+    [
+      ["keyword", "use"],
+      ["table_reference", "symfony"],
+    ]
+  ],
+  [
+    "use symfony pricing",
+    [
+      ["keyword", "use"],
+      ["table_reference", "symfony"],
+    ]
+  ]
+])("It tokenises a `use` correctly", (query, expected) => {
+  const tokeniser = new Use();
   const actual = tokeniser.tokenise(query).getTokenised();
   expect(actual).toEqual(expected);
 });

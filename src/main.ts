@@ -10,6 +10,7 @@ import { categorise, tokenise } from "./lexer/lexer"
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
 import { IChecker } from "./checker/interface";
+import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Select } from "./lexer/select";
 
@@ -53,6 +54,11 @@ const genericChecks: IChecker[] = [
 
 const allChecks = [selectChecks, genericChecks];
 const tokenised = tokenise(query);
+
+db.getDatabases(db.connection, (results: any) => {
+    const checker = new DatabaseNotFound(results);
+    console.log(checker.check(tokenised));
+});
 
 allChecks.forEach((checks) => {
     checks.forEach((check) => {

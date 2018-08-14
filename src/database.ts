@@ -25,15 +25,14 @@ class Database {
         return connection;
     }
 
-    public getDatabases(connection: mysql.Connection): string[] {
+    public getDatabases(connection: mysql.Connection, callback: any): void {
         const databases: string[] = [];
         connection.query('SHOW DATABASES', (error, results, fields) => {
             if (error) {
                 return console.log(error);
             }
-            results.forEach((result: any) => {
-                databases.push(result.Database)
-            })
+
+            callback(results);
         });
     }
 }

@@ -62,7 +62,8 @@ test.each([
 
   // A statement with a lowercase keyword
   [" select * from person", "select"],
-  ["USE symfony", "use"]
+  ["USE symfony", "use"],
+  ["use symfony;", "use"]
 
 
 ])("Queries are categorised correctly", (query, expected) => {

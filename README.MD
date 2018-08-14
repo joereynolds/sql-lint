@@ -9,6 +9,22 @@ This is a workaround until a package is made.
 ./build.sh //This will run more than just the tests (recommended)
 ```
 
+### Integration tests   
+
+Integration tests are not (currently) ran on travis.
+To get them working, you will need to update your actual config housed in `~/.config/sql-lint/config.json`
+to be   
+
+```
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "integration-tests"
+}
+```
+
+Once that is done, run `./integration-test.sh` to run the tests.
+
 ## Configuration
 
 A configuration file for `sql-lint` should reside in `~/.config/sql-lint/config.json`
@@ -28,3 +44,5 @@ You should put the following in there for more intelligent errors to come throug
 ```
 GRANT SELECT, SHOW VIEW, PROCESS, REPLICATION CLIENT ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY 'hunter2';
 ```
+
+

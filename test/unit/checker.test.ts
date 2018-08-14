@@ -33,6 +33,5 @@ test.each([
   const checker = new DatabaseNotFound([{ Database: "existing_db" }]);
   const tokenised = tokenise(query);
   const actual = checker.check(tokenised);
-
   expect(actual.content).toEqual(expected);
 });

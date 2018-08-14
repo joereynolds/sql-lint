@@ -3,10 +3,7 @@ import * as mysql from "mysql";
 import { MissingWhere } from "../../src/checker/Delete_MissingWhere";
 import { OddCodePoint } from "../../src/checker/Generic_OddCodePoint";
 import { DatabaseNotFound } from "../../src/checker/Use_DatabaseNotFound";
-import { Database } from "../../src/database";
 import { tokenise } from "../../src/lexer/lexer";
-
-jest.mock("../../src/database");
 
 test.each([
   ["SELECT 1", ""],
@@ -33,10 +30,7 @@ test.each([
   ["USE existing_db", ""],
   ["use non_existent_db", "Database 'non_existent_db' does not exist."]
 ])("it finds databases that don't exist", (query, expected) => {
-  const db = new Database("", "", "");
-  db.getDatabases(mysql.createConnection({}));
-
-  const checker = new DatabaseNotFound(db);
+  const checker = new DatabaseNotFound([{ Database: "existing_db" }]);
   const tokenised = tokenise(query);
   const actual = checker.check(tokenised);
 

@@ -30,8 +30,7 @@ const config = JSON.parse(fs.readFileSync(`${os.homedir}/.config/sql-lint/config
 
 const db = new Database(config.host, config.user, config.password)
 
-db.getDatabases(db.connection);
-
+// console.log(db.getDatabases(db.connection));
 if (program.query) {
     query = program.query;
 }

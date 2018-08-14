@@ -34,7 +34,7 @@ const config = JSON.parse(
 );
 
 if (program.query) {
-  queries = program.query;
+  queries = [program.query];
 }
 
 if (program.file) {
@@ -57,16 +57,15 @@ queries.forEach(query => {
     const category = categorise(query);
     const tokenised = tokenise(query);
 
-    switch (category) {
-      case "select":
-        console.log(checkOddCodePoint.check(tokenised));
-      case "use":
-        db.getDatabases(db.connection, (results: any) => {
-          const checker = new DatabaseNotFound(results);
-          console.log(checker.check(tokenised));
-        });
-      case "delete":
-        console.log(checkMissingWhere.check(tokenised));
+    if (category === "select") {
+      console.log(checkOddCodePoint.check(tokenised));
+    } else if (category === "use") {
+      db.getDatabases(db.connection, (results: any) => {
+        const checker = new DatabaseNotFound(results);
+        console.log(checker.check(tokenised));
+      });
+    } else if (category === "delete") {
+      console.log(checkMissingWhere.check(tokenised));
     }
   }
 });

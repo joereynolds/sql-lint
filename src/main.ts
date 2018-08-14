@@ -25,6 +25,9 @@ program
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated"
   )
+  .option("--host <string>", "The host for the connection")
+  .option("--user <string>", "The user for the connection")
+  .option("--password <string>", "The password for the connection")
   .parse(process.argv);
 
 let queries: string[] = [];
@@ -46,7 +49,11 @@ if (!program.file && !program.query) {
   queries = [fs.readFileSync(0).toString()];
 }
 
-const db = new Database(config.host, config.user, config.password);
+const db = new Database(
+  program.host || config.host,
+  program.user || config.user,
+  program.password || config.password
+);
 const checkOddCodePoint = new OddCodePoint();
 const checkMissingWhere = new MissingWhere();
 

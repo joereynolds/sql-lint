@@ -9,10 +9,10 @@ set -e
 
  
 echo "We expect a warning about a bad code point"
-assert "sql-lint --query='SELECT � AS name;'" "CheckerResult { line: 0, content: 'Bad code point', tokens: '' }"
+assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line: 0, content: 'Bad code point', tokens: '' }"
 
 echo "We expect a DELETE without a where to prompt us"
-assert "sql-lint --query='DELETE FROM person ;'" "CheckerResult {\n  line: 1,\n  content: 'Delete missing WHERE, intentional?',\n  tokens: '' }"
+assert "./dist/src/main.js --query='DELETE FROM person ;'" "CheckerResult {\n  line: 1,\n  content: 'Delete missing WHERE, intentional?',\n  tokens: '' }"
 
 # end of test suite
 assert_end sql-lint

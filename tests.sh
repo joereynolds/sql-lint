@@ -7,6 +7,8 @@ set -e
 . assert.sh
 
 
+
+pwd
  
 echo "We expect a warning about a bad code point"
 assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line: 0, content: 'Bad code point', tokens: '' }"

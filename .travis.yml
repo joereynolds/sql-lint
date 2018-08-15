@@ -9,5 +9,5 @@ node_js:
     - "9.0"
     - "10.0"
 
-script: bash ./tests.sh
+after_script: bash ./tests.sh
 

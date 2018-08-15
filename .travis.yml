@@ -11,6 +11,9 @@ node_js:
 
 language: bash
 
+install:
+    - wget https://raw.github.com/lehmannro/assert.sh/v1.1/assert.sh && chmod +x assert.sh
+
 script:
-    - bash tests.sh
+    - ./tests.sh
 

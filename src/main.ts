@@ -13,7 +13,7 @@ import { IChecker } from "./checker/interface";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Select } from "./lexer/select";
-import { getQueryFromFileNew, getQueryFromLine, Query } from "./reader/reader";
+import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
 
 const version = "0.0.2";
 
@@ -41,7 +41,7 @@ if (program.query) {
 }
 
 if (program.file) {
-  queries = getQueryFromFileNew(program.file);
+  queries = getQueryFromFile(program.file);
 }
 
 // Read from stdin if no args are supplied

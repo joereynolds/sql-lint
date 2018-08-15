@@ -19,6 +19,7 @@ export class Query {
 export class Line {
   public num: number;
   public content: string;
+  public tokens: string[][] = [];
 
   constructor(content: string, num: number) {
     this.content = content;
@@ -26,7 +27,10 @@ export class Line {
   }
 }
 
-export function getQueryFromFileNew(file: string): Query[] {
+/**
+ * Grabs the querie(s) from the --file flag
+ */
+export function getQueryFromFile(file: string): Query[] {
   const contents = fs.readFileSync(file, "utf8");
   return putContentIntoLines(contents);
 }
@@ -61,14 +65,6 @@ export function putContentIntoLines(contents: string): Query[] {
     }
   }
   return queriesFromFile;
-}
-/**
- * Grabs the querie(s) from the --file flag
- */
-export function getQueryFromFile(file: string): string[] {
-  const content = fs.readFileSync(file, "utf8");
-  const queries = content.split(";");
-  return queries;
 }
 
 /**

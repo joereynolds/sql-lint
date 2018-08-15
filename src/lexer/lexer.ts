@@ -26,7 +26,7 @@ function categorise(query: string) {
     throw new Error(`Unable to categorise query: ${query}`);
 }
 
-function tokenise(query: Query): Tokens {
+function tokenise(query: Query): Query {
     const category = categorise(query.getContent())
     let tokeniser: ILexer;
 
@@ -41,7 +41,7 @@ function tokenise(query: Query): Tokens {
             tokeniser = new Use();
     }
 
-    const tokens = tokeniser.tokenise(query.getContent())
+    const tokens = tokeniser.tokenise(query)
     return tokens;
 }
 

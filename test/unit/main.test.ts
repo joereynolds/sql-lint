@@ -72,49 +72,124 @@ test.each([
 
 test.each([
   [
-    "SELECT * FROM person",
-    [
-      ["keyword", "select"],
-      ["table_reference", "*"],
-      ["keyword", "from"],
-      ["table_reference", "person"]
-    ]
+    "SELECT * FROM person;",
+
+    
+      {
+        lines: [
+          {
+            content: "SELECT * FROM person;",
+            num: 1,
+            tokens: [
+              ["keyword", "select"],
+              ["table_reference", "*"],
+              ["keyword", "from"],
+              ["table_reference", "person;"]
+            ]
+          }
+        ]
+      }
+    
   ],
   [
-    "SELECT last_name FROM person",
-    [
-      ["keyword", "select"],
-      ["table_reference", "last_name"],
-      ["keyword", "from"],
-      ["table_reference", "person"]
-    ]
+    "SELECT last_name FROM person;",
+
+    {
+      lines: [
+        {
+          content: "SELECT last_name FROM person;",
+          num: 1,
+          tokens: [
+            ["keyword", "select"],
+            ["table_reference", "last_name"],
+            ["keyword", "from"],
+            ["table_reference", "person;"]
+          ]
+        }
+      ]
+    }
   ],
   [
-    "SELECT * FROM person WHERE name = 'test'",
-    [
-      ["keyword", "select"],
-      ["table_reference", "*"],
-      ["keyword", "from"],
-      ["table_reference", "person"],
-      ["keyword", "where"],
-      ["???", "name"],
-      ["???", "="],
-      ["???", "'test'"]
-    ]
+    "SELECT * FROM person WHERE name = 'test';",
+
+    {
+      lines: [
+        {
+          content: "SELECT * FROM person WHERE name = 'test';",
+          num: 1,
+          tokens: [
+            ["keyword", "select"],
+            ["table_reference", "*"],
+            ["keyword", "from"],
+            ["table_reference", "person"],
+            ["keyword", "where"],
+            ["???", "name"],
+            ["???", "="],
+            ["???", "'test';"]
+          ]
+        }
+      ]
+    }
   ]
 ])("It tokenises a select correctly", (query, expected) => {
   const tokeniser = new Select();
-  const actual = tokeniser.tokenise(query).getTokenised();
-  expect(actual).toEqual(expected);
+  const q = putContentIntoLines(query);
+  const actual = tokeniser.tokenise(q[0]);
+  expect(actual).toMatchObject(expected);
 });
 
 test.each([
-  ["USE", [["keyword", "use"]]],
-  ["USE symfony", [["keyword", "use"], ["table_reference", "symfony"]]],
-  ["use symfony pricing", [["keyword", "use"], ["table_reference", "symfony"]]]
+  [
+    "USE ;",
+    {
+      lines: [
+        {
+          content: "USE ;",
+          num: 1,
+          tokens: [["keyword", "use"], ["table_reference", ";"]]
+        }
+      ]
+    }
+  ],
+
+  [
+    "USE symfony ;",
+    {
+      lines: [
+        {
+          content: "USE symfony ;",
+          num: 1,
+          tokens: [
+            ["keyword", "use"],
+            ["table_reference", "symfony"],
+            ["table_reference", ";"]
+          ]
+        }
+      ]
+    }
+  ],
+
+  [
+    "use symfony pricing ;",
+    {
+      lines: [
+        {
+          content: "use symfony pricing ;",
+          num: 1,
+          tokens: [
+            ["keyword", "use"],
+            ["table_reference", "symfony"],
+            ["table_reference", "pricing"],
+            ["table_reference", ";"]
+          ]
+        }
+      ]
+    }
+  ]
 ])("It tokenises a `use` correctly", (query, expected) => {
+  const q = putContentIntoLines(query);
   const tokeniser = new Use();
-  const actual = tokeniser.tokenise(query).getTokenised();
+  const actual = tokeniser.tokenise(q[0]);
   expect(actual).toEqual(expected);
 });
 
@@ -143,7 +218,7 @@ test.each([
 ])("Table references are correctly categorised", (tableReference, expected) => {
   const tokeniser = new Select();
   const actual = tokeniser.extractTableReference(tableReference);
-  expect(actual).toEqual(expected);
+  expect(actual).toMatchObject(expected);
 });
 
 test("We correctly read a file", () => {

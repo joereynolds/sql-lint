@@ -1,9 +1,9 @@
-import { Tokens } from "../lexer/tokens";
+import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";
 
 class OddCodePoint implements IChecker {
-  public check(query: Tokens): CheckerResult {
+  public check(query: Query): CheckerResult {
 
     const badCodePoints = [65533];
 

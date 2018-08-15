@@ -1,7 +1,8 @@
+import { Query } from "../reader/reader";
 import { Tokens } from "./tokens";
 
 interface ILexer {
-  tokenise(query: string): Tokens;
+  tokenise(query: Query): Query;
 }
 
 export { ILexer };

@@ -1,5 +1,6 @@
 import { Database } from "../database";
 import { Tokens } from "../lexer/tokens";
+import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";
 
@@ -8,17 +9,25 @@ class DatabaseNotFound implements IChecker {
   constructor(databases: any[]) {
     this.databases = databases.map(result => result.Database);
   }
-  public check(query: Tokens): CheckerResult {
-    const tokenised = query.getTokenised();
-    const tableReference = tokenised[1][1];
+  public check(query: Query): CheckerResult {
 
-    if (!this.databases.includes(tableReference)) {
-      return new CheckerResult(
-        0,
-        `Database '${tableReference}' does not exist.`,
-        ""
-      );
-    }
+    query.lines.forEach(line => {
+      line.tokens.forEach(token => {
+        if (token[0] === "table_reference") {
+          const database = token[1];
+            console.log(database)
+          if (!this.databases.includes(database)) {
+
+            return new CheckerResult(
+              line.num,
+              `Database '${database}' does not exist.`,
+              ""
+            );
+          }
+        }
+      });
+    });
+
     return new CheckerResult(0, "", "");
   }
 }

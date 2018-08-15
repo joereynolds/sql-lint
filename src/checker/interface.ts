@@ -1,9 +1,9 @@
-import { Tokens } from "../lexer/tokens";
+import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 
 
 interface IChecker {
-  check(query: Tokens): CheckerResult;
+  check(query: Query): any;
 }
 
 export { IChecker };

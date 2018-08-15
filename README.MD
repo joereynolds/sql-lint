@@ -11,6 +11,7 @@ This is a workaround until a package is made.
 
 ### Integration tests   
 
+NOTE: Integration tests currently don't work
 Integration tests are not (currently) ran on travis.
 To get them working, you will need to update your actual config housed in `~/.config/sql-lint/config.json`
 to be   

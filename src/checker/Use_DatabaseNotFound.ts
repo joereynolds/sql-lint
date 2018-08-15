@@ -11,13 +11,11 @@ class DatabaseNotFound implements IChecker {
   }
   public check(query: Query): CheckerResult {
 
-    query.lines.forEach(line => {
-      line.tokens.forEach(token => {
+    for (const line of query.lines) {
+      for (const token of line.tokens) {
         if (token[0] === "table_reference") {
           const database = token[1];
-            console.log(database)
-          if (!this.databases.includes(database)) {
-
+          if (!this.databases.includes(database) && database !== ';') {
             return new CheckerResult(
               line.num,
               `Database '${database}' does not exist.`,
@@ -25,8 +23,8 @@ class DatabaseNotFound implements IChecker {
             );
           }
         }
-      });
-    });
+      }
+    }
 
     return new CheckerResult(0, "", "");
   }

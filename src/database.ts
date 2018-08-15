@@ -19,7 +19,6 @@ class Database {
             if (err) {
                 return console.log(err);
             }
-            return console.log(`Connected as ${connection.threadId}`);
         });
 
         return connection;

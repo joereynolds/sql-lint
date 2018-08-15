@@ -27,13 +27,14 @@ test.each([
 
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);
+
   const actual = checker.check(tokenised);
   expect(actual.content).toEqual(expected);
 });
 
 test.each([
-  ["USE non_existent_db ;", "Database 'non_existent_db' does not exist."],
-  ["USE existing_db ;", ""],
+  ["USE non_existent_db ;",       {"content": "Database 'non_existent_db' does not exist.", "line": 1, "tokens": ""}],
+  ["USE existing_db ;", {"content": "", "line": 0, "tokens": ""}]
 ])("it finds databases that don't exist", (query, expected) => {
   const checker = new DatabaseNotFound([{ Database: "existing_db" }]);
 
@@ -41,5 +42,5 @@ test.each([
   const tokenised = tokenise(queryObj[0]);
 
   const actual = checker.check(tokenised);
-  expect(actual).toEqual(expected);
+  expect(actual).toMatchObject(expected);
 });

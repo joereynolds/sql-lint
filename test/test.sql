@@ -33,3 +33,18 @@ PERSON
 
 
 WHERE age <  15 ;
+
+
+
+DELETE  
+
+
+FROM    
+
+
+
+
+
+
+
+      person;

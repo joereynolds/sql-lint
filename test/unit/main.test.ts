@@ -2,6 +2,7 @@ import { categorise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
 import { Tokens } from "../../src/lexer/tokens";
 import { Use } from "../../src/lexer/use";
+import { Line, putContentIntoLines, Query } from "../../src/reader/reader";
 
 test("The framework is running", () => {
   expect(1).toEqual(1);
@@ -64,8 +65,6 @@ test.each([
   [" select * from person", "select"],
   ["USE symfony", "use"],
   ["use symfony;", "use"]
-
-
 ])("Queries are categorised correctly", (query, expected) => {
   const actual = categorise(query);
   expect(actual).toEqual(expected);
@@ -109,28 +108,10 @@ test.each([
   expect(actual).toEqual(expected);
 });
 
-
 test.each([
-  [
-    "USE",
-    [
-      ["keyword", "use"],
-    ]
-  ],
-  [
-    "USE symfony",
-    [
-      ["keyword", "use"],
-      ["table_reference", "symfony"],
-    ]
-  ],
-  [
-    "use symfony pricing",
-    [
-      ["keyword", "use"],
-      ["table_reference", "symfony"],
-    ]
-  ]
+  ["USE", [["keyword", "use"]]],
+  ["USE symfony", [["keyword", "use"], ["table_reference", "symfony"]]],
+  ["use symfony pricing", [["keyword", "use"], ["table_reference", "symfony"]]]
 ])("It tokenises a `use` correctly", (query, expected) => {
   const tokeniser = new Use();
   const actual = tokeniser.tokenise(query).getTokenised();
@@ -138,30 +119,58 @@ test.each([
 });
 
 test.each([
-    [
-        'symfony.gigs.venue', 
-        {
-        "database": "symfony", 
-        "table": "gigs", 
-        "column": "venue"
-        },
-    ],
-    [
-        'gigs', 
-        {
-        "table": "gigs", 
-        },
-    ],
-    [
-        'symfony.gigs', 
-        {
-        "database": "symfony", 
-        "table": "gigs", 
-        },
-    ],
+  [
+    "symfony.gigs.venue",
+    {
+      database: "symfony",
+      table: "gigs",
+      column: "venue"
+    }
+  ],
+  [
+    "gigs",
+    {
+      table: "gigs"
+    }
+  ],
+  [
+    "symfony.gigs",
+    {
+      database: "symfony",
+      table: "gigs"
+    }
+  ]
 ])("Table references are correctly categorised", (tableReference, expected) => {
-    const tokeniser = new Select();
-    const actual = tokeniser.extractTableReference(tableReference);
-    expect(actual).toEqual(expected);
-})
+  const tokeniser = new Select();
+  const actual = tokeniser.extractTableReference(tableReference);
+  expect(actual).toEqual(expected);
+});
 
+test("We correctly read a file", () => {
+  const query = new Query();
+  query.lines = [
+    new Line("DELETE", 1),
+    new Line(" FROM ", 2),
+    new Line(" person WHERE ", 4),
+    new Line(" age > 5;", 5)
+  ];
+  const expected: any = [query];
+
+  const input = "DELETE\n FROM \n\n person WHERE \n age > 5;";
+  const actual = putContentIntoLines(input);
+  expect(actual).toEqual(expected);
+});
+
+test("We correctly reconstruct our query from lines", () => {
+  const query = new Query();
+  query.lines = [
+    new Line("DELETE", 1),
+    new Line(" FROM ", 2),
+    new Line(" person WHERE ", 4),
+    new Line(" age > 5;", 5)
+  ];
+
+  const expected: string = "DELETE FROM  person WHERE  age > 5;";
+  const actual = query.getContent();
+  expect(actual).toEqual(expected);
+});

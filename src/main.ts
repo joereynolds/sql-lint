@@ -13,7 +13,7 @@ import { IChecker } from "./checker/interface";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Select } from "./lexer/select";
-import { getQueryFromFile } from "./reader/reader";
+import { getQueryFromFileNew, getQueryFromLine, Query } from "./reader/reader";
 
 const version = "0.0.2";
 
@@ -30,24 +30,24 @@ program
   .option("--password <string>", "The password for the connection")
   .parse(process.argv);
 
-let queries: string[] = [];
+let queries: Query[] = [];
 
 const config = JSON.parse(
   fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
 );
 
 if (program.query) {
-  queries = [program.query];
+  queries = getQueryFromLine(program.query);
 }
 
 if (program.file) {
-  queries = getQueryFromFile(program.file);
+  queries = getQueryFromFileNew(program.file);
 }
 
 // Read from stdin if no args are supplied
-if (!program.file && !program.query) {
-  queries = [fs.readFileSync(0).toString()];
-}
+// if (!program.file && !program.query) {
+//   queries = [new Query()fs.readFileSync(0).toString()];
+// }
 
 const db = new Database(
   program.host || config.host,
@@ -58,10 +58,10 @@ const checkOddCodePoint = new OddCodePoint();
 const checkMissingWhere = new MissingWhere();
 
 queries.forEach(query => {
-  query = query.trim();
+  const content = query.getContent().trim();
 
-  if (query) {
-    const category = categorise(query);
+  if (content) {
+    const category = categorise(content);
     const tokenised = tokenise(query);
 
     if (category === "select") {

@@ -1,3 +1,4 @@
+import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { Select } from "./select"
 import { Tokens } from "./tokens";
@@ -25,8 +26,8 @@ function categorise(query: string) {
     throw new Error(`Unable to categorise query: ${query}`);
 }
 
-function tokenise(query: string): Tokens {
-    const category = categorise(query)
+function tokenise(query: Query): Tokens {
+    const category = categorise(query.getContent())
     let tokeniser: ILexer;
 
     switch (category) {
@@ -40,7 +41,7 @@ function tokenise(query: string): Tokens {
             tokeniser = new Use();
     }
 
-    const tokens = tokeniser.tokenise(query)
+    const tokens = tokeniser.tokenise(query.getContent())
     return tokens;
 }
 

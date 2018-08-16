@@ -12,11 +12,12 @@ class OddCodePoint implements IChecker {
 
       if (codePoint !== undefined) {
         if (badCodePoints.includes(codePoint)) {
-          return new CheckerResult(0, "Bad code point", "")
+          const lineNumber = query.lines[0].num;
+          return new CheckerResult(lineNumber, "Bad code point")
         }
       }
     }
-    return new CheckerResult(0, "", "");
+    return new CheckerResult(0, "");
   }
 }
 

@@ -6,15 +6,12 @@ set -e
 
 . assert.sh
 
-
-
-pwd
- 
 echo "We expect a warning about a bad code point"
-assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line: 0, content: 'Bad code point', tokens: '' }"
+assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line: 1, content: 'Bad code point' }"
 
 echo "We expect a DELETE without a where to prompt us"
-assert "./dist/src/main.js --query='DELETE FROM person ;'" "CheckerResult {\n  line: 1,\n  content: 'Delete missing WHERE, intentional?',\n  tokens: '' }"
+assert "./dist/src/main.js --query='DELETE FROM person ;'" "CheckerResult { line: 1, content: 'Delete missing WHERE, intentional?' }"
 
-# end of test suite
 assert_end sql-lint
+
+

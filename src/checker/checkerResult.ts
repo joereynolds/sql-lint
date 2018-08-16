@@ -12,15 +12,9 @@ class CheckerResult {
      */
     public content: string;
 
-    /**
-     * The tokens for the content of the line
-     */
-    public tokens: string;
-
-    constructor(line: number, content: string, tokens: string) {
+    constructor(line: number, content: string) {
         this.line = line;
         this.content = content;
-        this.tokens = tokens;
     }
 }
 

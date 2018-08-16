@@ -19,14 +19,13 @@ class DatabaseNotFound implements IChecker {
             return new CheckerResult(
               line.num,
               `Database '${database}' does not exist.`,
-              ""
             );
           }
         }
       }
     }
 
-    return new CheckerResult(0, "", "");
+    return new CheckerResult(0, "");
   }
 }
 

@@ -1,11 +1,9 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
-import { TOKENS, Tokens } from "./tokens";
+import { TOKENS } from "./tokens";
 
 class Select implements ILexer {
   public tokenise(query: Query): Query {
-    const splitQuery = query.getContent().split(" ");
-    const tokens = new Tokens(query.getContent());
 
     let lastToken = "";
     query.lines.forEach(line => {

@@ -1,7 +1,6 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { Select } from "./select";
-import { Tokens } from "./tokens";
 import { Use } from "./use";
 
 function categorise(query: string) {

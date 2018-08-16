@@ -1,51 +1,51 @@
-class Tokens {
-  /**
-   * The raw SQL query being tokenised
-   * i.e. "SELECT * FROM person"
-   */
-  public content: string;
+// class Tokens {
+//   /**
+//    * The raw SQL query being tokenised
+//    * i.e. "SELECT * FROM person"
+//    */
+//   public content: string;
 
-  /**
-   * The tokens that have come from tokenising the query
-   * i.e. ["keyword", "table_reference", "keyword", "table_reference"]
-   */
-  public tokens: string[] = [];
+//   /**
+//    * The tokens that have come from tokenising the query
+//    * i.e. ["keyword", "table_reference", "keyword", "table_reference"]
+//    */
+//   public tokens: string[] = [];
 
-  /**
-   * The tokens and the query together
-   * i.e. [
-   *     ["keyword", "select"]
-   *     ["table_reference", "*"]
-   *     ["keyword", "from"]
-   *     ["table_reference", "person"]
-   * ]
-   */
-  public tokenised: string[][] = [];
+//   /**
+//    * The tokens and the query together
+//    * i.e. [
+//    *     ["keyword", "select"]
+//    *     ["table_reference", "*"]
+//    *     ["keyword", "from"]
+//    *     ["table_reference", "person"]
+//    * ]
+//    */
+//   public tokenised: string[][] = [];
 
-  constructor(content: string) {
-    this.content = content;
-  }
+//   constructor(content: string) {
+//     this.content = content;
+//   }
 
-  public getTokenised(): string[][] {
-    return this.tokenised;
-  }
+//   public getTokenised(): string[][] {
+//     return this.tokenised;
+//   }
 
-  public getTokens(): string[] {
-    return this.tokens;
-  }
+//   public getTokens(): string[] {
+//     return this.tokens;
+//   }
 
-  public getContent(): string {
-    return this.content;
-  }
+//   public getContent(): string {
+//     return this.content;
+//   }
 
-  public addToken(token: string): void {
-    this.tokens.push(token);
-  }
+//   public addToken(token: string): void {
+//     this.tokens.push(token);
+//   }
 
-  public addTokenised(tokenised: string[]) {
-    this.tokenised.push(tokenised);
-  }
-}
+//   public addTokenised(tokenised: string[]) {
+//     this.tokenised.push(tokenised);
+//   }
+// }
 
 const TOKENS = {
   keyword: [
@@ -69,4 +69,4 @@ const TOKENS = {
   operator: ["+", "-", "/"]
 };
 
-export { TOKENS, Tokens };
+export { TOKENS };

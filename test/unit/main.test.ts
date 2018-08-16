@@ -1,51 +1,10 @@
 import { categorise, tokenise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
-import { Tokens } from "../../src/lexer/tokens";
 import { Use } from "../../src/lexer/use";
 import { Line, putContentIntoLines, Query } from "../../src/reader/reader";
 
 test("The framework is running", () => {
   expect(1).toEqual(1);
-});
-
-test("Tokens are populated with a query on instantiation", () => {
-  const actual = new Tokens("SELECT * FROM test");
-  const expected = "SELECT * FROM test";
-  expect(actual.content).toEqual(expected);
-});
-
-test("Tokens can retrieve their content", () => {
-  const t = new Tokens("SELECT * FROM test");
-  const actual = t.getContent();
-  const expected = "SELECT * FROM test";
-  expect(actual).toEqual(expected);
-});
-
-test("Tokens can add a token", () => {
-  const t = new Tokens("");
-  t.addToken("keyword");
-  const actual = t.getTokens();
-  const expected = ["keyword"];
-  expect(actual).toEqual(expected);
-});
-
-test("Tokens can retrieve their tokenised content", () => {
-  const t = new Tokens("SELECT * FROM test");
-
-  t.addTokenised(["keyword", "select"]);
-  t.addTokenised(["table_reference", "*"]);
-  t.addTokenised(["keyword", "from"]);
-  t.addTokenised(["table_reference", "test"]);
-
-  const actual = t.getTokenised();
-  const expected = [
-    ["keyword", "select"],
-    ["table_reference", "*"],
-    ["keyword", "from"],
-    ["table_reference", "test"]
-  ];
-
-  expect(actual).toEqual(expected);
 });
 
 test.each([

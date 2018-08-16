@@ -1,4 +1,4 @@
-import { categorise } from "../../src/lexer/lexer";
+import { categorise, tokenise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
 import { Tokens } from "../../src/lexer/tokens";
 import { Use } from "../../src/lexer/use";
@@ -248,4 +248,29 @@ test("We correctly reconstruct our query from lines", () => {
   const expected: string = "DELETE FROM  person WHERE  age > 5;";
   const actual = query.getContent();
   expect(actual).toEqual(expected);
+});
+
+
+test.each([
+  [
+    "SELECT last_name FROM person;",
+    {
+      lines: [
+        {
+          content: "SELECT last_name FROM person;",
+          num: 1,
+          tokens: [
+            ["keyword", "select"],
+            ["table_reference", "last_name"],
+            ["keyword", "from"],
+            ["table_reference", "person;"]
+          ]
+        }
+      ]
+    }
+  ],
+])("It tokenises correctly when called through tokenise", (query, expected) => {
+  const q = putContentIntoLines(query);
+  const actual = tokenise(q[0]);
+  expect(actual).toMatchObject(expected);
 });

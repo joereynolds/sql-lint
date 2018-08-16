@@ -47,3 +47,18 @@ test.each([
   const actual = checker.check(tokenised);
   expect(actual).toMatchObject(expected);
 });
+
+test.each([
+  [
+    "SELECT i_dont_exist FROM symfony.gig;",
+    { content: "Column 'i_dont_exist' does not exist in table 'symfony.gig'.", line: 1 }
+  ]
+])("it finds databases that don't exist", (query, expected) => {
+  const checker = new ColumnNotFound([{ Column: "non_existent_column" }]);
+
+  const queryObj = putContentIntoLines(query);
+  const tokenised = tokenise(queryObj[0]);
+
+  const actual = checker.check(tokenised);
+  expect(actual).toMatchObject(expected);
+});

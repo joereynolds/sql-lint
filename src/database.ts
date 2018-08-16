@@ -34,6 +34,20 @@ class Database {
             callback(results);
         });
     }
+
+    /**
+     * Gets all databases for a table
+     */
+    public getTables(connection: mysql.Connection, database: string, callback: any): void {
+        const databases: string[] = [];
+        connection.query(`SHOW TABLES FROM ${database}`, (error, results, fields) => {
+            if (error) {
+                return console.log(error);
+            }
+
+            callback(results);
+        });
+    }
 }
 
 export { Database };

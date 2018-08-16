@@ -5,10 +5,11 @@ import * as fs from "fs";
 import * as os from "os";
 import * as process from "process";
 
-import { categorise, tokenise } from "./lexer/lexer";
+import { categorise, extractTableReference, tokenise } from "./lexer/lexer";
 
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
+import { TableNotFound } from "./checker/Generic_TableNotFound";
 import { IChecker } from "./checker/interface";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
@@ -63,6 +64,20 @@ queries.forEach(query => {
   if (content) {
     const category = categorise(content);
     const tokenised: Query = tokenise(query);
+
+      query.lines.forEach(line => {
+          line.tokens.forEach(token => {
+              if (token[0] === 'table_reference') {
+                  const reference = extractTableReference(token[1]);
+                  if (reference.database) {
+                      db.getTables(db.connection, reference.database, (results: any) => {
+                        const checker = new TableNotFound(results);
+                        console.log(checker.check(tokenised));
+                      });
+                  }
+              }
+          })
+      })
 
     if (category === "select") {
       console.log(checkOddCodePoint.check(tokenised));

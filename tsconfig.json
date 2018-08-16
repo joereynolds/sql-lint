@@ -2,7 +2,8 @@
     "compilerOptions": {
         "baseUrl": ".",
         "lib": [
-            "es7"
+            "es7",
+            "es2017"
         ],
         "module": "commonjs",
         "noImplicitAny": true,
@@ -14,7 +15,7 @@
         },
         "sourceMap": true,
         "strictNullChecks": true,
-        "target": "es2015"
+        "target": "es2017"
     },
     "exclude": [
         "dist/**/*"

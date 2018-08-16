@@ -13,7 +13,7 @@ import { IChecker } from "./checker/interface";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Select } from "./lexer/select";
-import { getQueryFromFile, getQueryFromLine, Query, Line } from "./reader/reader";
+import { getQueryFromFile, getQueryFromLine, Line, Query } from "./reader/reader";
 
 const version = "0.0.2";
 

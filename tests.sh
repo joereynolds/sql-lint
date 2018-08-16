@@ -12,6 +12,9 @@ assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line:
 echo "We expect a DELETE without a where to prompt us"
 assert "./dist/src/main.js --query='DELETE FROM person ;'" "CheckerResult { line: 1, content: 'Delete missing WHERE, intentional?' }"
 
+echo "We expect stdin to work"
+assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "CheckerResult { line: 1, content: 'Delete missing WHERE, intentional?' }"
+
 assert_end sql-lint
 
 

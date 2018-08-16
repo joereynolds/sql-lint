@@ -45,9 +45,9 @@ if (program.file) {
 }
 
 // Read from stdin if no args are supplied
-// if (!program.file && !program.query) {
-//   queries = [new Query()fs.readFileSync(0).toString()];
-// }
+if (!program.file && !program.query) {
+  queries = getQueryFromLine(fs.readFileSync(0).toString());
+}
 
 const db = new Database(
   program.host || config.host,
@@ -62,7 +62,7 @@ queries.forEach(query => {
 
   if (content) {
     const category = categorise(content);
-    const tokenised = tokenise(query);
+    const tokenised: Query = tokenise(query);
 
     if (category === "select") {
       console.log(checkOddCodePoint.check(tokenised));

@@ -11,7 +11,6 @@ class TableNotFound implements IChecker {
   }
 
   public check(query: Query): CheckerResult {
-    console.log(this.tables);
     for (const line of query.lines) {
       for (const token of line.tokens) {
         if (token[0] === "table_reference") {

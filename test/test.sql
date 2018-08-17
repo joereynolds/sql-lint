@@ -6,6 +6,7 @@ WHERE something;
 USE test;
 
 
+
 use sykes_reservations;
 use sykes_res;
 
@@ -48,3 +49,6 @@ FROM
 
 
       person;
+
+
+    select * FROM symfony.dont_exist;

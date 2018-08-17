@@ -7,14 +7,12 @@ set -e
 . assert.sh
 
 echo "We expect a warning about a bad code point"
-assert "./dist/src/main.js --query='SELECT � AS name;'" "CheckerResult { line: 1, content: 'Bad code point' }"
+assert "./dist/src/main.js --query='SELECT � AS name;'" "query:1 Bad code point"
 
 echo "We expect a DELETE without a where to prompt us"
-assert "./dist/src/main.js --query='DELETE FROM person ;'" "CheckerResult { line: 1, content: 'Delete missing WHERE, intentional?' }"
+assert "./dist/src/main.js --query='DELETE FROM person ;'" "query:1 Delete missing WHERE, intentional?"
 
 echo "We expect stdin to work"
-assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "CheckerResult { line: 1, content: 'Delete missing WHERE, intentional?' }"
+assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "stdin:1 Delete missing WHERE, intentional?"
 
 assert_end sql-lint
-
-

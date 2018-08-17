@@ -32,6 +32,7 @@ program
   .parse(process.argv);
 
 let queries: Query[] = [];
+let prefix: string = '';
 
 const config = JSON.parse(
   fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
@@ -39,15 +40,18 @@ const config = JSON.parse(
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
+  prefix = 'query';
 }
 
 if (program.file) {
   queries = getQueryFromFile(program.file);
+  prefix = program.file;
 }
 
 // Read from stdin if no args are supplied
 if (!program.file && !program.query) {
   queries = getQueryFromLine(fs.readFileSync(0).toString());
+  prefix = 'stdin';
 }
 
 const db = new Database(
@@ -72,7 +76,8 @@ queries.forEach(query => {
                   if (reference.database) {
                       db.getTables(db.connection, reference.database, (results: any) => {
                         const checker = new TableNotFound(results);
-                        console.log(checker.check(tokenised));
+                          const result = checker.check(tokenised);
+                          console.log(`${prefix}:${result.line} ${result.content}`)
                       });
                   }
               }
@@ -80,14 +85,17 @@ queries.forEach(query => {
       })
 
     if (category === "select") {
-      console.log(checkOddCodePoint.check(tokenised));
+      const result = checkOddCodePoint.check(tokenised);
+      console.log(`${prefix}:${result.line} ${result.content}`)
     } else if (category === "use") {
       db.getDatabases(db.connection, (results: any) => {
         const checker = new DatabaseNotFound(results);
-        console.log(checker.check(tokenised));
+        const result = checker.check(tokenised);
+          console.log(`${prefix}:${result.line} ${result.content}`)
       });
     } else if (category === "delete") {
-      console.log(checkMissingWhere.check(tokenised));
+        const result = checkMissingWhere.check(tokenised);
+          console.log(`${prefix}:${result.line} ${result.content}`)
     }
   }
 });

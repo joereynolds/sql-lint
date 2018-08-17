@@ -94,7 +94,7 @@ function extractTableReference(tableReference: string) {
  */
 function cleanUnquotedIdentifier(identifier: string) {
     // Remove anything that isn't an a-z 0-9 or an _
-    return identifier.replace(/([^a-z0-9_*]+)/gi, '');
+    return identifier.replace(/([^a-z0-9_*.]+)/gi, '');
 }
 
 export { categorise, tokenise, extractTableReference, cleanUnquotedIdentifier };

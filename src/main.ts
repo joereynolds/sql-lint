@@ -16,7 +16,7 @@ import { Database } from "./database";
 import { Select } from "./lexer/select";
 import { getQueryFromFile, getQueryFromLine, Line, Query } from "./reader/reader";
 
-const version = "0.0.2";
+const version = "0.0.3";
 
 program
   .version(version)

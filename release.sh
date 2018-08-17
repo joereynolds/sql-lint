@@ -4,7 +4,7 @@ echo "Old versions number: $old_version"
 read -p "Enter the new version number (i.e. 2.3.5): " new_version
 
 echo "Bumping to $new_version in package.json and src/main.ts"
-sed -i "s/\"version\":.*/\"version\": \"$new_version\"/" package.json
+sed -i "s/\"version\":.*/\"version\": \"$new_version\",/" package.json
 sed -i "s/const version.*/const version = \"$new_version\";/" src/main.ts 
 
 npm run start

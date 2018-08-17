@@ -87,4 +87,14 @@ function extractTableReference(tableReference: string) {
 
   return extractedReferences[references.length];
 }
-export { categorise, tokenise, extractTableReference };
+
+/**
+ * Removes any invalid characters from an unquoted identifier.
+ * This can be a database, table, column name etc...
+ */
+function cleanUnquotedIdentifier(identifier: string) {
+    // Remove anything that isn't an a-z 0-9 or an _
+    return identifier.replace(/([^a-z0-9_*]+)/gi, '');
+}
+
+export { categorise, tokenise, extractTableReference, cleanUnquotedIdentifier };

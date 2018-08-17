@@ -16,7 +16,7 @@ test.each([
             ["keyword", "select"],
             ["table_reference", "*"],
             ["keyword", "from"],
-            ["table_reference", "person;"]
+            ["table_reference", "person"]
           ]
         }
       ]
@@ -34,7 +34,7 @@ test.each([
             ["keyword", "select"],
             ["table_reference", "last_name"],
             ["keyword", "from"],
-            ["table_reference", "person;"]
+            ["table_reference", "person"]
           ]
         }
       ]
@@ -77,7 +77,7 @@ test.each([
         {
           content: "USE ;",
           num: 1,
-          tokens: [["keyword", "use"], ["table_reference", ";"]]
+          tokens: [["keyword", "use"]]
         }
       ]
     }
@@ -93,7 +93,6 @@ test.each([
           tokens: [
             ["keyword", "use"],
             ["table_reference", "symfony"],
-            ["table_reference", ";"]
           ]
         }
       ]
@@ -111,7 +110,6 @@ test.each([
             ["keyword", "use"],
             ["table_reference", "symfony"],
             ["table_reference", "pricing"],
-            ["table_reference", ";"]
           ]
         }
       ]
@@ -136,7 +134,7 @@ test.each([
             ["keyword", "select"],
             ["table_reference", "last_name"],
             ["keyword", "from"],
-            ["table_reference", "person;"]
+            ["table_reference", "person"]
           ]
         }
       ]

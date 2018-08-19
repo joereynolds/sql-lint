@@ -10,7 +10,8 @@
         "object-literal-sort-keys": false,
         "prefer-for-of": false,
         "max-classes-per-file": false,
-        "no-angle-bracket-type-assertion": false
+        "no-angle-bracket-type-assertion": false,
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }

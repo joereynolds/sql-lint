@@ -6,15 +6,22 @@ import * as os from "os";
 import * as process from "process";
 
 import { categorise, extractTableReference, tokenise } from "./lexer/lexer";
-
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
 import { TableNotFound } from "./checker/Generic_TableNotFound";
 import { IChecker } from "./checker/interface";
+import { NullChecker } from "./checker/NullChecker";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Select } from "./lexer/select";
-import { getQueryFromFile, getQueryFromLine, Line, Query } from "./reader/reader";
+import { Printer } from "./printer";
+import {
+  getQueryFromFile,
+  getQueryFromLine,
+  Line,
+  Query
+} from "./reader/reader";
+
 
 const version = "0.0.3";
 
@@ -32,7 +39,8 @@ program
   .parse(process.argv);
 
 let queries: Query[] = [];
-let prefix: string = '';
+let prefix: string = "";
+const printer: Printer = new Printer();
 
 const config = JSON.parse(
   fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
@@ -40,7 +48,7 @@ const config = JSON.parse(
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
-  prefix = 'query';
+  prefix = "query";
 }
 
 if (program.file) {
@@ -51,7 +59,7 @@ if (program.file) {
 // Read from stdin if no args are supplied
 if (!program.file && !program.query) {
   queries = getQueryFromLine(fs.readFileSync(0).toString());
-  prefix = 'stdin';
+  prefix = "stdin";
 }
 
 const db = new Database(
@@ -69,33 +77,31 @@ queries.forEach(query => {
     const category = categorise(content);
     const tokenised: Query = tokenise(query);
 
-      query.lines.forEach(line => {
-          line.tokens.forEach(token => {
-              if (token[0] === 'table_reference') {
-                  const reference = extractTableReference(token[1]);
-                  if (reference.database) {
-                      db.getTables(db.connection, reference.database, (results: any) => {
-                        const checker = new TableNotFound(results);
-                          const result = checker.check(tokenised);
-                          console.log(`${prefix}:${result.line} ${result.content}`)
-                      });
-                  }
-              }
-          })
-      })
+    query.lines.forEach(line => {
+      line.tokens.forEach(token => {
+        if (token[0] === "table_reference") {
+          const reference = extractTableReference(token[1]);
+          if (reference.database) {
+            db.getTables(db.connection, reference.database, (results: any) => {
+              const checker = new TableNotFound(results);
+              printer.printCheck(checker, tokenised, prefix)
+            });
+          }
+        }
+      });
+    });
 
     if (category === "select") {
-      const result = checkOddCodePoint.check(tokenised);
-      console.log(`${prefix}:${result.line} ${result.content}`)
+      const checker = checkOddCodePoint;
+      printer.printCheck(checker, tokenised, prefix);
     } else if (category === "use") {
       db.getDatabases(db.connection, (results: any) => {
         const checker = new DatabaseNotFound(results);
-        const result = checker.check(tokenised);
-          console.log(`${prefix}:${result.line} ${result.content}`)
+        printer.printCheck(checker, tokenised, prefix);
       });
     } else if (category === "delete") {
-        const result = checkMissingWhere.check(tokenised);
-          console.log(`${prefix}:${result.line} ${result.content}`)
+      const checker = checkMissingWhere;
+        printer.printCheck(checker, tokenised, prefix);
     }
   }
 });

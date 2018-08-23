@@ -42,8 +42,15 @@ let queries: Query[] = [];
 let prefix: string = "";
 const printer: Printer = new Printer();
 
+const configFilePath = `${os.homedir}/.config/sql-lint/config.json`;
+
+if (!fs.existsSync(configFilePath)) {
+  console.log(`Config file not found at ${configFilePath}`);
+  process.exit(1);
+}
+
 const config = JSON.parse(
-  fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
+  fs.readFileSync(configFilePath, "utf8")
 );
 
 if (program.query) {

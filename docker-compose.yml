@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    # image: mysql:5
+    restart: always
+    build:
+        context: ./
+        dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sql_lint
+    ports:
+      - 3306:3306
+volumes:
+  mysql: ~

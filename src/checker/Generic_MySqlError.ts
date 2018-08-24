@@ -1,8 +1,3 @@
-// Tests
-// Make sure it brings back an empty result for anything that isnt in allowed Categories
-// Make sure errors come through (mock the errors)
-// Make sure that a query gets assigned the correct category once it's been lexed.
-
 import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";

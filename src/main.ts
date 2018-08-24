@@ -5,7 +5,9 @@ import * as fs from "fs";
 import * as os from "os";
 import * as process from "process";
 
+
 import { categorise, extractTableReference, tokenise } from "./lexer/lexer";
+import { MySqlError } from "./checker/Generic_MySqlError";
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
 import { TableNotFound } from "./checker/Generic_TableNotFound";
@@ -76,6 +78,11 @@ queries.forEach(query => {
   if (content) {
     const category = categorise(content);
     const tokenised: Query = tokenise(query);
+
+    db.lintQuery(db.connection, content, (results: any) => {
+        const checker = new MySqlError(results)
+        printer.printCheck(checker, tokenised, prefix)
+    });
 
     query.lines.forEach(line => {
       line.tokens.forEach(token => {

@@ -36,7 +36,7 @@ class Database {
     }
 
     /**
-     * Gets all databases for a table
+     * Gets all tables for a database
      */
     public getTables(connection: mysql.Connection, database: string, callback: any): void {
         const databases: string[] = [];
@@ -46,6 +46,18 @@ class Database {
             }
 
             callback(results);
+        });
+    }
+
+    /**
+     * Runs an EXPLAIN on the query. If it doesn't run successfully, errors will come through,
+     * which is what we want.
+     */
+    public lintQuery(connection: mysql.Connection, query: string, callback: any): void {
+        connection.query(`EXPLAIN ${query}`, (error, results, fields) => {
+            if (error) {
+                callback(error)
+            }
         });
     }
 }

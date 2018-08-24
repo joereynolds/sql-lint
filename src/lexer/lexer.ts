@@ -27,6 +27,8 @@ function categorise(query: string) {
 
 function tokenise(query: Query): Query {
   const category = categorise(query.getContent());
+  query.category = category;
+
   let tokeniser: ILexer;
 
   if (category === "select") {

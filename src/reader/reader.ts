@@ -2,6 +2,7 @@ import * as fs from "fs";
 
 export class Query {
   public lines: Line[] = [];
+  public category: string;
 
   public getContent() {
 

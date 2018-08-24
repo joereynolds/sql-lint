@@ -24,8 +24,14 @@ You should put the following in there for more intelligent errors to come throug
 {
     "host": "localhost",
     "user": "root",
-    "password": "password"
+    "password": "hunter2"
 }
+```
+
+You can also connect via the command line if you wish with the respective flags.
+
+```
+sql-line --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
 ```
 
 ## Troubleshooting
@@ -33,5 +39,3 @@ You should put the following in there for more intelligent errors to come throug
 ```
 GRANT SELECT, SHOW VIEW, PROCESS, REPLICATION CLIENT ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY 'hunter2';
 ```
-
-

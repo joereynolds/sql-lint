@@ -7,8 +7,8 @@ USE test;
 
 
 
-use sykes_reservations;
-use sykes_res;
+use dykes_reservations;
+use dykes_res;
 
 SELECT * FRO�;
 

@@ -12,10 +12,9 @@ An example of some of the checks performed
 
 Any others!
 
-## To run  
+## Running / Installation
 
-Run `./build.sh`, after that, you will have `sql-lint` installed locally.
-This is a workaround until a package is made.
+There are binaries on the [releases page](https://github.com/joereynolds/sql-lint/releases) for Mac, Linux and Windows.
 
 ### Linting a query
 

@@ -41,7 +41,7 @@
         "sql-lint"
     ],
     "license": "MIT",
-    "name": "sql-lint",
+    "name": "sql-lint-mysql",
     "scripts": {
         "build": "tsc",
         "start": "./build.sh",

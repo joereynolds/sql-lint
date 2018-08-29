@@ -25,7 +25,7 @@ import {
 } from "./reader/reader";
 
 
-const version = "0.0.3";
+const version = "0.0.4";
 
 program
   .version(version)

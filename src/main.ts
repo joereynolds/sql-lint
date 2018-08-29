@@ -84,20 +84,6 @@ queries.forEach(query => {
         printer.printCheck(checker, tokenised, prefix)
     });
 
-    query.lines.forEach(line => {
-      line.tokens.forEach(token => {
-        if (token[0] === "table_reference") {
-          const reference = extractTableReference(token[1]);
-          if (reference.database) {
-            db.getTables(db.connection, reference.database, (results: any) => {
-              const checker = new TableNotFound(results);
-              printer.printCheck(checker, tokenised, prefix)
-            });
-          }
-        }
-      });
-    });
-
     if (category === "select") {
       const checker = checkOddCodePoint;
       printer.printCheck(checker, tokenised, prefix);

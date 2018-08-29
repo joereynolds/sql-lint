@@ -13,7 +13,6 @@ class MySqlError implements IChecker {
     public check(query: Query): CheckerResult {
         const allowedCategories = [
             'select',
-            'delete',
             'insert',
             'replace',
             'update',

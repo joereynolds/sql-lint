@@ -18,6 +18,5 @@ git tag -a v$new_version $commit_id
 
 echo "Once you're certain about your changes, run these commands:"
 
-echo "git push origin v$new_version"
-echo "git push origin master"
+echo "git push origin v$new_version typescript"
 echo "npm publish"

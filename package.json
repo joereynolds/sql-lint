@@ -41,14 +41,14 @@
         "sql-lint"
     ],
     "license": "MIT",
-    "name": "sql-lint-mysql",
+    "name": "sql-lint",
     "scripts": {
         "build": "tsc",
         "start": "./build.sh",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "test": "jest test"
     },
-    "version": "0.0.5",
+    "version": "0.0.6",
     "devDependencies": {
         "prettier": "^1.14.2",
         "tslint-config-prettier": "^1.14.0"

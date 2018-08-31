@@ -21,6 +21,7 @@ import {
   Line,
   Query
 } from "./reader/reader";
+import { Keyword } from "./lexer/tokens";
 
 
 const version = "0.0.3";
@@ -98,17 +99,30 @@ queries.forEach(query => {
       });
     });
 
-    if (category === "select") {
-      const checker = checkOddCodePoint;
-      printer.printCheck(checker, tokenised, prefix);
-    } else if (category === "use") {
-      db.getDatabases(db.connection, (results: any) => {
-        const checker = new DatabaseNotFound(results);
+    switch(category) {
+      case Keyword.Select: {
+        const checker = checkOddCodePoint;
         printer.printCheck(checker, tokenised, prefix);
-      });
-    } else if (category === "delete") {
-      const checker = checkMissingWhere;
+        break;
+      }
+
+      case Keyword.Update:
+
+        break;
+
+      case Keyword.Use: {
+        db.getDatabases(db.connection, (results: any) => {
+          const checker = new DatabaseNotFound(results);
+          printer.printCheck(checker, tokenised, prefix);
+        });
+        break;
+      }
+
+      case Keyword.Delete: {
+        const checker = checkMissingWhere;
         printer.printCheck(checker, tokenised, prefix);
+        break;
+      }
     }
   }
 });

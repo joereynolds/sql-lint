@@ -28,6 +28,9 @@ class Select implements ILexer {
       });
     });
 
+    /**
+     * Does query need to be returned?
+     */
     return query;
   }
 }

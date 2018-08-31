@@ -1,7 +1,9 @@
-import { Query } from "../reader/reader";
-import { ILexer } from "./interface";
-import { Select } from "./select";
 import { Use } from "./use";
+import { Select } from "./select";
+import { Update } from "./update";
+import { Keyword } from "./tokens";
+import { ILexer } from "./interface";
+import { Query } from "../reader/reader";
 
 function categorise(query: string) {
   query = query.trim().toLowerCase();
@@ -29,15 +31,25 @@ function tokenise(query: Query): Query {
   const category = categorise(query.getContent());
   let tokeniser: ILexer;
 
-  if (category === "select") {
-    tokeniser = new Select();
-  } else if (category === "use") {
-    tokeniser = new Use();
-  } else {
-    tokeniser = new Use();
+  switch (category) {
+    case Keyword.Select:
+      tokeniser = new Select();
+      break;
+
+    case Keyword.Update:
+      tokeniser = new Update();
+      break;
+
+    case Keyword.Use:
+      tokeniser = new Use();
+      break;
+
+    default:
+      tokeniser = new Use();
+      break;
   }
 
-  const tokens = tokeniser.tokenise(query);
+  const tokens: Query = tokeniser.tokenise(query);
   return tokens;
 }
 
@@ -92,7 +104,7 @@ function extractTableReference(tableReference: string) {
  * Removes any invalid characters from an unquoted identifier.
  * This can be a database, table, column name etc...
  */
-function cleanUnquotedIdentifier(identifier: string) {
+function cleanUnquotedIdentifier(identifier: string): string {
     // Remove anything that isn't an a-z 0-9 or an _
     return identifier.replace(/([^a-z0-9_*.]+)/gi, '');
 }

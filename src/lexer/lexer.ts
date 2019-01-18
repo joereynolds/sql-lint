@@ -36,9 +36,9 @@ function tokenise(query: Query): Query {
 
   let tokeniser: ILexer;
 
-  if (category === "select") {
+  if (category === Keyword.Select) {
     tokeniser = new Select();
-  } else if (category === "use") {
+  } else if (category === Keyword.Use) {
     tokeniser = new Use();
   } else {
     tokeniser = new Use();

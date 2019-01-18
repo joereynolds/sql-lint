@@ -1,0 +1,83 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "SQL\-LINT" "" "2019-01-18" "" ""
+sql\-lint \- Lint MySQL files\.
+.
+.SH "SYNOPSIS"
+sql\-lint [OPTION]\.\.\.
+.
+.SH "DESCRIPTION"
+\-V, \-\-version
+.
+.br
+output the version number
+.
+.P
+\-f, \-\-file \fIpath\fR
+.
+.br
+The \.sql file to lint
+.
+.P
+\-q, \-\-query \fIstring\fR
+.
+.br
+The query to lint
+.
+.P
+\-v, \-\-verbose
+.
+.br
+Brings back information on the what it\'s linting and the tokens generated
+.
+.P
+\-\-host \fIstring\fR
+.
+.br
+The host for the MySQL server connection
+.
+.P
+\-\-user \fIstring\fR
+.
+.br
+The user for the MySQL server connection
+.
+.P
+\-\-password \fIstring\fR
+.
+.br
+The password for the MySQL server connection
+.
+.P
+\-h, \-\-help
+.
+.br
+Output usage information
+.
+.SH "EXAMPLES"
+.
+.SS "stdin"
+.
+.nf
+
+echo "DELETE FROM person;" | sql\-lint
+.
+.fi
+.
+.SS "file"
+.
+.nf
+
+sql\-lint \-f test\-file\.sql
+.
+.fi
+.
+.SS "query"
+.
+.nf
+
+sql\-lint \-\-query="DELETE FROM person;"
+.
+.fi
+

@@ -1,7 +1,6 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { cleanUnquotedIdentifier } from "./lexer";
-import { TOKENS } from "./tokens";
 
 class Use implements ILexer {
   public tokenise(query: Query): Query {

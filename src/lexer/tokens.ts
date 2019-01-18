@@ -1,4 +1,4 @@
-const TOKENS = {
+export const TOKENS = {
   keyword: [
     "select",
     "delete",
@@ -20,4 +20,18 @@ const TOKENS = {
   operator: ["+", "-", "/"]
 };
 
-export { TOKENS };
+export enum Keyword {
+  Select = "select",
+  Delete = "delete",
+  Update = "update",
+  From = "from",
+  Where = "where",
+  Set = "set",
+  Join = "join",
+  Having = "having",
+  Limit = "limit",
+  Else = "else",
+  If = "if",
+  Begin = "begin",
+  Use = "use"
+}

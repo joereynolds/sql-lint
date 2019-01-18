@@ -6,21 +6,17 @@ import * as os from "os";
 import * as process from "process";
 
 
-import { categorise, extractTableReference, tokenise } from "./lexer/lexer";
+import { categorise, tokenise } from "./lexer/lexer";
 import { MySqlError } from "./checker/Generic_MySqlError";
 import { MissingWhere } from "./checker/Delete_MissingWhere";
 import { OddCodePoint } from "./checker/Generic_OddCodePoint";
-import { TableNotFound } from "./checker/Generic_TableNotFound";
-import { IChecker } from "./checker/interface";
-import { NullChecker } from "./checker/NullChecker";
 import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
-import { Select } from "./lexer/select";
 import { Printer } from "./printer";
+import { Keyword } from "./lexer/tokens";
 import {
   getQueryFromFile,
   getQueryFromLine,
-  Line,
   Query
 } from "./reader/reader";
 
@@ -84,15 +80,15 @@ queries.forEach(query => {
         printer.printCheck(checker, tokenised, prefix)
     });
 
-    if (category === "select") {
+    if (category === Keyword.Select) {
       const checker = checkOddCodePoint;
       printer.printCheck(checker, tokenised, prefix);
-    } else if (category === "use") {
+    } else if (category === Keyword.Use) {
       db.getDatabases(db.connection, (results: any) => {
         const checker = new DatabaseNotFound(results);
         printer.printCheck(checker, tokenised, prefix);
       });
-    } else if (category === "delete") {
+    } else if (category === Keyword.Delete) {
       const checker = checkMissingWhere;
         printer.printCheck(checker, tokenised, prefix);
     }

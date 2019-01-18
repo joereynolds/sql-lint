@@ -1,7 +1,7 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { cleanUnquotedIdentifier } from "./lexer";
-import { TOKENS } from "./tokens";
+import { TOKENS, Keyword} from "./tokens";
 
 class Select implements ILexer {
   public tokenise(query: Query): Query {
@@ -12,7 +12,7 @@ class Select implements ILexer {
 
         if (TOKENS.keyword.includes(item)) {
           line.tokens.push(["keyword", item]);
-        } else if (lastToken === "select" || lastToken === "from") {
+        } else if (lastToken === Keyword.Select || lastToken === Keyword.From) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {

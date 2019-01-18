@@ -1,4 +1,3 @@
-import { Database } from "../database";
 import { extractTableReference } from "../lexer/lexer";
 import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";

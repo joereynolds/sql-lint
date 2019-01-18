@@ -1,4 +1,3 @@
-import { Database } from "../database";
 import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";

@@ -100,3 +100,17 @@ You should put the following in there for more intelligent errors to come throug
 
 Integration tests are not (currently) ran on travis.
 run `./tests.sh` to run the tests.
+
+### Working with the docker container
+
+First, make sure port `3306` is available locally.
+Now, `docker-compose up`.
+
+At this point the container(s) will be up and ready to use.
+You can login with the following credentials: `mysql -u root -ppassword`.
+
+Here's an example of a query:
+
+```
+docker exec sqllint_mysql_1 mysql -u root -ppassword -e "SHOW DATABASES"
+```

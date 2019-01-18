@@ -1,7 +1,8 @@
-import { categorise, tokenise } from "../../src/lexer/lexer";
+import { tokenise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
 import { Use } from "../../src/lexer/use";
-import { Line, putContentIntoLines, Query } from "../../src/reader/reader";
+import { Update } from "../../src/lexer/update";
+import { putContentIntoLines } from "../../src/reader/reader";
 
 
 test.each([
@@ -118,6 +119,42 @@ test.each([
 ])("It tokenises a `use` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Use();
+  const actual = tokeniser.tokenise(q[0]);
+  expect(actual).toEqual(expected);
+});
+
+test.each([
+  [
+    "UPDATE ;",
+    {
+      lines: [
+        {
+          content: "UPDATE ;",
+          num: 1,
+          tokens: [["keyword", "update"]]
+        }
+      ]
+    }
+  ],
+
+  [
+    "UPDATE symfony.gig ;",
+    {
+      lines: [
+        {
+          content: "UPDATE symfony.gig ;",
+          num: 1,
+          tokens: [
+            ["keyword", "update"],
+            ["table_reference", "symfony.gig"],
+          ]
+        }
+      ]
+    }
+  ],
+])("It tokenises an `update` correctly", (query, expected) => {
+  const q = putContentIntoLines(query);
+  const tokeniser = new Update();
   const actual = tokeniser.tokenise(q[0]);
   expect(actual).toEqual(expected);
 });

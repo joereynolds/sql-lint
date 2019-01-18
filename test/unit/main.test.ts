@@ -25,6 +25,7 @@ test.each([
 
   // A create table statement
   ["CREATE TABLE person", "create"],
+
   ["USE symfony", "use"],
   ["use symfony;", "use"]
 ])("Queries are categorised correctly", (query, expected) => {

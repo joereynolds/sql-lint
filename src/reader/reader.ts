@@ -5,15 +5,13 @@ export class Query {
   public category: string;
 
   public getContent() {
+    let content: string = "";
 
-      let content: string = '';
+    this.lines.forEach(line => {
+      content += line.content;
+    });
 
-      this.lines.forEach(line => {
-          content += line.content
-
-      })
-
-      return content;
+    return content;
   }
 }
 
@@ -38,7 +36,7 @@ export function getQueryFromFile(file: string): Query[] {
 
 export function putContentIntoLines(contents: string): Query[] {
   let lineNumber = 1;
-  const queriesFromFile: any[] = [];
+  const queriesFromFile: Query[] = [];
   let currentQueryContent: string = "";
   let query = new Query();
   const skipChars = ["", "\n", "\r\n"];
@@ -65,6 +63,7 @@ export function putContentIntoLines(contents: string): Query[] {
       currentQueryContent = "";
     }
   }
+
   return queriesFromFile;
 }
 

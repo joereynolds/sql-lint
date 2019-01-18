@@ -25,7 +25,6 @@ class Database {
     }
 
     public getDatabases(connection: mysql.Connection, callback: any): void {
-        const databases: string[] = [];
         connection.query('SHOW DATABASES', (error, results, fields) => {
             if (error) {
                 return console.log(error);
@@ -39,7 +38,6 @@ class Database {
      * Gets all tables for a database
      */
     public getTables(connection: mysql.Connection, database: string, callback: any): void {
-        const databases: string[] = [];
         connection.query(`SHOW TABLES FROM ${database}`, (error, results, fields) => {
             if (error) {
                 return console.log(error);

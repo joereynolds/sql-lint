@@ -1,5 +1,7 @@
 # sql-lint  
 
+![Imgur](https://i.imgur.com/Le90iGL.png)
+
 sql-lint is a linter for MySQL, it brings back any error from the MySQL server
 as well as custom errors written for sql-lint.
 

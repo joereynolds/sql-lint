@@ -54,8 +54,8 @@ FROM
 
     select * FROM symfony.dont_exist;
 
-SELECT npersonid 
-FROM sykes_reservations.person;
+SELECT ppersonid 
+FROM dykes_reservations.person;
 
 
 

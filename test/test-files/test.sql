@@ -7,6 +7,7 @@ USE test;
 
 
 
+
 use dykes_reservations;
 use dykes_res;
 
@@ -52,3 +53,13 @@ FROM
 
 
     select * FROM symfony.dont_exist;
+
+SELECT npersonid 
+FROM sykes_reservations.person;
+
+
+
+DELETE FROM 
+
+-- Test
+person;

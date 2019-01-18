@@ -2,24 +2,25 @@ import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { Select } from "./select";
 import { Use } from "./use";
+import { Keyword } from "./tokens";
 
 function categorise(query: string) {
   query = query.trim().toLowerCase();
 
-  if (query.startsWith("select")) {
-    return "select";
+  if (query.startsWith(Keyword.Select)) {
+    return Keyword.Select;
   }
 
-  if (query.startsWith("delete")) {
-    return "delete";
+  if (query.startsWith(Keyword.Delete)) {
+    return Keyword.Delete;
   }
 
-  if (query.startsWith("update")) {
-    return "update";
+  if (query.startsWith(Keyword.Update)) {
+    return Keyword.Update;
   }
 
-  if (query.startsWith("use")) {
-    return "use";
+  if (query.startsWith(Keyword.Use)) {
+    return Keyword.Use;
   }
 
   throw new Error(`Unable to categorise query: ${query}`);

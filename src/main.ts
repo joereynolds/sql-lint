@@ -5,7 +5,6 @@ import * as fs from "fs";
 import * as os from "os";
 import * as process from "process";
 
-
 import { categorise, tokenise } from "./lexer/lexer";
 import { MySqlError } from "./checker/Generic_MySqlError";
 import { MissingWhere } from "./checker/Delete_MissingWhere";
@@ -14,12 +13,7 @@ import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
 import { Database } from "./database";
 import { Printer } from "./printer";
 import { Keyword } from "./lexer/tokens";
-import {
-  getQueryFromFile,
-  getQueryFromLine,
-  Query
-} from "./reader/reader";
-
+import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
 
 const version = "0.0.6";
 
@@ -70,34 +64,45 @@ const db = new Database(
   program.user || config.user,
   program.password || config.password
 );
-const checkOddCodePoint = new OddCodePoint();
-const checkMissingWhere = new MissingWhere();
 
-queries.forEach(query => {
-  const content = query.getContent().trim();
+gatherCheckResults(queries, db);
 
-  if (content) {
-    const category = categorise(content);
-    const tokenised: Query = tokenise(query);
+// TODO move this elsewhere and make it return an       
+// array of checks rather than immediately
+// printing them out. 
+//
+// Then sort them by line number.
+function gatherCheckResults(queries: Query[], db: Database) {
 
-    db.lintQuery(db.connection, content, (results: any) => {
-        const checker = new MySqlError(results)
-        printer.printCheck(checker, tokenised, prefix)
-    });
+  const checkOddCodePoint = new OddCodePoint();
+  const checkMissingWhere = new MissingWhere();
 
-    if (category === Keyword.Select) {
-      const checker = checkOddCodePoint;
-      printer.printCheck(checker, tokenised, prefix);
-    } else if (category === Keyword.Use) {
-      db.getDatabases(db.connection, (results: any) => {
-        const checker = new DatabaseNotFound(results);
+  queries.forEach((query: any) => {
+    const content = query.getContent().trim();
+
+    if (content) {
+      const category = categorise(content);
+      const tokenised: Query = tokenise(query);
+
+      db.lintQuery(db.connection, content, (results: any) => {
+        const checker = new MySqlError(results);
         printer.printCheck(checker, tokenised, prefix);
       });
-    } else if (category === Keyword.Delete) {
-      const checker = checkMissingWhere;
+
+      if (category === Keyword.Select) {
+        const checker = checkOddCodePoint;
         printer.printCheck(checker, tokenised, prefix);
+      } else if (category === Keyword.Use) {
+        db.getDatabases(db.connection, (results: any) => {
+          const checker = new DatabaseNotFound(results);
+          printer.printCheck(checker, tokenised, prefix);
+        });
+      } else if (category === Keyword.Delete) {
+        const checker = checkMissingWhere;
+        printer.printCheck(checker, tokenised, prefix);
+      }
     }
-  }
-});
+  });
+}
 
 db.connection.end();

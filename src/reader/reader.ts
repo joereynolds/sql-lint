@@ -41,7 +41,24 @@ export function putContentIntoLines(contents: string): Query[] {
   let query = new Query();
   const skipChars = ["", "\n", "\r\n"];
 
+  // 1. Split on new line
+  // 2. Check if it starts with a comment, 
+  //   2.1 If it does remove it.
+  //   2.2 If not, leave it
+  // 3. Rejoin the lines together as a single string.
+  const lines = contents.split('\n');
+
+  lines.forEach((line, index) => {
+    if (line.startsWith('--') || line.startsWith('#')) {
+      delete lines[index];
+    }
+  });
+
+  const contentWithoutComments = lines.join('\n');
+  contents = contentWithoutComments;
+
   for (let i = 0; i < contents.length; i++) {
+
     if (!skipChars.includes(contents[i])) {
       currentQueryContent += contents[i];
     }

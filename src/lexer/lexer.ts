@@ -23,7 +23,7 @@ function categorise(query: string) {
     return Keyword.Use;
   }
 
-  throw new Error(`Unable to categorise query: ${query}`);
+  throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(Keyword)}`);
 }
 
 function tokenise(query: Query): Query {

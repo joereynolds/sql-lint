@@ -50,6 +50,11 @@ if (program.query) {
 }
 
 if (program.file) {
+  if (!fs.existsSync(program.file) && program.file !== 0) {
+    printer.warnAboutFileNotFound(program.file);
+    process.exit(0);
+  }
+
   queries = getQueryFromFile(program.file);
   prefix = program.file;
 }

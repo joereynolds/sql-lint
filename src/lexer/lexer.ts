@@ -23,6 +23,10 @@ function categorise(query: string) {
     return Keyword.Use;
   }
 
+  if (query.startsWith(Keyword.Create)) {
+    return Keyword.Create;
+  }
+
   throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(Keyword)}`);
 }
 

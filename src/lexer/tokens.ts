@@ -21,17 +21,18 @@ export const TOKENS = {
 };
 
 export enum Keyword {
-  Select = "select",
-  Delete = "delete",
-  Update = "update",
-  From = "from",
-  Where = "where",
-  Set = "set",
-  Join = "join",
-  Having = "having",
-  Limit = "limit",
-  Else = "else",
-  If = "if",
   Begin = "begin",
-  Use = "use"
+  Create = "create",
+  Delete = "delete",
+  Else = "else",
+  From = "from",
+  Having = "having",
+  If = "if",
+  Join = "join",
+  Limit = "limit",
+  Select = "select",
+  Set = "set",
+  Update = "update",
+  Use = "use",
+  Where = "where"
 }

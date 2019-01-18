@@ -20,6 +20,12 @@ export const TOKENS = {
   operator: ["+", "-", "/"]
 };
 
+export enum Types {
+  Keyword = 'keyword',
+  TableReference = 'table_reference',
+  Unidentified = '???'
+}
+
 export enum Keyword {
   Begin = "begin",
   Create = "create",

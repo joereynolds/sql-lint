@@ -1,6 +1,7 @@
 import { Query } from "../reader/reader";
 import { CheckerResult } from "./checkerResult";
 import { IChecker } from "./interface";
+import { Types } from "../lexer/tokens";
 
 class DatabaseNotFound implements IChecker {
   public databases: string[];
@@ -11,7 +12,7 @@ class DatabaseNotFound implements IChecker {
 
     for (const line of query.lines) {
       for (const token of line.tokens) {
-        if (token[0] === "table_reference") {
+        if (token[0] === Types.TableReference) {
           const database = token[1];
           if (!this.databases.includes(database) && database !== ';') {
             return new CheckerResult(

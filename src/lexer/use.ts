@@ -1,7 +1,7 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { cleanUnquotedIdentifier } from "./lexer";
-import { Keyword } from "./tokens";
+import { Keyword, Types } from "./tokens";
 
 class Use implements ILexer {
   public tokenise(query: Query): Query {
@@ -9,13 +9,13 @@ class Use implements ILexer {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Use) {
-          line.tokens.push(["keyword", item]);
+          line.tokens.push([Types.Keyword, item]);
         } else {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
             line.tokens.push([
-              "table_reference",
+              Types.TableReference,
               cleanUnquotedIdentifier(item)
             ]);
           }

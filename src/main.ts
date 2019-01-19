@@ -72,19 +72,19 @@ gatherCheckResults(queries, db);
 // printing them out. 
 //
 // Then sort them by line number.
-function gatherCheckResults(queries: Query[], db: Database) {
+function gatherCheckResults(sqlQueries: Query[], database: Database) {
 
   const checkOddCodePoint = new OddCodePoint();
   const checkMissingWhere = new MissingWhere();
 
-  queries.forEach((query: any) => {
+  sqlQueries.forEach((query: any) => {
     const content = query.getContent().trim();
 
     if (content) {
       const category = categorise(content);
       const tokenised: Query = tokenise(query);
 
-      db.lintQuery(db.connection, content, (results: any) => {
+      database.lintQuery(database.connection, content, (results: any) => {
         const checker = new MySqlError(results);
         printer.printCheck(checker, tokenised, prefix);
       });
@@ -93,7 +93,7 @@ function gatherCheckResults(queries: Query[], db: Database) {
         const checker = checkOddCodePoint;
         printer.printCheck(checker, tokenised, prefix);
       } else if (category === Keyword.Use) {
-        db.getDatabases(db.connection, (results: any) => {
+        database.getDatabases(database.connection, (results: any) => {
           const checker = new DatabaseNotFound(results);
           printer.printCheck(checker, tokenised, prefix);
         });

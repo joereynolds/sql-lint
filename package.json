@@ -44,7 +44,7 @@
     "name": "sql-lint-mysql",
     "scripts": {
         "build": "tsc",
-        "start": "./build.sh",
+        "start": "./build/build.sh",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "test": "jest test"
     },

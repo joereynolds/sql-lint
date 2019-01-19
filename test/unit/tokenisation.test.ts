@@ -2,6 +2,7 @@ import { tokenise } from "../../src/lexer/lexer";
 import { Select } from "../../src/lexer/select";
 import { Use } from "../../src/lexer/use";
 import { Update } from "../../src/lexer/update";
+import { Drop } from "../../src/lexer/drop";
 import { putContentIntoLines } from "../../src/reader/reader";
 
 
@@ -155,6 +156,43 @@ test.each([
 ])("It tokenises an `update` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Update();
+  const actual = tokeniser.tokenise(q[0]);
+  expect(actual).toEqual(expected);
+});
+
+test.each([
+  [
+    "DROP ;",
+    {
+      lines: [
+        {
+          content: "DROP ;",
+          num: 1,
+          tokens: [
+            ["keyword", "drop"]
+          ]
+        }
+      ]
+    }
+  ],
+  [
+    "DROP TABLE ;",
+    {
+      lines: [
+        {
+          content: "DROP TABLE ;",
+          num: 1,
+          tokens: [
+            ["keyword", "drop"],
+            ["drop_item", "table"]
+          ]
+        }
+      ]
+    }
+  ],
+])("It tokenises a `drop` correctly", (query, expected) => {
+  const q = putContentIntoLines(query);
+  const tokeniser = new Drop();
   const actual = tokeniser.tokenise(q[0]);
   expect(actual).toEqual(expected);
 });

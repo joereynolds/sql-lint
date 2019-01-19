@@ -15,7 +15,7 @@ import { Printer } from "./printer";
 import { Keyword } from "./lexer/tokens";
 import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
 
-const version = "0.0.6";
+const version = "0.0.7";
 
 program
   .version(version)

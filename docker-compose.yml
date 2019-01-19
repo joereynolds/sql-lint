@@ -8,7 +8,6 @@ services:
         dockerfile: Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: sql_lint
     ports:
       - 3307:3306
 volumes:

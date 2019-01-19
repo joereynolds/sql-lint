@@ -37,6 +37,7 @@ PERSON
 WHERE age <  15 ;
 
 
+UPDATE symfony.gig SET id = 4;
 
 DELETE  
 
@@ -63,3 +64,7 @@ DELETE FROM
 
 -- Test
 person;
+
+Use symfony;
+
+UPDATE symfony.gig SET id = 4;

@@ -104,7 +104,11 @@ run `./tests.sh` to run the tests.
 ### Working with the docker container
 
 First, make sure port `3306` is available locally.
-Now, `docker-compose up`.
+Now do:
+
+```
+docker-compose up --build -d --force-recreate
+```
 
 At this point the container(s) will be up and ready to use.
 You can login with the following credentials: `mysql -u root -ppassword`.

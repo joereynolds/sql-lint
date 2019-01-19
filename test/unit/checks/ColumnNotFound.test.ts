@@ -1,22 +1,23 @@
-import * as mysql from "mysql";
-
-import { ColumnNotFound } from "../../../src/checker/Generic_ColumnNotFound";
-import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines, Query } from "../../../src/reader/reader";
+import { ColumnNotFound } from "../../../src/checker/generic/columnNotFound";
 
 test.each([
   [
     "SELECT i_dont_exist FROM symfony.gig;",
-    { content: "Column 'i_dont_exist' does not exist in table 'symfony.gig'.", line: 1 }
+    {
+      content: "Column 'i_dont_exist' does not exist in table 'symfony.gig'.",
+      line: 1
+    }
   ]
-])("[SKIPPING - UNIMPLEMENTED]it finds databases that don't exist", (query, expected) => {
+])(
+  "[SKIPPING - UNIMPLEMENTED]it finds databases that don't exist",
+  (query, expected) => {
+    // const checker = new ColumnNotFound([{ Column: "non_existent_column" }]);
 
-  // const checker = new ColumnNotFound([{ Column: "non_existent_column" }]);
+    // const queryObj = putContentIntoLines(query);
+    // const tokenised = tokenise(queryObj[0]);
 
-  // const queryObj = putContentIntoLines(query);
-  // const tokenised = tokenise(queryObj[0]);
-
-  // const actual = checker.check(tokenised);
-  // expect(actual).toMatchObject(expected);
-  expect(1).toEqual(1);
-});
+    // const actual = checker.check(tokenised);
+    // expect(actual).toMatchObject(expected);
+    expect(1).toEqual(1);
+  }
+);

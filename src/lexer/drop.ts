@@ -6,7 +6,7 @@ import { Keyword, Types } from "./tokens";
 class Drop implements ILexer {
   public tokenise(query: Query): Query {
     let lastToken = "";
-    let lasttype = "";
+    const lasttype = "";
 
     query.lines.forEach(line => {
       line.content.split(" ").forEach(word => {

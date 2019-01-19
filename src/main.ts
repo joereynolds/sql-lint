@@ -6,10 +6,10 @@ import * as os from "os";
 import * as process from "process";
 
 import { categorise, tokenise } from "./lexer/lexer";
-import { MySqlError } from "./checker/Generic_MySqlError";
-import { MissingWhere } from "./checker/Delete_MissingWhere";
-import { OddCodePoint } from "./checker/Generic_OddCodePoint";
-import { DatabaseNotFound } from "./checker/Use_DatabaseNotFound";
+import { MySqlError } from "./checker/generic/mySqlError";
+import { MissingWhere } from "./checker/delete/missingWhere";
+import { OddCodePoint } from "./checker/generic/oddCodePoint";
+import { DatabaseNotFound } from "./checker/use/databaseNotFound";
 import { Database } from "./database";
 import { Printer } from "./printer";
 import { Keyword } from "./lexer/tokens";

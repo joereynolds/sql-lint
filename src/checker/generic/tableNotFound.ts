@@ -1,8 +1,8 @@
-import { extractTableReference } from "../lexer/lexer";
-import { Query } from "../reader/reader";
-import { CheckerResult } from "./checkerResult";
-import { IChecker } from "./interface";
-import { Types } from "../lexer/tokens";
+import { extractTableReference } from "../../lexer/lexer";
+import { Query } from "../../reader/reader";
+import { CheckerResult } from "../checkerResult";
+import { IChecker } from "../interface";
+import { Types } from "../../lexer/tokens";
 
 class TableNotFound implements IChecker {
   public tables: string[];

@@ -1,4 +1,4 @@
-import { DatabaseNotFound } from "../../../src/checker/Use_DatabaseNotFound";
+import { DatabaseNotFound } from "../../../src/checker/use/databaseNotFound";
 import { tokenise } from "../../../src/lexer/lexer";
 import { putContentIntoLines, Query } from "../../../src/reader/reader";
 

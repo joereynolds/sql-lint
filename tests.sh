@@ -17,6 +17,13 @@ assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "stdin:1 Delete missin
 
 echo "We expect it to tell us if it can't find a file"
 assert "./dist/src/main.js -f non-existent-file.here" "Can't open file non-existent-file.here. Does it exist?"
+
+echo "We expect a version number to be output"
+assert "./dist/src/main.js --version" "0.0.7"
+
+
+
+
 assert_end sql-lint
 
 # docker-compose down

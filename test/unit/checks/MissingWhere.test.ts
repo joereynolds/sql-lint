@@ -1,6 +1,6 @@
-import { MissingWhere } from "../../../src/checker/Delete_MissingWhere";
+import { MissingWhere } from "../../../src/checker/delete/missingWhere";
 import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines, Query } from "../../../src/reader/reader";
+import { putContentIntoLines } from "../../../src/reader/reader";
 
 test.each([
   ["DELETE FROM person WHERE name = 'Jon';", ""],

@@ -1,6 +1,6 @@
 import * as mysql from "mysql";
 
-import { OddCodePoint } from "../../../src/checker/Generic_OddCodePoint";
+import { OddCodePoint } from "../../../src/checker/generic/oddCodePoint";
 import { tokenise } from "../../../src/lexer/lexer";
 import { putContentIntoLines, Query } from "../../../src/reader/reader";
 

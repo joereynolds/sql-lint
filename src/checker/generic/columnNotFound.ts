@@ -1,6 +1,6 @@
-import { Query } from "../reader/reader";
-import { CheckerResult } from "./checkerResult";
-import { IChecker } from "./interface";
+import { Query } from "../../reader/reader";
+import { CheckerResult } from "../checkerResult";
+import { IChecker } from "../interface";
 
 class ColumnNotFound implements IChecker {
   public columns: string[];

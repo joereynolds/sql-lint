@@ -1,7 +1,7 @@
-import { Query } from "../reader/reader";
-import { CheckerResult } from "./checkerResult";
-import { IChecker } from "./interface";
-import { Types } from "../lexer/tokens";
+import { Query } from "../../reader/reader";
+import { CheckerResult } from "../checkerResult";
+import { IChecker } from "../interface";
+import { Types } from "../../lexer/tokens";
 
 class DatabaseNotFound implements IChecker {
   public databases: string[];

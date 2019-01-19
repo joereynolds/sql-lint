@@ -1,4 +1,4 @@
-import { MySqlError } from "../../../src/checker/Generic_MySqlError";
+import { MySqlError } from "../../../src/checker/generic/mySqlError";
 import { tokenise } from "../../../src/lexer/lexer";
 import { putContentIntoLines, Query } from "../../../src/reader/reader";
 

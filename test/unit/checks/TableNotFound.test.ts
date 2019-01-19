@@ -1,8 +1,7 @@
-import * as mysql from "mysql";
 
-import { TableNotFound } from "../../../src/checker/Generic_TableNotFound";
+import { TableNotFound } from "../../../src/checker/generic/tableNotFound";
 import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines, Query } from "../../../src/reader/reader";
+import { putContentIntoLines } from "../../../src/reader/reader";
 
 test.each([
   [

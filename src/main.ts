@@ -34,9 +34,13 @@ let queries: Query[] = [];
 let prefix: string = "";
 const printer: Printer = new Printer();
 
-const config = JSON.parse(
-  fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
-);
+let config = null;
+
+if (fs.existsSync(`${os.homedir}/.config/sql-lint/config.json`)) {
+  config = JSON.parse(
+    fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
+  );
+}
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -67,13 +71,12 @@ const db = new Database(
 
 gatherCheckResults(queries, db);
 
-// TODO move this elsewhere and make it return an       
+// TODO move this elsewhere and make it return an
 // array of checks rather than immediately
-// printing them out. 
+// printing them out.
 //
 // Then sort them by line number.
 function gatherCheckResults(sqlQueries: Query[], database: Database) {
-
   const checkOddCodePoint = new OddCodePoint();
   const checkMissingWhere = new MissingWhere();
 

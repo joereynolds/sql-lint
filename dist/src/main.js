@@ -27,7 +27,10 @@ program
 let queries = [];
 let prefix = "";
 const printer = new printer_1.Printer();
-const config = JSON.parse(fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8"));
+let config = null;
+if (fs.existsSync(`${os.homedir}/.config/sql-lint/config.json`)) {
+    config = JSON.parse(fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8"));
+}
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";
@@ -47,9 +50,9 @@ if (!program.file && !program.query) {
 }
 const db = new database_1.Database(program.host || config.host, program.user || config.user, program.password || config.password);
 gatherCheckResults(queries, db);
-// TODO move this elsewhere and make it return an       
+// TODO move this elsewhere and make it return an
 // array of checks rather than immediately
-// printing them out. 
+// printing them out.
 //
 // Then sort them by line number.
 function gatherCheckResults(sqlQueries, database) {

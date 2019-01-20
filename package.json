@@ -28,7 +28,7 @@
             "json",
             "node"
         ],
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+        "testRegex": "test\/unit",
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },

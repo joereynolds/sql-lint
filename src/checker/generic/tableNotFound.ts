@@ -3,8 +3,12 @@ import { Query } from "../../reader/reader";
 import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
 import { Types } from "../../lexer/tokens";
+import { sprintf } from "sprintf-js";
 
 class TableNotFound implements IChecker {
+
+  public message = "Table '%s' does not exist in database '%s'.";
+
   public tables: string[];
   constructor(tables: any[]) {
     this.tables = this.cleanTables(tables);
@@ -22,9 +26,7 @@ class TableNotFound implements IChecker {
           ) {
             return new CheckerResult(
               line.num,
-              `Table '${reference.table}' does not exist in database '${
-                reference.database
-              }'.`
+              sprintf(this.message, reference.table, reference.database)
             );
           }
         }

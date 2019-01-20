@@ -3,6 +3,8 @@ import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
 
 class ColumnNotFound implements IChecker {
+
+  public message = "";
   public columns: string[];
   constructor(columns: any[]) {
     this.columns = columns.map(result => result.Column);

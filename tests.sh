@@ -10,10 +10,10 @@ echo "We expect a warning about a bad code point"
 assert "./dist/src/main.js --query='SELECT � AS name;'" "query:1 Bad code point\nquery:1 [ER_BAD_FIELD_ERROR] Unknown column '�' in 'field list'"
 
 echo "We expect a DELETE without a where to prompt us"
-assert "./dist/src/main.js --query='DELETE FROM person ;'" "query:1 Delete missing WHERE, intentional?"
+assert "./dist/src/main.js --query='DELETE FROM person ;'" "query:1 DELETE missing WHERE, intentional?"
 
 echo "We expect stdin to work"
-assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "stdin:1 Delete missing WHERE, intentional?"
+assert "echo 'DELETE FROM person ;' | ./dist/src/main.js" "stdin:1 DELETE missing WHERE, intentional?"
 
 echo "We expect it to tell us if it can't find a file"
 assert "./dist/src/main.js -f non-existent-file.here" "Can't open file non-existent-file.here. Does it exist?"

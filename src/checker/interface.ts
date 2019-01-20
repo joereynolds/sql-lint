@@ -1,8 +1,7 @@
 import { Query } from "../reader/reader";
-import { CheckerResult } from "./checkerResult";
-
 
 interface IChecker {
+  message: string;
   check(query: Query): any;
 }
 

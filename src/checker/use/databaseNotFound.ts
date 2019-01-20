@@ -2,8 +2,12 @@ import { Query } from "../../reader/reader";
 import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
 import { Types } from "../../lexer/tokens";
+import { sprintf } from "sprintf-js";
 
 class DatabaseNotFound implements IChecker {
+
+  public message = "Database '%s' does not exist.";
+
   public databases: string[];
   constructor(databases: any[]) {
     this.databases = databases.map(result => result.Database);
@@ -17,7 +21,7 @@ class DatabaseNotFound implements IChecker {
           if (!this.databases.includes(database) && database !== ';') {
             return new CheckerResult(
               line.num,
-              `Database '${database}' does not exist.`,
+              sprintf(this.message, database)
             );
           }
         }

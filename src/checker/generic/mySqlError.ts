@@ -6,6 +6,10 @@ class MySqlError implements IChecker {
 
     public errors: any;
 
+    // Note that we don't follow the interface correctly for MySQL Error
+    // since the error message is dynamically generated.
+    public message = "";
+
     constructor(errors: any) {
         this.errors = errors;
     }

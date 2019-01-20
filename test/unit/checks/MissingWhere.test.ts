@@ -4,7 +4,7 @@ import { putContentIntoLines } from "../../../src/reader/reader";
 
 test.each([
   ["DELETE FROM person WHERE name = 'Jon';", ""],
-  ["DELETE FROM person;", "Delete missing WHERE, intentional?"]
+  ["DELETE FROM person;", "DELETE missing WHERE, intentional?"]
 ])("it finds missing WHEREs in DELETEs", (query, expected) => {
   const checker = new MissingWhere();
 

@@ -10,5 +10,5 @@ node_js:
     - "10.0"
 
 before_script:
+    - npm run build
     - chmod a+x ./dist/src/main.js
-

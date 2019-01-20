@@ -8,3 +8,7 @@ node_js:
     - "8.11"
     - "9.0"
     - "10.0"
+
+before_script:
+    - chmod a+x ./dist/src/main.js
+

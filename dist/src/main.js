@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const fs = require("fs");
-const os = require("os");
 const process = require("process");
 const lexer_1 = require("./lexer/lexer");
 const mySqlError_1 = require("./checker/generic/mySqlError");
@@ -14,6 +13,7 @@ const database_1 = require("./database");
 const printer_1 = require("./printer");
 const tokens_1 = require("./lexer/tokens");
 const reader_1 = require("./reader/reader");
+const config_1 = require("./config");
 const version = "0.0.7";
 program
     .version(version)
@@ -27,10 +27,7 @@ program
 let queries = [];
 let prefix = "";
 const printer = new printer_1.Printer();
-let config = null;
-if (fs.existsSync(`${os.homedir}/.config/sql-lint/config.json`)) {
-    config = JSON.parse(fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8"));
-}
+const configuration = config_1.getConfiguration(config_1.file);
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";
@@ -48,7 +45,7 @@ if (!program.file && !program.query) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
-const db = new database_1.Database(program.host || config.host, program.user || config.user, program.password || config.password);
+const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
 gatherCheckResults(queries, db);
 // TODO move this elsewhere and make it return an
 // array of checks rather than immediately

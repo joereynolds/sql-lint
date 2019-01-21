@@ -2,7 +2,6 @@
 
 import * as program from "commander";
 import * as fs from "fs";
-import * as os from "os";
 import * as process from "process";
 
 import { categorise, tokenise } from "./lexer/lexer";
@@ -14,6 +13,7 @@ import { Database } from "./database";
 import { Printer } from "./printer";
 import { Keyword } from "./lexer/tokens";
 import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
+import { file, getConfiguration }from "./config"
 
 const version = "0.0.7";
 
@@ -34,13 +34,7 @@ let queries: Query[] = [];
 let prefix: string = "";
 const printer: Printer = new Printer();
 
-let config = null;
-
-if (fs.existsSync(`${os.homedir}/.config/sql-lint/config.json`)) {
-  config = JSON.parse(
-    fs.readFileSync(`${os.homedir}/.config/sql-lint/config.json`, "utf8")
-  );
-}
+const configuration = getConfiguration(file)
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -64,9 +58,9 @@ if (!program.file && !program.query) {
 }
 
 const db = new Database(
-  program.host || config.host,
-  program.user || config.user,
-  program.password || config.password
+  program.host || configuration.host,
+  program.user || configuration.user,
+  program.password || configuration.password
 );
 
 gatherCheckResults(queries, db);

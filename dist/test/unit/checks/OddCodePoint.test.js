@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const oddCodePoint_1 = require("../../../src/checker/generic/oddCodePoint");
+const oddCodePoint_1 = require("../../../src/checker/checks/generic/oddCodePoint");
 const lexer_1 = require("../../../src/lexer/lexer");
 const reader_1 = require("../../../src/reader/reader");
 test.each([

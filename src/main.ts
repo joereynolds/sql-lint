@@ -5,10 +5,10 @@ import * as fs from "fs";
 import * as process from "process";
 
 import { categorise, tokenise } from "./lexer/lexer";
-import { MySqlError } from "./checker/generic/mySqlError";
-import { MissingWhere } from "./checker/delete/missingWhere";
-import { OddCodePoint } from "./checker/generic/oddCodePoint";
-import { DatabaseNotFound } from "./checker/use/databaseNotFound";
+import { MySqlError } from "./checker/checks/generic/mySqlError";
+import { MissingWhere } from "./checker/checks/delete/missingWhere";
+import { OddCodePoint } from "./checker/checks/generic/oddCodePoint";
+import { DatabaseNotFound } from "./checker/checks/use/databaseNotFound";
 import { Database } from "./database";
 import { Printer } from "./printer";
 import { Keyword } from "./lexer/tokens";

@@ -1,4 +1,4 @@
-import { ColumnNotFound } from "../../../src/checker/generic/columnNotFound";
+import { ColumnNotFound } from "../../../src/checker/checks/generic/columnNotFound";
 
 test.each([
   [

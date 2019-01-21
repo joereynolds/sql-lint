@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mySqlError_1 = require("../../../src/checker/generic/mySqlError");
+const mySqlError_1 = require("../../../src/checker/checks/generic/mySqlError");
 const lexer_1 = require("../../../src/lexer/lexer");
 const reader_1 = require("../../../src/reader/reader");
 test("It brings back the error from the server", () => {

@@ -1,4 +1,4 @@
-import { MissingWhere } from "../../../src/checker/delete/missingWhere";
+import { MissingWhere } from "../../../src/checker/checks/delete/missingWhere";
 import { tokenise } from "../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../src/reader/reader";
 

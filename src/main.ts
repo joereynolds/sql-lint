@@ -31,6 +31,11 @@ const printer: Printer = new Printer();
 
 const configuration = getConfiguration(file);
 
+if (configuration === null) {
+  printer.warnAboutFileNotFound(file);
+  process.exit(0);
+}
+
 if (program.query) {
   queries = getQueryFromLine(program.query);
   prefix = "query";

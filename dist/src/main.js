@@ -23,6 +23,10 @@ let queries = [];
 let prefix = "";
 const printer = new printer_1.Printer();
 const configuration = config_1.getConfiguration(config_1.file);
+if (configuration === null) {
+    printer.warnAboutFileNotFound(config_1.file);
+    process.exit(0);
+}
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";

@@ -1,0 +1,58 @@
+import { Query } from "../reader/reader";
+import { Database } from "../database";
+import { Printer } from "../printer";
+import { Keyword } from "../lexer/tokens";
+import { categorise, tokenise } from "../lexer/lexer";
+import { MySqlError } from "../checker/checks/generic/mySqlError";
+import { MissingWhere } from "../checker/checks/delete/missingWhere";
+import { OddCodePoint } from "../checker/checks/generic/oddCodePoint";
+import { DatabaseNotFound } from "../checker/checks/use/databaseNotFound";
+
+/**
+ * Runs all the checks.
+ */
+class CheckerRunner {
+  /**
+   * The line number of the content
+   */
+  public line: number;
+
+  /**
+   *  The content for the current line
+   */
+  public content: string;
+
+  public run(sqlQueries: Query[], database: Database, printer: Printer, prefix: string) {
+    const checkOddCodePoint = new OddCodePoint();
+    const checkMissingWhere = new MissingWhere();
+
+    sqlQueries.forEach((query: any) => {
+      const content = query.getContent().trim();
+
+      if (content) {
+        const category = categorise(content);
+        const tokenised: Query = tokenise(query);
+
+        database.lintQuery(database.connection, content, (results: any) => {
+          const checker = new MySqlError(results);
+          printer.printCheck(checker, tokenised, prefix);
+        });
+
+        if (category === Keyword.Select) {
+          const checker = checkOddCodePoint;
+          printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Use) {
+          database.getDatabases(database.connection, (results: any) => {
+            const checker = new DatabaseNotFound(results);
+            printer.printCheck(checker, tokenised, prefix);
+          });
+        } else if (category === Keyword.Delete) {
+          const checker = checkMissingWhere;
+          printer.printCheck(checker, tokenised, prefix);
+        }
+      }
+    });
+  }
+}
+
+export { CheckerRunner };

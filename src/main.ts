@@ -4,16 +4,11 @@ import * as program from "commander";
 import * as fs from "fs";
 import * as process from "process";
 
-import { categorise, tokenise } from "./lexer/lexer";
-import { MySqlError } from "./checker/checks/generic/mySqlError";
-import { MissingWhere } from "./checker/checks/delete/missingWhere";
-import { OddCodePoint } from "./checker/checks/generic/oddCodePoint";
-import { DatabaseNotFound } from "./checker/checks/use/databaseNotFound";
 import { Database } from "./database";
 import { Printer } from "./printer";
-import { Keyword } from "./lexer/tokens";
 import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
-import { file, getConfiguration }from "./config"
+import { file, getConfiguration } from "./config";
+import { CheckerRunner } from "./checker/checkerRunner";
 
 const version = "0.0.7";
 
@@ -34,7 +29,7 @@ let queries: Query[] = [];
 let prefix: string = "";
 const printer: Printer = new Printer();
 
-const configuration = getConfiguration(file)
+const configuration = getConfiguration(file);
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -63,43 +58,8 @@ const db = new Database(
   program.password || configuration.password
 );
 
-gatherCheckResults(queries, db);
+const runner = new CheckerRunner();
 
-// TODO move this elsewhere and make it return an
-// array of checks rather than immediately
-// printing them out.
-//
-// Then sort them by line number.
-function gatherCheckResults(sqlQueries: Query[], database: Database) {
-  const checkOddCodePoint = new OddCodePoint();
-  const checkMissingWhere = new MissingWhere();
-
-  sqlQueries.forEach((query: any) => {
-    const content = query.getContent().trim();
-
-    if (content) {
-      const category = categorise(content);
-      const tokenised: Query = tokenise(query);
-
-      database.lintQuery(database.connection, content, (results: any) => {
-        const checker = new MySqlError(results);
-        printer.printCheck(checker, tokenised, prefix);
-      });
-
-      if (category === Keyword.Select) {
-        const checker = checkOddCodePoint;
-        printer.printCheck(checker, tokenised, prefix);
-      } else if (category === Keyword.Use) {
-        database.getDatabases(database.connection, (results: any) => {
-          const checker = new DatabaseNotFound(results);
-          printer.printCheck(checker, tokenised, prefix);
-        });
-      } else if (category === Keyword.Delete) {
-        const checker = checkMissingWhere;
-        printer.printCheck(checker, tokenised, prefix);
-      }
-    }
-  });
-}
+runner.run(queries, db, printer, prefix);
 
 db.connection.end();

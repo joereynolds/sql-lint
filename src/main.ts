@@ -27,14 +27,11 @@ program
 
 let queries: Query[] = [];
 let prefix: string = "";
+
 const printer: Printer = new Printer();
-
 const configuration = getConfiguration(file);
-
-if (configuration === null) {
-  printer.warnAboutFileNotFound(file);
-  process.exit(0);
-}
+const runner = new CheckerRunner();
+let runSimpleChecks: boolean = false;
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -57,14 +54,19 @@ if (!program.file && !program.query) {
   prefix = "stdin";
 }
 
-const db = new Database(
-  program.host || configuration.host,
-  program.user || configuration.user,
-  program.password || configuration.password
-);
+if (configuration === null) {
+  printer.warnAboutFileNotFound(file);
+  runSimpleChecks = true;
+}
 
-const runner = new CheckerRunner();
-
-runner.run(queries, db, printer, prefix);
-
-db.connection.end();
+if (runSimpleChecks) {
+  runner.runSimpleChecks(queries, printer, prefix);
+} else {
+  const db = new Database(
+    program.host || configuration.host,
+    program.user || configuration.user,
+    program.password || configuration.password
+  );
+  runner.run(queries, db, printer, prefix);
+  db.connection.end();
+}

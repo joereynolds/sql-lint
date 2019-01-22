@@ -23,10 +23,8 @@ let queries = [];
 let prefix = "";
 const printer = new printer_1.Printer();
 const configuration = config_1.getConfiguration(config_1.file);
-if (configuration === null) {
-    printer.warnAboutFileNotFound(config_1.file);
-    process.exit(0);
-}
+const runner = new checkerRunner_1.CheckerRunner();
+let runSimpleChecks = false;
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";
@@ -44,8 +42,16 @@ if (!program.file && !program.query) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
-const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
-const runner = new checkerRunner_1.CheckerRunner();
-runner.run(queries, db, printer, prefix);
-db.connection.end();
+if (configuration === null) {
+    printer.warnAboutFileNotFound(config_1.file);
+    runSimpleChecks = true;
+}
+if (runSimpleChecks) {
+    runner.runSimpleChecks(queries, printer, prefix);
+}
+else {
+    const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
+    runner.run(queries, db, printer, prefix);
+    db.connection.end();
+}
 //# sourceMappingURL=main.js.map

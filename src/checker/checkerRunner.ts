@@ -22,6 +22,31 @@ class CheckerRunner {
    */
   public content: string;
 
+  /**
+   * Simple checks are ones that don't require a database connection
+   */
+  public runSimpleChecks(sqlQueries: Query[], printer: Printer, prefix: string) {
+    const checkOddCodePoint = new OddCodePoint();
+    const checkMissingWhere = new MissingWhere();
+
+    sqlQueries.forEach((query: any) => {
+      const content = query.getContent().trim();
+
+      if (content) {
+        const category = categorise(content);
+        const tokenised: Query = tokenise(query);
+
+        if (category === Keyword.Select) {
+          const checker = checkOddCodePoint;
+          printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Delete) {
+          const checker = checkMissingWhere;
+          printer.printCheck(checker, tokenised, prefix);
+        }
+      }
+    });
+  }
+
   public run(sqlQueries: Query[], database: Database, printer: Printer, prefix: string) {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();

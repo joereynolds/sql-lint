@@ -11,4 +11,5 @@ node_js:
 
 before_script:
     - npm run build
+    - mkdir -p /home/travis/.config/sql-lint && touch /home/travis/.config/sql-lint/config.json
     - chmod a+x ./dist/src/main.js

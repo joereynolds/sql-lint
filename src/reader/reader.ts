@@ -49,7 +49,7 @@ export function putContentIntoLines(contents: string): Query[] {
   const lines = contents.split('\n');
 
   lines.forEach((line, index) => {
-    if (line.startsWith('--') || line.startsWith('#')) {
+  if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
       delete lines[index];
     }
   });

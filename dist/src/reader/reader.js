@@ -43,7 +43,7 @@ function putContentIntoLines(contents) {
     // 3. Rejoin the lines together as a single string.
     const lines = contents.split('\n');
     lines.forEach((line, index) => {
-        if (line.startsWith('--') || line.startsWith('#')) {
+        if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
             delete lines[index];
         }
     });

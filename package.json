@@ -28,7 +28,7 @@
             "json",
             "node"
         ],
-        "testRegex": "test/(unit|integration)",
+        "testRegex": "test/unit",
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },

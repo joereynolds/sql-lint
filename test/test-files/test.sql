@@ -68,3 +68,6 @@ person;
 Use symfony;
 
 UPDATE symfony.gig SET id = 4;
+
+
+INSERT INTO some_table VALUES (some_thing);

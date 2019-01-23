@@ -5,11 +5,45 @@ const use_1 = require("./use");
 const tokens_1 = require("./tokens");
 function categorise(query) {
     query = query.trim().toLowerCase();
-    if (query.startsWith(tokens_1.Keyword.Select)) {
-        return tokens_1.Keyword.Select;
+    // TODO refactor this
+    if (query.startsWith(tokens_1.Keyword.Begin)) {
+        return tokens_1.Keyword.Begin;
+    }
+    if (query.startsWith(tokens_1.Keyword.Create)) {
+        return tokens_1.Keyword.Create;
     }
     if (query.startsWith(tokens_1.Keyword.Delete)) {
         return tokens_1.Keyword.Delete;
+    }
+    if (query.startsWith(tokens_1.Keyword.Drop)) {
+        return tokens_1.Keyword.Drop;
+    }
+    if (query.startsWith(tokens_1.Keyword.Else)) {
+        return tokens_1.Keyword.Else;
+    }
+    if (query.startsWith(tokens_1.Keyword.From)) {
+        return tokens_1.Keyword.From;
+    }
+    if (query.startsWith(tokens_1.Keyword.Having)) {
+        return tokens_1.Keyword.Having;
+    }
+    if (query.startsWith(tokens_1.Keyword.If)) {
+        return tokens_1.Keyword.If;
+    }
+    if (query.startsWith(tokens_1.Keyword.Insert)) {
+        return tokens_1.Keyword.Insert;
+    }
+    if (query.startsWith(tokens_1.Keyword.Join)) {
+        return tokens_1.Keyword.Join;
+    }
+    if (query.startsWith(tokens_1.Keyword.Limit)) {
+        return tokens_1.Keyword.Limit;
+    }
+    if (query.startsWith(tokens_1.Keyword.Select)) {
+        return tokens_1.Keyword.Select;
+    }
+    if (query.startsWith(tokens_1.Keyword.Set)) {
+        return tokens_1.Keyword.Set;
     }
     if (query.startsWith(tokens_1.Keyword.Update)) {
         return tokens_1.Keyword.Update;
@@ -17,14 +51,8 @@ function categorise(query) {
     if (query.startsWith(tokens_1.Keyword.Use)) {
         return tokens_1.Keyword.Use;
     }
-    if (query.startsWith(tokens_1.Keyword.Create)) {
-        return tokens_1.Keyword.Create;
-    }
-    if (query.startsWith(tokens_1.Keyword.Drop)) {
-        return tokens_1.Keyword.Drop;
-    }
-    if (query.startsWith(tokens_1.Keyword.Insert)) {
-        return tokens_1.Keyword.Insert;
+    if (query.startsWith(tokens_1.Keyword.Where)) {
+        return tokens_1.Keyword.Where;
     }
     throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(tokens_1.Keyword)}`);
 }

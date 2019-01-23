@@ -23,6 +23,9 @@ function categorise(query) {
     if (query.startsWith(tokens_1.Keyword.Drop)) {
         return tokens_1.Keyword.Drop;
     }
+    if (query.startsWith(tokens_1.Keyword.Insert)) {
+        return tokens_1.Keyword.Insert;
+    }
     throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(tokens_1.Keyword)}`);
 }
 exports.categorise = categorise;

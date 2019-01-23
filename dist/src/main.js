@@ -21,7 +21,7 @@ program
     .parse(process.argv);
 let queries = [];
 let prefix = "";
-const printer = new printer_1.Printer();
+const printer = new printer_1.Printer(program.verbose);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 let runSimpleChecks = false;

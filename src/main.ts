@@ -28,7 +28,7 @@ program
 let queries: Query[] = [];
 let prefix: string = "";
 
-const printer: Printer = new Printer();
+const printer: Printer = new Printer(program.verbose);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
 let runSimpleChecks: boolean = false;

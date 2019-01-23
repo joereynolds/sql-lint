@@ -36,6 +36,7 @@ export enum Keyword {
   From = "from",
   Having = "having",
   If = "if",
+  Insert = 'insert',
   Join = "join",
   Limit = "limit",
   Select = "select",

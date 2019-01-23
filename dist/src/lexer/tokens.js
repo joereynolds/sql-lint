@@ -37,6 +37,7 @@ var Keyword;
     Keyword["From"] = "from";
     Keyword["Having"] = "having";
     Keyword["If"] = "if";
+    Keyword["Insert"] = "insert";
     Keyword["Join"] = "join";
     Keyword["Limit"] = "limit";
     Keyword["Select"] = "select";

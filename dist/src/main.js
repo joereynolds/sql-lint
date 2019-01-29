@@ -47,11 +47,11 @@ if (configuration === null) {
     runSimpleChecks = true;
 }
 if (runSimpleChecks) {
-    runner.runSimpleChecks(queries, printer, prefix);
+    runner.run(queries, printer, prefix);
 }
 else {
     const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
-    runner.run(queries, db, printer, prefix);
+    runner.run(queries, printer, prefix, db);
     db.connection.end();
 }
 //# sourceMappingURL=main.js.map

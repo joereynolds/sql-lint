@@ -60,13 +60,13 @@ if (configuration === null) {
 }
 
 if (runSimpleChecks) {
-  runner.runSimpleChecks(queries, printer, prefix);
+  runner.run(queries, printer, prefix);
 } else {
   const db = new Database(
     program.host || configuration.host,
     program.user || configuration.user,
     program.password || configuration.password
   );
-  runner.run(queries, db, printer, prefix);
+  runner.run(queries, printer, prefix, db);
   db.connection.end();
 }

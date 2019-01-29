@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../../src/lexer/lexer");
-const select_1 = require("../../src/lexer/select");
 test("The framework is running", () => {
     expect(1).toEqual(1);
 });
@@ -47,7 +46,6 @@ test.each([
         }
     ]
 ])("Table references are correctly categorised", (tableReference, expected) => {
-    const tokeniser = new select_1.Select();
     const actual = lexer_1.extractTableReference(tableReference);
     expect(actual).toMatchObject(expected);
 });

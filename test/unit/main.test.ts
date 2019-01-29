@@ -1,7 +1,4 @@
-import { categorise, extractTableReference, tokenise } from "../../src/lexer/lexer";
-import { Select } from "../../src/lexer/select";
-import { Use } from "../../src/lexer/use";
-import { Line, putContentIntoLines, Query } from "../../src/reader/reader";
+import { categorise, extractTableReference } from "../../src/lexer/lexer";
 
 test("The framework is running", () => {
   expect(1).toEqual(1);
@@ -58,7 +55,6 @@ test.each([
     }
   ]
 ])("Table references are correctly categorised", (tableReference, expected) => {
-  const tokeniser = new Select();
   const actual = extractTableReference(tableReference);
   expect(actual).toMatchObject(expected);
 });

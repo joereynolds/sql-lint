@@ -25,7 +25,11 @@ class CheckerRunner {
   /**
    * Simple checks are ones that don't require a database connection
    */
-  public runSimpleChecks(sqlQueries: Query[], printer: Printer, prefix: string) {
+  public runSimpleChecks(
+    sqlQueries: Query[],
+    printer: Printer,
+    prefix: string
+  ) {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
 
@@ -47,7 +51,12 @@ class CheckerRunner {
     });
   }
 
-  public run(sqlQueries: Query[], database: Database, printer: Printer, prefix: string) {
+  public runDatabaseChecks(
+    sqlQueries: Query[],
+    database: Database,
+    printer: Printer,
+    prefix: string
+  ) {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
 
@@ -77,6 +86,19 @@ class CheckerRunner {
         }
       }
     });
+  }
+
+  public run(
+    sqlQueries: Query[],
+    printer: Printer,
+    prefix: string,
+    database?: Database
+  ) {
+    if (database) {
+      return this.runDatabaseChecks(sqlQueries, database, printer, prefix);
+    }
+
+    return this.runSimpleChecks(sqlQueries, printer, prefix);
   }
 }
 

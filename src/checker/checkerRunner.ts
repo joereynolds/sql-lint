@@ -7,6 +7,7 @@ import { MySqlError } from "../checker/checks/generic/mySqlError";
 import { MissingWhere } from "../checker/checks/delete/missingWhere";
 import { OddCodePoint } from "../checker/checks/generic/oddCodePoint";
 import { DatabaseNotFound } from "../checker/checks/use/databaseNotFound";
+import { InvalidDropOption } from "../checker/checks/drop/invalidDropOption";
 
 /**
  * Runs all the checks.
@@ -32,6 +33,7 @@ class CheckerRunner {
   ) {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
+    const invalidDropOption = new InvalidDropOption();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -46,6 +48,9 @@ class CheckerRunner {
         } else if (category === Keyword.Delete) {
           const checker = checkMissingWhere;
           printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Drop) {
+          const checker = invalidDropOption;
+          printer.printCheck(checker, tokenised, prefix);
         }
       }
     });
@@ -59,6 +64,7 @@ class CheckerRunner {
   ) {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
+    const invalidDropOption = new InvalidDropOption();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -82,6 +88,9 @@ class CheckerRunner {
           });
         } else if (category === Keyword.Delete) {
           const checker = checkMissingWhere;
+          printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Drop) {
+          const checker = invalidDropOption;
           printer.printCheck(checker, tokenised, prefix);
         }
       }

@@ -190,6 +190,21 @@ test.each([
       ]
     }
   ],
+  [
+    "DROP DATABASE ;",
+    {
+      lines: [
+        {
+          content: "DROP DATABASE ;",
+          num: 1,
+          tokens: [
+            ["keyword", "drop"],
+            ["drop_item", "database"]
+          ]
+        }
+      ]
+    }
+  ],
 ])("It tokenises a `drop` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Drop();

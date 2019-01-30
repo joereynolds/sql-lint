@@ -1,6 +1,7 @@
 import { Query } from "../reader/reader";
 import { ILexer } from "./interface";
 import { Select } from "./select";
+import { Drop } from "./drop";
 import { Use } from "./use";
 import { Keyword } from "./tokens";
 
@@ -74,6 +75,8 @@ function tokenise(query: Query): Query {
     tokeniser = new Select();
   } else if (category === Keyword.Use) {
     tokeniser = new Use();
+  } else if (category === Keyword.Drop) {
+    tokeniser = new Drop();
   } else {
     tokeniser = new Use();
   }

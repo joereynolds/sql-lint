@@ -5,14 +5,22 @@
 sql-lint is a linter for MySQL, it brings back any error from the MySQL server
 as well as custom errors written for sql-lint.
 
-An example of some of the checks performed
+`sql-lint` will show errors about the following things
 
 - DELETE statements missing WHERE clauses
-- Databases not found
-- Tables not found
-- Weird characters in a query where they shouldn't be
+- Odd code points in queries
+- Any MySQL error*
 
-Any others!
+* `sql-lint` brings back errors from the MySQL server too. It will catch **any** MySQL error.
+these include but are not limited to:
+
+- Unknown columns on a table 
+- A non existent database
+- A non existent table
+- Syntax errors
+
+etc...
+
 
 ## Running / Installation
 
@@ -93,17 +101,12 @@ You should put the following in there for more intelligent errors to come throug
 ### To test  
 
 ```
-./build.sh //This will run more than just the tests (recommended)
+./build/build.sh //This will run more than just the tests (recommended)
 ```
-
-### Integration tests   
-
-Integration tests are not (currently) ran on travis.
-run `./tests.sh` to run the tests.
 
 ### Working with the docker container
 
-First, make sure port `3306` is available locally.
+First, make sure port `3307` is available locally.
 Now do:
 
 ```

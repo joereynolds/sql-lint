@@ -1,19 +1,18 @@
+-- Valid query
 DELETE
 FROM 
 PERSON  
 WHERE something;
 
+-- Non existent database
 USE test;
+use non_existent_database;
 
 
-
-
-use dykes_reservations;
-use dykes_res;
-
+-- Bad code point and syntax error
 SELECT * FRO�;
 
-
+-- Missing a database
 SELECT  
 *
 FROM    
@@ -24,21 +23,9 @@ PERSON
 WHERE age > 5
 ;
 
-
-
-
-SELECT  
-*
-FROM    
-PERSON  
-
-
-
-WHERE age <  15 ;
-
-
 UPDATE symfony.gig SET id = 4;
 
+-- DELETE missing a WHERE clause
 DELETE  
 
 
@@ -49,25 +36,27 @@ FROM
 
 
 
-
       person;
 
 
+-- Non existent table
     select * FROM symfony.dont_exist;
 
-SELECT ppersonid 
-FROM dykes_reservations.person;
 
-
-
+-- DELETE missing a WHERE clause with a comment nested inside it
 DELETE FROM 
 
 -- Test
 person;
 
-Use symfony;
-
-UPDATE symfony.gig SET id = 4;
 
 
-INSERT INTO some_table VALUES (some_thing);
+-- Invalid option for DROP
+DROP thing l;
+
+-- Valid option for DROP
+DROP TABLE test;
+
+-- Currently These queries fail with 'invalid syntax'. Probably not lexxed properly.
+/* UPDATE symfony.gig SET id = 4; */
+/* INSERT INTO some_table VALUES (some_thing); */

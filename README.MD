@@ -22,7 +22,6 @@ these include but are not limited to:
 
 etc...
 
-
 ## Running / Installation
 
 There are binaries on the [releases page](https://github.com/joereynolds/sql-lint/releases) for Mac, Linux and Windows.
@@ -122,3 +121,15 @@ Here's an example of a query:
 ```
 docker exec sqllint_mysql_1 mysql -u root -ppassword -e "SHOW DATABASES"
 ```
+
+## Troubleshooting
+
+### I'm not seeing any warnings
+
+Run `sql-lint -f your-file` and it will display the exception.
+Add the `-v` flag for more information.
+
+### It's telling me there's a syntax error when there's clearly not.
+
+Chances are you're using an old(er) version of MySQL.
+`EXPLAIN`ing on `INSERT|UPDATE|DELETE` was added in Mysql 5.6.

@@ -56,7 +56,3 @@ DROP thing l;
 
 -- Valid option for DROP
 DROP TABLE test;
-
--- Currently These queries fail with 'invalid syntax'. Probably not lexxed properly.
-/* UPDATE symfony.gig SET id = 4; */
-/* INSERT INTO some_table VALUES (some_thing); */

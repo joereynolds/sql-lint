@@ -106,7 +106,8 @@ You should put the following in there for more intelligent errors to come throug
 
 ### Working with the docker container
 
-First, make sure port `3307` is available locally.
+First, make sure port `3306` is available locally.
+(You can do this by inspecting the output of `sudo lsof -i :3306` and `docker ps` and `kill`ing anything using that port)
 Now do:
 
 ```
@@ -120,6 +121,18 @@ Here's an example of a query:
 
 ```
 docker exec sqllint_mysql_1 mysql -u root -ppassword -e "SHOW DATABASES"
+```
+
+### Connecting sql-lint to the docker container
+
+Change your config file in `~/.config/sql-lint/config.json` to have the following values:
+
+```
+{
+    "host": "localhost",
+    "user": "root",
+    "password": "password"
+}
 ```
 
 ## Troubleshooting

@@ -4,7 +4,7 @@
 
 ![Imgur](https://i.imgur.com/JgAhLFp.png)
 
-![Imgur](https://i.imgur.com/pXJNNoW.png)
+![Imgur](https://i.imgur.com/lo7MMoI.png)
 
 sql-lint is a linter for MySQL, it brings back any error from the MySQL server
 as well as custom errors written for sql-lint.

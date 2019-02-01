@@ -1,30 +1,7 @@
 import * as fs from "fs";
+import  { Line } from "./line";
+import  { Query } from "./query";
 
-export class Query {
-  public lines: Line[] = [];
-  public category: string;
-
-  public getContent() {
-    let content: string = "";
-
-    this.lines.forEach(line => {
-      content += line.content;
-    });
-
-    return content;
-  }
-}
-
-export class Line {
-  public num: number;
-  public content: string;
-  public tokens: string[][] = [];
-
-  constructor(content: string, num: number) {
-    this.content = content;
-    this.num = num;
-  }
-}
 
 /**
  * Grabs the querie(s) from the --file flag

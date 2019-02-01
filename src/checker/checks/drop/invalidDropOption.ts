@@ -8,7 +8,7 @@
  *   DROP TABLE test;
  */
 
-import { Query } from "../../../reader/reader";
+import { Query } from "../../../reader/query";
 import { CheckerResult } from "../../checkerResult";
 import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/tokens";

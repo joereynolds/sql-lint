@@ -1,8 +1,6 @@
-import * as mysql from "mysql";
-
 import { OddCodePoint } from "../../../src/checker/checks/generic/oddCodePoint";
 import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines, Query } from "../../../src/reader/reader";
+import { putContentIntoLines } from "../../../src/reader/reader";
 
 test.each([
   ["SELECT 1;", ""],

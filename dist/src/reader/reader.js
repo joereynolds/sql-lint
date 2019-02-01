@@ -1,27 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
-class Query {
-    constructor() {
-        this.lines = [];
-    }
-    getContent() {
-        let content = "";
-        this.lines.forEach(line => {
-            content += line.content;
-        });
-        return content;
-    }
-}
-exports.Query = Query;
-class Line {
-    constructor(content, num) {
-        this.tokens = [];
-        this.content = content;
-        this.num = num;
-    }
-}
-exports.Line = Line;
+const line_1 = require("./line");
+const query_1 = require("./query");
 /**
  * Grabs the querie(s) from the --file flag
  */
@@ -34,7 +15,7 @@ function putContentIntoLines(contents) {
     let lineNumber = 1;
     const queriesFromFile = [];
     let currentQueryContent = "";
-    let query = new Query();
+    let query = new query_1.Query();
     const skipChars = ["", "\n", "\r\n"];
     // 1. Split on new line
     // 2. Check if it starts with a comment, 
@@ -55,17 +36,17 @@ function putContentIntoLines(contents) {
         }
         if (contents[i] === "\n") {
             if (currentQueryContent.length > 0) {
-                query.lines.push(new Line(currentQueryContent, lineNumber));
+                query.lines.push(new line_1.Line(currentQueryContent, lineNumber));
             }
             currentQueryContent = "";
             lineNumber++;
         }
         if (contents[i] === ";") {
             if (currentQueryContent.length > 0) {
-                query.lines.push(new Line(currentQueryContent, lineNumber));
+                query.lines.push(new line_1.Line(currentQueryContent, lineNumber));
             }
             queriesFromFile.push(query);
-            query = new Query();
+            query = new query_1.Query();
             currentQueryContent = "";
         }
     }

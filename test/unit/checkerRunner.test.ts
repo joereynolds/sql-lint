@@ -1,8 +1,6 @@
 import { CheckerRunner } from "../../src/checker/checkerRunner";
 import { Printer } from "../../src/printer";
 
-// xtest("It runs database checks when a database is supplied", () => {});
-
 test("It does not run database checks when a database is not supplied", () => {
   const mockRunDatabaseChecksFn = (CheckerRunner.prototype.runDatabaseChecks = jest.fn());
   const printer = new Printer(0);

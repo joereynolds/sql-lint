@@ -1,5 +1,5 @@
 import { IChecker } from "./checker/interface";
-import { Query } from "./reader/reader";
+import { Query } from "./reader/query";
 
 import chalk from "chalk";
 

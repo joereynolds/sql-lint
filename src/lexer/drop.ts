@@ -1,4 +1,4 @@
-import { Query } from "../reader/reader";
+import { Query } from "../reader/query";
 import { ILexer } from "./interface";
 import { cleanUnquotedIdentifier } from "./lexer";
 import { Keyword, Types } from "./tokens";

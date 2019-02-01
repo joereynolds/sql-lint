@@ -1,4 +1,4 @@
-import { Query } from "../reader/reader";
+import { Query } from "../reader/query";
 
 interface IChecker {
   message: string;

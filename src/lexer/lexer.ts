@@ -1,4 +1,4 @@
-import { Query } from "../reader/reader";
+import { Query } from "../reader/query";
 import { ILexer } from "./interface";
 import { Select } from "./select";
 import { Drop } from "./drop";

@@ -1,4 +1,4 @@
-import { Query } from "../reader/reader";
+import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
 import { Keyword } from "../lexer/tokens";

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const checkerRunner_1 = require("../../src/checker/checkerRunner");
 const printer_1 = require("../../src/printer");
-// xtest("It runs database checks when a database is supplied", () => {});
 test("It does not run database checks when a database is not supplied", () => {
     const mockRunDatabaseChecksFn = (checkerRunner_1.CheckerRunner.prototype.runDatabaseChecks = jest.fn());
     const printer = new printer_1.Printer(0);

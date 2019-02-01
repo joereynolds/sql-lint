@@ -6,7 +6,8 @@ import * as process from "process";
 
 import { Database } from "./database";
 import { Printer } from "./printer";
-import { getQueryFromFile, getQueryFromLine, Query } from "./reader/reader";
+import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
+import { Query } from "./reader/query";
 import { file, getConfiguration } from "./config";
 import { CheckerRunner } from "./checker/checkerRunner";
 

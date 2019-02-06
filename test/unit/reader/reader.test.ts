@@ -1,6 +1,6 @@
-import { putContentIntoLines } from "../../src/reader/reader";
-import { Query } from "../../src/reader/query";
-import { Line } from "../../src/reader/line";
+import { putContentIntoLines } from "../../../src/reader/reader";
+import { Query } from "../../../src/reader/query";
+import { Line } from "../../../src/reader/line";
 
 test("We correctly read a file", () => {
   const query = new Query();

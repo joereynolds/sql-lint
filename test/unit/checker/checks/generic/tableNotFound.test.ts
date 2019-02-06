@@ -1,7 +1,6 @@
-
-import { TableNotFound } from "../../../src/checker/checks/generic/tableNotFound";
-import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../src/reader/reader";
+import { TableNotFound } from "../../../../../src/checker/checks/generic/tableNotFound";
+import { tokenise } from "../../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../../src/reader/reader";
 
 test.each([
   [

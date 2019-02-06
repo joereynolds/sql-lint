@@ -1,5 +1,5 @@
-import { CheckerRunner } from "../../src/checker/checkerRunner";
-import { Printer } from "../../src/printer";
+import { CheckerRunner } from "../../../src/checker/checkerRunner";
+import { Printer } from "../../../src/printer";
 
 test("It does not run database checks when a database is not supplied", () => {
   const mockRunDatabaseChecksFn = (CheckerRunner.prototype.runDatabaseChecks = jest.fn());

@@ -5,7 +5,7 @@ const sqlLint = "./dist/src/main.js";
 xtest("it brings back a version number", done => {
     shelltest()
         .cmd(`${sqlLint} --version`)
-        .expect('stdout', "0.0.7\n")
+        .expect('stdout', "0.0.9\n")
         .end(done);
 });
 xtest("it warns us if it can't find a configuration file", done => {

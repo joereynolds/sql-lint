@@ -1,6 +1,6 @@
-import { MySqlError } from "../../../src/checker/checks/generic/mySqlError";
-import { tokenise } from "../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../src/reader/reader";
+import { MySqlError } from "../../../../../src/checker/checks/generic/mySqlError";
+import { tokenise } from "../../../../..//src/lexer/lexer";
+import { putContentIntoLines } from "../../../../../src/reader/reader";
 
 test("It brings back the error from the server", () => {
   const query = "SELECT stuff FROM things ;";

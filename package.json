@@ -55,6 +55,7 @@
     "man": "./doc/man/doc.1",
     "devDependencies": {
         "prettier": "^1.14.2",
-        "tslint-config-prettier": "^1.14.0"
+        "tslint-config-prettier": "^1.14.0",
+        "tslint-sonarts": "^1.9.0"
     }
 }

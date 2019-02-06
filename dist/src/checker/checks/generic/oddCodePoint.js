@@ -9,11 +9,9 @@ class OddCodePoint {
         const badCodePoints = [65533];
         for (const char of query.getContent()) {
             const codePoint = char.codePointAt(0);
-            if (codePoint !== undefined) {
-                if (badCodePoints.includes(codePoint)) {
-                    const lineNumber = query.lines[0].num;
-                    return new checkerResult_1.CheckerResult(lineNumber, this.message);
-                }
+            if (codePoint !== undefined && badCodePoints.includes(codePoint)) {
+                const lineNumber = query.lines[0].num;
+                return new checkerResult_1.CheckerResult(lineNumber, this.message);
             }
         }
         return new checkerResult_1.CheckerResult(0, "");

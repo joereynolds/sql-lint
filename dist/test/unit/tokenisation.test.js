@@ -224,6 +224,7 @@ test.each([
 ])("It tokenises correctly when called through tokenise", (query, expected) => {
     const q = reader_1.putContentIntoLines(query);
     const actual = lexer_1.tokenise(q[0]);
+    console.log(actual);
     expect(actual).toMatchObject(expected);
 });
 //# sourceMappingURL=tokenisation.test.js.map

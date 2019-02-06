@@ -80,9 +80,7 @@ function tokenise(query: Query): Query {
   } else {
     tokeniser = new Use();
   }
-
-  const tokens = tokeniser.tokenise(query);
-  return tokens;
+  return tokeniser.tokenise(query);
 }
 
 /*

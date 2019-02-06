@@ -2,7 +2,8 @@
     "defaultSeverity": "error",
     "extends": [
         "tslint:latest",
-        "tslint-config-prettier"
+        "tslint-config-prettier",
+        "tslint-sonarts"
     ],
     "jsRules": {},
     "rules": {

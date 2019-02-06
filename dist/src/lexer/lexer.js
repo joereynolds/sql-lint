@@ -74,8 +74,7 @@ function tokenise(query) {
     else {
         tokeniser = new use_1.Use();
     }
-    const tokens = tokeniser.tokenise(query);
-    return tokens;
+    return tokeniser.tokenise(query);
 }
 exports.tokenise = tokenise;
 /*

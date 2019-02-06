@@ -21,10 +21,9 @@ class InvalidDropOption {
         const dropStatement = new drop_1.Drop();
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token[0] === tokens_1.Types.DropItem) {
-                    if (!dropStatement.options.includes(token[1])) {
-                        return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, token[1], JSON.stringify(dropStatement.options)));
-                    }
+                if (token[0] === tokens_1.Types.DropItem &&
+                    !dropStatement.options.includes(token[1])) {
+                    return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, token[1], JSON.stringify(dropStatement.options)));
                 }
             }
         }

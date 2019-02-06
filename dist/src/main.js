@@ -9,7 +9,7 @@ const printer_1 = require("./printer");
 const reader_1 = require("./reader/reader");
 const config_1 = require("./config");
 const checkerRunner_1 = require("./checker/checkerRunner");
-const version = "0.0.7";
+const version = "0.0.9";
 program
     .version(version)
     .option("-f, --file <path>", "The .sql file to lint")

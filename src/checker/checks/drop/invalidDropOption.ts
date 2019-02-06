@@ -13,7 +13,7 @@ import { CheckerResult } from "../../checkerResult";
 import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/tokens";
 import { sprintf } from "sprintf-js";
-import { Drop } from "../../../lexer/drop";
+import { Drop } from "../../../lexer/statements/drop";
 
 class InvalidDropOption implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'";

@@ -1,16 +1,18 @@
-import { Query } from "../reader/query";
-import { ILexer } from "./interface";
-import { cleanUnquotedIdentifier } from "./lexer";
-import { Keyword, Types } from "./tokens";
+import { Query } from "../../reader/query";
+import { ILexer } from "../interface";
+import { cleanUnquotedIdentifier } from "../lexer";
+import { Keyword, Types } from "../tokens";
 
-class Use implements ILexer {
+class Update implements ILexer {
   public tokenise(query: Query): Query {
+    let lastToken = "";
     query.lines.forEach(line => {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase().trim();
-        if (item === Keyword.Use) {
+
+        if (item === Keyword.Update) {
           line.tokens.push([Types.Keyword, item]);
-        } else {
+        } else if (lastToken === Keyword.Update) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
@@ -20,6 +22,7 @@ class Use implements ILexer {
             ]);
           }
         }
+        lastToken = item;
       });
     });
 
@@ -27,4 +30,4 @@ class Use implements ILexer {
   }
 }
 
-export { Use };
+export { Update };

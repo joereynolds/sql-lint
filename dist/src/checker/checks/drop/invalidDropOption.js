@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../../checkerResult");
 const tokens_1 = require("../../../lexer/tokens");
 const sprintf_js_1 = require("sprintf-js");
-const drop_1 = require("../../../lexer/drop");
+const drop_1 = require("../../../lexer/statements/drop");
 class InvalidDropOption {
     constructor() {
         this.message = "Option '%s' is not a valid option, must be one of '%s'";

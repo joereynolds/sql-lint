@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const select_1 = require("./select");
-const drop_1 = require("./drop");
-const use_1 = require("./use");
+const select_1 = require("./statements/select");
+const drop_1 = require("./statements/drop");
+const use_1 = require("./statements/use");
 const tokens_1 = require("./tokens");
 function categorise(query) {
     query = query.trim().toLowerCase();

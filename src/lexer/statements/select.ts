@@ -1,7 +1,7 @@
-import { Query } from "../reader/query";
-import { ILexer } from "./interface";
-import { cleanUnquotedIdentifier } from "./lexer";
-import { TOKENS, Keyword, Types} from "./tokens";
+import { Query } from "../../reader/query";
+import { ILexer } from "../interface";
+import { cleanUnquotedIdentifier } from "../lexer";
+import { TOKENS, Keyword, Types} from "../tokens";
 
 class Select implements ILexer {
   public tokenise(query: Query): Query {

@@ -1,8 +1,8 @@
 import { tokenise } from "../../src/lexer/lexer";
-import { Select } from "../../src/lexer/select";
-import { Use } from "../../src/lexer/use";
-import { Update } from "../../src/lexer/update";
-import { Drop } from "../../src/lexer/drop";
+import { Select } from "../../src/lexer/statements/select";
+import { Use } from "../../src/lexer/statements/use";
+import { Update } from "../../src/lexer/statements/update";
+import { Drop } from "../../src/lexer/statements/drop";
 import { putContentIntoLines } from "../../src/reader/reader";
 
 

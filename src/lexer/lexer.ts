@@ -1,8 +1,8 @@
 import { Query } from "../reader/query";
 import { ILexer } from "./interface";
-import { Select } from "./select";
-import { Drop } from "./drop";
-import { Use } from "./use";
+import { Select } from "./statements/select";
+import { Drop } from "./statements/drop";
+import { Use } from "./statements/use";
 import { Keyword } from "./tokens";
 
 function categorise(query: string) {

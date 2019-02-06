@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../../src/lexer/lexer");
-const select_1 = require("../../src/lexer/select");
-const use_1 = require("../../src/lexer/use");
-const update_1 = require("../../src/lexer/update");
-const drop_1 = require("../../src/lexer/drop");
+const select_1 = require("../../src/lexer/statements/select");
+const use_1 = require("../../src/lexer/statements/use");
+const update_1 = require("../../src/lexer/statements/update");
+const drop_1 = require("../../src/lexer/statements/drop");
 const reader_1 = require("../../src/reader/reader");
 test.each([
     [
@@ -224,7 +224,6 @@ test.each([
 ])("It tokenises correctly when called through tokenise", (query, expected) => {
     const q = reader_1.putContentIntoLines(query);
     const actual = lexer_1.tokenise(q[0]);
-    console.log(actual);
     expect(actual).toMatchObject(expected);
 });
 //# sourceMappingURL=tokenisation.test.js.map

@@ -1,7 +1,7 @@
-import { Query } from "../reader/query";
-import { ILexer } from "./interface";
-import { cleanUnquotedIdentifier } from "./lexer";
-import { Keyword, Types } from "./tokens";
+import { Query } from "../../reader/query";
+import { ILexer } from "../interface";
+import { cleanUnquotedIdentifier } from "../lexer";
+import { Keyword, Types } from "../tokens";
 
 class Drop implements ILexer {
   public options: string[] = [

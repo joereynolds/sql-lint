@@ -9,9 +9,9 @@ const printer_1 = require("./printer");
 const reader_1 = require("./reader/reader");
 const config_1 = require("./config");
 const checkerRunner_1 = require("./checker/checkerRunner");
-const version = "0.0.9";
+const package_json_1 = require("../package.json");
 program
-    .version(version)
+    .version(package_json_1.version)
     .option("-f, --file <path>", "The .sql file to lint")
     .option("-q, --query <string>", "The query to lint")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")

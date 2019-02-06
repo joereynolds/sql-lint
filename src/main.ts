@@ -10,8 +10,7 @@ import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 import { Query } from "./reader/query";
 import { file, getConfiguration } from "./config";
 import { CheckerRunner } from "./checker/checkerRunner";
-
-const version = "0.0.9";
+import { version } from "../package.json";
 
 program
   .version(version)

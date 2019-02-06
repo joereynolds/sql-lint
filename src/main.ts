@@ -11,7 +11,7 @@ import { Query } from "./reader/query";
 import { file, getConfiguration } from "./config";
 import { CheckerRunner } from "./checker/checkerRunner";
 
-const version = "0.0.9";
+const version = "0.0.8";
 
 program
   .version(version)

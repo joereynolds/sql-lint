@@ -25,26 +25,14 @@ class Database {
     }
 
     public getDatabases(connection: mysql.Connection, callback: any): void {
-        connection.query('SHOW DATABASES', (error, results, fields) => {
-            if (error) {
-                return console.log(error);
-            }
-
-            callback(results);
-        });
+        connection.query('SHOW DATABASES', this.getQueryHandler(callback));
     }
 
     /**
      * Gets all tables for a database
      */
     public getTables(connection: mysql.Connection, database: string, callback: any): void {
-        connection.query(`SHOW TABLES FROM ${database}`, (error, results, fields) => {
-            if (error) {
-                return console.log(error);
-            }
-
-            callback(results);
-        });
+        connection.query(`SHOW TABLES FROM ${database}`, this.getQueryHandler(callback));
     }
 
     /**
@@ -57,6 +45,16 @@ class Database {
                 callback(error)
             }
         });
+    }
+
+    private getQueryHandler(callback: any) {
+        return (error: mysql.MysqlError | null, results: any) => {
+            if (error) {
+                return console.log(error);
+            }
+
+            callback(results);
+        };
     }
 }
 

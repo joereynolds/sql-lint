@@ -19,7 +19,11 @@
         "ajv": "^6.0.0"
     },
     "description": "An intelligent MySQL linter and checker",
-    "homepage": "https://github.com/joereynolds/gauxilium",
+    "homepage": "https://github.com/joereynolds/sql-lint",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/joereynolds/sql-lint.git"
+    },
     "jest": {
         "moduleFileExtensions": [
             "ts",

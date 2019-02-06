@@ -19,23 +19,13 @@ class Database {
         return connection;
     }
     getDatabases(connection, callback) {
-        connection.query('SHOW DATABASES', (error, results, fields) => {
-            if (error) {
-                return console.log(error);
-            }
-            callback(results);
-        });
+        connection.query('SHOW DATABASES', this.getQueryHandler(callback));
     }
     /**
      * Gets all tables for a database
      */
     getTables(connection, database, callback) {
-        connection.query(`SHOW TABLES FROM ${database}`, (error, results, fields) => {
-            if (error) {
-                return console.log(error);
-            }
-            callback(results);
-        });
+        connection.query(`SHOW TABLES FROM ${database}`, this.getQueryHandler(callback));
     }
     /**
      * Runs an EXPLAIN on the query. If it doesn't run successfully, errors will come through,
@@ -47,6 +37,14 @@ class Database {
                 callback(error);
             }
         });
+    }
+    getQueryHandler(callback) {
+        return (error, results) => {
+            if (error) {
+                return console.log(error);
+            }
+            callback(results);
+        };
     }
 }
 exports.Database = Database;

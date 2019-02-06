@@ -1,6 +1,5 @@
-/* tslint:disable */ 
+/* tslint:disable-next-line */
 const shelltest = require("shelltest");
-/* tslint:enable */ 
 
 const sqlLint = "./dist/src/main.js";
 

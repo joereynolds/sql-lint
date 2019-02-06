@@ -8,54 +8,14 @@ import { Keyword } from "./tokens";
 function categorise(query: string) {
   query = query.trim().toLowerCase();
 
-  // TODO refactor this
-  if (query.startsWith(Keyword.Begin)) {
-    return Keyword.Begin;
-  }
-  if (query.startsWith(Keyword.Create)) {
-    return Keyword.Create;
-  }
-  if (query.startsWith(Keyword.Delete)) {
-    return Keyword.Delete;
-  }
-  if (query.startsWith(Keyword.Drop)) {
-    return Keyword.Drop;
-  }
-  if (query.startsWith(Keyword.Else)) {
-    return Keyword.Else;
-  }
-  if (query.startsWith(Keyword.From)) {
-    return Keyword.From;
-  }
-  if (query.startsWith(Keyword.Having)) {
-    return Keyword.Having;
-  }
-  if (query.startsWith(Keyword.If)) {
-    return Keyword.If;
-  }
-  if (query.startsWith(Keyword.Insert)) {
-    return Keyword.Insert;
-  }
-  if (query.startsWith(Keyword.Join)) {
-    return Keyword.Join;
-  }
-  if (query.startsWith(Keyword.Limit)) {
-    return Keyword.Limit;
-  }
-  if (query.startsWith(Keyword.Select)) {
-    return Keyword.Select;
-  }
-  if (query.startsWith(Keyword.Set)) {
-    return Keyword.Set;
-  }
-  if (query.startsWith(Keyword.Update)) {
-    return Keyword.Update;
-  }
-  if (query.startsWith(Keyword.Use)) {
-    return Keyword.Use;
-  }
-  if (query.startsWith(Keyword.Where)) {
-    return Keyword.Where;
+  // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
+  const keywordLookup: { [keywordName: string]: string } = Keyword as any;
+
+  const result = Object.keys(Keyword)
+    .find(keyword => query.startsWith(keywordLookup[keyword]));
+
+  if (result) {
+    return keywordLookup[result];
   }
 
   throw new Error(

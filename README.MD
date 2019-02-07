@@ -1,5 +1,7 @@
 # sql-lint  
 
+![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
+
 ![Imgur](https://i.imgur.com/Le90iGL.png)
 
 ![Imgur](https://i.imgur.com/JgAhLFp.png)

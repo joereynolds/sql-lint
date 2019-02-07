@@ -10,7 +10,7 @@ test("it brings back a version number", done => {
     .end(done);
 });
 
-test("it warns us if it can't find a configuration file", done => {
+xtest("it warns us if it can't find a configuration file", done => {
     shelltest()
     .cmd(`${sqlLint} -f test/test-files/test.sql`)
     .expect('stdout', /Can't open file .*config\.json.*/)

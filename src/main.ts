@@ -20,6 +20,7 @@ program
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated"
   )
+  .option("--format <string>", "The format of the output, can be one of [vim]", "vim")
   .option("--host <string>", "The host for the connection")
   .option("--user <string>", "The user for the connection")
   .option("--password <string>", "The password for the connection")

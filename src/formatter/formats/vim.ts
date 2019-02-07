@@ -1,0 +1,7 @@
+
+
+class simpleFormat {
+
+}
+
+export { simpleFormat }

@@ -1,8 +1,4 @@
-import { categorise, extractTableReference } from "../../src/lexer/lexer";
-
-test("The framework is running", () => {
-  expect(1).toEqual(1);
-});
+import { categorise, extractTableReference } from "../../../src/lexer/lexer";
 
 test.each([
   // SELECT statements
@@ -29,8 +25,6 @@ test.each([
   const actual = categorise(query);
   expect(actual).toEqual(expected);
 });
-
-
 
 test.each([
   [

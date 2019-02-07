@@ -1,8 +1,9 @@
 import { IFormat } from "../interface";
+import { CheckerResult } from "../../checker/checkerResult";
 
 class SimpleFormat implements IFormat {
-  public getMessage() {
-    return "implement";
+  public getMessage(prefix: string, result: CheckerResult) {
+      return `${prefix}:${result.line} ${result.content}`;
   }
 }
 

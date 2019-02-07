@@ -1,7 +1,0 @@
-
-
-class simpleFormat {
-
-}
-
-export { simpleFormat }

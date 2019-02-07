@@ -11,6 +11,7 @@ import { Query } from "./reader/query";
 import { file, getConfiguration } from "./config";
 import { CheckerRunner } from "./checker/checkerRunner";
 import { version } from "../package.json";
+import { FormatterFactory } from "./formatter/formatterFactory";
 
 program
   .version(version)
@@ -20,7 +21,11 @@ program
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated"
   )
-  .option("--format <string>", "The format of the output, can be one of [vim]", "vim")
+  .option(
+    "--format <string>",
+    "The format of the output, can be one of [simple]",
+    "simple"
+  )
   .option("--host <string>", "The host for the connection")
   .option("--user <string>", "The user for the connection")
   .option("--password <string>", "The password for the connection")
@@ -29,7 +34,9 @@ program
 let queries: Query[] = [];
 let prefix: string = "";
 
-const printer: Printer = new Printer(program.verbose);
+const formatterFactory = new FormatterFactory();
+const format = formatterFactory.build(program.format);
+const printer: Printer = new Printer(program.verbose, format);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
 let runSimpleChecks: boolean = false;

@@ -10,19 +10,22 @@ const reader_1 = require("./reader/reader");
 const config_1 = require("./config");
 const checkerRunner_1 = require("./checker/checkerRunner");
 const package_json_1 = require("../package.json");
+const formatterFactory_1 = require("./formatter/formatterFactory");
 program
     .version(package_json_1.version)
     .option("-f, --file <path>", "The .sql file to lint")
     .option("-q, --query <string>", "The query to lint")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
-    .option("--format <string>", "The format of the output, can be one of [vim]", "vim")
+    .option("--format <string>", "The format of the output, can be one of [simple]", "simple")
     .option("--host <string>", "The host for the connection")
     .option("--user <string>", "The user for the connection")
     .option("--password <string>", "The password for the connection")
     .parse(process.argv);
 let queries = [];
 let prefix = "";
-const printer = new printer_1.Printer(program.verbose);
+const formatterFactory = new formatterFactory_1.FormatterFactory();
+const format = formatterFactory.build(program.format);
+const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 let runSimpleChecks = false;

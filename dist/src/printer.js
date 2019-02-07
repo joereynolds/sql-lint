@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = require("chalk");
 class Printer {
-    constructor(verbosity) {
+    constructor(verbosity, format) {
         this.verbosity = verbosity;
+        this.format = format;
     }
     printCheck(checker, tokenised, prefix) {
         const result = checker.check(tokenised);
@@ -15,7 +16,7 @@ class Printer {
             console.log(chalk_1.default.yellow(`${tokenisedForPrint}`));
         }
         if (result.content) {
-            console.log(`${prefix}:${result.line} ${result.content}`);
+            console.log(this.format.getMessage(prefix, result));
         }
         if (this.verbosity) {
             console.log("\n-------------------------\n");

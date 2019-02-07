@@ -17,19 +17,7 @@ function putContentIntoLines(contents) {
     let currentQueryContent = "";
     let query = new query_1.Query();
     const skipChars = ["", "\n", "\r\n"];
-    // 1. Split on new line
-    // 2. Check if it starts with a comment, 
-    //   2.1 If it does remove it.
-    //   2.2 If not, leave it
-    // 3. Rejoin the lines together as a single string.
-    const lines = contents.split('\n');
-    lines.forEach((line, index) => {
-        if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
-            delete lines[index];
-        }
-    });
-    const contentWithoutComments = lines.join('\n');
-    contents = contentWithoutComments;
+    contents = stripComments(contents);
     for (let i = 0; i < contents.length; i++) {
         if (!skipChars.includes(contents[i])) {
             currentQueryContent += contents[i];
@@ -53,6 +41,24 @@ function putContentIntoLines(contents) {
     return queriesFromFile;
 }
 exports.putContentIntoLines = putContentIntoLines;
+/**
+ * 1. Split on new line
+ * 2. Filter out any lines that start with a comment
+ * 3. Rejoin the lines together as a single string.
+ */
+function stripComments(content) {
+    return content
+        .split('\n')
+        .map(line => {
+        if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
+            return '';
+        }
+        else {
+            return line;
+        }
+    })
+        .join('\n');
+}
 /**
  * Grabs the query from the --query flag
  * Line is always 0 since there are no

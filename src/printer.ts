@@ -1,13 +1,16 @@
 import { IChecker } from "./checker/interface";
 import { Query } from "./reader/query";
+import { IFormat } from "./formatter/interface";
 
 import chalk from "chalk";
 
 class Printer {
   public verbosity: number;
+  public format: IFormat;
 
-  constructor(verbosity: number) {
+  constructor(verbosity: number, format: IFormat) {
     this.verbosity = verbosity;
+    this.format = format;
   }
   public printCheck(checker: IChecker, tokenised: Query, prefix: string) {
     const result = checker.check(tokenised);
@@ -16,16 +19,16 @@ class Printer {
       const queryForPrint = JSON.stringify(tokenised.getContent());
       const promptForPrint = `Linting Query: ${queryForPrint}`;
       const tokenisedForPrint = JSON.stringify(tokenised, null, 4);
-      console.log(chalk.blue(promptForPrint))
+      console.log(chalk.blue(promptForPrint));
       console.log(chalk.yellow(`${tokenisedForPrint}`));
     }
 
     if (result.content) {
-      console.log(`${prefix}:${result.line} ${result.content}`);
+      console.log(this.format.getMessage(prefix, result));
     }
 
     if (this.verbosity) {
-        console.log("\n-------------------------\n");
+      console.log("\n-------------------------\n");
     }
   }
 

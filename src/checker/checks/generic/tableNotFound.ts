@@ -6,7 +6,6 @@ import { Types } from "../../../lexer/tokens";
 import { sprintf } from "sprintf-js";
 
 class TableNotFound implements IChecker {
-
   public message = "Table '%s' does not exist in database '%s'.";
 
   public tables: string[];

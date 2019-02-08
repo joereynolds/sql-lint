@@ -53,7 +53,8 @@
         "build": "tsc",
         "start": "./build/build.sh",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
-        "test": "jest test"
+        "test": "jest test",
+        "format": "prettier --write {src,test}/**/*.ts"
     },
     "version": "0.0.9",
     "man": "./doc/man/doc.1",

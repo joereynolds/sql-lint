@@ -60,7 +60,7 @@ test("We ignore '--' comments in files", () => {
   const expected: any = [query];
 
   const input =
-  "DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;";
+    "DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;";
   const actual = putContentIntoLines(input);
   expect(actual).toEqual(expected);
 });

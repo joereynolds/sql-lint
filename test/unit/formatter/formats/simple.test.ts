@@ -8,6 +8,6 @@ test.each([
   (prefix, result, expected) => {
     const format = new SimpleFormat();
     const actual = format.getMessage(prefix, result);
-    expect(actual).toEqual(expected)
+    expect(actual).toEqual(expected);
   }
 );

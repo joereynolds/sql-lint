@@ -5,10 +5,12 @@ import { putContentIntoLines } from "../../../../../src/reader/reader";
 test.each([
   [
     "SELECT * FROM symfony.dont_exist ;",
-    { content: "Table 'dont_exist' does not exist in database 'symfony'.", line: 1 }
+    {
+      content: "Table 'dont_exist' does not exist in database 'symfony'.",
+      line: 1
+    }
   ]
 ])("it finds tables that don't exist", (query, expected) => {
-
   const checker = new TableNotFound([{ Table: "non_existent_table" }]);
 
   const queryObj = putContentIntoLines(query);

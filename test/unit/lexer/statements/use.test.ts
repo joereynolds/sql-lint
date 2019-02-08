@@ -22,10 +22,7 @@ test.each([
         {
           content: "USE symfony ;",
           num: 1,
-          tokens: [
-            ["keyword", "use"],
-            ["table_reference", "symfony"],
-          ]
+          tokens: [["keyword", "use"], ["table_reference", "symfony"]]
         }
       ]
     }
@@ -41,7 +38,7 @@ test.each([
           tokens: [
             ["keyword", "use"],
             ["table_reference", "symfony"],
-            ["table_reference", "pricing"],
+            ["table_reference", "pricing"]
           ]
         }
       ]

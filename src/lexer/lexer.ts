@@ -1,10 +1,7 @@
 import { Query } from "../reader/query";
 import { ILexer } from "./interface";
 import { Keyword } from "./tokens";
-import { Create } from "./statements/create";
-import { Drop } from "./statements/drop";
-import { Select } from "./statements/select";
-import { Use } from "./statements/use";
+import { Create, Drop, Select, Use } from "../barrel/statements";
 
 function categorise(query: string) {
   query = query.trim().toLowerCase();

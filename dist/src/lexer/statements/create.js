@@ -5,20 +5,20 @@ const tokens_1 = require("../tokens");
 class Create {
     constructor() {
         this.options = [
-            'algorithm',
-            'database',
-            'definer',
-            'event',
-            'function',
-            'index',
-            'procedure',
-            'server',
-            'table',
-            'tablespace',
-            'temporary',
-            'trigger',
-            'user',
-            'view',
+            "algorithm",
+            "database",
+            "definer",
+            "event",
+            "function",
+            "index",
+            "procedure",
+            "server",
+            "table",
+            "tablespace",
+            "temporary",
+            "trigger",
+            "user",
+            "view"
         ];
     }
     tokenise(query) {

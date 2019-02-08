@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../../checkerResult");
 const tokens_1 = require("../../../lexer/tokens");
 const sprintf_js_1 = require("sprintf-js");
-const drop_1 = require("../../../lexer/statements/drop");
+const statements_1 = require("../../../barrel/statements");
 class InvalidDropOption {
     constructor() {
         this.message = "Option '%s' is not a valid option, must be one of '%s'";
     }
     check(query) {
-        const dropStatement = new drop_1.Drop();
+        const dropStatement = new statements_1.Drop();
         for (const line of query.lines) {
             for (const token of line.tokens) {
                 if (token[0] === tokens_1.Types.Option &&

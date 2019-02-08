@@ -1,7 +1,6 @@
 import * as fs from "fs";
-import  { Line } from "./line";
-import  { Query } from "./query";
-
+import { Line } from "./line";
+import { Query } from "./query";
 
 /**
  * Grabs the querie(s) from the --file flag
@@ -21,7 +20,6 @@ export function putContentIntoLines(contents: string): Query[] {
   contents = stripComments(contents);
 
   for (let i = 0; i < contents.length; i++) {
-
     if (!skipChars.includes(contents[i])) {
       currentQueryContent += contents[i];
     }
@@ -54,15 +52,19 @@ export function putContentIntoLines(contents: string): Query[] {
  */
 function stripComments(content: string): string {
   return content
-    .split('\n')
+    .split("\n")
     .map(line => {
-      if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
-        return '';
+      if (
+        line.startsWith("--") ||
+        line.startsWith("#") ||
+        line.startsWith("/*")
+      ) {
+        return "";
       } else {
         return line;
       }
     })
-    .join('\n')
+    .join("\n");
 }
 
 /**

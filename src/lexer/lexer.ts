@@ -11,8 +11,9 @@ function categorise(query: string) {
   // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
   const keywordLookup: { [keywordName: string]: string } = Keyword as any;
 
-  const result = Object.keys(Keyword)
-    .find(keyword => query.startsWith(keywordLookup[keyword]));
+  const result = Object.keys(Keyword).find(keyword =>
+    query.startsWith(keywordLookup[keyword])
+  );
 
   if (result) {
     return keywordLookup[result];

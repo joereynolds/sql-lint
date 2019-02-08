@@ -1,9 +1,10 @@
 import { Query } from "../reader/query";
 import { ILexer } from "./interface";
-import { Select } from "./statements/select";
-import { Drop } from "./statements/drop";
-import { Use } from "./statements/use";
 import { Keyword } from "./tokens";
+import { Create } from "./statements/create";
+import { Drop } from "./statements/drop";
+import { Select } from "./statements/select";
+import { Use } from "./statements/use";
 
 function categorise(query: string) {
   query = query.trim().toLowerCase();
@@ -38,6 +39,8 @@ function tokenise(query: Query): Query {
     tokeniser = new Use();
   } else if (category === Keyword.Drop) {
     tokeniser = new Drop();
+  } else if (category === Keyword.Create) {
+    tokeniser = new Create();
   } else {
     tokeniser = new Use();
   }

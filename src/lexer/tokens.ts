@@ -23,7 +23,7 @@ export const TOKENS = {
 export enum Types {
   Keyword = "keyword",
   TableReference = "table_reference",
-  DropItem = "drop_item",
+  Option = "option",
   Unidentified = "???"
 }
 

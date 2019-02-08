@@ -13,7 +13,7 @@ class DatabaseNotFound {
             for (const token of line.tokens) {
                 if (token[0] === tokens_1.Types.TableReference) {
                     const database = token[1];
-                    if (!this.databases.includes(database) && database !== ';') {
+                    if (!this.databases.includes(database) && database !== ";") {
                         return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, database));
                     }
                 }

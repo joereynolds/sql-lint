@@ -9,12 +9,7 @@ class MySqlError {
         this.errors = errors;
     }
     check(query) {
-        const allowedCategories = [
-            'select',
-            'insert',
-            'replace',
-            'update',
-        ];
+        const allowedCategories = ["select", "insert", "replace", "update"];
         if (allowedCategories.includes(query.category)) {
             const lineNumber = query.lines[0].num;
             const message = this.concatErrorObject(this.errors);

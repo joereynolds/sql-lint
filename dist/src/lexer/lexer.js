@@ -8,8 +8,7 @@ function categorise(query) {
     query = query.trim().toLowerCase();
     // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
     const keywordLookup = tokens_1.Keyword;
-    const result = Object.keys(tokens_1.Keyword)
-        .find(keyword => query.startsWith(keywordLookup[keyword]));
+    const result = Object.keys(tokens_1.Keyword).find(keyword => query.startsWith(keywordLookup[keyword]));
     if (result) {
         return keywordLookup[result];
     }

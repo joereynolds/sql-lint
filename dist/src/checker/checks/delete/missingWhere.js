@@ -6,7 +6,10 @@ class MissingWhere {
         this.message = "DELETE missing WHERE, intentional?";
     }
     check(query) {
-        if (!query.getContent().toLowerCase().includes("where")) {
+        if (!query
+            .getContent()
+            .toLowerCase()
+            .includes("where")) {
             const lineNumber = query.lines[0].num;
             return new checkerResult_1.CheckerResult(lineNumber, this.message);
         }

@@ -19,7 +19,7 @@ class Database {
         return connection;
     }
     getDatabases(connection, callback) {
-        connection.query('SHOW DATABASES', this.getQueryHandler(callback));
+        connection.query("SHOW DATABASES", this.getQueryHandler(callback));
     }
     /**
      * Gets all tables for a database

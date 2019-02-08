@@ -48,16 +48,18 @@ exports.putContentIntoLines = putContentIntoLines;
  */
 function stripComments(content) {
     return content
-        .split('\n')
+        .split("\n")
         .map(line => {
-        if (line.startsWith('--') || line.startsWith('#') || line.startsWith('/*')) {
-            return '';
+        if (line.startsWith("--") ||
+            line.startsWith("#") ||
+            line.startsWith("/*")) {
+            return "";
         }
         else {
             return line;
         }
     })
-        .join('\n');
+        .join("\n");
 }
 /**
  * Grabs the query from the --query flag

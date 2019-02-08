@@ -1,17 +1,9 @@
 {
     "src/*.ts": {
-        "console": "test",
         "alternate": "test/unit/{}.test.ts",
         "type": "source"
     },
     "test/unit/*.test.ts": {
-        "console": "test",
-        "alternate": "src/{}.ts",
-        "type": "source"
-    },
-    "test/*": {
-        "console": "npm test",
-        "type": "test"
-    },
-    "*": {"make": "npm run lint"}
+        "alternate": "src/{}.ts"
+    }
 }

@@ -21,7 +21,7 @@ test.each([
         {
           content: "DROP TABLE ;",
           num: 1,
-          tokens: [["keyword", "drop"], ["drop_item", "table"]]
+          tokens: [["keyword", "drop"], ["option", "table"]]
         }
       ]
     }
@@ -33,7 +33,7 @@ test.each([
         {
           content: "DROP DATABASE ;",
           num: 1,
-          tokens: [["keyword", "drop"], ["drop_item", "database"]]
+          tokens: [["keyword", "drop"], ["option", "database"]]
         }
       ]
     }

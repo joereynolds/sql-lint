@@ -24,7 +24,7 @@ var Types;
 (function (Types) {
     Types["Keyword"] = "keyword";
     Types["TableReference"] = "table_reference";
-    Types["DropItem"] = "drop_item";
+    Types["Option"] = "option";
     Types["Unidentified"] = "???";
 })(Types = exports.Types || (exports.Types = {}));
 var Keyword;

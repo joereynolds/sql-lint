@@ -3,20 +3,22 @@ import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
 import { Keyword, Types } from "../tokens";
 
-class Drop implements ILexer {
+class Create implements ILexer {
   public options: string[] = [
+    "algorithm",
     "database",
+    "definer",
     "event",
     "function",
     "index",
-    "logfile",
     "procedure",
-    "schema",
     "server",
     "table",
-    "view",
     "tablespace",
-    "trigger"
+    "temporary",
+    "trigger",
+    "user",
+    "view"
   ];
 
   public tokenise(query: Query): Query {
@@ -25,9 +27,9 @@ class Drop implements ILexer {
     query.lines.forEach(line => {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase().trim();
-        if (item === Keyword.Drop) {
+        if (item === Keyword.Create) {
           line.tokens.push([Types.Keyword, item]);
-        } else if (lastToken === Keyword.Drop) {
+        } else if (lastToken === Keyword.Create) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
@@ -42,4 +44,4 @@ class Drop implements ILexer {
   }
 }
 
-export { Drop };
+export { Create };

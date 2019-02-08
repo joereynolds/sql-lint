@@ -2,21 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
 const tokens_1 = require("../tokens");
-class Drop {
+class Create {
     constructor() {
         this.options = [
-            "database",
-            "event",
-            "function",
-            "index",
-            "logfile",
-            "procedure",
-            "schema",
-            "server",
-            "table",
-            "view",
-            "tablespace",
-            "trigger"
+            'algorithm',
+            'database',
+            'definer',
+            'event',
+            'function',
+            'index',
+            'procedure',
+            'server',
+            'table',
+            'tablespace',
+            'temporary',
+            'trigger',
+            'user',
+            'view',
         ];
     }
     tokenise(query) {
@@ -24,10 +26,10 @@ class Drop {
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase().trim();
-                if (item === tokens_1.Keyword.Drop) {
+                if (item === tokens_1.Keyword.Create) {
                     line.tokens.push([tokens_1.Types.Keyword, item]);
                 }
-                else if (lastToken === tokens_1.Keyword.Drop) {
+                else if (lastToken === tokens_1.Keyword.Create) {
                     item = lexer_1.cleanUnquotedIdentifier(item);
                     if (item.length > 0) {
                         line.tokens.push([tokens_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)]);
@@ -39,5 +41,5 @@ class Drop {
         return query;
     }
 }
-exports.Drop = Drop;
-//# sourceMappingURL=drop.js.map
+exports.Create = Create;
+//# sourceMappingURL=create.js.map

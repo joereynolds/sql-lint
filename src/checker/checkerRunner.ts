@@ -3,11 +3,13 @@ import { Database } from "../database";
 import { Printer } from "../printer";
 import { Keyword } from "../lexer/tokens";
 import { categorise, tokenise } from "../lexer/lexer";
-import { MySqlError } from "../checker/checks/generic/mySqlError";
-import { MissingWhere } from "../checker/checks/delete/missingWhere";
-import { OddCodePoint } from "../checker/checks/generic/oddCodePoint";
-import { DatabaseNotFound } from "../checker/checks/use/databaseNotFound";
-import { InvalidDropOption } from "../checker/checks/drop/invalidDropOption";
+import {
+  MySqlError,
+  MissingWhere,
+  OddCodePoint,
+  DatabaseNotFound,
+  InvalidDropOption
+} from "../barrel/checks";
 
 /**
  * Runs all the checks.

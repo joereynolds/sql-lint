@@ -5,10 +5,10 @@ class StatementFactory {
     build(statement) {
         let builtStatement = new statements_1.Select();
         const statementMap = {
-            'select': new statements_1.Select(),
-            'use': new statements_1.Use(),
-            'drop': new statements_1.Drop(),
-            'create': new statements_1.Create()
+            select: new statements_1.Select(),
+            use: new statements_1.Use(),
+            drop: new statements_1.Drop(),
+            create: new statements_1.Create()
         };
         if (Object.keys(statementMap).includes(statement)) {
             builtStatement = statementMap[statement];

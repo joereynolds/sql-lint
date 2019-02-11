@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tokens_1 = require("./tokens");
-const statements_1 = require("../barrel/statements");
+const statementFactory_1 = require("./statementFactory");
 function categorise(query) {
     query = query.trim().toLowerCase();
     // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
@@ -15,24 +15,10 @@ function categorise(query) {
 exports.categorise = categorise;
 function tokenise(query) {
     const category = categorise(query.getContent());
+    const statementFactory = new statementFactory_1.StatementFactory();
+    const statement = statementFactory.build(category);
     query.category = category;
-    let tokeniser;
-    if (category === tokens_1.Keyword.Select) {
-        tokeniser = new statements_1.Select();
-    }
-    else if (category === tokens_1.Keyword.Use) {
-        tokeniser = new statements_1.Use();
-    }
-    else if (category === tokens_1.Keyword.Drop) {
-        tokeniser = new statements_1.Drop();
-    }
-    else if (category === tokens_1.Keyword.Create) {
-        tokeniser = new statements_1.Create();
-    }
-    else {
-        tokeniser = new statements_1.Use();
-    }
-    return tokeniser.tokenise(query);
+    return statement.tokenise(query);
 }
 exports.tokenise = tokenise;
 /*

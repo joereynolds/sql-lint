@@ -1,7 +1,6 @@
 import { Query } from "../reader/query";
-import { ILexer } from "./interface";
 import { Keyword } from "./tokens";
-import { Create, Drop, Select, Use } from "../barrel/statements";
+import { StatementFactory } from "./statementFactory";
 
 function categorise(query: string) {
   query = query.trim().toLowerCase();
@@ -26,22 +25,12 @@ function categorise(query: string) {
 
 function tokenise(query: Query): Query {
   const category = categorise(query.getContent());
+  const statementFactory = new StatementFactory();
+  const statement = statementFactory.build(category);
+
   query.category = category;
 
-  let tokeniser: ILexer;
-
-  if (category === Keyword.Select) {
-    tokeniser = new Select();
-  } else if (category === Keyword.Use) {
-    tokeniser = new Use();
-  } else if (category === Keyword.Drop) {
-    tokeniser = new Drop();
-  } else if (category === Keyword.Create) {
-    tokeniser = new Create();
-  } else {
-    tokeniser = new Use();
-  }
-  return tokeniser.tokenise(query);
+  return statement.tokenise(query);
 }
 
 /*

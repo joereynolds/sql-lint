@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const simple_1 = require("./formats/simple");
+const json_1 = require("./formats/json");
 class FormatterFactory {
     build(format) {
         let formatter = new simple_1.SimpleFormat();
         const formatMap = {
-            simple: new simple_1.SimpleFormat()
+            simple: new simple_1.SimpleFormat(),
+            json: new json_1.JsonFormat()
         };
         if (Object.keys(formatMap).includes(format)) {
             formatter = formatMap[format];

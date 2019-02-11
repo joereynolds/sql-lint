@@ -23,7 +23,7 @@ program
   )
   .option(
     "--format <string>",
-    "The format of the output, can be one of [simple]",
+    "The format of the output, can be one of ['simple', 'json']",
     "simple"
   )
   .option("--host <string>", "The host for the connection")

@@ -17,16 +17,6 @@ import {
  */
 class CheckerRunner {
   /**
-   * The line number of the content
-   */
-  public line: number;
-
-  /**
-   *  The content for the current line
-   */
-  public content: string;
-
-  /**
    * Simple checks are ones that don't require a database connection
    */
   public runSimpleChecks(

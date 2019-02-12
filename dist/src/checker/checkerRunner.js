@@ -14,6 +14,7 @@ class CheckerRunner {
         const checkOddCodePoint = new checks_1.OddCodePoint();
         const checkMissingWhere = new checks_1.MissingWhere();
         const invalidDropOption = new checks_1.InvalidDropOption();
+        const invalidCreateOption = new checks_1.InvalidCreateOption();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {
@@ -31,6 +32,10 @@ class CheckerRunner {
                     const checker = invalidDropOption;
                     printer.printCheck(checker, tokenised, prefix);
                 }
+                else if (category === tokens_1.Keyword.Create) {
+                    const checker = invalidCreateOption;
+                    printer.printCheck(checker, tokenised, prefix);
+                }
             }
         });
     }
@@ -38,6 +43,7 @@ class CheckerRunner {
         const checkOddCodePoint = new checks_1.OddCodePoint();
         const checkMissingWhere = new checks_1.MissingWhere();
         const invalidDropOption = new checks_1.InvalidDropOption();
+        const invalidCreateOption = new checks_1.InvalidCreateOption();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {
@@ -63,6 +69,10 @@ class CheckerRunner {
                 }
                 else if (category === tokens_1.Keyword.Drop) {
                     const checker = invalidDropOption;
+                    printer.printCheck(checker, tokenised, prefix);
+                }
+                else if (category === tokens_1.Keyword.Create) {
+                    const checker = invalidCreateOption;
                     printer.printCheck(checker, tokenised, prefix);
                 }
             }

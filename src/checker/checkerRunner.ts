@@ -34,10 +34,7 @@ class CheckerRunner {
     printer: Printer,
     prefix: string
   ) {
-    const checkOddCodePoint = new OddCodePoint();
-    const checkMissingWhere = new MissingWhere();
-    const invalidDropOption = new InvalidDropOption();
-    const invalidCreateOption = new InvalidCreateOption();
+    const checks = this.getSqlLintChecks();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -47,17 +44,13 @@ class CheckerRunner {
         const tokenised: Query = tokenise(query);
 
         if (category === Keyword.Select) {
-          const checker = checkOddCodePoint;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.oddCodePoint, tokenised, prefix);
         } else if (category === Keyword.Delete) {
-          const checker = checkMissingWhere;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.missingWhere, tokenised, prefix);
         } else if (category === Keyword.Drop) {
-          const checker = invalidDropOption;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.invalidDropOption, tokenised, prefix);
         } else if (category === Keyword.Create) {
-          const checker = invalidCreateOption;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
         }
       }
     });
@@ -69,10 +62,7 @@ class CheckerRunner {
     printer: Printer,
     prefix: string
   ) {
-    const checkOddCodePoint = new OddCodePoint();
-    const checkMissingWhere = new MissingWhere();
-    const invalidDropOption = new InvalidDropOption();
-    const invalidCreateOption = new InvalidCreateOption();
+    const checks = this.getSqlLintChecks();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -87,22 +77,18 @@ class CheckerRunner {
         });
 
         if (category === Keyword.Select) {
-          const checker = checkOddCodePoint;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.oddCodePoint, tokenised, prefix);
         } else if (category === Keyword.Use) {
           database.getDatabases(database.connection, (results: any) => {
             const checker = new DatabaseNotFound(results);
             printer.printCheck(checker, tokenised, prefix);
           });
         } else if (category === Keyword.Delete) {
-          const checker = checkMissingWhere;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.missingWhere, tokenised, prefix);
         } else if (category === Keyword.Drop) {
-          const checker = invalidDropOption;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.invalidDropOption, tokenised, prefix);
         } else if (category === Keyword.Create) {
-          const checker = invalidCreateOption;
-          printer.printCheck(checker, tokenised, prefix);
+          printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
         }
       }
     });
@@ -119,6 +105,15 @@ class CheckerRunner {
     }
 
     return this.runSimpleChecks(sqlQueries, printer, prefix);
+  }
+
+  private getSqlLintChecks() {
+    return {
+      oddCodePoint: new OddCodePoint(),
+      missingWhere: new MissingWhere(),
+      invalidDropOption: new InvalidDropOption(),
+      invalidCreateOption: new InvalidCreateOption()
+    };
   }
 }
 

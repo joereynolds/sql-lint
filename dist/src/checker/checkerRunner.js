@@ -11,39 +11,29 @@ class CheckerRunner {
      * Simple checks are ones that don't require a database connection
      */
     runSimpleChecks(sqlQueries, printer, prefix) {
-        const checkOddCodePoint = new checks_1.OddCodePoint();
-        const checkMissingWhere = new checks_1.MissingWhere();
-        const invalidDropOption = new checks_1.InvalidDropOption();
-        const invalidCreateOption = new checks_1.InvalidCreateOption();
+        const checks = this.getSqlLintChecks();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {
                 const category = lexer_1.categorise(content);
                 const tokenised = lexer_1.tokenise(query);
                 if (category === tokens_1.Keyword.Select) {
-                    const checker = checkOddCodePoint;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.oddCodePoint, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Delete) {
-                    const checker = checkMissingWhere;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.missingWhere, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Drop) {
-                    const checker = invalidDropOption;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.invalidDropOption, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Create) {
-                    const checker = invalidCreateOption;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
                 }
             }
         });
     }
     runDatabaseChecks(sqlQueries, database, printer, prefix) {
-        const checkOddCodePoint = new checks_1.OddCodePoint();
-        const checkMissingWhere = new checks_1.MissingWhere();
-        const invalidDropOption = new checks_1.InvalidDropOption();
-        const invalidCreateOption = new checks_1.InvalidCreateOption();
+        const checks = this.getSqlLintChecks();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {
@@ -54,8 +44,7 @@ class CheckerRunner {
                     printer.printCheck(checker, tokenised, prefix);
                 });
                 if (category === tokens_1.Keyword.Select) {
-                    const checker = checkOddCodePoint;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.oddCodePoint, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Use) {
                     database.getDatabases(database.connection, (results) => {
@@ -64,16 +53,13 @@ class CheckerRunner {
                     });
                 }
                 else if (category === tokens_1.Keyword.Delete) {
-                    const checker = checkMissingWhere;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.missingWhere, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Drop) {
-                    const checker = invalidDropOption;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.invalidDropOption, tokenised, prefix);
                 }
                 else if (category === tokens_1.Keyword.Create) {
-                    const checker = invalidCreateOption;
-                    printer.printCheck(checker, tokenised, prefix);
+                    printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
                 }
             }
         });
@@ -83,6 +69,14 @@ class CheckerRunner {
             return this.runDatabaseChecks(sqlQueries, database, printer, prefix);
         }
         return this.runSimpleChecks(sqlQueries, printer, prefix);
+    }
+    getSqlLintChecks() {
+        return {
+            oddCodePoint: new checks_1.OddCodePoint(),
+            missingWhere: new checks_1.MissingWhere(),
+            invalidDropOption: new checks_1.InvalidDropOption(),
+            invalidCreateOption: new checks_1.InvalidCreateOption()
+        };
     }
 }
 exports.CheckerRunner = CheckerRunner;

@@ -1,12 +1,12 @@
 "use strict";
 /**
- * This error is triggered when a DROP statement
- * has an invalid option following the 'DROP'.
+ * This error is triggered when a CREATE statement
+ * has an invalid option following the 'CREATE'.
  *
  * It would trigger for this:
- *   DROP RUBBISH thing;
+ *   CREATE RUBBISH thing;
  * It wouldn't trigger for this:
- *   DROP TABLE test;
+ *   CREATE TABLE test;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../../checkerResult");

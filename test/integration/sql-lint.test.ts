@@ -6,7 +6,7 @@ const sqlLint = "./dist/src/main.js";
 test("it brings back a version number", done => {
   shelltest()
     .cmd(`${sqlLint} --version`)
-    .expect("stdout", "0.0.9\n")
+    .expect("stdout", "0.0.10\n")
     .end(done);
 });
 

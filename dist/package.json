@@ -25,6 +25,14 @@
         "url": "https://github.com/joereynolds/sql-lint.git"
     },
     "jest": {
+        "coverageThreshold": {
+            "global": {
+                "branches": 73,
+                "functions": 89,
+                "lines": 88,
+                "statements": 88
+            }
+        },
         "moduleFileExtensions": [
             "ts",
             "tsx",
@@ -53,10 +61,10 @@
         "build": "tsc",
         "start": "./build/build.sh",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
-        "test": "jest test",
+        "test": "jest test --coverage --silent",
         "format": "prettier --write {src,test}/**/*.ts"
     },
-    "version": "0.0.9",
+    "version": "0.0.10",
     "man": "./doc/man/doc.1",
     "devDependencies": {
         "prettier": "^1.14.2",

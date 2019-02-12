@@ -14,9 +14,9 @@ test("It gets the queries content when the verbose option is set", () => {
 });
 
 test("It calls console.log if a file is not found", () => {
-  const console = jest.spyOn(global.console, 'log');
+  const console = jest.spyOn(global.console, "log");
   const format = new SimpleFormat();
   const printer = new Printer(1, format);
-  printer.warnAboutFileNotFound('some-file');
+  printer.warnAboutFileNotFound("some-file");
   expect(console).toHaveBeenCalledTimes(1);
 });

@@ -32,7 +32,6 @@
                 "lines": 88,
                 "statements": 88
             }
-
         },
         "moduleFileExtensions": [
             "ts",
@@ -65,7 +64,7 @@
         "test": "jest test --coverage --silent",
         "format": "prettier --write {src,test}/**/*.ts"
     },
-    "version": "0.0.9",
+    "version": "0.0.10",
     "man": "./doc/man/doc.1",
     "devDependencies": {
         "prettier": "^1.14.2",

@@ -56,3 +56,10 @@ DROP thing l;
 
 -- Valid option for DROP
 DROP TABLE test;
+
+-- Invalid option for CREATE
+CREATE test person;
+
+-- Valid option for CREATE
+CREATE TABLE person;
+

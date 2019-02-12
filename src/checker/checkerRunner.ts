@@ -8,6 +8,7 @@ import {
   MissingWhere,
   OddCodePoint,
   DatabaseNotFound,
+  InvalidCreateOption,
   InvalidDropOption
 } from "../barrel/checks";
 
@@ -36,6 +37,7 @@ class CheckerRunner {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
     const invalidDropOption = new InvalidDropOption();
+    const invalidCreateOption = new InvalidCreateOption();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -53,6 +55,9 @@ class CheckerRunner {
         } else if (category === Keyword.Drop) {
           const checker = invalidDropOption;
           printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Create) {
+          const checker = invalidCreateOption;
+          printer.printCheck(checker, tokenised, prefix);
         }
       }
     });
@@ -67,6 +72,7 @@ class CheckerRunner {
     const checkOddCodePoint = new OddCodePoint();
     const checkMissingWhere = new MissingWhere();
     const invalidDropOption = new InvalidDropOption();
+    const invalidCreateOption = new InvalidCreateOption();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -93,6 +99,9 @@ class CheckerRunner {
           printer.printCheck(checker, tokenised, prefix);
         } else if (category === Keyword.Drop) {
           const checker = invalidDropOption;
+          printer.printCheck(checker, tokenised, prefix);
+        } else if (category === Keyword.Create) {
+          const checker = invalidCreateOption;
           printer.printCheck(checker, tokenised, prefix);
         }
       }

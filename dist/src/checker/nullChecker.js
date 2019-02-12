@@ -10,4 +10,4 @@ class NullChecker {
     }
 }
 exports.NullChecker = NullChecker;
-//# sourceMappingURL=NullChecker.js.map
+//# sourceMappingURL=nullChecker.js.map

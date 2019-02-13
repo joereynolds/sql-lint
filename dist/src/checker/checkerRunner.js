@@ -10,65 +10,48 @@ class CheckerRunner {
     /**
      * Simple checks are ones that don't require a database connection
      */
-    runSimpleChecks(sqlQueries, printer, prefix) {
-        const checks = this.getSqlLintChecks();
-        sqlQueries.forEach((query) => {
-            const content = query.getContent().trim();
-            if (content) {
-                const category = lexer_1.categorise(content);
-                const tokenised = lexer_1.tokenise(query);
-                if (category === tokens_1.Keyword.Select) {
-                    printer.printCheck(checks.oddCodePoint, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Delete) {
-                    printer.printCheck(checks.missingWhere, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Drop) {
-                    printer.printCheck(checks.invalidDropOption, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Create) {
-                    printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
-                }
-            }
-        });
+    runSimpleChecks(printer, prefix, category, tokenised, checks) {
+        if (category === tokens_1.Keyword.Select) {
+            printer.printCheck(checks.oddCodePoint, tokenised, prefix);
+        }
+        else if (category === tokens_1.Keyword.Delete) {
+            printer.printCheck(checks.missingWhere, tokenised, prefix);
+        }
+        else if (category === tokens_1.Keyword.Drop) {
+            printer.printCheck(checks.invalidDropOption, tokenised, prefix);
+        }
+        else if (category === tokens_1.Keyword.Create) {
+            printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
+        }
     }
-    runDatabaseChecks(sqlQueries, database, printer, prefix) {
-        const checks = this.getSqlLintChecks();
-        sqlQueries.forEach((query) => {
-            const content = query.getContent().trim();
-            if (content) {
-                const category = lexer_1.categorise(content);
-                const tokenised = lexer_1.tokenise(query);
-                database.lintQuery(database.connection, content, (results) => {
-                    const checker = new checks_1.MySqlError(results);
-                    printer.printCheck(checker, tokenised, prefix);
-                });
-                if (category === tokens_1.Keyword.Select) {
-                    printer.printCheck(checks.oddCodePoint, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Use) {
-                    database.getDatabases(database.connection, (results) => {
-                        const checker = new checks_1.DatabaseNotFound(results);
-                        printer.printCheck(checker, tokenised, prefix);
-                    });
-                }
-                else if (category === tokens_1.Keyword.Delete) {
-                    printer.printCheck(checks.missingWhere, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Drop) {
-                    printer.printCheck(checks.invalidDropOption, tokenised, prefix);
-                }
-                else if (category === tokens_1.Keyword.Create) {
-                    printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
-                }
-            }
+    runDatabaseChecks(database, printer, prefix, category, tokenised, content) {
+        database.lintQuery(database.connection, content, (results) => {
+            const checker = new checks_1.MySqlError(results);
+            printer.printCheck(checker, tokenised, prefix);
         });
+        if (category === tokens_1.Keyword.Use) {
+            database.getDatabases(database.connection, (results) => {
+                const checker = new checks_1.DatabaseNotFound(results);
+                printer.printCheck(checker, tokenised, prefix);
+            });
+        }
     }
     run(sqlQueries, printer, prefix, database) {
-        if (database) {
-            return this.runDatabaseChecks(sqlQueries, database, printer, prefix);
-        }
-        return this.runSimpleChecks(sqlQueries, printer, prefix);
+        const checks = this.getSqlLintChecks();
+        sqlQueries.forEach((query) => {
+            const content = query.getContent().trim();
+            if (content) {
+                const category = lexer_1.categorise(content);
+                const tokenised = lexer_1.tokenise(query);
+                if (database) {
+                    this.runDatabaseChecks(database, printer, prefix, category, tokenised, content);
+                    this.runSimpleChecks(printer, prefix, category, tokenised, checks);
+                }
+                else {
+                    this.runSimpleChecks(printer, prefix, category, tokenised, checks);
+                }
+            }
+        });
     }
     getSqlLintChecks() {
         return {

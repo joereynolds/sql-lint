@@ -13,8 +13,10 @@ const checkerResult_1 = require("../../checkerResult");
 const tokens_1 = require("../../../lexer/tokens");
 const sprintf_js_1 = require("sprintf-js");
 const statements_1 = require("../../../barrel/statements");
-class InvalidCreateOption {
+const check_1 = require("../check");
+class InvalidCreateOption extends check_1.Check {
     constructor() {
+        super(...arguments);
         this.message = "Option '%s' is not a valid option, must be one of '%s'";
     }
     check(query) {
@@ -23,7 +25,7 @@ class InvalidCreateOption {
             for (const token of line.tokens) {
                 if (token[0] === tokens_1.Types.Option &&
                     !createStatement.options.includes(token[1])) {
-                    return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, token[1], JSON.stringify(createStatement.options)));
+                    return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, token[1], JSON.stringify(createStatement.options)));
                 }
             }
         }

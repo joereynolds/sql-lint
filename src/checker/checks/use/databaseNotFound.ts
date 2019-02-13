@@ -3,12 +3,14 @@ import { CheckerResult } from "../../checkerResult";
 import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/tokens";
 import { sprintf } from "sprintf-js";
+import { Check } from "../check";
 
-class DatabaseNotFound implements IChecker {
+class DatabaseNotFound extends Check implements IChecker {
   public message = "Database '%s' does not exist.";
 
   public databases: string[];
   constructor(databases: any[]) {
+    super();
     this.databases = databases.map(result => result.Database);
   }
   public check(query: Query): CheckerResult {
@@ -17,7 +19,10 @@ class DatabaseNotFound implements IChecker {
         if (token[0] === Types.TableReference) {
           const database = token[1];
           if (!this.databases.includes(database) && database !== ";") {
-            return new CheckerResult(line.num, sprintf(this.message, database));
+            return new CheckerResult(
+              line.num,
+              sprintf(this.prefix + this.message, database)
+            );
           }
         }
       }

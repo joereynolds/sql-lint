@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../../checkerResult");
-class OddCodePoint {
+const check_1 = require("../check");
+class OddCodePoint extends check_1.Check {
     constructor() {
-        this.message = "Bad code point";
+        super(...arguments);
+        this.message = "Unexpected code point.";
     }
     check(query) {
         const badCodePoints = [65533];
@@ -11,7 +13,7 @@ class OddCodePoint {
             const codePoint = char.codePointAt(0);
             if (codePoint !== undefined && badCodePoints.includes(codePoint)) {
                 const lineNumber = query.lines[0].num;
-                return new checkerResult_1.CheckerResult(lineNumber, this.message);
+                return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message);
             }
         }
         return new checkerResult_1.CheckerResult(0, "");

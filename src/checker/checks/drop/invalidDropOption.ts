@@ -14,9 +14,10 @@ import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/tokens";
 import { sprintf } from "sprintf-js";
 import { Drop } from "../../../barrel/statements";
+import { Check } from "../check";
 
-class InvalidDropOption implements IChecker {
-  public message = "Option '%s' is not a valid option, must be one of '%s'";
+class InvalidDropOption extends Check implements IChecker {
+  public message = "Option '%s' is not a valid option, must be one of '%s'.";
 
   public check(query: Query): CheckerResult {
     const dropStatement = new Drop();
@@ -30,7 +31,7 @@ class InvalidDropOption implements IChecker {
           return new CheckerResult(
             line.num,
             sprintf(
-              this.message,
+              this.prefix + this.message,
               token[1],
               JSON.stringify(dropStatement.options)
             )

@@ -5,11 +5,19 @@ import { putContentIntoLines } from "../../../../../src/reader/reader";
 test.each([
   [
     "USE non_existent_db ;",
-    { content: "Database 'non_existent_db' does not exist.", line: 1 }
+    {
+      content:
+        "[sql-lint: database-not-found] Database 'non_existent_db' does not exist.",
+      line: 1
+    }
   ],
   [
     "USE other_db;",
-    { content: "Database 'other_db' does not exist.", line: 1 }
+    {
+      content:
+        "[sql-lint: database-not-found] Database 'other_db' does not exist.",
+      line: 1
+    }
   ],
   ["USE existing_db ;", { content: "", line: 0 }],
   ["USE existing_db;", { content: "", line: 0 }]

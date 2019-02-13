@@ -4,7 +4,10 @@ import { putContentIntoLines } from "../../../../../src/reader/reader";
 
 test.each([
   ["DELETE FROM person WHERE name = 'Jon';", ""],
-  ["DELETE FROM person;", "DELETE missing WHERE, intentional?"]
+  [
+    "DELETE FROM person;",
+    "[sql-lint: missing-where] DELETE statement missing WHERE clause."
+  ]
 ])("it finds missing WHEREs in DELETEs", (query, expected) => {
   const checker = new MissingWhere();
 

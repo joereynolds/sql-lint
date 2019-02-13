@@ -1,9 +1,10 @@
 import { Query } from "../../../reader/query";
 import { CheckerResult } from "../../checkerResult";
 import { IChecker } from "../../interface";
+import { Check } from "../check";
 
-class OddCodePoint implements IChecker {
-  public message = "Bad code point";
+class OddCodePoint extends Check implements IChecker {
+  public message = "Unexpected code point.";
   public check(query: Query): CheckerResult {
     const badCodePoints = [65533];
 
@@ -12,7 +13,7 @@ class OddCodePoint implements IChecker {
 
       if (codePoint !== undefined && badCodePoints.includes(codePoint)) {
         const lineNumber = query.lines[0].num;
-        return new CheckerResult(lineNumber, this.message);
+        return new CheckerResult(lineNumber, this.prefix + this.message);
       }
     }
     return new CheckerResult(0, "");

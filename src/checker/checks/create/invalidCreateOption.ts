@@ -14,8 +14,9 @@ import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/tokens";
 import { sprintf } from "sprintf-js";
 import { Create } from "../../../barrel/statements";
+import { Check } from "../check";
 
-class InvalidCreateOption implements IChecker {
+class InvalidCreateOption extends Check implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'";
 
   public check(query: Query): CheckerResult {
@@ -30,7 +31,7 @@ class InvalidCreateOption implements IChecker {
           return new CheckerResult(
             line.num,
             sprintf(
-              this.message,
+              this.prefix + this.message,
               token[1],
               JSON.stringify(createStatement.options)
             )

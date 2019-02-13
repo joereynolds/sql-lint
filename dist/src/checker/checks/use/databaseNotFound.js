@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../../checkerResult");
 const tokens_1 = require("../../../lexer/tokens");
 const sprintf_js_1 = require("sprintf-js");
-class DatabaseNotFound {
+const check_1 = require("../check");
+class DatabaseNotFound extends check_1.Check {
     constructor(databases) {
+        super();
         this.message = "Database '%s' does not exist.";
         this.databases = databases.map(result => result.Database);
     }
@@ -14,7 +16,7 @@ class DatabaseNotFound {
                 if (token[0] === tokens_1.Types.TableReference) {
                     const database = token[1];
                     if (!this.databases.includes(database) && database !== ";") {
-                        return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, database));
+                        return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, database));
                     }
                 }
             }

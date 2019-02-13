@@ -7,7 +7,9 @@ beforeEach(() => {
   this.mockRunDatabaseChecksFn = CheckerRunner.prototype.runDatabaseChecks = jest.fn();
   this.mockRunSimpleChecksFn = CheckerRunner.prototype.runSimpleChecks = jest.fn();
   this.printer = new Printer(0, new SimpleFormat());
+  this.database = jest.mock("../../../src/database");
   this.runner = new CheckerRunner();
+  this.query = new Query();
 });
 
 test("It does not run database checks when a database is not supplied", () => {
@@ -15,10 +17,15 @@ test("It does not run database checks when a database is not supplied", () => {
   expect(this.mockRunDatabaseChecksFn).toHaveBeenCalledTimes(0);
 });
 
-test("It runs basic checks when no database is supplied", () => {
-  const query = new Query();
+test("It does run database checks when a database is supplied", () => {
   Query.prototype.getContent = jest.fn().mockReturnValue("SELECT test");
-  this.runner.run([query], this.printer, "");
+  this.runner.run([this.query], this.printer, "", this.database);
+  expect(this.mockRunDatabaseChecksFn).toHaveBeenCalledTimes(1);
+});
+
+test("It runs basic checks when no database is supplied", () => {
+  Query.prototype.getContent = jest.fn().mockReturnValue("SELECT test");
+  this.runner.run([this.query], this.printer, "");
   expect(this.mockRunSimpleChecksFn).toHaveBeenCalledTimes(1);
 });
 

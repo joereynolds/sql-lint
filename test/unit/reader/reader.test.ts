@@ -1,80 +1,59 @@
-import { putContentIntoLines } from "../../../src/reader/reader";
+import {
+  putContentIntoLines,
+  getQueryFromLine
+} from "../../../src/reader/reader";
 import { Query } from "../../../src/reader/query";
 import { Line } from "../../../src/reader/line";
 
-test("We correctly read a file", () => {
-  const query = new Query();
-  query.lines = [
+beforeEach(() => {
+  this.query = new Query();
+  this.query.lines = [
     new Line("DELETE", 1),
     new Line(" FROM ", 2),
     new Line(" person WHERE ", 4),
     new Line(" age > 5;", 5)
   ];
-  const expected: any = [query];
 
+  this.queryWithComments = new Query();
+  this.queryWithComments.lines = [
+    new Line("DELETE", 1),
+    new Line(" FROM ", 2),
+    new Line(" person WHERE ", 4),
+    new Line(" age > 5;", 6)
+  ];
+});
+
+test("We correctly read a file", () => {
+  const expected: any = [this.query];
   const input = "DELETE\n FROM \n\n person WHERE \n age > 5;";
   const actual = putContentIntoLines(input);
   expect(actual).toEqual(expected);
 });
 
-test("We ignore '--' comments in files", () => {
-  const query = new Query();
-  query.lines = [
-    new Line("DELETE", 1),
-    new Line(" FROM ", 2),
-    new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 6)
-  ];
-  const expected: any = [query];
+test.each([
+  // Test we ignore '--' comments
+  ["DELETE\n FROM \n\n person WHERE \n-- Remove old people\n age > 5;"],
 
-  const input =
-    "DELETE\n FROM \n\n person WHERE \n-- Remove old people\n age > 5;";
+  // We ignore '#' comments
+  ["DELETE\n FROM \n\n person WHERE \n# Remove old people\n age > 5;"],
+
+  // We ignore '/*' comments
+  ["DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;"]
+])("We ignore comments in files", input => {
   const actual = putContentIntoLines(input);
-  expect(actual).toEqual(expected);
-});
-
-test("We ignore '#' comments in files", () => {
-  const query = new Query();
-  query.lines = [
-    new Line("DELETE", 1),
-    new Line(" FROM ", 2),
-    new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 6)
-  ];
-  const expected: any = [query];
-
-  const input =
-    "DELETE\n FROM \n\n person WHERE \n# Remove old people\n age > 5;";
-  const actual = putContentIntoLines(input);
-  expect(actual).toEqual(expected);
-});
-
-test("We ignore '--' comments in files", () => {
-  const query = new Query();
-  query.lines = [
-    new Line("DELETE", 1),
-    new Line(" FROM ", 2),
-    new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 6)
-  ];
-  const expected: any = [query];
-
-  const input =
-    "DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;";
-  const actual = putContentIntoLines(input);
-  expect(actual).toEqual(expected);
+  expect(actual).toEqual([this.queryWithComments]);
 });
 
 test("We correctly reconstruct our query from lines", () => {
-  const query = new Query();
-  query.lines = [
-    new Line("DELETE", 1),
-    new Line(" FROM ", 2),
-    new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 5)
-  ];
-
   const expected: string = "DELETE FROM  person WHERE  age > 5;";
-  const actual = query.getContent();
+  const actual = this.query.getContent();
+  expect(actual).toEqual(expected);
+});
+
+test("We correctly construct lines in a query from a string", () => {
+  const expected: any = [this.query];
+
+  const input = "DELETE\n FROM \n\n person WHERE \n age > 5;";
+  const actual = getQueryFromLine(input);
   expect(actual).toEqual(expected);
 });

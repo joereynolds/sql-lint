@@ -4,16 +4,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const fs = require("fs");
 const process = require("process");
-const database_1 = require("./database");
-const printer_1 = require("./printer");
-const reader_1 = require("./reader/reader");
-const config_1 = require("./config");
 const checkerRunner_1 = require("./checker/checkerRunner");
-const package_json_1 = require("../package.json");
+const database_1 = require("./database");
 const formatterFactory_1 = require("./formatter/formatterFactory");
+const printer_1 = require("./printer");
+const config_1 = require("./config");
+const reader_1 = require("./reader/reader");
+const package_json_1 = require("../package.json");
+const fixer_1 = require("./fixer");
 program
     .version(package_json_1.version)
+    .option("-i, --init", "Start an interactive session to create your configuration file")
     .option("-f, --file <path>", "The .sql file to lint")
+    .option("--fix <string>", "The .sql string to fix")
     .option("-q, --query <string>", "The query to lint")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
@@ -40,6 +43,13 @@ if (program.file) {
     }
     queries = reader_1.getQueryFromFile(program.file);
     prefix = program.file;
+}
+if (program.fix) {
+    const fixer = new fixer_1.Fixer();
+    const query = reader_1.getQueryFromLine(program.fix);
+    const fixed = fixer.fix(query[0]);
+    console.log(fixed);
+    process.exit(0);
 }
 // Read from stdin if no args are supplied
 if (!program.file && !program.query) {

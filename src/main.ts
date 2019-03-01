@@ -4,18 +4,21 @@ import * as program from "commander";
 import * as fs from "fs";
 import * as process from "process";
 
+import { CheckerRunner } from "./checker/checkerRunner";
 import { Database } from "./database";
+import { FormatterFactory } from "./formatter/formatterFactory";
 import { Printer } from "./printer";
-import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 import { Query } from "./reader/query";
 import { file, getConfiguration } from "./config";
-import { CheckerRunner } from "./checker/checkerRunner";
+import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 import { version } from "../package.json";
-import { FormatterFactory } from "./formatter/formatterFactory";
+import { Fixer } from "./fixer";
 
 program
   .version(version)
+  .option("-i, --init", "Start an interactive session to create your configuration file")
   .option("-f, --file <path>", "The .sql file to lint")
+  .option("--fix <string>", "The .sql string to fix")
   .option("-q, --query <string>", "The query to lint")
   .option(
     "-v, --verbose",
@@ -54,6 +57,14 @@ if (program.file) {
 
   queries = getQueryFromFile(program.file);
   prefix = program.file;
+}
+
+if (program.fix) {
+    const fixer = new Fixer();
+    const query = getQueryFromLine(program.fix);
+    const fixed = fixer.fix(query[0]);
+    console.log(fixed);
+    process.exit(0);
 }
 
 // Read from stdin if no args are supplied

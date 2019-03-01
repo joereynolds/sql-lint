@@ -2,23 +2,21 @@ import { Fixer } from "../../src/fixer";
 import { Line } from "../../src/reader/line";
 import { Query } from "../../src/reader/query";
 
-test("A keyword is given its own line", () => { 
+test.each([
+  // Single keyword
+  [new Line("SELECT", 1), "SELECT\n"],
+  // Single keyword (lowercase)
+  [new Line("select", 1), "SELECT\n"],
+  [new Line("DELETE", 1), "DELETE\n"],
+  // Multiple keywords
+  [new Line("DELETE FROM", 1), "DELETE\nFROM\n"],
+  // A query with a non-keyword in it
+  [new Line("DELETE FROM some_table;", 1), "DELETE\nFROM\nsome_table;"]
+])("A keyword is given its own line", (input, expected) => {
+  const inputQuery = new Query();
+  inputQuery.lines = [input];
 
-
-    const inputQuery = new Query();
-    inputQuery.lines = [
-      new Line("DELETE FROM person;", 1),
-    ];
-
-    const expectedQuery = new Query();
-    expectedQuery.lines = [
-      new Line("DELETE", 1),
-      new Line("FROM", 2),
-      new Line("person;", 3),
-    ];
-
-    const fixer = new Fixer();
-    const expected = '\nSELECT\n';
-    const actual = fixer.fix(inputQuery);
-    expect(1).toEqual(expected);
+  const fixer = new Fixer();
+  const actual = fixer.fix(inputQuery);
+  expect(actual).toEqual(expected);
 });

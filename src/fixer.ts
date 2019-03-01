@@ -19,12 +19,12 @@ class Fixer {
         if (keywords.includes(titleCase(word))) {
           fixed += `${word.toUpperCase()}\n`;
         } else {
-          fixed += word;
+          fixed += word + "\n";
         }
       });
     });
 
-    return fixed;
+    return fixed.trim();
   }
 }
 

@@ -1,5 +1,6 @@
 import { Select } from "../../../../src/lexer/statements/select";
 import { putContentIntoLines } from "../../../../src/reader/reader";
+import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
@@ -10,10 +11,10 @@ test.each([
           content: "SELECT * FROM person;",
           num: 1,
           tokens: [
-            ["keyword", "select"],
-            ["table_reference", "*"],
-            ["keyword", "from"],
-            ["table_reference", "person"]
+            new Token("keyword", "select"),
+            new Token("table_reference", "*"),
+            new Token("keyword", "from"),
+            new Token("table_reference", "person")
           ]
         }
       ]
@@ -28,10 +29,10 @@ test.each([
           content: "SELECT last_name FROM person;",
           num: 1,
           tokens: [
-            ["keyword", "select"],
-            ["table_reference", "last_name"],
-            ["keyword", "from"],
-            ["table_reference", "person"]
+            new Token("keyword", "select"),
+            new Token("table_reference", "last_name"),
+            new Token("keyword", "from"),
+            new Token("table_reference", "person")
           ]
         }
       ]
@@ -46,14 +47,14 @@ test.each([
           content: "SELECT * FROM person WHERE name = 'test';",
           num: 1,
           tokens: [
-            ["keyword", "select"],
-            ["table_reference", "*"],
-            ["keyword", "from"],
-            ["table_reference", "person"],
-            ["keyword", "where"],
-            ["???", "name"],
-            ["???", "="],
-            ["???", "'test';"]
+            new Token("keyword", "select"),
+            new Token("table_reference", "*"),
+            new Token("keyword", "from"),
+            new Token("table_reference", "person"),
+            new Token("keyword", "where"),
+            new Token("???", "name"),
+            new Token("???", "="),
+            new Token("???", "'test';")
           ]
         }
       ]

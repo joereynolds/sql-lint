@@ -1,5 +1,6 @@
 import { Drop } from "../../../../src/lexer/statements/drop";
 import { putContentIntoLines } from "../../../../src/reader/reader";
+import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
@@ -9,7 +10,7 @@ test.each([
         {
           content: "DROP ;",
           num: 1,
-          tokens: [["keyword", "drop"]]
+          tokens: [new Token("keyword", "drop")]
         }
       ]
     }
@@ -21,7 +22,7 @@ test.each([
         {
           content: "DROP TABLE ;",
           num: 1,
-          tokens: [["keyword", "drop"], ["option", "table"]]
+          tokens: [new Token("keyword", "drop"), new Token("option", "table")]
         }
       ]
     }
@@ -33,7 +34,10 @@ test.each([
         {
           content: "DROP DATABASE ;",
           num: 1,
-          tokens: [["keyword", "drop"], ["option", "database"]]
+          tokens: [
+            new Token("keyword", "drop"),
+            new Token("option", "database")
+          ]
         }
       ]
     }

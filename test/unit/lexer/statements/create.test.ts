@@ -1,5 +1,6 @@
 import { Create } from "../../../../src/lexer/statements/create";
 import { putContentIntoLines } from "../../../../src/reader/reader";
+import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
@@ -9,7 +10,7 @@ test.each([
         {
           content: "CREATE ;",
           num: 1,
-          tokens: [["keyword", "create"]]
+          tokens: [new Token("keyword", "create")]
         }
       ]
     }
@@ -21,7 +22,7 @@ test.each([
         {
           content: "CREATE TABLE ;",
           num: 1,
-          tokens: [["keyword", "create"], ["option", "table"]]
+          tokens: [new Token("keyword", "create"), new Token("option", "table")]
         }
       ]
     }
@@ -33,7 +34,10 @@ test.each([
         {
           content: "CREATE DATABASE ;",
           num: 1,
-          tokens: [["keyword", "create"], ["option", "database"]]
+          tokens: [
+            new Token("keyword", "create"),
+            new Token("option", "database")
+          ]
         }
       ]
     }

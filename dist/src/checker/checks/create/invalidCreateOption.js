@@ -23,9 +23,9 @@ class InvalidCreateOption extends check_1.Check {
         const createStatement = new statements_1.Create();
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token[0] === tokens_1.Types.Option &&
-                    !createStatement.options.includes(token[1])) {
-                    return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, token[1], JSON.stringify(createStatement.options)));
+                if (token.type === tokens_1.Types.Option &&
+                    !createStatement.options.includes(token.value)) {
+                    return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, token.value, JSON.stringify(createStatement.options)));
                 }
             }
         }

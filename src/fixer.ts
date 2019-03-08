@@ -12,7 +12,6 @@ class Fixer {
     let fixed: string = "";
 
     query.lines.forEach(line => {
-
       line.tokens.forEach(token => {
         if (token[0] === "keyword") {
           fixed += `${token[1].toUpperCase()}\n`;

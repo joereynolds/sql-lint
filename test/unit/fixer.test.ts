@@ -22,3 +22,15 @@ test.each([
   const actual = fixer.fix(inputQuery);
   expect(actual).toEqual(expected);
 });
+
+test.each([
+  [new Line("select", 1), "SELECT"],
+  [new Line("delete from", 1), "DELETE\nFROM"]
+])("A keyword is uppercased", (input, expected) => {
+  const inputQuery = new Query();
+  inputQuery.lines = [input];
+
+  const fixer = new Fixer();
+  const actual = fixer.fix(inputQuery);
+  expect(actual).toEqual(expected);
+});

@@ -1,6 +1,5 @@
-import { Keyword } from "./lexer/tokens";
 import { Query } from "./reader/query";
-import { titleCase } from "./util";
+import { tokenise } from "./lexer/lexer";
 
 class Fixer {
   public fix(query: Query) {
@@ -8,22 +7,20 @@ class Fixer {
   }
 
   private fixKeywords(query: Query) {
-    const keywords = Object.keys(Keyword);
+    query = tokenise(query);
 
     let fixed: string = "";
 
     query.lines.forEach(line => {
-      const content = line.content.split(" ");
 
-      content.forEach(word => {
-        if (keywords.includes(titleCase(word))) {
-          fixed += `${word.toUpperCase()}\n`;
+      line.tokens.forEach(token => {
+        if (token[0] === "keyword") {
+          fixed += `${token[1].toUpperCase()}\n`;
         } else {
-          fixed += word + "\n";
+          fixed += token[1] + "\n";
         }
       });
     });
-
     return fixed.trim();
   }
 }

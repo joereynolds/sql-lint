@@ -11,9 +11,9 @@ test.each([
   // Multiple keywords
   [new Line("DELETE FROM", 1), "DELETE\nFROM"],
   // A query with a non-keyword in it
-  [new Line("DELETE FROM some_table;", 1), "DELETE\nFROM\nsome_table;"],
+  [new Line("DELETE FROM some_table", 1), "DELETE\nFROM\nsome_table"],
   // Select *
-  [new Line("SELECT * FROM test;", 1), "SELECT\n*\nFROM\ntest;"]
+  [new Line("SELECT * FROM test", 1), "SELECT\n*\nFROM\ntest"]
 ])("A keyword is given its own line", (input, expected) => {
   const inputQuery = new Query();
   inputQuery.lines = [input];

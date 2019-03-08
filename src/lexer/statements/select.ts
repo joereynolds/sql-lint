@@ -5,6 +5,8 @@ import { TOKENS, Keyword, Types } from "../tokens";
 import { Token } from "../token";
 
 class Select implements ILexer {
+  public options: string[] = [];
+
   public tokenise(query: Query): Query {
     let lastToken = "";
     query.lines.forEach(line => {

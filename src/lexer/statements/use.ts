@@ -5,6 +5,7 @@ import { Keyword, Types } from "../tokens";
 import { Token } from "../token";
 
 class Use implements ILexer {
+  public options: string[] = [];
   public tokenise(query: Query): Query {
     query.lines.forEach(line => {
       line.content.split(" ").forEach(word => {

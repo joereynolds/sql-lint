@@ -4,6 +4,9 @@ const lexer_1 = require("../lexer");
 const tokens_1 = require("../tokens");
 const token_1 = require("../token");
 class Update {
+    constructor() {
+        this.options = [];
+    }
     tokenise(query) {
         let lastToken = "";
         query.lines.forEach(line => {

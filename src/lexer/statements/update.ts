@@ -5,6 +5,7 @@ import { Keyword, Types } from "../tokens";
 import { Token } from "../token";
 
 class Update implements ILexer {
+  public options: string[] = [];
   public tokenise(query: Query): Query {
     let lastToken = "";
     query.lines.forEach(line => {

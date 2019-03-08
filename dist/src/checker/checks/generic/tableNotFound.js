@@ -12,8 +12,8 @@ class TableNotFound {
     check(query) {
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token[0] === tokens_1.Types.TableReference) {
-                    const reference = lexer_1.extractTableReference(token[1]);
+                if (token.type === tokens_1.Types.TableReference) {
+                    const reference = lexer_1.extractTableReference(token.value);
                     if (!this.tables.includes(reference.table) &&
                         reference.table !== "*") {
                         return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.message, reference.table, reference.database));

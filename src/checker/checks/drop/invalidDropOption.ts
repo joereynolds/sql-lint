@@ -25,14 +25,14 @@ class InvalidDropOption extends Check implements IChecker {
     for (const line of query.lines) {
       for (const token of line.tokens) {
         if (
-          token[0] === Types.Option &&
-          !dropStatement.options.includes(token[1])
+          token.type === Types.Option &&
+          !dropStatement.options.includes(token.value)
         ) {
           return new CheckerResult(
             line.num,
             sprintf(
               this.prefix + this.message,
-              token[1],
+              token.value,
               JSON.stringify(dropStatement.options)
             )
           );

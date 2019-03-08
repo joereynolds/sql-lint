@@ -1,7 +1,9 @@
+import { Token } from "../lexer/token";
+
 class Line {
   public num: number;
   public content: string;
-  public tokens: string[][] = [];
+  public tokens: Token[] = [];
 
   constructor(content: string, num: number) {
     this.content = content;

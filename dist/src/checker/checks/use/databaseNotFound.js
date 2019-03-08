@@ -13,8 +13,8 @@ class DatabaseNotFound extends check_1.Check {
     check(query) {
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token[0] === tokens_1.Types.TableReference) {
-                    const database = token[1];
+                if (token.type === tokens_1.Types.TableReference) {
+                    const database = token.value;
                     if (!this.databases.includes(database) && database !== ";") {
                         return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, database));
                     }

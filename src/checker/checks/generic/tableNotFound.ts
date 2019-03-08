@@ -16,8 +16,8 @@ class TableNotFound implements IChecker {
   public check(query: Query): CheckerResult {
     for (const line of query.lines) {
       for (const token of line.tokens) {
-        if (token[0] === Types.TableReference) {
-          const reference = extractTableReference(token[1]);
+        if (token.type === Types.TableReference) {
+          const reference = extractTableReference(token.value);
 
           if (
             !this.tables.includes(reference.table) &&

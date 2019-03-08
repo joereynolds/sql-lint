@@ -2,6 +2,7 @@ import { Query } from "../../reader/query";
 import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
 import { Keyword, Types } from "../tokens";
+import { Token } from "../token";
 
 class Update implements ILexer {
   public tokenise(query: Query): Query {
@@ -11,15 +12,14 @@ class Update implements ILexer {
         let item = word.toLowerCase().trim();
 
         if (item === Keyword.Update) {
-          line.tokens.push([Types.Keyword, item]);
+          line.tokens.push(new Token(Types.Keyword, item));
         } else if (lastToken === Keyword.Update) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
-            line.tokens.push([
-              Types.TableReference,
-              cleanUnquotedIdentifier(item)
-            ]);
+            line.tokens.push(
+              new Token(Types.TableReference, cleanUnquotedIdentifier(item))
+            );
           }
         }
         lastToken = item;

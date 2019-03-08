@@ -11,11 +11,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const statements_1 = require("../../../barrel/statements");
 const invalidOption_1 = require("../generic/invalidOption");
-class InvalidDropOption extends invalidOption_1.InvalidOption {
+class InvalidTruncateOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
-        this.checker = new statements_1.Drop();
+        this.checker = new statements_1.Truncate();
     }
 }
-exports.InvalidDropOption = InvalidDropOption;
-//# sourceMappingURL=invalidDropOption.js.map
+exports.InvalidTruncateOption = InvalidTruncateOption;
+//# sourceMappingURL=invalidTruncateOption.js.map

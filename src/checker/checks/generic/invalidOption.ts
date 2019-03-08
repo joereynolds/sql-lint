@@ -1,4 +1,3 @@
-
 /**
  * This error is triggered when a DROP statement
  * has an invalid option following the 'DROP'.
@@ -22,7 +21,6 @@ class InvalidOption extends Check implements IChecker {
   public checker: ILexer;
 
   public check(query: Query): CheckerResult {
-
     for (const line of query.lines) {
       for (const token of line.tokens) {
         if (

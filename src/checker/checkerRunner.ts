@@ -9,7 +9,8 @@ import {
   OddCodePoint,
   DatabaseNotFound,
   InvalidCreateOption,
-  InvalidDropOption
+  InvalidDropOption,
+  InvalidTruncateOption
 } from "../barrel/checks";
 
 /**
@@ -34,6 +35,8 @@ class CheckerRunner {
       printer.printCheck(checks.invalidDropOption, tokenised, prefix);
     } else if (category === Keyword.Create) {
       printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
+    } else if (category === Keyword.Truncate) {
+      printer.printCheck(checks.invalidTruncateOption, tokenised, prefix);
     }
   }
 
@@ -94,7 +97,8 @@ class CheckerRunner {
       oddCodePoint: new OddCodePoint(),
       missingWhere: new MissingWhere(),
       invalidDropOption: new InvalidDropOption(),
-      invalidCreateOption: new InvalidCreateOption()
+      invalidCreateOption: new InvalidCreateOption(),
+      invalidTruncateOption: new InvalidTruncateOption()
     };
   }
 }

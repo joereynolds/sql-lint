@@ -63,3 +63,8 @@ CREATE test person;
 -- Valid option for CREATE
 CREATE TABLE person;
 
+-- Invalid option for TRUNCATE
+TRUNCATE something g;
+
+-- Valid option for TRUNCATE
+TRUNCATE TABLE person;

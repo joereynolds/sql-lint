@@ -9,5 +9,6 @@ __export(require("../checker/checks/drop/invalidDropOption"));
 __export(require("../checker/checks/generic/mySqlError"));
 __export(require("../checker/checks/generic/oddCodePoint"));
 __export(require("../checker/checks/generic/tableNotFound"));
+__export(require("../checker/checks/truncate/invalidTruncateOption"));
 __export(require("../checker/checks/use/databaseNotFound"));
 //# sourceMappingURL=checks.js.map

@@ -41,6 +41,7 @@ export enum Keyword {
   Limit = "limit",
   Select = "select",
   Set = "set",
+  Truncate = "truncate",
   Update = "update",
   Use = "use",
   Where = "where"

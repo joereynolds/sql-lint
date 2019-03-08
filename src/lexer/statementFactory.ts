@@ -1,5 +1,5 @@
 import { ILexer } from "./interface";
-import { Select, Use, Create, Drop } from "../barrel/statements";
+import { Select, Use, Create, Drop, Truncate } from "../barrel/statements";
 
 class StatementFactory {
   public build(statement: string): ILexer {
@@ -9,7 +9,8 @@ class StatementFactory {
       select: new Select(),
       use: new Use(),
       drop: new Drop(),
-      create: new Create()
+      create: new Create(),
+      truncate: new Truncate()
     };
 
     if (Object.keys(statementMap).includes(statement)) {

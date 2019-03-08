@@ -23,6 +23,9 @@ class CheckerRunner {
         else if (category === tokens_1.Keyword.Create) {
             printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
         }
+        else if (category === tokens_1.Keyword.Truncate) {
+            printer.printCheck(checks.invalidTruncateOption, tokenised, prefix);
+        }
     }
     runDatabaseChecks(database, printer, prefix, category, tokenised, content) {
         database.lintQuery(database.connection, content, (results) => {
@@ -58,7 +61,8 @@ class CheckerRunner {
             oddCodePoint: new checks_1.OddCodePoint(),
             missingWhere: new checks_1.MissingWhere(),
             invalidDropOption: new checks_1.InvalidDropOption(),
-            invalidCreateOption: new checks_1.InvalidCreateOption()
+            invalidCreateOption: new checks_1.InvalidCreateOption(),
+            invalidTruncateOption: new checks_1.InvalidTruncateOption(),
         };
     }
 }

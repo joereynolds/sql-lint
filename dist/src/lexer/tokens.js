@@ -42,6 +42,7 @@ var Keyword;
     Keyword["Limit"] = "limit";
     Keyword["Select"] = "select";
     Keyword["Set"] = "set";
+    Keyword["Truncate"] = "truncate";
     Keyword["Update"] = "update";
     Keyword["Use"] = "use";
     Keyword["Where"] = "where";

@@ -14,7 +14,7 @@ as well as custom errors written for sql-lint.
 `sql-lint` will show errors about the following things
 
 - DELETE statements missing WHERE clauses
-- DROP statements with invalid things to be dropped
+- DROP/TRUNCATE/ALTER/CREATE statements with invalid options specified
 - Odd code points in queries
 - Any MySQL error*
 

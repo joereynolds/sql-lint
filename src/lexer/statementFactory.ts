@@ -1,5 +1,12 @@
 import { ILexer } from "./interface";
-import { Select, Use, Create, Drop, Truncate } from "../barrel/statements";
+import {
+  Alter,
+  Select,
+  Use,
+  Create,
+  Drop,
+  Truncate
+} from "../barrel/statements";
 
 class StatementFactory {
   public build(statement: string): ILexer {
@@ -10,6 +17,7 @@ class StatementFactory {
       use: new Use(),
       drop: new Drop(),
       create: new Create(),
+      alter: new Alter(),
       truncate: new Truncate()
     };
 

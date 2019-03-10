@@ -8,6 +8,7 @@ import {
   MissingWhere,
   OddCodePoint,
   DatabaseNotFound,
+  InvalidAlterOption,
   InvalidCreateOption,
   InvalidDropOption,
   InvalidTruncateOption
@@ -33,6 +34,8 @@ class CheckerRunner {
       printer.printCheck(checks.missingWhere, tokenised, prefix);
     } else if (category === Keyword.Drop) {
       printer.printCheck(checks.invalidDropOption, tokenised, prefix);
+    } else if (category === Keyword.Alter) {
+      printer.printCheck(checks.invalidAlterOption, tokenised, prefix);
     } else if (category === Keyword.Create) {
       printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
     } else if (category === Keyword.Truncate) {
@@ -98,7 +101,8 @@ class CheckerRunner {
       missingWhere: new MissingWhere(),
       invalidDropOption: new InvalidDropOption(),
       invalidCreateOption: new InvalidCreateOption(),
-      invalidTruncateOption: new InvalidTruncateOption()
+      invalidTruncateOption: new InvalidTruncateOption(),
+      invalidAlterOption: new InvalidAlterOption()
     };
   }
 }

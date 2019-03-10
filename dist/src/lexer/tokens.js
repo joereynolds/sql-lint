@@ -29,6 +29,7 @@ var Types;
 })(Types = exports.Types || (exports.Types = {}));
 var Keyword;
 (function (Keyword) {
+    Keyword["Alter"] = "alter";
     Keyword["Begin"] = "begin";
     Keyword["Create"] = "create";
     Keyword["Delete"] = "delete";

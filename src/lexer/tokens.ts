@@ -28,6 +28,7 @@ export enum Types {
 }
 
 export enum Keyword {
+  Alter = "alter",
   Begin = "begin",
   Create = "create",
   Delete = "delete",

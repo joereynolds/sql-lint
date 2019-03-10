@@ -1,3 +1,4 @@
+export * from "../checker/checks/alter/invalidAlterOption";
 export * from "../checker/checks/create/invalidCreateOption";
 export * from "../checker/checks/delete/missingWhere";
 export * from "../checker/checks/drop/invalidDropOption";

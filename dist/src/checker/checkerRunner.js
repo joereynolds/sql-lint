@@ -11,7 +11,6 @@ class CheckerRunner {
      * Simple checks are ones that don't require a database connection
      */
     runSimpleChecks(printer, prefix, category, tokenised, checks) {
-        console.log('category');
         if (category === tokens_1.Keyword.Select) {
             printer.printCheck(checks.oddCodePoint, tokenised, prefix);
         }
@@ -20,6 +19,9 @@ class CheckerRunner {
         }
         else if (category === tokens_1.Keyword.Drop) {
             printer.printCheck(checks.invalidDropOption, tokenised, prefix);
+        }
+        else if (category === tokens_1.Keyword.Alter) {
+            printer.printCheck(checks.invalidAlterOption, tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Create) {
             printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
@@ -63,7 +65,8 @@ class CheckerRunner {
             missingWhere: new checks_1.MissingWhere(),
             invalidDropOption: new checks_1.InvalidDropOption(),
             invalidCreateOption: new checks_1.InvalidCreateOption(),
-            invalidTruncateOption: new checks_1.InvalidTruncateOption()
+            invalidTruncateOption: new checks_1.InvalidTruncateOption(),
+            invalidAlterOption: new checks_1.InvalidAlterOption(),
         };
     }
 }

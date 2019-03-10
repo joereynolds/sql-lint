@@ -68,3 +68,9 @@ TRUNCATE something g;
 
 -- Valid option for TRUNCATE
 TRUNCATE TABLE person;
+
+-- Invalid option for ALTER
+ALTER mlady TEST;
+
+-- Valid option for ALTER
+ALTER TABLE test;

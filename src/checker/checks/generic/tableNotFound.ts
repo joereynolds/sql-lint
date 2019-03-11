@@ -38,7 +38,7 @@ class TableNotFound implements IChecker {
   private cleanTables(tables: any): string[] {
     const cleanTables: string[] = [];
     for (const obj of tables) {
-      const cleanTable = (<any>Object).values(obj)[0];
+      const cleanTable = (Object as any).values(obj)[0];
       if (cleanTable.length > 0) {
         cleanTables.push(cleanTable);
       }

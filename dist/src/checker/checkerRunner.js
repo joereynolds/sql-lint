@@ -66,7 +66,7 @@ class CheckerRunner {
             invalidDropOption: new checks_1.InvalidDropOption(),
             invalidCreateOption: new checks_1.InvalidCreateOption(),
             invalidTruncateOption: new checks_1.InvalidTruncateOption(),
-            invalidAlterOption: new checks_1.InvalidAlterOption(),
+            invalidAlterOption: new checks_1.InvalidAlterOption()
         };
     }
 }

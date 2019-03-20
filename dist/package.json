@@ -3,29 +3,29 @@
         "sql-lint": "./dist/src/main.js"
     },
     "dependencies": {
-        "@types/jest": "^23.3.1",
         "@types/mysql": "^2.15.5",
         "@types/node": "^10.5.7",
         "@types/sprintf-js": "^1.1.1",
-        "ajv": "^6.0.0",
         "chalk": "^2.4.1",
         "commander": "^2.17.1",
-        "jest": "^24.5.0",
         "mysql": "^2.16.0",
         "param-case": "^2.1.1",
-        "pkg": "^4.3.7",
-        "shelltest": "^2.0.0",
         "sprintf-js": "^1.1.2",
-        "ts-jest": "^23.1.3",
-        "tslint": "^5.11.0",
         "typescript": "^3.0.1"
     },
-    "description": "An intelligent MySQL linter and checker",
-    "homepage": "https://github.com/joereynolds/sql-lint",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/joereynolds/sql-lint.git"
+    "description": "An intelligent SQL linter and checker",
+    "devDependencies": {
+        "@types/jest": "^23.3.1",
+        "jest": "^24.5.0",
+        "pkg": "^4.3.7",
+        "prettier": "^1.14.2",
+        "shelltest": "^2.0.0",
+        "ts-jest": "^23.1.3",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.14.0",
+        "tslint-sonarts": "^1.9.0"
     },
+    "homepage": "https://github.com/joereynolds/sql-lint",
     "jest": {
         "coverageThreshold": {
             "global": {
@@ -44,11 +44,11 @@
             "node"
         ],
         "testRegex": "test/(unit|integration)",
+        "testURL": "http://localhost/",
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },
-        "verbose": true,
-        "testURL": "http://localhost/"
+        "verbose": true
     },
     "keywords": [
         "sql",
@@ -58,19 +58,18 @@
         "sql-lint"
     ],
     "license": "MIT",
+    "man": "./doc/man/doc.1",
     "name": "sql-lint",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/joereynolds/sql-lint.git"
+    },
     "scripts": {
         "build": "tsc",
-        "start": "./build/build.sh",
+        "format": "prettier --write {src,test}/**/*.ts",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
-        "test": "jest test --coverage --silent",
-        "format": "prettier --write {src,test}/**/*.ts"
+        "start": "./build/build.sh",
+        "test": "jest test --coverage --silent"
     },
-    "version": "0.0.10",
-    "man": "./doc/man/doc.1",
-    "devDependencies": {
-        "prettier": "^1.14.2",
-        "tslint-config-prettier": "^1.14.0",
-        "tslint-sonarts": "^1.9.0"
-    }
+    "version": "0.0.10"
 }

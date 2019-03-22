@@ -37,7 +37,7 @@ class CheckerRunner {
         });
         if (category === tokens_1.Keyword.Use) {
             database.getDatabases(database.connection, (results) => {
-                const checker = new checks_1.DatabaseNotFound(results);
+                const checker = new checks_1.DatabaseNotFound(results.rows);
                 printer.printCheck(checker, tokenised, prefix);
             });
         }

@@ -58,7 +58,7 @@ class CheckerRunner {
 
     if (category === Keyword.Use) {
       database.getDatabases(database.connection, (results: any) => {
-        const checker = new DatabaseNotFound(results);
+        const checker = new DatabaseNotFound(results.rows);
         printer.printCheck(checker, tokenised, prefix);
       });
     }

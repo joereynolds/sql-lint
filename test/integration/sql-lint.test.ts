@@ -30,3 +30,10 @@ test("it works with stdin", done => {
     .expect("stdout", /.*DELETE statement missing WHERE.*/)
     .end(done);
 });
+
+test("it can lint a use correctly", done => {
+  shelltest()
+    .cmd(`echo 'USE non_existent_db ;' | ${sqlLint}`)
+    .expect("stdout", /.*Database 'non_existent_db' does not exist.*/)
+    .end(done);
+});

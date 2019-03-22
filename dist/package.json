@@ -10,11 +10,11 @@
         "commander": "^2.17.1",
         "mysql": "^2.16.0",
         "param-case": "^2.1.1",
-        "sprintf-js": "^1.1.2",
-        "typescript": "^3.3.4000"
+        "sprintf-js": "^1.1.2"
     },
     "description": "An intelligent SQL linter and checker",
     "devDependencies": {
+        "typescript": "^3.3.4000",
         "@types/jest": "^23.3.14",
         "jest": "^24.5.0",
         "pkg": "^4.3.7",

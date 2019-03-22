@@ -4,11 +4,7 @@ class Database {
   public connection: mysql.Connection;
 
   constructor(host: string, user: string, password: string) {
-    this.connection = this.connect(
-      host,
-      user,
-      password
-    );
+    this.connection = this.connect(host, user, password);
   }
 
   public connect(host: string, user: string, password: string) {

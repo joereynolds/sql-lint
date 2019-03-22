@@ -18,6 +18,10 @@ program
   .option("-f, --file <path>", "The .sql file to lint")
   .option("-q, --query <string>", "The query to lint")
   .option(
+    "-d, --driver <string>",
+    "The driver to use, must be one of ['mysql', 'postgres']"
+  )
+  .option(
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated"
   )
@@ -71,6 +75,7 @@ if (runSimpleChecks) {
   runner.run(queries, printer, prefix);
 } else {
   const db = new Database(
+    program.driver || configuration.driver || "mysql",
     program.host || configuration.host,
     program.user || configuration.user,
     program.password || configuration.password

@@ -8,7 +8,7 @@
 
 ![Imgur](https://i.imgur.com/lo7MMoI.png)
 
-sql-lint is a linter for MySQL, it brings back any error from the MySQL server
+sql-lint is a linter for SQL, it brings back any error from the supported servers
 as well as custom errors written for sql-lint.
 
 `sql-lint` will show errors about the following things
@@ -18,7 +18,7 @@ as well as custom errors written for sql-lint.
 - Odd code points in queries
 - Any MySQL error*
 
-* `sql-lint` brings back errors from the MySQL server too. It will catch **any** MySQL error.
+* `sql-lint` brings back errors from the supported servers too. It will catch **any** error from the server.
 these include but are not limited to:
 
 - Unknown columns on a table 
@@ -27,6 +27,15 @@ these include but are not limited to:
 - Syntax errors
 
 etc...
+
+## Supported servers
+
+As of now, `sql-lint` supports the following servers:
+
+- Mysql
+- Postgres
+
+Others can be added but I don't use them. Raise an issue with the server you want to be supported and I'll get around to it.
 
 ## Running / Installation
 
@@ -85,7 +94,7 @@ You can connect in two ways:
 You can connect via the command line if you wish with the respective flags.
 
 ```
-sql-lint --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
+sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
 ```
 
 ### Via `config.json`
@@ -96,6 +105,7 @@ You should put the following in there for more intelligent errors to come throug
 
 ```
 {
+    "driver": "mysql",
     "host": "localhost",
     "user": "root",
     "password": "hunter2"
@@ -135,6 +145,7 @@ Change your config file in `~/.config/sql-lint/config.json` to have the followin
 
 ```
 {
+    "driver": "mysql",
     "host": "localhost",
     "user": "root",
     "password": "password"

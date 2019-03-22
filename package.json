@@ -8,6 +8,7 @@
         "@types/sprintf-js": "^1.1.2",
         "any-db": "^2.2.1",
         "any-db-mysql": "^2.1.2",
+        "any-db-postgres": "^2.1.5",
         "chalk": "^2.4.1",
         "commander": "^2.17.1",
         "mysql": "^2.16.0",

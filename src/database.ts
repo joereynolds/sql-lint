@@ -4,9 +4,9 @@ import * as anyDB from "any-db";
 class Database {
   public connection: any;
 
-  constructor(host: string, user: string, password: string) {
+  constructor(driver: string, host: string, user: string, password: string) {
     this.connection = anyDB.createConnection(
-      `mysql://${user}:${password}@${host}`
+      `${driver}://${user}:${password}@${host}`
     );
   }
 

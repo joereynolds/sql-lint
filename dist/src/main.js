@@ -15,6 +15,7 @@ program
     .version(package_json_1.version)
     .option("-f, --file <path>", "The .sql file to lint")
     .option("-q, --query <string>", "The query to lint")
+    .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
     .option("--host <string>", "The host for the connection")
@@ -54,7 +55,7 @@ if (runSimpleChecks) {
     runner.run(queries, printer, prefix);
 }
 else {
-    const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
+    const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
     runner.run(queries, printer, prefix, db);
     db.connection.end();
 }

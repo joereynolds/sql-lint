@@ -29,17 +29,17 @@ class CheckerRunner {
     checks: any
   ) {
     if (category === Keyword.Select) {
-      printer.printCheck(checks.oddCodePoint, tokenised, prefix);
+      printer.printCheck(checks["odd-code-point"], tokenised, prefix);
     } else if (category === Keyword.Delete) {
-      printer.printCheck(checks.missingWhere, tokenised, prefix);
+      printer.printCheck(checks["missing-where"], tokenised, prefix);
     } else if (category === Keyword.Drop) {
-      printer.printCheck(checks.invalidDropOption, tokenised, prefix);
+      printer.printCheck(checks["invalid-drop-option"], tokenised, prefix);
     } else if (category === Keyword.Alter) {
-      printer.printCheck(checks.invalidAlterOption, tokenised, prefix);
+      printer.printCheck(checks["invalid-alter-option"], tokenised, prefix);
     } else if (category === Keyword.Create) {
-      printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
+      printer.printCheck(checks["invalid-create-option"], tokenised, prefix);
     } else if (category === Keyword.Truncate) {
-      printer.printCheck(checks.invalidTruncateOption, tokenised, prefix);
+      printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
     }
   }
 
@@ -68,9 +68,10 @@ class CheckerRunner {
     sqlQueries: Query[],
     printer: Printer,
     prefix: string,
+    omittedErrors: string[],
     database?: Database
   ) {
-    const checks = this.getSqlLintChecks();
+    const checks = this.getSqlLintChecks(omittedErrors);
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -95,15 +96,24 @@ class CheckerRunner {
     });
   }
 
-  private getSqlLintChecks() {
-    return {
-      oddCodePoint: new OddCodePoint(),
-      missingWhere: new MissingWhere(),
-      invalidDropOption: new InvalidDropOption(),
-      invalidCreateOption: new InvalidCreateOption(),
-      invalidTruncateOption: new InvalidTruncateOption(),
-      invalidAlterOption: new InvalidAlterOption()
+  private getSqlLintChecks(omittedErrors: string[]) {
+    const checks = {
+      "odd-code-point": new OddCodePoint(),
+      "missing-where": new MissingWhere(),
+      "invalid-drop-option": new InvalidDropOption(),
+      "invalid-create-option": new InvalidCreateOption(),
+      "invalid-truncate-option": new InvalidTruncateOption(),
+      "invalid-alter-option": new InvalidAlterOption()
     };
+
+    omittedErrors.forEach(error => {
+      if (error in checks) {
+        // @ts-ignore
+        delete checks[error];
+      }
+    });
+
+    return checks;
   }
 }
 

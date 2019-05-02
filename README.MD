@@ -55,16 +55,20 @@ query:1 Delete missing WHERE, intentional?
 sql-lint works on files with the `--file` flag.
 
 ```
-> sql-lint --file="test/test.sql" 
-test/test.sql:13 Bad code point
-test/test.sql:40 Delete missing WHERE, intentional?
-test/test.sql:6 Database 'test' does not exist.
-test/test.sql:10 Database 'dykes_reservations' does not exist.
-test/test.sql:11 Database 'dykes_res' does not exist.
-test/test.sql:13 [ER_PARSE_ERROR] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO�' at line 1
-test/test.sql:16 [ER_NO_DB_ERROR] No database selected
-test/test.sql:29 [ER_NO_DB_ERROR] No database selected
-test/test.sql:54 [ER_NO_SUCH_TABLE] Table 'symfony.dont_exist' doesn't exist
+> sql-lint --file="test/test-files/test.sql" 
+test/test-files/test.sql:13 [sql-lint: odd-code-point] Unexpected code point.
+test/test-files/test.sql:29 [sql-lint: missing-where] DELETE statement missing WHERE clause.
+test/test-files/test.sql:47 [sql-lint: missing-where] DELETE statement missing WHERE clause.
+test/test-files/test.sql:55 [sql-lint: invalid-drop-option] Option 'thing' is not a valid option, must be one of '["database","event","function","index","logfile","procedure","schema","server","table","view","tablespace","trigger"]'.
+test/test-files/test.sql:61 [sql-lint: invalid-create-option] Option 'test' is not a valid option, must be one of '["algorithm","database","definer","event","function","index","procedure","server","table","tablespace","temporary","trigger","user","view"]'.
+test/test-files/test.sql:67 [sql-lint: invalid-truncate-option] Option 'something' is not a valid option, must be one of '["table"]'.
+test/test-files/test.sql:73 [sql-lint: invalid-alter-option] Option 'mlady' is not a valid option, must be one of '["online","offline","ignore","database","event","function","procedure","server","table","tablespace","view"]'.
+test/test-files/test.sql:8 [sql-lint: database-not-found] Database 'test' does not exist.
+test/test-files/test.sql:9 [sql-lint: database-not-found] Database 'non_existent_database' does not exist.
+test/test-files/test.sql:13 [ER_PARSE_ERROR] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO�' at line 1
+test/test-files/test.sql:16 [ER_NO_DB_ERROR] No database selected
+test/test-files/test.sql:26 [ER_NO_SUCH_TABLE] Table 'symfony.gig' doesn't exist
+test/test-files/test.sql:43 [ER_NO_SUCH_TABLE] Table 'symfony.dont_exist' doesn't exist
 ```
 
 ### Linting stdin
@@ -87,30 +91,7 @@ for Vim and Neovim.
 Configuring `sql-lint` with connection details allows errors from the server to come through.
 You'll probably want these as they supply even more information about what's going wrong.
 
-You can connect in two ways:
-
-### Via CLI
-
-You can connect via the command line if you wish with the respective flags.
-
-```
-sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
-```
-
-### Via `config.json`
-
-A configuration file for `sql-lint` can reside in `~/.config/sql-lint/config.json`
-
-You should put the following in there for more intelligent errors to come through
-
-```
-{
-    "driver": "mysql",
-    "host": "localhost",
-    "user": "root",
-    "password": "hunter2"
-}
-```
+You can read more about it in `./doc/configuration.md`.
 
 ## Contributing
 
@@ -154,12 +135,4 @@ Change your config file in `~/.config/sql-lint/config.json` to have the followin
 
 ## Troubleshooting
 
-### I'm not seeing any warnings
-
-Run `sql-lint -f your-file` and it will display the exception.
-Add the `-v` flag for more information.
-
-### It's telling me there's a syntax error when there's clearly not.
-
-Chances are you're using an old(er) version of MySQL.
-`EXPLAIN`ing on `INSERT|UPDATE|DELETE` was added in Mysql 5.6.
+Having an issue? Check out `./doc/troubleshooting.md`.

@@ -12,7 +12,20 @@ class Printer {
     this.verbosity = verbosity;
     this.format = format;
   }
-  public printCheck(checker: IChecker, tokenised: Query, prefix: string) {
+  public printCheck(
+    checker: IChecker | undefined,
+    tokenised: Query,
+    prefix: string
+  ) {
+    /**
+     * If the checker is undefined, we make the assumption
+     * that the check was specified in the 'ignore-errors'
+     * array in the config and so we skip over it.
+     */
+    if (typeof checker === "undefined") {
+      return;
+    }
+
     const result = checker.check(tokenised);
 
     if (this.verbosity) {

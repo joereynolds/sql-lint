@@ -71,8 +71,10 @@ if (configuration === null) {
   runSimpleChecks = true;
 }
 
+const omittedErrors: string[] = configuration["ignore-errors"] || [];
+
 if (runSimpleChecks) {
-  runner.run(queries, printer, prefix);
+  runner.run(queries, printer, prefix, omittedErrors);
 } else {
   const db = new Database(
     program.driver || configuration.driver || "mysql",
@@ -80,6 +82,6 @@ if (runSimpleChecks) {
     program.user || configuration.user,
     program.password || configuration.password
   );
-  runner.run(queries, printer, prefix, db);
+  runner.run(queries, printer, prefix, omittedErrors, db);
   db.connection.end();
 }

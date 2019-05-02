@@ -51,12 +51,13 @@ if (configuration === null) {
     printer.warnAboutFileNotFound(config_1.file);
     runSimpleChecks = true;
 }
+const omittedErrors = configuration['ignore-errors'] || [];
 if (runSimpleChecks) {
-    runner.run(queries, printer, prefix);
+    runner.run(queries, printer, prefix, omittedErrors);
 }
 else {
     const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
-    runner.run(queries, printer, prefix, db);
+    runner.run(queries, printer, prefix, omittedErrors, db);
     db.connection.end();
 }
 //# sourceMappingURL=main.js.map

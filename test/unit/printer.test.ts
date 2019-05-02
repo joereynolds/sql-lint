@@ -20,3 +20,14 @@ test("It calls console.log if a file is not found", () => {
   printer.warnAboutFileNotFound("some-file");
   expect(console).toHaveBeenCalledTimes(1);
 });
+
+test("It does not console log if the checker is undefined", () => {
+  const format = new SimpleFormat();
+  const query = new Query();
+  const printer = new Printer(1, format);
+  printer.printCheck(undefined, query, "");
+
+  // @ts-ignore
+  global.console = { log: jest.fn() };
+  expect(console.log).toHaveBeenCalledTimes(0);
+});

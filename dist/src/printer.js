@@ -7,6 +7,14 @@ class Printer {
         this.format = format;
     }
     printCheck(checker, tokenised, prefix) {
+        /**
+         * If the checker is undefined, we make the assumption
+         * that the check was specified in the 'ignore-errors'
+         * array in the config and so we skip over it.
+         */
+        if (typeof checker === "undefined") {
+            return;
+        }
         const result = checker.check(tokenised);
         if (this.verbosity) {
             const queryForPrint = JSON.stringify(tokenised.getContent());

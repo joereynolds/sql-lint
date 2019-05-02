@@ -12,22 +12,22 @@ class CheckerRunner {
      */
     runSimpleChecks(printer, prefix, category, tokenised, checks) {
         if (category === tokens_1.Keyword.Select) {
-            printer.printCheck(checks['odd-code-point'], tokenised, prefix);
+            printer.printCheck(checks["odd-code-point"], tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Delete) {
-            printer.printCheck(checks['missing-where'], tokenised, prefix);
+            printer.printCheck(checks["missing-where"], tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Drop) {
-            printer.printCheck(checks['invalid-drop-option'], tokenised, prefix);
+            printer.printCheck(checks["invalid-drop-option"], tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Alter) {
-            printer.printCheck(checks['invalid-alter-option'], tokenised, prefix);
+            printer.printCheck(checks["invalid-alter-option"], tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Create) {
-            printer.printCheck(checks['invalid-create-option'], tokenised, prefix);
+            printer.printCheck(checks["invalid-create-option"], tokenised, prefix);
         }
         else if (category === tokens_1.Keyword.Truncate) {
-            printer.printCheck(checks['invalid-truncate-option'], tokenised, prefix);
+            printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
         }
     }
     runDatabaseChecks(database, printer, prefix, category, tokenised, content) {

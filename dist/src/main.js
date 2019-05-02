@@ -51,7 +51,10 @@ if (configuration === null) {
     printer.warnAboutFileNotFound(config_1.file);
     runSimpleChecks = true;
 }
-const omittedErrors = configuration['ignore-errors'] || [];
+let omittedErrors = [];
+if (configuration !== null && "ignore-errors" in configuration) {
+    omittedErrors = configuration["ignore-errors"] || [];
+}
 if (runSimpleChecks) {
     runner.run(queries, printer, prefix, omittedErrors);
 }

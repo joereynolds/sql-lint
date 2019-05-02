@@ -71,7 +71,10 @@ if (configuration === null) {
   runSimpleChecks = true;
 }
 
-const omittedErrors: string[] = configuration["ignore-errors"] || [];
+let omittedErrors: string[] = [];
+if (configuration !== null && "ignore-errors" in configuration) {
+  omittedErrors = configuration["ignore-errors"] || [];
+}
 
 if (runSimpleChecks) {
   runner.run(queries, printer, prefix, omittedErrors);

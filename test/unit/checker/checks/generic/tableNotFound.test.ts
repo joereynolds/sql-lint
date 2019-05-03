@@ -12,7 +12,7 @@ test.each([
       line: 1
     }
   ]
-])("it finds tables that don't exist", (query, expected) => {
+])("It finds tables that don't exist", (query, expected) => {
   const checker = new TableNotFound([{ Table: "non_existent_table" }]);
 
   const queryObj = putContentIntoLines(query);
@@ -27,5 +27,20 @@ test("It brings back an empty checkerResult for an empty query", () => {
   const query = new Query();
   const actual = checker.check(query);
   const expected = new CheckerResult(0, "");
+  expect(actual).toEqual(expected);
+});
+
+test.each([
+    [
+        "non_existent_table",
+        ["non_existent_table"]
+    ],
+    [
+        "",
+        []
+    ]
+])("It correctly cleans a table name", (table, expected) => {
+  const checker = new TableNotFound([{ Table: table }]);
+  const actual = checker.tables;
   expect(actual).toEqual(expected);
 });

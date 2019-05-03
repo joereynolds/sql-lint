@@ -27,9 +27,10 @@ test.each([
   ["delete", 1],
   ["drop", 1],
   ["truncate", 1],
+  ["alter", 1],
   ["non-existent-query-type", 0],
   ["create", 1]
-])("It prints out select checks", (category, timesToHaveBeenCalled) => {
+])("It runs simple checks for valid query categories", (category, timesToHaveBeenCalled) => {
   const mockPrintCheckFn = (Printer.prototype.printCheck = jest.fn());
   this.runner.runSimpleChecks(
     this.printer,

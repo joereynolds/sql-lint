@@ -25,6 +25,19 @@ test.each([
   // LEAVE statements
   ["LEAVE some_stored_procedure", "leave"],
 
+  // CALL statements
+  ["CALL some_stored_procedure", "call"],
+
+  // REPLACE statements
+  ["REPLACE table_name", "replace"],
+
+  // RETURN statements
+  ["RETURN 4", "return"],
+
+  // SHOW statements
+  ["SHOW TABLES FROM some_database", "show"],
+
+  // USE statements
   ["USE symfony", "use"],
   ["use symfony;", "use"]
 ])("Queries are categorised correctly", (query, expected) => {

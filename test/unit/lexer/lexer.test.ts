@@ -19,6 +19,12 @@ test.each([
   // A create table statement
   ["CREATE TABLE person", "create"],
 
+  // DECLARE statements
+  ["DECLARE p_test_statement DECIMAL(10,2)", "declare"],
+
+  // LEAVE statements
+  ["LEAVE _sp_addDefaultItineraryLineItems_label", "leave"],
+
   ["USE symfony", "use"],
   ["use symfony;", "use"]
 ])("Queries are categorised correctly", (query, expected) => {

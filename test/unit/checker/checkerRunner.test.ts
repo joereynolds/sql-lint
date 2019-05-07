@@ -30,17 +30,20 @@ test.each([
   ["alter", 1],
   ["non-existent-query-type", 0],
   ["create", 1]
-])("It runs simple checks for valid query categories", (category, timesToHaveBeenCalled) => {
-  const mockPrintCheckFn = (Printer.prototype.printCheck = jest.fn());
-  this.runner.runSimpleChecks(
-    this.printer,
-    "something",
-    category,
-    this.Query,
-    ""
-  );
-  expect(mockPrintCheckFn).toHaveBeenCalledTimes(timesToHaveBeenCalled);
-});
+])(
+  "It runs simple checks for valid query categories",
+  (category, timesToHaveBeenCalled) => {
+    const mockPrintCheckFn = (Printer.prototype.printCheck = jest.fn());
+    this.runner.runSimpleChecks(
+      this.printer,
+      "something",
+      category,
+      this.Query,
+      ""
+    );
+    expect(mockPrintCheckFn).toHaveBeenCalledTimes(timesToHaveBeenCalled);
+  }
+);
 
 test("No checks are ran if a query doesn't have content", () => {
   const mockRunSimpleChecksFn = (CheckerRunner.prototype.runSimpleChecks = jest.fn());

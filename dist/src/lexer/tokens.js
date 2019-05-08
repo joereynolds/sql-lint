@@ -1,25 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TOKENS = {
-    keyword: [
-        "select",
-        "delete",
-        "update",
-        "from",
-        "where",
-        "set",
-        "join",
-        "having",
-        "limit",
-        "else",
-        "if",
-        "begin"
-    ],
-    comment: ["#", "--"],
-    boolean: ["true", "false", "null"],
-    conditional: ["and", "or"],
-    operator: ["+", "-", "/"]
-};
 var Types;
 (function (Types) {
     Types["Keyword"] = "keyword";

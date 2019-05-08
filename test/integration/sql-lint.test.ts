@@ -3,7 +3,6 @@ const shelltest = require("shelltest");
 
 const sqlLint = "./dist/src/main.js";
 
-
 xtest("it warns us if it can't find a configuration file", done => {
   shelltest()
     .cmd(`${sqlLint} -f test/test-files/test.sql`)

@@ -9,11 +9,12 @@ class Select {
         this.options = [];
     }
     tokenise(query) {
+        const keywords = Object.keys(keywords_1.Keyword).map(keyword => keyword.toLowerCase());
         let lastToken = "";
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase();
-                if (tokens_1.TOKENS.keyword.includes(item)) {
+                if (keywords.includes(item)) {
                     line.tokens.push(new token_1.Token(tokens_1.Types.Keyword, item));
                 }
                 else if (lastToken === keywords_1.Keyword.Select || lastToken === keywords_1.Keyword.From) {

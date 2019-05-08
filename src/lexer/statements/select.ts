@@ -1,7 +1,7 @@
 import { Query } from "../../reader/query";
 import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
-import { TOKENS, Types } from "../tokens";
+import { Types } from "../tokens";
 import { Keyword } from "../keywords";
 import { Token } from "../token";
 
@@ -9,12 +9,14 @@ class Select implements ILexer {
   public options: string[] = [];
 
   public tokenise(query: Query): Query {
+
+    const keywords = Object.keys(Keyword).map(keyword => keyword.toLowerCase());
     let lastToken = "";
     query.lines.forEach(line => {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase();
 
-        if (TOKENS.keyword.includes(item)) {
+        if (keywords.includes(item)) {
           line.tokens.push(new Token(Types.Keyword, item));
         } else if (lastToken === Keyword.Select || lastToken === Keyword.From) {
           item = cleanUnquotedIdentifier(item);

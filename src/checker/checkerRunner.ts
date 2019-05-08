@@ -1,7 +1,7 @@
 import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
-import { Keyword } from "../lexer/tokens";
+import { Keyword } from "../lexer/keywords";
 import { categorise, tokenise } from "../lexer/lexer";
 import {
   MySqlError,

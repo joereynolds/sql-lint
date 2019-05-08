@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
+const keywords_1 = require("../keywords");
 const tokens_1 = require("../tokens");
 const token_1 = require("../token");
 class Drop {
@@ -25,10 +26,10 @@ class Drop {
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase().trim();
-                if (item === tokens_1.Keyword.Drop) {
+                if (item === keywords_1.Keyword.Drop) {
                     line.tokens.push(new token_1.Token(tokens_1.Types.Keyword, item));
                 }
-                else if (lastToken === tokens_1.Keyword.Drop) {
+                else if (lastToken === keywords_1.Keyword.Drop) {
                     item = lexer_1.cleanUnquotedIdentifier(item);
                     if (item.length > 0) {
                         line.tokens.push(new token_1.Token(tokens_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)));

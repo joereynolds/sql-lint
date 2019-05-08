@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const tokens_1 = require("../lexer/tokens");
+const keywords_1 = require("../lexer/keywords");
 const lexer_1 = require("../lexer/lexer");
 const checks_1 = require("../barrel/checks");
 /**
@@ -11,22 +11,22 @@ class CheckerRunner {
      * Simple checks are ones that don't require a database connection
      */
     runSimpleChecks(printer, prefix, category, tokenised, checks) {
-        if (category === tokens_1.Keyword.Select) {
+        if (category === keywords_1.Keyword.Select) {
             printer.printCheck(checks["odd-code-point"], tokenised, prefix);
         }
-        else if (category === tokens_1.Keyword.Delete) {
+        else if (category === keywords_1.Keyword.Delete) {
             printer.printCheck(checks["missing-where"], tokenised, prefix);
         }
-        else if (category === tokens_1.Keyword.Drop) {
+        else if (category === keywords_1.Keyword.Drop) {
             printer.printCheck(checks["invalid-drop-option"], tokenised, prefix);
         }
-        else if (category === tokens_1.Keyword.Alter) {
+        else if (category === keywords_1.Keyword.Alter) {
             printer.printCheck(checks["invalid-alter-option"], tokenised, prefix);
         }
-        else if (category === tokens_1.Keyword.Create) {
+        else if (category === keywords_1.Keyword.Create) {
             printer.printCheck(checks["invalid-create-option"], tokenised, prefix);
         }
-        else if (category === tokens_1.Keyword.Truncate) {
+        else if (category === keywords_1.Keyword.Truncate) {
             printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
         }
     }
@@ -35,7 +35,7 @@ class CheckerRunner {
             const checker = new checks_1.MySqlError(results);
             printer.printCheck(checker, tokenised, prefix);
         });
-        if (category === tokens_1.Keyword.Use) {
+        if (category === keywords_1.Keyword.Use) {
             database.getDatabases(database.connection, (results) => {
                 const checker = new checks_1.DatabaseNotFound(results.rows);
                 printer.printCheck(checker, tokenised, prefix);

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
+const keywords_1 = require("../keywords");
 const tokens_1 = require("../tokens");
 const token_1 = require("../token");
 class Use {
@@ -11,7 +12,7 @@ class Use {
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase().trim();
-                if (item === tokens_1.Keyword.Use) {
+                if (item === keywords_1.Keyword.Use) {
                     line.tokens.push(new token_1.Token(tokens_1.Types.Keyword, item));
                 }
                 else {

@@ -4,15 +4,17 @@ import { Printer } from "../printer";
 import { Keyword } from "../syntax/keywords";
 import { categorise, tokenise } from "../lexer/lexer";
 import {
-  MySqlError,
-  MissingWhere,
-  OddCodePoint,
   DatabaseNotFound,
   InvalidAlterOption,
   InvalidCreateOption,
   InvalidDropOption,
-  InvalidTruncateOption
+  InvalidTruncateOption,
+  MissingWhere,
+  MySqlError,
+  OddCodePoint,
+  UnmatchedParentheses
 } from "../barrel/checks";
+
 
 /**
  * Runs all the checks.
@@ -28,9 +30,8 @@ class CheckerRunner {
     tokenised: Query,
     checks: any
   ) {
-    if (category === Keyword.Select) {
-      printer.printCheck(checks["odd-code-point"], tokenised, prefix);
-    } else if (category === Keyword.Delete) {
+
+    if (category === Keyword.Delete) {
       printer.printCheck(checks["missing-where"], tokenised, prefix);
     } else if (category === Keyword.Drop) {
       printer.printCheck(checks["invalid-drop-option"], tokenised, prefix);
@@ -41,6 +42,9 @@ class CheckerRunner {
     } else if (category === Keyword.Truncate) {
       printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
     }
+
+    printer.printCheck(checks["odd-code-point"], tokenised, prefix);
+    printer.printCheck(checks['unmatched-parentheses'], tokenised, prefix);
   }
 
   public runDatabaseChecks(
@@ -103,7 +107,8 @@ class CheckerRunner {
       "invalid-drop-option": new InvalidDropOption(),
       "invalid-create-option": new InvalidCreateOption(),
       "invalid-truncate-option": new InvalidTruncateOption(),
-      "invalid-alter-option": new InvalidAlterOption()
+      "invalid-alter-option": new InvalidAlterOption(),
+      "unmatched-parentheses": new UnmatchedParentheses(),
     };
 
     omittedErrors.forEach(error => {

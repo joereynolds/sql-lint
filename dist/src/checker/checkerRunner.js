@@ -11,10 +11,7 @@ class CheckerRunner {
      * Simple checks are ones that don't require a database connection
      */
     runSimpleChecks(printer, prefix, category, tokenised, checks) {
-        if (category === keywords_1.Keyword.Select) {
-            printer.printCheck(checks["odd-code-point"], tokenised, prefix);
-        }
-        else if (category === keywords_1.Keyword.Delete) {
+        if (category === keywords_1.Keyword.Delete) {
             printer.printCheck(checks["missing-where"], tokenised, prefix);
         }
         else if (category === keywords_1.Keyword.Drop) {
@@ -29,6 +26,8 @@ class CheckerRunner {
         else if (category === keywords_1.Keyword.Truncate) {
             printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
         }
+        printer.printCheck(checks["odd-code-point"], tokenised, prefix);
+        printer.printCheck(checks['unmatched-parentheses'], tokenised, prefix);
     }
     runDatabaseChecks(database, printer, prefix, category, tokenised, content) {
         database.lintQuery(database.connection, content, (results) => {
@@ -66,7 +65,8 @@ class CheckerRunner {
             "invalid-drop-option": new checks_1.InvalidDropOption(),
             "invalid-create-option": new checks_1.InvalidCreateOption(),
             "invalid-truncate-option": new checks_1.InvalidTruncateOption(),
-            "invalid-alter-option": new checks_1.InvalidAlterOption()
+            "invalid-alter-option": new checks_1.InvalidAlterOption(),
+            "unmatched-parentheses": new checks_1.UnmatchedParentheses(),
         };
         omittedErrors.forEach(error => {
             if (error in checks) {

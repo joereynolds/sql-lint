@@ -23,13 +23,13 @@ test("It does run database checks when a database is supplied", () => {
 });
 
 test.each([
-  ["select", 1],
-  ["delete", 1],
-  ["drop", 1],
-  ["truncate", 1],
-  ["alter", 1],
-  ["non-existent-query-type", 0],
-  ["create", 1]
+  ["select", 2],
+  ["delete", 3],
+  ["drop", 3],
+  ["truncate", 3],
+  ["alter", 3],
+  ["non-existent-query-type", 2],
+  ["create", 3]
 ])(
   "It runs simple checks for valid query categories",
   (category, timesToHaveBeenCalled) => {

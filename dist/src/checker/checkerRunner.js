@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const keywords_1 = require("../lexer/keywords");
+const keywords_1 = require("../syntax/keywords");
 const lexer_1 = require("../lexer/lexer");
 const checks_1 = require("../barrel/checks");
 /**

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
 const tokens_1 = require("../tokens");
-const keywords_1 = require("../keywords");
+const keywords_1 = require("../../syntax/keywords");
 const token_1 = require("../token");
 class Update {
     constructor() {

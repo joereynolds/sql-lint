@@ -4,6 +4,7 @@ import { IChecker } from "./interface";
 
 class NullChecker implements IChecker {
   public message: string = "";
+  public appliesTo = [];
 
   public check(query: Query): CheckerResult {
     return new CheckerResult(0, this.message);

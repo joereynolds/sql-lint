@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
+const path = require("path");
+const checkFactory_1 = require("./checkFactory");
 const keywords_1 = require("../syntax/keywords");
 const lexer_1 = require("../lexer/lexer");
 const checks_1 = require("../barrel/checks");
@@ -27,7 +30,7 @@ class CheckerRunner {
             printer.printCheck(checks["invalid-truncate-option"], tokenised, prefix);
         }
         printer.printCheck(checks["odd-code-point"], tokenised, prefix);
-        printer.printCheck(checks['unmatched-parentheses'], tokenised, prefix);
+        printer.printCheck(checks["unmatched-parentheses"], tokenised, prefix);
     }
     runDatabaseChecks(database, printer, prefix, category, tokenised, content) {
         database.lintQuery(database.connection, content, (results) => {
@@ -41,10 +44,37 @@ class CheckerRunner {
             });
         }
     }
+    runAutomatic(sqlQueries, printer, prefix, omittedErrors, database) {
+        const checks = fs.readdirSync("./src/checker/checks").map(check => {
+            return path.parse(check).name;
+        });
+        // Removing the 'check.ts' file from the checks since it's not one.
+        checks.splice(0, 1);
+        // Remove the InvalidOption base class, gross I know.
+        checks.splice(3, 1);
+        // Remove the tableNotFound check for now.
+        checks.splice(7, 1);
+        // Remove the MySqlError check for now.
+        checks.splice(5, 1);
+        const factory = new checkFactory_1.CheckFactory();
+        sqlQueries.forEach((query) => {
+            const content = query.getContent().trim();
+            if (content) {
+                const category = lexer_1.categorise(content);
+                const tokenised = lexer_1.tokenise(query);
+                checks.forEach(check => {
+                    const checker = factory.build(check);
+                    if (checker.appliesTo.includes(category)) {
+                        printer.printCheck(checker, tokenised, prefix);
+                    }
+                });
+            }
+        });
+    }
     run(sqlQueries, printer, prefix, omittedErrors, database) {
         const checks = this.getSqlLintChecks(omittedErrors);
         sqlQueries.forEach((query) => {
-            const content = query.getContent().trim();
+            const content = query.getcontent().trim();
             if (content) {
                 const category = lexer_1.categorise(content);
                 const tokenised = lexer_1.tokenise(query);
@@ -66,7 +96,7 @@ class CheckerRunner {
             "invalid-create-option": new checks_1.InvalidCreateOption(),
             "invalid-truncate-option": new checks_1.InvalidTruncateOption(),
             "invalid-alter-option": new checks_1.InvalidAlterOption(),
-            "unmatched-parentheses": new checks_1.UnmatchedParentheses(),
+            "unmatched-parentheses": new checks_1.UnmatchedParentheses()
         };
         omittedErrors.forEach(error => {
             if (error in checks) {

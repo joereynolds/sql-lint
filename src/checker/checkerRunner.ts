@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import * as path from "path";
+import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
@@ -15,7 +18,6 @@ import {
   UnmatchedParentheses
 } from "../barrel/checks";
 
-
 /**
  * Runs all the checks.
  */
@@ -30,7 +32,6 @@ class CheckerRunner {
     tokenised: Query,
     checks: any
   ) {
-
     if (category === Keyword.Delete) {
       printer.printCheck(checks["missing-where"], tokenised, prefix);
     } else if (category === Keyword.Drop) {
@@ -44,7 +45,7 @@ class CheckerRunner {
     }
 
     printer.printCheck(checks["odd-code-point"], tokenised, prefix);
-    printer.printCheck(checks['unmatched-parentheses'], tokenised, prefix);
+    printer.printCheck(checks["unmatched-parentheses"], tokenised, prefix);
   }
 
   public runDatabaseChecks(
@@ -68,6 +69,47 @@ class CheckerRunner {
     }
   }
 
+  public runAutomatic(
+    sqlQueries: Query[],
+    printer: Printer,
+    prefix: string,
+    omittedErrors: string[],
+    database?: Database
+  ) {
+    const checks = fs.readdirSync("./src/checker/checks").map(check => {
+      return path.parse(check).name;
+    });
+
+
+    // Removing the 'check.ts' file from the checks since it's not one.
+    checks.splice(0, 1);
+    // Remove the InvalidOption base class, gross I know.
+    checks.splice(3, 1);
+
+    // Remove the tableNotFound check for now.
+    checks.splice(7, 1);
+
+    // Remove the MySqlError check for now.
+    checks.splice(5, 1);
+
+    const factory = new CheckFactory();
+
+    sqlQueries.forEach((query: any) => {
+      const content = query.getContent().trim();
+
+      if (content) {
+        const category = categorise(content);
+        const tokenised: Query = tokenise(query);
+        checks.forEach(check => {
+          const checker = factory.build(check);
+          if (checker.appliesTo.includes(category)) {
+            printer.printCheck(checker, tokenised, prefix);
+          }
+        });
+      }
+    });
+  }
+
   public run(
     sqlQueries: Query[],
     printer: Printer,
@@ -78,7 +120,7 @@ class CheckerRunner {
     const checks = this.getSqlLintChecks(omittedErrors);
 
     sqlQueries.forEach((query: any) => {
-      const content = query.getContent().trim();
+      const content = query.getcontent().trim();
 
       if (content) {
         const category = categorise(content);
@@ -108,7 +150,7 @@ class CheckerRunner {
       "invalid-create-option": new InvalidCreateOption(),
       "invalid-truncate-option": new InvalidTruncateOption(),
       "invalid-alter-option": new InvalidAlterOption(),
-      "unmatched-parentheses": new UnmatchedParentheses(),
+      "unmatched-parentheses": new UnmatchedParentheses()
     };
 
     omittedErrors.forEach(error => {

@@ -76,15 +76,4 @@ if (configuration !== null && "ignore-errors" in configuration) {
   omittedErrors = configuration["ignore-errors"] || [];
 }
 
-if (runSimpleChecks) {
-  runner.run(queries, printer, prefix, omittedErrors);
-} else {
-  const db = new Database(
-    program.driver || configuration.driver || "mysql",
-    program.host || configuration.host,
-    program.user || configuration.user,
-    program.password || configuration.password
-  );
-  runner.run(queries, printer, prefix, omittedErrors, db);
-  db.connection.end();
-}
+runner.runAutomatic(queries, printer, prefix, omittedErrors)

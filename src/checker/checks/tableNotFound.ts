@@ -8,6 +8,7 @@ import { sprintf } from "sprintf-js";
 class TableNotFound implements IChecker {
   public message = "Table '%s' does not exist in database '%s'.";
   public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public requiresConnection = false;
 
   public tables: string[];
   constructor(tables: any[]) {

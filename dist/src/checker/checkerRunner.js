@@ -67,6 +67,12 @@ class CheckerRunner {
                     if (checker.appliesTo.includes(category)) {
                         printer.printCheck(checker, tokenised, prefix);
                     }
+                    if (checker.requiresConnection && typeof database !== 'undefined') {
+                        database.lintQuery(database.connection, content, (results) => {
+                            const sqlChecker = new checks_1.MySqlError(results);
+                            printer.printCheck(sqlChecker, tokenised, prefix);
+                        });
+                    }
                 });
             }
         });

@@ -6,6 +6,7 @@ class UnmatchedParentheses extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "Unmatched parentheses.";
+        this.requiresConnection = false;
         this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
     }
     check(query) {

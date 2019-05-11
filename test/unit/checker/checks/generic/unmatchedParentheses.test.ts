@@ -1,4 +1,4 @@
-import { UnmatchedParentheses } from "../../../../../src/checker/checks/generic/unmatchedParentheses";
+import { UnmatchedParentheses } from "../../../../../src/checker/checks/unmatchedParentheses";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

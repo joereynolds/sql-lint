@@ -1,4 +1,4 @@
-import { InvalidTruncateOption } from "../../../../../src/checker/checks/truncate/invalidTruncateOption";
+import { InvalidTruncateOption } from "../../../../../src/checker/checks/invalidTruncateOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

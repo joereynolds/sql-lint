@@ -4,6 +4,7 @@ const checkerResult_1 = require("./checkerResult");
 class NullChecker {
     constructor() {
         this.message = "";
+        this.requiresConnection = false;
         this.appliesTo = [];
     }
     check(query) {

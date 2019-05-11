@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../checkerResult");
 class MySqlError {
     constructor(errors) {
+        this.requiresConnection = true;
         // Note that we don't follow the interface correctly for MySQL Error
         // since the error message is dynamically generated.
         this.message = "";

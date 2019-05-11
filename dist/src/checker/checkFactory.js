@@ -15,6 +15,7 @@ class CheckFactory {
             "oddCodePoint": checks_1.OddCodePoint,
             "tableNotFound": checks_1.TableNotFound,
             "unmatchedParentheses": checks_1.UnmatchedParentheses,
+            "databaseNotFound": checks_1.DatabaseNotFound,
         };
         return new checkMap[check]();
     }

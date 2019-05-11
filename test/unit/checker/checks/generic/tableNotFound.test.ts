@@ -1,4 +1,4 @@
-import { TableNotFound } from "../../../../../src/checker/checks/generic/tableNotFound";
+import { TableNotFound } from "../../../../../src/checker/checks/tableNotFound";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 import { CheckerResult } from "../../../../../src/checker/checkerResult";

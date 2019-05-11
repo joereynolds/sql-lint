@@ -76,4 +76,4 @@ if (configuration !== null && "ignore-errors" in configuration) {
   omittedErrors = configuration["ignore-errors"] || [];
 }
 
-runner.runAutomatic(queries, printer, prefix, omittedErrors)
+runner.run(queries, printer, prefix, omittedErrors)

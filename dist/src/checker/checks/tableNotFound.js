@@ -8,6 +8,7 @@ class TableNotFound {
     constructor(tables) {
         this.message = "Table '%s' does not exist in database '%s'.";
         this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+        this.requiresConnection = false;
         this.tables = this.cleanTables(tables);
     }
     check(query) {

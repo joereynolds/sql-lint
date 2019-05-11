@@ -6,6 +6,7 @@ class OddCodePoint extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "Unexpected code point.";
+        this.requiresConnection = false;
         this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
     }
     check(query) {

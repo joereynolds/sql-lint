@@ -27,6 +27,7 @@ class CheckFactory {
       "oddCodePoint": OddCodePoint,
       "tableNotFound": TableNotFound,
       "unmatchedParentheses": UnmatchedParentheses,
+      "databaseNotFound": DatabaseNotFound,
     };
 
     return new checkMap[check]();

@@ -1,4 +1,4 @@
-import { InvalidDropOption } from "../../../../../src/checker/checks/drop/invalidDropOption";
+import { InvalidDropOption } from "../../../../../src/checker/checks/invalidDropOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

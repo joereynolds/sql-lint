@@ -4,6 +4,7 @@ import { IChecker } from "../interface";
 
 class MySqlError implements IChecker {
   public errors: any;
+  public requiresConnection = true;
 
   // Note that we don't follow the interface correctly for MySQL Error
   // since the error message is dynamically generated.

@@ -6,6 +6,7 @@ class MissingWhere extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "DELETE statement missing WHERE clause.";
+        this.requiresConnection = false;
         this.appliesTo = ['delete'];
     }
     check(query) {

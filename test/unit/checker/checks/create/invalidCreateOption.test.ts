@@ -1,4 +1,4 @@
-import { InvalidCreateOption } from "../../../../../src/checker/checks/create/invalidCreateOption";
+import { InvalidCreateOption } from "../../../../../src/checker/checks/invalidCreateOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

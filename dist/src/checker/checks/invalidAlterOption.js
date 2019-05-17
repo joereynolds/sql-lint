@@ -6,7 +6,7 @@ class InvalidAlterOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
         this.checker = new statements_1.Alter();
-        this.appliesTo = ['alert'];
+        this.appliesTo = ['alter'];
     }
 }
 exports.InvalidAlterOption = InvalidAlterOption;

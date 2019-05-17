@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const fs = require("fs");
 const process = require("process");
+const database_1 = require("./database");
 const printer_1 = require("./printer");
 const reader_1 = require("./reader/reader");
 const config_1 = require("./config");
@@ -54,5 +55,7 @@ let omittedErrors = [];
 if (configuration !== null && "ignore-errors" in configuration) {
     omittedErrors = configuration["ignore-errors"] || [];
 }
-runner.runAutomatic(queries, printer, prefix, omittedErrors);
+const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
+runner.run(queries, printer, prefix, omittedErrors, db);
+db.connection.end();
 //# sourceMappingURL=main.js.map

@@ -14,9 +14,7 @@ import { InvalidOption } from "./invalidOption";
 
 class InvalidDropOption extends InvalidOption implements IChecker {
   public checker = new Drop();
-  public requiresConnection = false;
   public appliesTo = ['drop'];
-
 }
 
 export { InvalidDropOption };

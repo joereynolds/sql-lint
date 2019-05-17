@@ -5,7 +5,7 @@ import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
 import { categorise, tokenise } from "../lexer/lexer";
-import { MySqlError, } from "../barrel/checks";
+import { MySqlError } from "../barrel/checks";
 
 /**
  * Runs all the checks.
@@ -23,16 +23,9 @@ class CheckerRunner {
       return path.parse(check).name;
     });
 
-    // Removing the 'check.ts' file from the checks since it's not one.
-    checks.splice(0, 1);
-    // Remove the InvalidOption base class, gross I know.
-    checks.splice(3, 1);
-
-    // Remove the tableNotFound check for now.
-    checks.splice(7, 1);
-
-    // Remove the MySqlError check for now.
-    checks.splice(5, 1);
+    checks.splice(0, 1); // Removing the 'check.ts' file from the checks since it's not one.
+    checks.splice(3, 1); // Remove the InvalidOption base class, gross I know.
+    checks.splice(7, 1); // Remove the tableNotFound check for now.
 
     const factory = new CheckFactory();
 
@@ -44,20 +37,30 @@ class CheckerRunner {
         const tokenised: Query = tokenise(query);
         checks.forEach(check => {
           const checker = factory.build(check);
-          if (checker.appliesTo.includes(category)) {
+
+          // Simple checks
+          if (
+            checker.appliesTo.includes(category) &&
+            !checker.requiresConnection
+          ) {
             printer.printCheck(checker, tokenised, prefix);
           }
-            if (checker.requiresConnection && typeof database !== 'undefined') {
-                database.lintQuery(database.connection, content, (results: any) => {
-                  const sqlChecker = new MySqlError(results);
-                  printer.printCheck(sqlChecker, tokenised, prefix);
-                });
-            }
+
+          // DB server checks
+          if (
+            checker.requiresConnection &&
+            database &&
+            checker.appliesTo.includes(category)
+          ) {
+            database.lintQuery(database.connection, content, (results: any) => {
+              const sqlChecker = new MySqlError(results);
+              printer.printCheck(sqlChecker, tokenised, prefix);
+            });
+          }
         });
       }
     });
   }
-
 }
 
 export { CheckerRunner };

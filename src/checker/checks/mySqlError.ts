@@ -17,10 +17,9 @@ class MySqlError implements IChecker {
   }
 
   public check(query: Query): CheckerResult {
-    const allowedCategories = ["select", "insert", "replace", "update"];
-
-    if (allowedCategories.includes(query.category)) {
+    if (this.appliesTo.includes(query.category)) {
       const lineNumber = query.lines[0].num;
+
       const message = this.concatErrorObject(this.errors);
       return new CheckerResult(lineNumber, message);
     }

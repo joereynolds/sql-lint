@@ -15,7 +15,6 @@ class InvalidDropOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
         this.checker = new statements_1.Drop();
-        this.requiresConnection = false;
         this.appliesTo = ['drop'];
     }
 }

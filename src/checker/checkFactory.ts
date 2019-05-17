@@ -21,11 +21,9 @@ class CheckFactory {
       "mySqlError": MySqlError,
       "invalidAlterOption": InvalidAlterOption,
       "invalidDropOption": InvalidDropOption,
-      // "invalidOption": InvalidOption,
       "invalidCreateOption": InvalidCreateOption,
       "invalidTruncateOption": InvalidTruncateOption,
       "oddCodePoint": OddCodePoint,
-      "tableNotFound": TableNotFound,
       "unmatchedParentheses": UnmatchedParentheses,
       "databaseNotFound": DatabaseNotFound,
     };

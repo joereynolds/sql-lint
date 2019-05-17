@@ -18,7 +18,7 @@ test.each([
   ["mySqlError", MySqlError],
   ["oddCodePoint", OddCodePoint],
 ])(
-  "The StatementFactory builds the correct statement",
+  "The CheckFactory builds the correct check",
   (format: string, expected) => {
     const factory = new CheckFactory();
     const actual = factory.build(format);

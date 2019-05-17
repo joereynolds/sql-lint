@@ -6,7 +6,7 @@ import { Check } from "../check";
 class UnmatchedParentheses extends Check implements IChecker {
   public message = "Unmatched parentheses.";
   public requiresConnection = false;
-  public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public appliesTo = ["select", "create", "update", "drop", "insert"];
   public check(query: Query): CheckerResult {
     const content = query.getContent();
 

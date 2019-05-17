@@ -6,7 +6,7 @@ import { Check } from "../check";
 class MissingWhere extends Check implements IChecker {
   public message: string = "DELETE statement missing WHERE clause.";
   public requiresConnection = false;
-  public appliesTo = ['delete'];
+  public appliesTo = ["delete"];
 
   public check(query: Query): CheckerResult {
     this.getName();

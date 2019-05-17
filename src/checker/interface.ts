@@ -3,7 +3,7 @@ import { Query } from "../reader/query";
 interface IChecker {
   message: string;
   requiresConnection: boolean;
-  appliesTo: string[]
+  appliesTo: string[];
   check(query: Query): any;
 }
 

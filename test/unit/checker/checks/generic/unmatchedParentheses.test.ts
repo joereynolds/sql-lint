@@ -5,7 +5,8 @@ import { putContentIntoLines } from "../../../../../src/reader/reader";
 test.each([
   ["SELECT name FROM person WHERE (SELECT age > 4);", ""],
 
-  ["SELECT name FROM person WHERE (SELECT age > 4;",
+  [
+    "SELECT name FROM person WHERE (SELECT age > 4;",
     "[sql-lint: unmatched-parentheses] Unmatched parentheses."
   ]
 ])("It detects unmatched parentheses in a query", (query, expected) => {

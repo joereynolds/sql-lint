@@ -4,7 +4,7 @@ import { InvalidOption } from "./invalidOption";
 
 class InvalidTruncateOption extends InvalidOption implements IChecker {
   public checker = new Truncate();
-  public appliesTo = ['truncate'];
+  public appliesTo = ["truncate"];
 }
 
 export { InvalidTruncateOption };

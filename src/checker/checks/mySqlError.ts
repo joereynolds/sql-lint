@@ -10,7 +10,7 @@ class MySqlError implements IChecker {
   // since the error message is dynamically generated.
   public message = "";
 
-  public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public appliesTo = ["select", "create", "update", "drop", "insert"];
 
   constructor(errors: any) {
     this.errors = errors;

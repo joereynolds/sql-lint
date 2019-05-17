@@ -11,7 +11,6 @@ import { MySqlError } from "../barrel/checks";
  * Runs all the checks.
  */
 class CheckerRunner {
-
   public run(
     sqlQueries: Query[],
     printer: Printer,

@@ -20,7 +20,7 @@ class InvalidOption extends Check implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'.";
   public checker: ILexer;
   public requiresConnection = false;
-  public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public appliesTo = ["select", "create", "update", "drop", "insert"];
 
   public check(query: Query): CheckerResult {
     for (const line of query.lines) {

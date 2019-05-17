@@ -9,23 +9,22 @@ import {
   TableNotFound,
   UnmatchedParentheses,
   InvalidTruncateOption,
-  DatabaseNotFound,
+  DatabaseNotFound
 } from "../barrel/checks";
 
 class CheckFactory {
   public build(check: string): IChecker {
-
-      // any is actually IChecker
-    const checkMap: { [key: string]: any} = {
-      "missingWhere": MissingWhere,
-      "mySqlError": MySqlError,
-      "invalidAlterOption": InvalidAlterOption,
-      "invalidDropOption": InvalidDropOption,
-      "invalidCreateOption": InvalidCreateOption,
-      "invalidTruncateOption": InvalidTruncateOption,
-      "oddCodePoint": OddCodePoint,
-      "unmatchedParentheses": UnmatchedParentheses,
-      "databaseNotFound": DatabaseNotFound,
+    // any is actually IChecker
+    const checkMap: { [key: string]: any } = {
+      missingWhere: MissingWhere,
+      mySqlError: MySqlError,
+      invalidAlterOption: InvalidAlterOption,
+      invalidDropOption: InvalidDropOption,
+      invalidCreateOption: InvalidCreateOption,
+      invalidTruncateOption: InvalidTruncateOption,
+      oddCodePoint: OddCodePoint,
+      unmatchedParentheses: UnmatchedParentheses,
+      databaseNotFound: DatabaseNotFound
     };
 
     return new checkMap[check]();

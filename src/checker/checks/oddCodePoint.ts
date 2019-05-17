@@ -6,7 +6,7 @@ import { Check } from "../check";
 class OddCodePoint extends Check implements IChecker {
   public message = "Unexpected code point.";
   public requiresConnection = false;
-  public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public appliesTo = ["select", "create", "update", "drop", "insert"];
   public check(query: Query): CheckerResult {
     const badCodePoints = [65533];
 

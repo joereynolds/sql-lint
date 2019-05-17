@@ -9,11 +9,9 @@ class CheckFactory {
             "mySqlError": checks_1.MySqlError,
             "invalidAlterOption": checks_1.InvalidAlterOption,
             "invalidDropOption": checks_1.InvalidDropOption,
-            // "invalidOption": InvalidOption,
             "invalidCreateOption": checks_1.InvalidCreateOption,
             "invalidTruncateOption": checks_1.InvalidTruncateOption,
             "oddCodePoint": checks_1.OddCodePoint,
-            "tableNotFound": checks_1.TableNotFound,
             "unmatchedParentheses": checks_1.UnmatchedParentheses,
             "databaseNotFound": checks_1.DatabaseNotFound,
         };

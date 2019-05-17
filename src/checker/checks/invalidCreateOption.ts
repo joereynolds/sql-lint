@@ -14,7 +14,7 @@ import { InvalidOption } from "./invalidOption";
 
 class InvalidCreateOption extends InvalidOption implements IChecker {
   public checker = new Create();
-  public appliesTo = ['create'];
+  public appliesTo = ["create"];
 }
 
 export { InvalidCreateOption };

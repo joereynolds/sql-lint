@@ -8,7 +8,7 @@ import { Check } from "../check";
 class DatabaseNotFound extends Check implements IChecker {
   public message = "Database '%s' does not exist.";
   public requiresConnection = true;
-  public appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+  public appliesTo = ["select", "create", "update", "drop", "insert"];
   public databases: string[];
   constructor(databases: any[]) {
     super();

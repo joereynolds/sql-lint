@@ -1,4 +1,4 @@
-import { InvalidAlterOption } from "../../../../../src/checker/checks/alter/invalidAlterOption";
+import { InvalidAlterOption } from "../../../../../src/checker/checks/invalidAlterOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

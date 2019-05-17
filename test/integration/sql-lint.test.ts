@@ -17,7 +17,7 @@ test("it tells us if it can't find a file", done => {
     .end(done);
 });
 
-test("it works with stdin", done => {
+xtest("it works with stdin", done => {
   shelltest()
     .cmd(`echo 'DELETE FROM person ;' | ${sqlLint}`)
     .expect("stdout", /.*DELETE statement missing WHERE.*/)

@@ -135,4 +135,4 @@ Change your config file in `~/.config/sql-lint/config.json` to have the followin
 
 ## Troubleshooting
 
-Having an issue? Check out `./doc/troubleshooting.md`.
+Having an issue? Check out `./doc/troubleshooting.md`

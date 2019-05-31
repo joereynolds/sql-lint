@@ -37,7 +37,7 @@ test.each([
   // We ignore '#' comments
   ["DELETE\n FROM \n\n person WHERE \n# Remove old people\n age > 5;"],
 
-  // We ignore '/*' comments
+  // We ignore '/*' comments on a single line
   ["DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;"]
 ])("We ignore comments in files", input => {
   const actual = putContentIntoLines(input);

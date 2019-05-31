@@ -22,5 +22,13 @@ export enum Keyword {
   Truncate = "truncate",
   Update = "update",
   Use = "use",
-  Where = "where"
+  Where = "where",
+
+  CommentHash = '#',
+  CommentDash = '--',
+  CommentMultiLineStart = '/*',
+  CommentMultiLineEnd = '*/',
+
+  Newline = "\n",
+  WindowsNewline = "\r\n",
 }

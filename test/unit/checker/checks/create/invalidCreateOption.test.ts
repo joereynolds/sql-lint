@@ -7,8 +7,9 @@ test.each([
   [
     "CREATE JIBBERISH person;",
     /Option 'jibberish' is not a valid option, must be one of .*/
-  ]
-])("it warns about invalid options in DROPs", (query, expected) => {
+  ],
+  ["CREATE OR REPLACE some_table;", ""]
+])("it warns about invalid options in CREATEs", (query, expected) => {
   const checker = new InvalidCreateOption();
 
   const queryObj = putContentIntoLines(query);

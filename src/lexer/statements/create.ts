@@ -13,6 +13,7 @@ class Create implements ILexer {
     "event",
     "function",
     "index",
+    "or",
     "procedure",
     "server",
     "table",

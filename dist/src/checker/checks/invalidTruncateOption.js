@@ -6,7 +6,7 @@ class InvalidTruncateOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
         this.checker = new statements_1.Truncate();
-        this.appliesTo = ['truncate'];
+        this.appliesTo = ["truncate"];
     }
 }
 exports.InvalidTruncateOption = InvalidTruncateOption;

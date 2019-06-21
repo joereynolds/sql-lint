@@ -26,5 +26,11 @@ var Keyword;
     Keyword["Update"] = "update";
     Keyword["Use"] = "use";
     Keyword["Where"] = "where";
+    Keyword["CommentHash"] = "#";
+    Keyword["CommentDash"] = "--";
+    Keyword["CommentMultiLineStart"] = "/*";
+    Keyword["CommentMultiLineEnd"] = "*/";
+    Keyword["Newline"] = "\n";
+    Keyword["WindowsNewline"] = "\r\n";
 })(Keyword = exports.Keyword || (exports.Keyword = {}));
 //# sourceMappingURL=keywords.js.map

@@ -24,11 +24,11 @@ export enum Keyword {
   Use = "use",
   Where = "where",
 
-  CommentHash = '#',
-  CommentDash = '--',
-  CommentMultiLineStart = '/*',
-  CommentMultiLineEnd = '*/',
+  CommentHash = "#",
+  CommentDash = "--",
+  CommentMultiLineStart = "/*",
+  CommentMultiLineEnd = "*/",
 
   Newline = "\n",
-  WindowsNewline = "\r\n",
+  WindowsNewline = "\r\n"
 }

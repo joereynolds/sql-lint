@@ -7,7 +7,7 @@ class MissingWhere extends check_1.Check {
         super(...arguments);
         this.message = "DELETE statement missing WHERE clause.";
         this.requiresConnection = false;
-        this.appliesTo = ['delete'];
+        this.appliesTo = ["delete"];
     }
     check(query) {
         this.getName();

@@ -9,7 +9,7 @@ class DatabaseNotFound extends check_1.Check {
         super();
         this.message = "Database '%s' does not exist.";
         this.requiresConnection = true;
-        this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+        this.appliesTo = ["select", "create", "update", "drop", "insert"];
         this.databases = databases.map(result => result.Database);
     }
     check(query) {

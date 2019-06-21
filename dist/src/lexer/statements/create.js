@@ -13,6 +13,7 @@ class Create {
             "event",
             "function",
             "index",
+            "or",
             "procedure",
             "server",
             "table",

@@ -16,11 +16,7 @@ export function putContentIntoLines(contents: string): Query[] {
   const queriesFromFile: Query[] = [];
   let currentQueryContent: string = "";
   let query = new Query();
-  const skipChars = [
-      "",
-      Keyword.Newline,
-      Keyword.WindowsNewline
-  ];
+  const skipChars = ["", Keyword.Newline, Keyword.WindowsNewline];
 
   contents = stripComments(contents);
 
@@ -56,15 +52,16 @@ export function putContentIntoLines(contents: string): Query[] {
  * 3. Rejoin the lines together as a single string.
  */
 function stripComments(content: string): string {
-
   const contentInLines = content.split(Keyword.Newline);
 
   for (let i = 0; i < contentInLines.length; i++) {
-      if (contentInLines[i].startsWith(Keyword.CommentDash) ||
-          contentInLines[i].startsWith(Keyword.CommentHash) ||
-          contentInLines[i].startsWith(Keyword.CommentMultiLineStart)) {
-          contentInLines[i] = "";
-      }
+    if (
+      contentInLines[i].startsWith(Keyword.CommentDash) ||
+      contentInLines[i].startsWith(Keyword.CommentHash) ||
+      contentInLines[i].startsWith(Keyword.CommentMultiLineStart)
+    ) {
+      contentInLines[i] = "";
+    }
   }
 
   return contentInLines.join(Keyword.Newline);

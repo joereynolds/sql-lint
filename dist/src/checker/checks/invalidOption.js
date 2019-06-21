@@ -18,7 +18,7 @@ class InvalidOption extends check_1.Check {
         super(...arguments);
         this.message = "Option '%s' is not a valid option, must be one of '%s'.";
         this.requiresConnection = false;
-        this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+        this.appliesTo = ["select", "create", "update", "drop", "insert"];
     }
     check(query) {
         for (const line of query.lines) {

@@ -15,7 +15,7 @@ class InvalidCreateOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
         this.checker = new statements_1.Create();
-        this.appliesTo = ['create'];
+        this.appliesTo = ["create"];
     }
 }
 exports.InvalidCreateOption = InvalidCreateOption;

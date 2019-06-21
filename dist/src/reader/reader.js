@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const line_1 = require("./line");
 const query_1 = require("./query");
+const keywords_1 = require("../syntax/keywords");
 /**
  * Grabs the querie(s) from the --file flag
  */
@@ -16,13 +17,17 @@ function putContentIntoLines(contents) {
     const queriesFromFile = [];
     let currentQueryContent = "";
     let query = new query_1.Query();
-    const skipChars = ["", "\n", "\r\n"];
+    const skipChars = [
+        "",
+        keywords_1.Keyword.Newline,
+        keywords_1.Keyword.WindowsNewline
+    ];
     contents = stripComments(contents);
     for (let i = 0; i < contents.length; i++) {
         if (!skipChars.includes(contents[i])) {
             currentQueryContent += contents[i];
         }
-        if (contents[i] === "\n") {
+        if (contents[i] === keywords_1.Keyword.Newline) {
             if (currentQueryContent.length > 0) {
                 query.lines.push(new line_1.Line(currentQueryContent, lineNumber));
             }
@@ -47,19 +52,15 @@ exports.putContentIntoLines = putContentIntoLines;
  * 3. Rejoin the lines together as a single string.
  */
 function stripComments(content) {
-    return content
-        .split("\n")
-        .map(line => {
-        if (line.startsWith("--") ||
-            line.startsWith("#") ||
-            line.startsWith("/*")) {
-            return "";
+    const contentInLines = content.split(keywords_1.Keyword.Newline);
+    for (let i = 0; i < contentInLines.length; i++) {
+        if (contentInLines[i].startsWith(keywords_1.Keyword.CommentDash) ||
+            contentInLines[i].startsWith(keywords_1.Keyword.CommentHash) ||
+            contentInLines[i].startsWith(keywords_1.Keyword.CommentMultiLineStart)) {
+            contentInLines[i] = "";
         }
-        else {
-            return line;
-        }
-    })
-        .join("\n");
+    }
+    return contentInLines.join(keywords_1.Keyword.Newline);
 }
 /**
  * Grabs the query from the --query flag

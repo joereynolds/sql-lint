@@ -15,7 +15,7 @@ class InvalidDropOption extends invalidOption_1.InvalidOption {
     constructor() {
         super(...arguments);
         this.checker = new statements_1.Drop();
-        this.appliesTo = ['drop'];
+        this.appliesTo = ["drop"];
     }
 }
 exports.InvalidDropOption = InvalidDropOption;

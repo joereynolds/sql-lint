@@ -7,7 +7,7 @@ class UnmatchedParentheses extends check_1.Check {
         super(...arguments);
         this.message = "Unmatched parentheses.";
         this.requiresConnection = false;
-        this.appliesTo = ['select', 'create', 'update', 'drop', 'insert'];
+        this.appliesTo = ["select", "create", "update", "drop", "insert"];
     }
     check(query) {
         const content = query.getContent();

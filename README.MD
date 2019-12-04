@@ -28,6 +28,11 @@ these include but are not limited to:
 
 etc...
 
+## Quick Install
+
+`npm install -g sql-lint`
+
+
 ## Supported servers
 
 As of now, `sql-lint` supports the following servers:
@@ -95,9 +100,12 @@ You can read more about it in `./doc/configuration.md`.
 
 ## Contributing
 
-### To test  
+### To test
+
+Testing requires sql-lint and auto-changelog to be installed.
 
 ```
+npm install -g sql-lint auto-changelog
 ./build/build.sh //This will run more than just the tests (recommended)
 ```
 

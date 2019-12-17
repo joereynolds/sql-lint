@@ -21,6 +21,7 @@ class Create {
             "temporary",
             "trigger",
             "user",
+            "unique",
             "view"
         ];
     }

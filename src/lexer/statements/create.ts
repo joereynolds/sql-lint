@@ -21,6 +21,7 @@ class Create implements ILexer {
     "temporary",
     "trigger",
     "user",
+    "unique",
     "view"
   ];
 

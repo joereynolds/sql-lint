@@ -17,11 +17,7 @@ function putContentIntoLines(contents) {
     const queriesFromFile = [];
     let currentQueryContent = "";
     let query = new query_1.Query();
-    const skipChars = [
-        "",
-        keywords_1.Keyword.Newline,
-        keywords_1.Keyword.WindowsNewline
-    ];
+    const skipChars = ["", keywords_1.Keyword.Newline, keywords_1.Keyword.WindowsNewline];
     contents = stripComments(contents);
     for (let i = 0; i < contents.length; i++) {
         if (!skipChars.includes(contents[i])) {

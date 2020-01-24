@@ -1,3 +1,7 @@
+-- To see these errors in vim, you need the patch:
+-- https://github.com/joereynolds/sql-lint/issues/30
+-- failing that you can do `:!sql-lint %`
+
 -- Valid Queries (These should not display any errors)
 ALTER TABLE test;
 CREATE TABLE person;

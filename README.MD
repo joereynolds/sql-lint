@@ -28,23 +28,21 @@ these include but are not limited to:
 
 etc...
 
-## Quick Install
+## Installation
 
-`npm install -g sql-lint`
+There are binaries on the [releases
+page](https://github.com/joereynolds/sql-lint/releases) for Mac, Linux and
+Windows.  Or you can do `npm install -g sql-lint`
 
+## Supported drivers
 
-## Supported servers
+As of now, `sql-lint` supports the following drivers:
 
-As of now, `sql-lint` supports the following servers:
+- Mysql 
+- psql (postgres)
 
-- Mysql
-- Postgres
-
-Others can be added but I don't use them. Raise an issue with the server you want to be supported and I'll get around to it.
-
-## Running / Installation
-
-There are binaries on the [releases page](https://github.com/joereynolds/sql-lint/releases) for Mac, Linux and Windows.
+Others can be added but I don't use them. Raise an issue with the server you
+want to be supported and I'll get around to it.
 
 ### Linting a query
 
@@ -52,7 +50,6 @@ sql-lint works on queries with the `--query` flag.
 
 ```
 > sql-lint --query="DELETE FROM test;"
-query:1 Delete missing WHERE, intentional?
 ```
 
 ### Linting a file  
@@ -61,29 +58,14 @@ sql-lint works on files with the `--file` flag.
 
 ```
 > sql-lint --file="test/test-files/test.sql" 
-test/test-files/test.sql:13 [sql-lint: odd-code-point] Unexpected code point.
-test/test-files/test.sql:29 [sql-lint: missing-where] DELETE statement missing WHERE clause.
-test/test-files/test.sql:47 [sql-lint: missing-where] DELETE statement missing WHERE clause.
-test/test-files/test.sql:55 [sql-lint: invalid-drop-option] Option 'thing' is not a valid option, must be one of '["database","event","function","index","logfile","procedure","schema","server","table","view","tablespace","trigger"]'.
-test/test-files/test.sql:61 [sql-lint: invalid-create-option] Option 'test' is not a valid option, must be one of '["algorithm","database","definer","event","function","index","procedure","server","table","tablespace","temporary","trigger","user","view"]'.
-test/test-files/test.sql:67 [sql-lint: invalid-truncate-option] Option 'something' is not a valid option, must be one of '["table"]'.
-test/test-files/test.sql:73 [sql-lint: invalid-alter-option] Option 'mlady' is not a valid option, must be one of '["online","offline","ignore","database","event","function","procedure","server","table","tablespace","view"]'.
-test/test-files/test.sql:8 [sql-lint: database-not-found] Database 'test' does not exist.
-test/test-files/test.sql:9 [sql-lint: database-not-found] Database 'non_existent_database' does not exist.
-test/test-files/test.sql:13 [ER_PARSE_ERROR] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO�' at line 1
-test/test-files/test.sql:16 [ER_NO_DB_ERROR] No database selected
-test/test-files/test.sql:26 [ER_NO_SUCH_TABLE] Table 'symfony.gig' doesn't exist
-test/test-files/test.sql:43 [ER_NO_SUCH_TABLE] Table 'symfony.dont_exist' doesn't exist
 ```
 
 ### Linting stdin
 
 sql-lint works with stdin if you don't supply any arguments.
 
-
 ```
 > echo "DELETE FROM test;" | sql-lint
-stdin:1 Delete missing WHERE, intentional?
 ```
 
 ## Editor integration   

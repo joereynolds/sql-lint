@@ -121,7 +121,8 @@ Change your config file in `~/.config/sql-lint/config.json` to have the followin
     "driver": "mysql",
     "host": "localhost",
     "user": "root",
-    "password": "password"
+    "password": "password",
+    "port": 3306
 }
 ```
 

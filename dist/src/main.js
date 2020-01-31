@@ -55,7 +55,7 @@ if (configuration === null) {
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);
 }
-const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
+const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password, program.port || configuration.port || '3306');
 runner.run(queries, printer, prefix, omittedErrors, db);
 db.connection.end();
 //# sourceMappingURL=main.js.map

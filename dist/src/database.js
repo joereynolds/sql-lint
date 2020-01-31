@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const anyDB = require("any-db");
 class Database {
-    constructor(driver, host, user, password) {
-        this.connection = anyDB.createConnection(`${driver}://${user}:${password}@${host}`);
+    constructor(driver, host, user, password, port) {
+        this.connection = anyDB.createConnection(`${driver}://${user}:${password}@${host}:${port}`);
     }
     getDatabases(connection, callback) {
         connection.query("SHOW DATABASES", (error, results) => {

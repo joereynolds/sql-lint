@@ -80,7 +80,8 @@ const db = new Database(
   program.driver || configuration.driver || "mysql",
   program.host || configuration.host,
   program.user || configuration.user,
-  program.password || configuration.password
+  program.password || configuration.password,
+  program.port || configuration.port || "3306"
 );
 
 runner.run(queries, printer, prefix, omittedErrors, db);

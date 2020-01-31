@@ -21,7 +21,8 @@ You should put the following in there for more intelligent errors to come throug
     "driver": "mysql",
     "host": "localhost",
     "user": "root",
-    "password": "hunter2"
+    "password": "hunter2",
+    "port": 3306
 }
 ```
 
@@ -38,12 +39,14 @@ Basically, your configuration file is (or belongs) in `~/.config/sql-lint/config
 
 ### `driver`
 
+Optional, default is `mysql`.
+
 The driver to be used to check for errors.
 Accepted ones are `mysql` and `psql`.
 
 ### `host`
 
-The hostname of the database server, usually this is `localhost`.
+The host of the database server.
 
 ### `user`
 
@@ -52,6 +55,12 @@ The user for the database server.
 ### `password`
 
 The password to the database server.
+
+### `port`
+
+Optional, default it `3306`.
+
+The port to connect to.
 
 ### `ignore-errors`
 

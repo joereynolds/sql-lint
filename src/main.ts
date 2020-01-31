@@ -43,7 +43,6 @@ const format = formatterFactory.build(program.format);
 const printer: Printer = new Printer(program.verbose, format);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
-let runSimpleChecks: boolean = false;
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -66,14 +65,15 @@ if (!program.file && !program.query) {
   prefix = "stdin";
 }
 
-if (configuration === null) {
-  printer.warnAboutFileNotFound(file);
-  runSimpleChecks = true;
-}
-
 let omittedErrors: string[] = [];
 if (configuration !== null && "ignore-errors" in configuration) {
   omittedErrors = configuration["ignore-errors"] || [];
+}
+
+if (configuration === null) {
+  printer.warnAboutFileNotFound(file);
+  runner.run(queries, printer, prefix, omittedErrors);
+  process.exit(0);
 }
 
 const db = new Database(

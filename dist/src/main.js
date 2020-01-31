@@ -29,7 +29,6 @@ const format = formatterFactory.build(program.format);
 const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
-let runSimpleChecks = false;
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";
@@ -47,13 +46,14 @@ if (!program.file && !program.query) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
-if (configuration === null) {
-    printer.warnAboutFileNotFound(config_1.file);
-    runSimpleChecks = true;
-}
 let omittedErrors = [];
 if (configuration !== null && "ignore-errors" in configuration) {
     omittedErrors = configuration["ignore-errors"] || [];
+}
+if (configuration === null) {
+    printer.warnAboutFileNotFound(config_1.file);
+    runner.run(queries, printer, prefix, omittedErrors);
+    process.exit(0);
 }
 const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
 runner.run(queries, printer, prefix, omittedErrors, db);

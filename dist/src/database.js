@@ -18,7 +18,7 @@ class Database {
      * which is what we want.
      */
     lintQuery(connection, query, callback) {
-        connection.query(`EXPLAIN ${query}`, (error, results) => {
+        connection.query(`EXPLAIN ${query}`, [], (error, results) => {
             if (error) {
                 callback(error);
             }

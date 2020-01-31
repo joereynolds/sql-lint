@@ -1,4 +1,3 @@
-import * as mysql from "mysql";
 import * as anyDB from "any-db";
 
 class Database {
@@ -31,11 +30,11 @@ class Database {
    * which is what we want.
    */
   public lintQuery(
-    connection: mysql.Connection,
+    connection: anyDB.Connection,
     query: string,
     callback: any
   ): void {
-    connection.query(`EXPLAIN ${query}`, (error, results) => {
+    connection.query(`EXPLAIN ${query}`, [], (error, results) => {
       if (error) {
         callback(error);
       }

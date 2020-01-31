@@ -81,7 +81,7 @@ const db = new Database(
   program.host || configuration.host,
   program.user || configuration.user,
   program.password || configuration.password,
-  program.port || configuration.port || '3306'
+  program.port || configuration.port || "3306"
 );
 
 runner.run(queries, printer, prefix, omittedErrors, db);

@@ -4,7 +4,13 @@ import * as anyDB from "any-db";
 class Database {
   public connection: any;
 
-  constructor(driver: string, host: string, user: string, password: string, port?: string) {
+  constructor(
+    driver: string,
+    host: string,
+    user: string,
+    password: string,
+    port?: string
+  ) {
     this.connection = anyDB.createConnection(
       `${driver}://${user}:${password}@${host}:${port}`
     );

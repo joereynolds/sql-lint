@@ -21,6 +21,7 @@ program
     .option("--host <string>", "The host for the connection")
     .option("--user <string>", "The user for the connection")
     .option("--password <string>", "The password for the connection")
+    .option("--port <string>", "The port for the connection")
     .parse(process.argv);
 let queries = [];
 let prefix = "";

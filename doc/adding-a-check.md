@@ -11,6 +11,7 @@ Anyway, here are the steps.
 - Increment the splice last two spliced numbers in `checkerRunner` otherwise it
   will remove the wrong things. Gross I know and needs to be fixed
 - Add it to the README.md so people know it's a thing
+- Add it to `configuration.md`. This is an exhaustive list of the checks
 - Add tests. The name of the test should match the name of the check
 
 ## Troubleshooting

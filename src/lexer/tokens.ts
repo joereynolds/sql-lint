@@ -3,7 +3,7 @@ export enum Types {
   TableReference = "table_reference",
   Option = "option",
   Unidentified = "???",
-  RowCount = 'row_count'
+  RowCount = "row_count"
 }
 
 export enum Keyword {

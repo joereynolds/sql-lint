@@ -25,16 +25,14 @@ class Select implements ILexer {
               new Token(Types.TableReference, cleanUnquotedIdentifier(item))
             );
           }
-
         } else if (lastToken === Keyword.Limit) {
-              item = cleanUnquotedIdentifier(item);
+          item = cleanUnquotedIdentifier(item);
 
-              if (item.length > 0) {
-                line.tokens.push(
-                  new Token(Types.RowCount, cleanUnquotedIdentifier(item))
-                );
-              }
-
+          if (item.length > 0) {
+            line.tokens.push(
+              new Token(Types.RowCount, cleanUnquotedIdentifier(item))
+            );
+          }
         } else {
           line.tokens.push(new Token(Types.Unidentified, item));
         }

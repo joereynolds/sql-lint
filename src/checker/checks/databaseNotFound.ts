@@ -1,7 +1,7 @@
 import { Query } from "../../reader/query";
 import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
-import { Types } from "../../lexer/tokens";
+import { Types } from "../../lexer/types";
 import { sprintf } from "sprintf-js";
 import { Check } from "../check";
 

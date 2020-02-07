@@ -2,7 +2,7 @@ import { Query } from "../../reader/query";
 import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
 import { Keyword } from "../../syntax/keywords";
-import { Types } from "../tokens";
+import { Types } from "../types";
 import { Token } from "../token";
 
 class Use implements ILexer {

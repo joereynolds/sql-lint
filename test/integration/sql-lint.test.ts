@@ -33,10 +33,16 @@ xtest("it can lint a use correctly", done => {
     .end(done);
 });
 
-// Change this to somethihng less flaky, maybe just 0.*
-xtest("it brings back a version number", done => {
+test("it brings back a version number", done => {
   shelltest()
     .cmd(`${sqlLint} --version`)
-    .expect("stdout", "0.0.10\n")
+    .expect("stdout", /^\d/)
+    .end(done);
+});
+
+test("--port is a valid option", done => {
+  shelltest()
+    .cmd(`${sqlLint} --help`)
+    .expect("stdout", /.*--port.*/)
     .end(done);
 });

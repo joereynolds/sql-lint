@@ -6,6 +6,7 @@ var Types;
     Types["TableReference"] = "table_reference";
     Types["Option"] = "option";
     Types["Unidentified"] = "???";
+    Types["RowCount"] = "row_count";
 })(Types = exports.Types || (exports.Types = {}));
 var Keyword;
 (function (Keyword) {

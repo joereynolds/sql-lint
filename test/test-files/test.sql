@@ -28,7 +28,8 @@ TRUNCATE something g;
 ALTER mlady TEST;
 -- [sql-lint: odd-code-point]
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE '�';
-
+-- [sql-lint: invalid-limit-argument]
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS LIMIT 'test';
 
 -- [ER_NO_DB_ERROR]
 SELECT  * FROM    PERSON  WHERE age > 5 ;

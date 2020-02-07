@@ -2,7 +2,8 @@ export enum Types {
   Keyword = "keyword",
   TableReference = "table_reference",
   Option = "option",
-  Unidentified = "???"
+  Unidentified = "???",
+  RowCount = "row_count"
 }
 
 export enum Keyword {

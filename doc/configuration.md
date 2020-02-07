@@ -91,6 +91,7 @@ An exhaustive list is below.
 "invalid-create-option"
 "invalid-truncate-option"
 "invalid-alter-option"
+"invalid-limit-quantifier"
 ```
 
 You cannot skip checks that are returned from the DB server itself, only the checks built into `sql-lint`.

@@ -23,6 +23,12 @@ class Select {
                         line.tokens.push(new token_1.Token(tokens_1.Types.TableReference, lexer_1.cleanUnquotedIdentifier(item)));
                     }
                 }
+                else if (lastToken === keywords_1.Keyword.Limit) {
+                    item = lexer_1.cleanUnquotedIdentifier(item);
+                    if (item.length > 0) {
+                        line.tokens.push(new token_1.Token(tokens_1.Types.RowCount, lexer_1.cleanUnquotedIdentifier(item)));
+                    }
+                }
                 else {
                     line.tokens.push(new token_1.Token(tokens_1.Types.Unidentified, item));
                 }

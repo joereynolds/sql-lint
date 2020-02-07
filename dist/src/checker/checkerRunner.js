@@ -14,8 +14,8 @@ class CheckerRunner {
             return path.parse(check).name;
         });
         checks.splice(0, 1); // Removing the 'check.ts' file from the checks since it's not one.
-        checks.splice(3, 1); // Remove the InvalidOption base class, gross I know.
-        checks.splice(7, 1); // Remove the tableNotFound check for now.
+        checks.splice(4, 1); // Remove the InvalidOption base class, gross I know.
+        checks.splice(8, 1); // Remove the tableNotFound check for now.
         const factory = new checkFactory_1.CheckFactory();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();

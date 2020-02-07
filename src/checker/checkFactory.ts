@@ -6,9 +6,9 @@ import {
   InvalidDropOption,
   MySqlError,
   OddCodePoint,
-  TableNotFound,
   UnmatchedParentheses,
   InvalidTruncateOption,
+  InvalidLimitQuantifier,
   DatabaseNotFound
 } from "../barrel/checks";
 
@@ -16,15 +16,16 @@ class CheckFactory {
   public build(check: string): IChecker {
     // any is actually IChecker
     const checkMap: { [key: string]: any } = {
+      databaseNotFound: DatabaseNotFound,
+      invalidAlterOption: InvalidAlterOption,
+      invalidCreateOption: InvalidCreateOption,
+      invalidDropOption: InvalidDropOption,
+      invalidLimitQuantifier: InvalidLimitQuantifier,
+      invalidTruncateOption: InvalidTruncateOption,
       missingWhere: MissingWhere,
       mySqlError: MySqlError,
-      invalidAlterOption: InvalidAlterOption,
-      invalidDropOption: InvalidDropOption,
-      invalidCreateOption: InvalidCreateOption,
-      invalidTruncateOption: InvalidTruncateOption,
       oddCodePoint: OddCodePoint,
-      unmatchedParentheses: UnmatchedParentheses,
-      databaseNotFound: DatabaseNotFound
+      unmatchedParentheses: UnmatchedParentheses
     };
 
     return new checkMap[check]();

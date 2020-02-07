@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../checkerResult");
 const check_1 = require("../check");
 const sprintf_js_1 = require("sprintf-js");
-const tokens_1 = require("../../lexer/tokens");
+const types_1 = require("../../lexer/types");
 class InvalidLimitQuantifier extends check_1.Check {
     constructor() {
         super(...arguments);
@@ -14,7 +14,7 @@ class InvalidLimitQuantifier extends check_1.Check {
     check(query) {
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token.type === tokens_1.Types.RowCount && isNaN(Number(token.value))) {
+                if (token.type === types_1.Types.RowCount && isNaN(Number(token.value))) {
                     return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, token.value));
                 }
             }

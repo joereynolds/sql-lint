@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
 const keywords_1 = require("../../syntax/keywords");
-const tokens_1 = require("../tokens");
+const types_1 = require("../types");
 const token_1 = require("../token");
 class Truncate {
     constructor() {
@@ -14,12 +14,12 @@ class Truncate {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase().trim();
                 if (item === keywords_1.Keyword.Truncate) {
-                    line.tokens.push(new token_1.Token(tokens_1.Types.Keyword, item));
+                    line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));
                 }
                 else if (lastToken === keywords_1.Keyword.Truncate) {
                     item = lexer_1.cleanUnquotedIdentifier(item);
                     if (item.length > 0) {
-                        line.tokens.push(new token_1.Token(tokens_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)));
+                        line.tokens.push(new token_1.Token(types_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)));
                     }
                 }
                 lastToken = item;

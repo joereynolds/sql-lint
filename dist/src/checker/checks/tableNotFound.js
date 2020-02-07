@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../../lexer/lexer");
 const checkerResult_1 = require("../checkerResult");
-const tokens_1 = require("../../lexer/tokens");
+const types_1 = require("../../lexer/types");
 const sprintf_js_1 = require("sprintf-js");
 class TableNotFound {
     constructor(tables) {
@@ -14,7 +14,7 @@ class TableNotFound {
     check(query) {
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token.type === tokens_1.Types.TableReference) {
+                if (token.type === types_1.Types.TableReference) {
                     const reference = lexer_1.extractTableReference(token.value);
                     if (!this.tables.includes(reference.table) &&
                         reference.table !== "*") {

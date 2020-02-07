@@ -10,7 +10,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../checkerResult");
-const tokens_1 = require("../../lexer/tokens");
+const types_1 = require("../../lexer/types");
 const sprintf_js_1 = require("sprintf-js");
 const check_1 = require("../check");
 class InvalidOption extends check_1.Check {
@@ -23,7 +23,7 @@ class InvalidOption extends check_1.Check {
     check(query) {
         for (const line of query.lines) {
             for (const token of line.tokens) {
-                if (token.type === tokens_1.Types.Option &&
+                if (token.type === types_1.Types.Option &&
                     !this.checker.options.includes(token.value)) {
                     return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + this.message, token.value, JSON.stringify(this.checker.options)));
                 }

@@ -11,14 +11,15 @@
 sql-lint is a linter for SQL, it brings back any error from the supported servers
 as well as custom errors written for sql-lint.
 
-`sql-lint` will show errors about the following things
+`sql-lint` will show errors about the following things (and more)
 
 - DELETE statements missing WHERE clauses
 - DROP/TRUNCATE/ALTER/CREATE statements with invalid options specified
 - Odd code points in queries
-- Any MySQL error*
+- Invalid arguments to the LIMIT clause
+- Any SQL server errors
 
-* `sql-lint` brings back errors from the supported servers too. It will catch **any** error from the server.
+\* `sql-lint` brings back errors from the supported servers too. It will catch **any** error from the server.
 these include but are not limited to:
 
 - Unknown columns on a table 
@@ -38,11 +39,11 @@ Windows.  Or you can do `npm install -g sql-lint`
 
 As of now, `sql-lint` supports the following drivers:
 
-- Mysql 
-- psql (postgres)
+- mysql 
+- postgres
 
 Others can be added but I don't use them. Raise an issue with the server you
-want to be supported and I'll get around to it.
+want supported and I'll get around to it. PR's are welcome in this area as I only use MySQL.
 
 ### Linting a query
 

@@ -52,16 +52,16 @@ test("Good queries exit with 0", done => {
     .cmd(`echo 'DELETE FROM person WHERE 1=1;' | ${sqlLint}`)
     .expect(0)
     .end(done);
-})
+});
 
 // Ironically this fails the test suite so we can't actually run it.
 // Figure out a way around this
 xtest("Bad queries exit with 1", done => {
-  // This is a "bad query" becase the linter will flag it up as 
+  // This is a "bad query" becase the linter will flag it up as
   // dangerous. Anything the linter prints out should result
   // in an exit code of 1.
   shelltest()
     .cmd(`echo 'DELETE FROM person ;' | ${sqlLint}`)
     .expect(1)
     .end(done);
-})
+});

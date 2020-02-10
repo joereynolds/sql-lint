@@ -52,7 +52,7 @@ test.each([
             new Token("keyword", "from"),
             new Token("table_reference", "person"),
             new Token("keyword", "limit"),
-            new Token("row_count", "73"),
+            new Token("row_count", "73")
           ]
         }
       ]

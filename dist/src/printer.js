@@ -25,6 +25,8 @@ class Printer {
         }
         if (result.content) {
             console.log(this.format.getMessage(prefix, result));
+            // If there are any errors whatsoever, we want to exit 
+            // with 1 for build scripts and the like.
             process.exitCode = 1;
         }
         if (this.verbosity) {

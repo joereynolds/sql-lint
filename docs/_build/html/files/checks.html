@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Checks &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Checks</a><ul>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#unmatched-parentheses">unmatched-parentheses</a><ul>
+<li><a class="reference internal" href="#example-output">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#missing-where">missing-where</a><ul>
+<li><a class="reference internal" href="#id1">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invalid-drop-option">invalid-drop-option</a><ul>
+<li><a class="reference internal" href="#id2">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invalid-create-option">invalid-create-option</a><ul>
+<li><a class="reference internal" href="#id3">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invalid-truncate-option">invalid-truncate-option</a><ul>
+<li><a class="reference internal" href="#id4">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invalid-alter-option">invalid-alter-option</a><ul>
+<li><a class="reference internal" href="#id5">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#odd-code-point">odd-code-point</a><ul>
+<li><a class="reference internal" href="#id6">Example output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invalid-limit-quantifier">invalid-limit-quantifier</a><ul>
+<li><a class="reference internal" href="#id7">Example output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Checks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/checks.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="checks">
+<h1>Checks<a class="headerlink" href="#checks" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> comes with its own suite of checks. Aside from its own checks, it
+also returns any errors from the SQL server you have connected to. Generally
+you’ll find that the errors from <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> are more informative than those from
+the server. That said, you will still want errors from the server as it covers
+more cases and will catch things that <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> does not.</p>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unmatched-parentheses">
+<h3>unmatched-parentheses<a class="headerlink" href="#unmatched-parentheses" title="Permalink to this headline">¶</a></h3>
+<p>Shown when a query has an unbalanced amount of parentheses.</p>
+<div class="section" id="example-output">
+<h4>Example output<a class="headerlink" href="#example-output" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">16</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">unmatched</span><span class="o">-</span><span class="n">parentheses</span><span class="p">]</span> <span class="n">Unmatched</span> <span class="n">parentheses</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="missing-where">
+<h3>missing-where<a class="headerlink" href="#missing-where" title="Permalink to this headline">¶</a></h3>
+<p>Shown when a <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> statement is missing a <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause.</p>
+<div class="section" id="id1">
+<h4>Example output<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="invalid-drop-option">
+<h3>invalid-drop-option<a class="headerlink" href="#invalid-drop-option" title="Permalink to this headline">¶</a></h3>
+<p>Shown when an invalid option is given to the <code class="docutils literal notranslate"><span class="pre">DROP</span></code> statement.</p>
+<div class="section" id="id2">
+<h4>Example output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="invalid-create-option">
+<h3>invalid-create-option<a class="headerlink" href="#invalid-create-option" title="Permalink to this headline">¶</a></h3>
+<p>Shown when an invalid option is given to the <code class="docutils literal notranslate"><span class="pre">CREATE</span></code> statement.</p>
+<div class="section" id="id3">
+<h4>Example output<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="invalid-truncate-option">
+<h3>invalid-truncate-option<a class="headerlink" href="#invalid-truncate-option" title="Permalink to this headline">¶</a></h3>
+<p>Shown when an invalid option is given to the <code class="docutils literal notranslate"><span class="pre">TRUNCATE</span></code> statement.</p>
+<div class="section" id="id4">
+<h4>Example output<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="invalid-alter-option">
+<h3>invalid-alter-option<a class="headerlink" href="#invalid-alter-option" title="Permalink to this headline">¶</a></h3>
+<p>Shown when an invalid option is given to the <code class="docutils literal notranslate"><span class="pre">ALTER</span></code> statement.</p>
+<div class="section" id="id5">
+<h4>Example output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="odd-code-point">
+<h3>odd-code-point<a class="headerlink" href="#odd-code-point" title="Permalink to this headline">¶</a></h3>
+<p>Shown when there are unsupported/unusual* code points in your code.</p>
+<p>*<small>This check came about whilst working Microsoft Excel. Microsoft likes to
+add a lot of zany characters which can subtly break your data without you
+realising.</small></p>
+<div class="section" id="id6">
+<h4>Example output<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">30</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">odd</span><span class="o">-</span><span class="n">code</span><span class="o">-</span><span class="n">point</span><span class="p">]</span> <span class="n">Unexpected</span> <span class="n">code</span> <span class="n">point</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="invalid-limit-quantifier">
+<h3>invalid-limit-quantifier<a class="headerlink" href="#invalid-limit-quantifier" title="Permalink to this headline">¶</a></h3>
+<p>Shown when you specify something other than a number to the <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> statement.</p>
+<div class="section" id="id7">
+<h4>Example output<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">32</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">invalid</span><span class="o">-</span><span class="n">limit</span><span class="o">-</span><span class="n">quantifier</span><span class="p">]</span> <span class="n">Argument</span> <span class="s1">&#39;test&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">quantifier</span> <span class="k">for</span> <span class="n">LIMIT</span> <span class="n">clause</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to sql-lint’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-sql-lint">What is sql-lint?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#via-stdin">Via stdin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#with-a-file">With a file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#with-a-string">With a string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-options">Command line options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checks.html">Checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/introduction.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-sql-lint">
+<h2>What is sql-lint?<a class="headerlink" href="#what-is-sql-lint" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> is a linter for SQL dialects. It currently supports MySQL and
+Postgres. It brings errors to your attention, suggests what’s wrong with them,
+why it may be wrong, and what you can do as a developer to fix it. Generally
+these errors are more verbose and specific than those coming from an SQL server.</p>
+<p>Here’s a small excerpt of its use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">-</span><span class="n">f</span> <span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span> 
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">16</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">unmatched</span><span class="o">-</span><span class="n">parentheses</span><span class="p">]</span> <span class="n">Unmatched</span> <span class="n">parentheses</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">20</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">missing</span><span class="o">-</span><span class="n">where</span><span class="p">]</span> <span class="n">DELETE</span> <span class="n">statement</span> <span class="n">missing</span> <span class="n">WHERE</span> <span class="n">clause</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">22</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">invalid</span><span class="o">-</span><span class="n">drop</span><span class="o">-</span><span class="n">option</span><span class="p">]</span> <span class="n">Option</span> <span class="s1">&#39;thing&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">option</span><span class="p">,</span> <span class="n">must</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="s1">&#39;[&quot;database&quot;,&quot;event&quot;,&quot;function&quot;,&quot;index&quot;,&quot;logfile&quot;,&quot;procedure&quot;,&quot;schema&quot;,&quot;server&quot;,&quot;table&quot;,&quot;view&quot;,&quot;tablespace&quot;,&quot;trigger&quot;]&#39;</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">26</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">invalid</span><span class="o">-</span><span class="n">truncate</span><span class="o">-</span><span class="n">option</span><span class="p">]</span> <span class="n">Option</span> <span class="s1">&#39;something&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">option</span><span class="p">,</span> <span class="n">must</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="s1">&#39;[&quot;table&quot;]&#39;</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">30</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">odd</span><span class="o">-</span><span class="n">code</span><span class="o">-</span><span class="n">point</span><span class="p">]</span> <span class="n">Unexpected</span> <span class="n">code</span> <span class="n">point</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">32</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">invalid</span><span class="o">-</span><span class="n">limit</span><span class="o">-</span><span class="n">quantifier</span><span class="p">]</span> <span class="n">Argument</span> <span class="s1">&#39;test&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">quantifier</span> <span class="k">for</span> <span class="n">LIMIT</span> <span class="n">clause</span><span class="o">.</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">24</span> <span class="p">[</span><span class="n">ER_PARSE_ERROR</span><span class="p">]</span> <span class="n">You</span> <span class="n">have</span> <span class="n">an</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">your</span> <span class="n">SQL</span> <span class="n">syntax</span><span class="p">;</span> <span class="n">check</span> <span class="n">the</span> <span class="n">manual</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">your</span> <span class="n">MySQL</span> <span class="n">server</span> <span class="n">version</span> <span class="k">for</span> <span class="n">the</span> <span class="n">right</span> <span class="n">syntax</span> <span class="n">to</span> <span class="n">use</span> <span class="n">near</span> <span class="s1">&#39;CREATE test person&#39;</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">test</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">files</span><span class="o">//</span><span class="n">test</span><span class="o">.</span><span class="n">sql</span><span class="p">:</span><span class="mi">39</span> <span class="p">[</span><span class="n">ER_NO_SUCH_TABLE</span><span class="p">]</span> <span class="n">Table</span> <span class="s1">&#39;symfony.dont_exist&#39;</span> <span class="n">doesn</span><span class="s1">&#39;t exist</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> is used from the command line in several ways.</p>
+<div class="section" id="via-stdin">
+<h3>Via stdin<a class="headerlink" href="#via-stdin" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;DELETE FROM person;&quot;</span> <span class="o">|</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="with-a-file">
+<h3>With a file<a class="headerlink" href="#with-a-file" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">-</span><span class="n">f</span> <span class="n">test</span><span class="o">-</span><span class="n">file</span><span class="o">.</span><span class="n">sql</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="with-a-string">
+<h3>With a string<a class="headerlink" href="#with-a-string" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;DELETE FROM person;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-line-options">
+<h3>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
+<p>To see the full host of options, pass the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag to <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">-</span><span class="n">h</span>
+<span class="n">Usage</span><span class="p">:</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+
+<span class="n">Options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">V</span><span class="p">,</span> <span class="o">--</span><span class="n">version</span>          <span class="n">output</span> <span class="n">the</span> <span class="n">version</span> <span class="n">number</span>
+  <span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">&gt;</span>      <span class="n">The</span> <span class="o">.</span><span class="n">sql</span> <span class="n">file</span> <span class="n">to</span> <span class="n">lint</span>
+  <span class="o">-</span><span class="n">q</span><span class="p">,</span> <span class="o">--</span><span class="n">query</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>   <span class="n">The</span> <span class="n">query</span> <span class="n">to</span> <span class="n">lint</span>
+  <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">driver</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>  <span class="n">The</span> <span class="n">driver</span> <span class="n">to</span> <span class="n">use</span><span class="p">,</span> <span class="n">must</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="p">[</span><span class="s1">&#39;mysql&#39;</span><span class="p">,</span> <span class="s1">&#39;postgres&#39;</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">--</span><span class="n">verbose</span>          <span class="n">Brings</span> <span class="n">back</span> <span class="n">information</span> <span class="n">on</span> <span class="n">the</span> <span class="n">what</span> <span class="n">it</span><span class="s1">&#39;s linting and the tokens generated</span>
+  <span class="o">--</span><span class="nb">format</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>      <span class="n">The</span> <span class="nb">format</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span><span class="p">,</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="n">of</span> <span class="p">[</span><span class="s1">&#39;simple&#39;</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">]</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="s2">&quot;simple&quot;</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>        <span class="n">The</span> <span class="n">host</span> <span class="k">for</span> <span class="n">the</span> <span class="n">connection</span>
+  <span class="o">--</span><span class="n">user</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>        <span class="n">The</span> <span class="n">user</span> <span class="k">for</span> <span class="n">the</span> <span class="n">connection</span>
+  <span class="o">--</span><span class="n">password</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>    <span class="n">The</span> <span class="n">password</span> <span class="k">for</span> <span class="n">the</span> <span class="n">connection</span>
+  <span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>        <span class="n">The</span> <span class="n">port</span> <span class="k">for</span> <span class="n">the</span> <span class="n">connection</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>             <span class="n">output</span> <span class="n">usage</span> <span class="n">information</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to sql-lint’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

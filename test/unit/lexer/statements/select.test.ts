@@ -39,6 +39,26 @@ test.each([
     }
   ],
   [
+    "SELECT * FROM person LIMIT 73;",
+
+    {
+      lines: [
+        {
+          content: "SELECT * FROM person LIMIT 73;",
+          num: 1,
+          tokens: [
+            new Token("keyword", "select"),
+            new Token("table_reference", "*"),
+            new Token("keyword", "from"),
+            new Token("table_reference", "person"),
+            new Token("keyword", "limit"),
+            new Token("row_count", "73"),
+          ]
+        }
+      ]
+    }
+  ],
+  [
     "SELECT * FROM person WHERE name = 'test';",
 
     {

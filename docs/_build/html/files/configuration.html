@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Checks" href="checks.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#via-cli">Via CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#via-config-json">Via <code class="docutils literal notranslate"><span class="pre">config.json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-options">Configuration options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#driver"><code class="docutils literal notranslate"><span class="pre">driver</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#host"><code class="docutils literal notranslate"><span class="pre">host</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user"><code class="docutils literal notranslate"><span class="pre">user</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#password"><code class="docutils literal notranslate"><span class="pre">password</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port"><code class="docutils literal notranslate"><span class="pre">port</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ignore-errors"><code class="docutils literal notranslate"><span class="pre">ignore-errors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-configuration">Example configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-word-of-warning">A word of warning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#editor-integration">Editor Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vim-neovim">Vim / Neovim</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ale">Ale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vanilla">Vanilla</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="checks.html">Checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/configuration.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Configuring <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> to connect to your database of choice allows even more
+errors to come through. Errors that <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> wouldn’t find itself. To do this
+is easy, simply supply the connection details to your database in one of two
+ways:</p>
+<div class="section" id="via-cli">
+<h2>Via CLI<a class="headerlink" href="#via-cli" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">driver</span><span class="o">=</span><span class="s2">&quot;mysql&quot;</span> <span class="o">--</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="s2">&quot;root&quot;</span> <span class="o">--</span><span class="n">password</span><span class="o">=</span><span class="s2">&quot;hunter2&quot;</span> <span class="o">--</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;SELECT 1;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="via-config-json">
+<h2>Via <code class="docutils literal notranslate"><span class="pre">config.json</span></code><a class="headerlink" href="#via-config-json" title="Permalink to this headline">¶</a></h2>
+<p>A configuration file for <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> can reside in
+<code class="docutils literal notranslate"><span class="pre">~/.config/sql-lint/config.json</span></code>.  It follows the <a class="reference external" href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory
+Specification</a>.
+Specifically, it uses <code class="docutils literal notranslate"><span class="pre">$HOME/.config</span></code>.</p>
+<p>You should put the following in there for more intelligent errors to come through</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;hunter2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">3306</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-options">
+<h2>Configuration options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>An exhaustive list of the configuration options for your <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file are
+below.</p>
+<div class="section" id="driver">
+<h3><code class="docutils literal notranslate"><span class="pre">driver</span></code><a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h3>
+<p>Optional, default is <code class="docutils literal notranslate"><span class="pre">mysql</span></code>.</p>
+<p>The driver to be used to check for errors.
+Accepted ones are <code class="docutils literal notranslate"><span class="pre">mysql</span></code> and <code class="docutils literal notranslate"><span class="pre">psql</span></code>.</p>
+</div>
+<div class="section" id="host">
+<h3><code class="docutils literal notranslate"><span class="pre">host</span></code><a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<p>The host of the database server.</p>
+</div>
+<div class="section" id="user">
+<h3><code class="docutils literal notranslate"><span class="pre">user</span></code><a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p>The user for the database server.</p>
+</div>
+<div class="section" id="password">
+<h3><code class="docutils literal notranslate"><span class="pre">password</span></code><a class="headerlink" href="#password" title="Permalink to this headline">¶</a></h3>
+<p>The password for the database server.</p>
+</div>
+<div class="section" id="port">
+<h3><code class="docutils literal notranslate"><span class="pre">port</span></code><a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h3>
+<p>The port to connect to.</p>
+<p>Optional, default is <code class="docutils literal notranslate"><span class="pre">3306</span></code>.</p>
+</div>
+<div class="section" id="ignore-errors">
+<h3><code class="docutils literal notranslate"><span class="pre">ignore-errors</span></code><a class="headerlink" href="#ignore-errors" title="Permalink to this headline">¶</a></h3>
+<p>Don’t want to be warned about a particular error?
+In that case add it to the <code class="docutils literal notranslate"><span class="pre">ignore-errors</span></code> array in <code class="docutils literal notranslate"><span class="pre">~/.config/sql-lint/config.json</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ignore-errors&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;odd-code-point&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;missing-where&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The example above will skip checks for odd code points and <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> statements with missing <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses.</p>
+<p>For a full list of all available checks, see <a class="reference internal" href="checks.html"><span class="doc">the check
+documentation</span></a></p>
+<p>You cannot skip checks that are returned from the DB server itself, only the checks built into <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code>.</p>
+</div>
+<div class="section" id="example-configuration">
+<h3>Example configuration<a class="headerlink" href="#example-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The below configuration contains every option available.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ignore-errors&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;odd-code-point&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;missing-where&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invalid-drop-option&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invalid-create-option&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invalid-truncate-option&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;invalid-alter-option&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-word-of-warning">
+<h3>A word of warning<a class="headerlink" href="#a-word-of-warning" title="Permalink to this headline">¶</a></h3>
+<p>Do not version control your configuration file unless you know what you’re
+doing. Stick it in your global <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to be safe.</p>
+</div>
+</div>
+<div class="section" id="editor-integration">
+<h2>Editor Integration<a class="headerlink" href="#editor-integration" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> can integrate with any editor that supports external plugins.</p>
+<div class="section" id="vim-neovim">
+<h3>Vim / Neovim<a class="headerlink" href="#vim-neovim" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ale">
+<h4>Ale<a class="headerlink" href="#ale" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> can be integrated into (Neo)Vim if you add this
+<a class="reference external" href="https://github.com/dense-analysis/ale/pull/2988/commits/07080066e49d68910dccc19e4d95167300fb9422">patch</a>
+to Ale.</p>
+</div>
+<div class="section" id="vanilla">
+<h4>Vanilla<a class="headerlink" href="#vanilla" title="Permalink to this headline">¶</a></h4>
+<p>If you want to go without a plugin, the simplest option is to run the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:!sql-lint -f %
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="checks.html" class="btn btn-neutral float-right" title="Checks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Lexer &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">NAME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Lexer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/rambles.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lexer">
+<h1>Lexer<a class="headerlink" href="#lexer" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="n">tokenised</span> <span class="n">string</span>
+<span class="n">analyse</span><span class="p">(</span><span class="n">statement</span> <span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="tokens">
+<h2>Tokens<a class="headerlink" href="#tokens" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">mydatabase</span><span class="o">.</span><span class="n">people</span>
+<span class="p">[(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">SELECT</span><span class="p">),</span> <span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="o">*</span><span class="p">),</span> <span class="p">(</span><span class="n">keyword</span> <span class="n">FROM</span><span class="p">),</span> <span class="p">(</span><span class="n">table_reference</span> <span class="n">mydatabase</span><span class="o">.</span><span class="n">people</span><span class="p">)]</span>
+
+<span class="n">SHOW</span> <span class="n">TABLE</span> <span class="n">FROM</span> <span class="n">mydatabase</span><span class="o">.</span><span class="n">people</span> <span class="c1"># this table should probably be removed</span>
+<span class="p">[(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">SHOW</span><span class="p">),</span> <span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="n">TABLE</span><span class="p">),</span> <span class="p">(</span><span class="n">keyword</span> <span class="n">FROM</span><span class="p">),</span> <span class="p">(</span><span class="n">table_reference</span> <span class="n">mydatabase</span><span class="o">.</span><span class="n">people</span><span class="p">),</span> <span class="p">(</span><span class="n">comment</span><span class="p">,</span> <span class="c1">#), (comment_string, &quot;this table should ...&quot;)]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">keyword</span><span class="p">:</span> <span class="p">[</span><span class="n">SELECT</span><span class="p">,</span> <span class="n">FROM</span><span class="p">,</span> <span class="n">WHERE</span><span class="p">,</span> <span class="n">LIMIT</span><span class="p">,</span> <span class="n">LEFT</span><span class="p">,</span> <span class="n">RIGHT</span><span class="p">,</span> <span class="n">OUTER</span><span class="p">,</span> <span class="n">INNER</span><span class="p">,</span> <span class="n">JOIN</span><span class="p">]</span>
+<span class="n">operator</span><span class="p">:</span> <span class="p">[</span><span class="o">*</span><span class="p">,</span> <span class="o">+</span><span class="p">,</span> <span class="o">-</span><span class="p">,</span> <span class="o">/</span><span class="p">]</span>
+<span class="n">comment</span><span class="p">:</span> <span class="p">[</span><span class="c1">#, --]</span>
+<span class="n">separator</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ramblings-ideas">
+<h1>Ramblings &amp; Ideas<a class="headerlink" href="#ramblings-ideas" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Write it in go?</li>
+<li>Maybe rename <code class="docutils literal notranslate"><span class="pre">table_reference</span></code> to <code class="docutils literal notranslate"><span class="pre">literal</span></code>?</li>
+<li>We can use regex for most of the tokenizing.</li>
+<li>Split on whitespace (spaces, tabs, newlines) for the tokenizer</li>
+</ul>
+<div class="section" id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Should be able to read from a file, or stdin (or a string?)</li>
+</ul>
+<p><strong>file</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">-</span><span class="n">go</span> <span class="n">myfile</span><span class="o">.</span><span class="n">sql</span>
+</pre></div>
+</div>
+<p><strong>stdin</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;SELECT * FROM 5 WHERE l&quot;</span> <span class="o">|</span> <span class="n">mysql</span><span class="o">-</span><span class="n">go</span>
+</pre></div>
+</div>
+<p><strong>string(?)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">-</span><span class="n">go</span> <span class="s2">&quot;SELECT * FROM 5 WHERE l&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="warnings-messages">
+<h2>Warnings &amp; Messages<a class="headerlink" href="#warnings-messages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>All of them should have line number and column number</li>
+</ul>
+<p><strong>Missing semicolon</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">address</span> <span class="n">WHERE</span>
+<span class="mi">6</span><span class="p">:</span><span class="mi">14</span> <span class="n">Missing</span> <span class="n">semicolon</span>
+</pre></div>
+</div>
+<p><strong>No condition in a where clause</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">address</span> <span class="n">WHERE</span>
+<span class="mi">6</span><span class="p">:</span><span class="mi">14</span> <span class="n">No</span> <span class="n">condition</span> <span class="ow">in</span> <span class="n">where</span> <span class="n">clause</span>
+</pre></div>
+</div>
+<p><strong>No where clause in DELETE/UPDATE (destructive operation)</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>DELETE FROM address
+8:13 DELETE/UPDATE has no WHERE, is that what you want?
+</pre></div>
+</div>
+<p><strong>Database doesn’t exist</strong></p>
+<p>Works on SELECT, INSERT, UPDATE etc…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SELECT `address_line_1` FROM `some_database`.address
+9:15 database `some_database` does not exist
+</pre></div>
+</div>
+<p><strong>Table doesn’t exist</strong></p>
+<p>Works on SELECT, INSERT, UPDATE etc..</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SELECT `address_line_1` FROM some_table
+9:15 table `some_table` does not exist
+</pre></div>
+</div>
+<p><strong>Column doesn’t exist</strong></p>
+<p>Works on SELECT, INSERT, UPDATE etc…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>SELECT `non_existent_column` FROM address
+9:15 column `non_existent_column` does not exist in table `address`
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INSERT INTO address (`non_existent_column`) VALUES (3)
+9:15 column `non_existent_column` does not exist in table `address`
+</pre></div>
+</div>
+<p>etc…</p>
+<p><strong>Trailing comma</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>UPDATE price_band SET band_1_modifier = 0.95, default_band_2_modifier = 0.85, WHERE id = 43;&quot;;
+12:43 Trailing comma after column `default_band_2_modifier`
+</pre></div>
+</div>
+<p><strong>Bring back MySQL errors too</strong></p>
+<p>If MySQL brings back any errors, then we should too.</p>
+</div>
+<div class="section" id="formatter">
+<h2>Formatter?<a class="headerlink" href="#formatter" title="Permalink to this headline">¶</a></h2>
+<p>Maybe create a formatter too.</p>
+<p>Should accept, file, string or stdin.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mysql-go</span> <span class="pre">format</span> <span class="pre">file.sql</span></code></p>
+</div>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>main.go
+Lexer.go<br />Parser.go
+warnings/
+interface.go
+non-existent-table.go
+non-existent-column.go
+etc…</p>
+<p>Parser should contain an array of checks to go through, all checks should follow an interface.<br />each check should have a <code class="docutils literal notranslate"><span class="pre">parse()</span></code> method which takes a string, the SQL statement.</p>
+<div class="section" id="error-struct">
+<h3>Error struct<a class="headerlink" href="#error-struct" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">column</span> <span class="nb">int</span>  
+    <span class="n">line</span> <span class="nb">int</span>    
+    <span class="n">message</span> <span class="n">string</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-kinda">
+<h3>Example (kinda)<a class="headerlink" href="#example-kinda" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">package</span> <span class="n">main</span>    
+
+<span class="kn">import</span> <span class="s2">&quot;fmt&quot;</span>
+
+<span class="nb">type</span> <span class="n">Checker</span> <span class="n">interface</span> <span class="p">{</span>
+    <span class="n">Check</span><span class="p">()</span> <span class="nb">int</span>
+<span class="p">}</span>
+
+<span class="nb">type</span> <span class="n">CheckError</span> <span class="n">struct</span> <span class="p">{</span>
+    <span class="n">line</span> <span class="nb">int</span>    
+    <span class="n">column</span> <span class="nb">int</span>  
+    <span class="n">message</span> <span class="n">string</span>
+<span class="p">}</span>
+
+<span class="nb">type</span> <span class="n">MissingColumn</span> <span class="n">struct</span> <span class="p">{</span>
+    <span class="n">SqlQuery</span> <span class="n">string</span>
+<span class="p">}</span>
+
+<span class="nb">type</span> <span class="n">MissingTable</span> <span class="n">struct</span> <span class="p">{</span>
+    <span class="n">SqlQuery</span> <span class="n">string</span>
+<span class="p">}</span>
+
+<span class="n">func</span> <span class="p">(</span><span class="n">mc</span> <span class="n">MissingColumn</span><span class="p">)</span> <span class="n">Check</span><span class="p">()</span> <span class="nb">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="n">func</span> <span class="p">(</span><span class="n">mt</span> <span class="n">MissingTable</span><span class="p">)</span> <span class="n">Check</span><span class="p">()</span> <span class="nb">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">2</span>
+<span class="p">}</span>
+
+<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">a</span> <span class="p">:</span><span class="o">=</span> <span class="n">MissingColumn</span><span class="p">{</span><span class="s2">&quot;SELECT * FROM SOMETHING&quot;</span><span class="p">}</span>
+    <span class="n">b</span> <span class="p">:</span><span class="o">=</span> <span class="n">MissingTable</span><span class="p">{</span><span class="s2">&quot;SELECT * FROM SOMETHING&quot;</span><span class="p">}</span>
+
+    <span class="n">checks</span> <span class="p">:</span><span class="o">=</span> <span class="p">[]</span><span class="n">Checker</span><span class="p">{</span><span class="n">a</span> <span class="p">,</span><span class="n">b</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">check</span> <span class="p">:</span><span class="o">=</span> <span class="nb">range</span> <span class="n">checks</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">check</span><span class="o">.</span><span class="n">Check</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p>https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

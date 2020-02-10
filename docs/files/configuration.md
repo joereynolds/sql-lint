@@ -1,18 +1,22 @@
-## Connecting to the DB server
+# Configuration
 
-You can connect in two ways:
+Configuring `sql-lint` to connect to your database of choice allows even more
+errors to come through. Errors that `sql-lint` wouldn't find itself. To do this
+is easy, simply supply the connection details to your database in one of two
+ways:
 
-### Via CLI
-
-You can connect via the command line if you wish with the respective flags.
+## Via CLI
 
 ```
 sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
 ```
 
-### Via `config.json`
+## Via `config.json`
 
-A configuration file for `sql-lint` can reside in `~/.config/sql-lint/config.json`
+A configuration file for `sql-lint` can reside in
+`~/.config/sql-lint/config.json`.  It follows the [XDG Base Directory
+Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+Specifically, it uses `$HOME/.config`.
 
 You should put the following in there for more intelligent errors to come through
 
@@ -28,14 +32,9 @@ You should put the following in there for more intelligent errors to come throug
 
 ## Configuration options
 
-The configuration file for `sql-lint` enables more intelligent
-errors to come through since it can query the DB server.
+An exhaustive list of the configuration options for your `config.json` file are
+below.
 
-It follows the [XDG Base Directory
-Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html). Specifically, it uses
-`$HOME/.config`.
-
-Basically, your configuration file is (or belongs) in `~/.config/sql-lint/config.json`.
 
 ### `driver`
 
@@ -54,13 +53,13 @@ The user for the database server.
 
 ### `password`
 
-The password to the database server.
+The password for the database server.
 
 ### `port`
 
-Optional, default it `3306`.
-
 The port to connect to.
+
+Optional, default is `3306`.
 
 ### `ignore-errors`
 
@@ -80,19 +79,10 @@ In that case add it to the `ignore-errors` array in `~/.config/sql-lint/config.j
 ```
 
 The example above will skip checks for odd code points and `DELETE` statements with missing `WHERE` clauses.
-The available checks to skip are:
 
-An exhaustive list is below.
+For a full list of all available checks, see [the check
+documentation](./checks.md)
 
-```
-"odd-code-point"
-"missing-where"
-"invalid-drop-option"
-"invalid-create-option"
-"invalid-truncate-option"
-"invalid-alter-option"
-"invalid-limit-quantifier"
-```
 
 You cannot skip checks that are returned from the DB server itself, only the checks built into `sql-lint`.
 
@@ -116,7 +106,28 @@ The below configuration contains every option available.
 }
 ```
 
-# A word of warning
+### A word of warning
 
 Do not version control your configuration file unless you know what you're
 doing. Stick it in your global `.gitignore` to be safe.
+
+## Editor Integration
+
+`sql-lint` can integrate with any editor that supports external plugins.
+
+### Vim / Neovim
+
+#### Ale
+
+`sql-lint` can be integrated into (Neo)Vim if you add this
+[patch](https://github.com/dense-analysis/ale/pull/2988/commits/07080066e49d68910dccc19e4d95167300fb9422)
+to Ale.
+
+
+#### Vanilla
+
+If you want to go without a plugin, the simplest option is to run the following:
+
+```
+:!sql-lint -f %
+```

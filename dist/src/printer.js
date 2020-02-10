@@ -25,6 +25,7 @@ class Printer {
         }
         if (result.content) {
             console.log(this.format.getMessage(prefix, result));
+            process.exitCode = 1;
         }
         if (this.verbosity) {
             console.log("\n-------------------------\n");

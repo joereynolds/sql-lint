@@ -88,7 +88,20 @@
 <li class="toctree-l3"><a class="reference internal" href="#via-stdin">Via stdin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#with-a-file">With a file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#with-a-string">With a string</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#command-line-options">Command line options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-options">Command line options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#v-version">-V –version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f-file">-f –file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-query">-q –query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-driver">-d –driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v-verbose">-v –verbose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#format">–format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#host">–host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user">–user</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#password">–password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port">–port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h-help">-h –help</a></li>
 </ul>
 </li>
 </ul>
@@ -204,9 +217,90 @@ these errors are more verbose and specific than those coming from an SQL server.
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="command-line-options">
-<h3>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
-<p>To see the full host of options, pass the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag to <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code>.</p>
+<h2>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v-version">
+<h3>-V –version<a class="headerlink" href="#v-version" title="Permalink to this headline">¶</a></h3>
+<p>The version of <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code>.
+Useful for bug reports and confirming what features are available to you.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">version</span>
+<span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="f-file">
+<h3>-f –file<a class="headerlink" href="#f-file" title="Permalink to this headline">¶</a></h3>
+<p>Specifies the file to be linted</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">file</span> <span class="s2">&quot;test.sql&quot;</span>
+<span class="o">&gt;</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-query">
+<h3>-q –query<a class="headerlink" href="#q-query" title="Permalink to this headline">¶</a></h3>
+<p>Specifies an SQL query string to be linted. Note that it must end with a ‘;’.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;SELECT * FROM person WHERE name = &#39;John&#39;;&quot;</span>
+<span class="o">&gt;</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="d-driver">
+<h3>-d –driver<a class="headerlink" href="#d-driver" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mysql</span></code> | <code class="docutils literal notranslate"><span class="pre">postgres</span></code></p>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">mysql</span></code>.</p>
+<p>The driver to use.</p>
+</div>
+<div class="section" id="v-verbose">
+<h3>-v –verbose<a class="headerlink" href="#v-verbose" title="Permalink to this headline">¶</a></h3>
+<p>How verbose to be with output. <code class="docutils literal notranslate"><span class="pre">-v</span></code> will print out the output from the lexer.
+Usually you do not want any verbosity. Useful for bug reports and debugging.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">verbose</span>
+<span class="o">&gt;</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format">
+<h3>–format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">simple</span></code> | <code class="docutils literal notranslate"><span class="pre">json</span></code></p>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">simple</span></code>.</p>
+<p>The output format of <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">simple</span></code> is the most user friendly and human readable. You won’t usually change
+the format unless you have a reason to.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;DELETE FROM person;&quot;</span>
+<span class="o">&gt;</span> <span class="n">query</span><span class="p">:</span><span class="mi">1</span> <span class="p">[</span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span><span class="p">:</span> <span class="n">missing</span><span class="o">-</span><span class="n">where</span><span class="p">]</span> <span class="n">DELETE</span> <span class="n">statement</span> <span class="n">missing</span> <span class="n">WHERE</span> <span class="n">clause</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">json</span></code> can be used if you wish. Usually this is done for editor
+integration or for consumption via some other service.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">--</span><span class="n">query</span> <span class="s2">&quot;DELETE FROM person;&quot;</span> <span class="o">--</span><span class="nb">format</span> <span class="n">json</span>
+<span class="o">&gt;</span> <span class="p">{</span>
+     <span class="s2">&quot;source&quot;</span><span class="p">:</span><span class="s2">&quot;query&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="s2">&quot;[sql-lint: missing-where] DELETE statement missing WHERE clause.&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;line&quot;</span><span class="p">:</span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="host">
+<h3>–host<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<p>The host for the connection.</p>
+</div>
+<div class="section" id="user">
+<h3>–user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p>The user for the connection.</p>
+</div>
+<div class="section" id="password">
+<h3>–password<a class="headerlink" href="#password" title="Permalink to this headline">¶</a></h3>
+<p>The password for the connection.</p>
+</div>
+<div class="section" id="port">
+<h3>–port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h3>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">3306</span></code>.</p>
+<p>The port for the connection.</p>
+</div>
+<div class="section" id="h-help">
+<h3>-h –help<a class="headerlink" href="#h-help" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="o">-</span><span class="n">h</span>
 <span class="n">Usage</span><span class="p">:</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
 

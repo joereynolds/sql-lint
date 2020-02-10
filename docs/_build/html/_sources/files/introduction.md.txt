@@ -44,9 +44,101 @@ sql-lint -f test-file.sql
 sql-lint --query="DELETE FROM person;"
 ```
 
-### Command line options
+## Command line options
 
-To see the full host of options, pass the `-h` or `--help` flag to `sql-lint`. 
+### -V --version
+
+The version of `sql-lint`. 
+Useful for bug reports and confirming what features are available to you.
+
+```
+sql-lint --version
+> 0.0.11
+```
+
+### -f --file
+
+Specifies the file to be linted
+
+```
+sql-lint --file "test.sql"
+> ...
+```
+
+### -q --query
+
+Specifies an SQL query string to be linted. Note that it must end with a ';'.
+
+```
+sql-lint --query "SELECT * FROM person WHERE name = 'John';"
+> ...
+```
+
+### -d --driver
+
+`mysql` | `postgres`
+
+Default is `mysql`.
+
+The driver to use.
+
+### -v --verbose
+
+How verbose to be with output. `-v` will print out the output from the lexer.
+Usually you do not want any verbosity. Useful for bug reports and debugging.
+
+```
+sql-lint --verbose
+> ...
+```
+
+### --format
+
+`simple` | `json`
+
+Default is `simple`.
+
+The output format of `sql-lint`.
+
+ `simple` is the most user friendly and human readable. You won't usually change
+ the format unless you have a reason to.
+
+ ```
+ sql-lint --query "DELETE FROM person;"
+> query:1 [sql-lint: missing-where] DELETE statement missing WHERE clause.
+ ```
+
+`json` can be used if you wish. Usually this is done for editor
+integration or for consumption via some other service.
+
+```
+sql-lint --query "DELETE FROM person;" --format json
+> {
+     "source":"query",
+     "error":"[sql-lint: missing-where] DELETE statement missing WHERE clause.",
+     "line":1
+}
+```
+
+### --host
+
+The host for the connection.
+
+### --user
+
+The user for the connection.
+
+### --password
+
+The password for the connection.
+
+### --port 
+
+Default is `3306`.
+
+The port for the connection.
+
+### -h --help
 
 ```
 : sql-lint -h

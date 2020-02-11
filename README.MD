@@ -2,13 +2,11 @@
 
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
-![Imgur](https://i.imgur.com/nqi1MnT.gifv)
+![Imgur](https://i.imgur.com/nqi1MnT.gif)
 
 ![Imgur](https://i.imgur.com/Le90iGL.png)
 
 ![Imgur](https://i.imgur.com/rJ3h34b.png)
-
-![Imgur](https://i.imgur.com/lo7MMoI.png)
 
 sql-lint is a linter for SQL, it brings back any error from the supported servers
 as well as custom errors written for sql-lint.

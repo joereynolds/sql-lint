@@ -3,8 +3,6 @@
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
 
-sql-lint integrated into vim
-
 ![Imgur](https://i.imgur.com/nqi1MnT.gif)
 
 

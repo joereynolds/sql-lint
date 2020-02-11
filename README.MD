@@ -2,7 +2,7 @@
 
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
-![Imgur](https://i.imgur.com/9BAf9Uq.mp4)
+![Imgur](https://i.imgur.com/nqi1MnT.gifv)
 
 ![Imgur](https://i.imgur.com/Le90iGL.png)
 

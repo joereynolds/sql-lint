@@ -18,21 +18,27 @@ class CheckerRunner {
     omittedErrors: string[],
     database?: Database
   ) {
-    const checks = fs.readdirSync(__dirname + '/checks').map(check => {
-      const checkName = path.parse(check).name;
-      return path.parse(check).name;
-    }).filter(item => {
-      const ignoredChecks = ['invalidOption', 'tableNotFound', 'databaseNotFound'];
+    const checks = fs
+      .readdirSync(__dirname + "/checks")
+      .map(check => {
+        return path.parse(check).name;
+      })
+      .filter(item => {
+        const ignoredChecks = [
+          "invalidOption",
+          "tableNotFound",
+          "databaseNotFound"
+        ];
 
-      // We ignore the 3 above checks.
-      // invalidOption - This is a base class and does actually have any checks
-      // tableNotFound - This is built into most SQL servers so is redundant
-      // databaseNotFound - This is built into most SQL servers so is redundant
-      // .js - There seems to be a discrepancy with filenames when using the compiled
-      //       version of sql-lint (./dist/src/main.js). They are finding checks and
-      //       including the .js. We ignore those too
-      return !ignoredChecks.includes(item) && !item.endsWith('.js');
-    });
+        // We ignore the 3 above checks.
+        // invalidOption - This is a base class and does actually have any checks
+        // tableNotFound - This is built into most SQL servers so is redundant
+        // databaseNotFound - This is built into most SQL servers so is redundant
+        // .js - There seems to be a discrepancy with filenames when using the compiled
+        //       version of sql-lint (./dist/src/main.js). They are finding checks and
+        //       including the .js. We ignore those too
+        return !ignoredChecks.includes(item) && !item.endsWith(".js");
+      });
 
     const factory = new CheckFactory();
 

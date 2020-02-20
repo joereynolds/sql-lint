@@ -10,12 +10,20 @@ const checks_1 = require("../barrel/checks");
  */
 class CheckerRunner {
     run(sqlQueries, printer, prefix, omittedErrors, database) {
-        const checks = fs.readdirSync("./src/checker/checks").map(check => {
+        const checks = fs.readdirSync(__dirname + '/checks').map(check => {
+            const checkName = path.parse(check).name;
             return path.parse(check).name;
+        }).filter(item => {
+            const ignoredChecks = ['invalidOption', 'tableNotFound', 'databaseNotFound'];
+            // We ignore the 3 above checks.
+            // invalidOption - This is a base class and does actually have any checks
+            // tableNotFound - This is built into most SQL servers so is redundant
+            // databaseNotFound - This is built into most SQL servers so is redundant
+            // .js - There seems to be a discrepancy with filenames when using the compiled
+            //       version of sql-lint (./dist/src/main.js). They are finding checks and
+            //       including the .js. We ignore those too
+            return !ignoredChecks.includes(item) && !item.endsWith('.js');
         });
-        checks.splice(0, 1); // Removing the 'check.ts' file from the checks since it's not one.
-        checks.splice(4, 1); // Remove the InvalidOption base class, gross I know.
-        checks.splice(8, 1); // Remove the tableNotFound check for now.
         const factory = new checkFactory_1.CheckFactory();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();

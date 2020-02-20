@@ -76,5 +76,5 @@
         "test": "jest test --coverage --silent",
         "postinstall": "./build/postinstall.sh"
     },
-    "version": "0.0.12"
+    "version": "0.0.13"
 }

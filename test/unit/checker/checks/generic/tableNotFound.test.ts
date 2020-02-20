@@ -30,11 +30,11 @@ test("It brings back an empty checkerResult for an empty query", () => {
   expect(actual).toEqual(expected);
 });
 
-test.each([["non_existent_table", ["non_existent_table"]], ["", []]])(
-  "It correctly cleans a table name",
-  (table, expected) => {
-    const checker = new TableNotFound([{ Table: table }]);
-    const actual = checker.tables;
-    expect(actual).toEqual(expected);
-  }
-);
+test.each([
+  ["non_existent_table", ["non_existent_table"]],
+  ["", []]
+])("It correctly cleans a table name", (table, expected) => {
+  const checker = new TableNotFound([{ Table: table }]);
+  const actual = checker.tables;
+  expect(actual).toEqual(expected);
+});

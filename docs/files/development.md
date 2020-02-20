@@ -53,10 +53,10 @@ of `checks` is in `checkerRunner` **after** the `splice`ing.
 
 ## Testing the code
 
-Testing requires sql-lint and auto-changelog to be installed.
+Testing requires sql-lint to be installed.
 
 ```
-npm install -g sql-lint auto-changelog
+npm install -g sql-lint
 ./build/build.sh //This will run more than just the tests (recommended)
 ```
 

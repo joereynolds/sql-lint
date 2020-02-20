@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk_1 = require("chalk");
 class Printer {
     constructor(verbosity, format) {
         this.verbosity = verbosity;
@@ -20,8 +19,8 @@ class Printer {
             const queryForPrint = JSON.stringify(tokenised.getContent());
             const promptForPrint = `Linting Query: ${queryForPrint}`;
             const tokenisedForPrint = JSON.stringify(tokenised, null, 4);
-            console.log(chalk_1.default.blue(promptForPrint));
-            console.log(chalk_1.default.yellow(`${tokenisedForPrint}`));
+            console.log(promptForPrint);
+            console.log(tokenisedForPrint);
         }
         if (result.content) {
             console.log(this.format.getMessage(prefix, result));

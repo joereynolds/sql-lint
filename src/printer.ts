@@ -2,8 +2,6 @@ import { IChecker } from "./checker/interface";
 import { Query } from "./reader/query";
 import { IFormat } from "./formatter/interface";
 
-import chalk from "chalk";
-
 class Printer {
   public verbosity: number;
   public format: IFormat;
@@ -32,8 +30,8 @@ class Printer {
       const queryForPrint = JSON.stringify(tokenised.getContent());
       const promptForPrint = `Linting Query: ${queryForPrint}`;
       const tokenisedForPrint = JSON.stringify(tokenised, null, 4);
-      console.log(chalk.blue(promptForPrint));
-      console.log(chalk.yellow(`${tokenisedForPrint}`));
+      console.log(promptForPrint);
+      console.log(tokenisedForPrint);
     }
 
     if (result.content) {

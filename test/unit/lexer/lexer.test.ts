@@ -19,6 +19,25 @@ test.each([
   // A create table statement
   ["CREATE TABLE person", "create"],
 
+  // DECLARE statements
+  ["DECLARE p_test_statement DECIMAL(10,2)", "declare"],
+
+  // LEAVE statements
+  ["LEAVE some_stored_procedure", "leave"],
+
+  // CALL statements
+  ["CALL some_stored_procedure", "call"],
+
+  // REPLACE statements
+  ["REPLACE table_name", "replace"],
+
+  // RETURN statements
+  ["RETURN 4", "return"],
+
+  // SHOW statements
+  ["SHOW TABLES FROM some_database", "show"],
+
+  // USE statements
   ["USE symfony", "use"],
   ["use symfony;", "use"]
 ])("Queries are categorised correctly", (query, expected) => {
@@ -51,4 +70,11 @@ test.each([
 ])("Table references are correctly categorised", (tableReference, expected) => {
   const actual = extractTableReference(tableReference);
   expect(actual).toMatchObject(expected);
+});
+
+test("We throw an exception on a query that cannot be categorised", () => {
+  const query = "Not a query SELECT * FROM l";
+  expect(() => {
+    categorise(query);
+  }).toThrow(Error);
 });

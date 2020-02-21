@@ -1,65 +1,39 @@
--- Valid query
+-- To see these errors in vim, you need the patch:
+-- https://github.com/joereynolds/sql-lint/issues/30
+-- failing that you can do `:!sql-lint %`
+
+-- Valid Queries (These should not display any errors)
+ALTER TABLE test;
+CREATE TABLE person;
+DROP TABLE test;
+TRUNCATE TABLE person;
 DELETE
 FROM 
 PERSON  
 WHERE something;
 
--- Non existent database
+-- [sql-lint: unmatched-parentheses]
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE ')';
+-- [sql-lint: database-not-found]
 USE test;
-use non_existent_database;
-
-
--- Bad code point and syntax error
-SELECT * FRO�;
-
--- Missing a database
-SELECT  
-*
-FROM    
-PERSON  
-
-
-
-WHERE age > 5
-;
-
-UPDATE symfony.gig SET id = 4;
-
--- DELETE missing a WHERE clause
-DELETE  
-
-
-FROM    
-
-
-
-
-
-
-      person;
-
-
--- Non existent table
-    select * FROM symfony.dont_exist;
-
-
--- DELETE missing a WHERE clause with a comment nested inside it
-DELETE FROM 
-
--- Test
-person;
-
-
-
--- Invalid option for DROP
+-- [sql-lint: missing-where]
+DELETE  FROM    person;
+-- [sql-lint: invalid-drop-option]
 DROP thing l;
-
--- Valid option for DROP
-DROP TABLE test;
-
--- Invalid option for CREATE
+-- [sql-lint: invalid-create-option]
 CREATE test person;
+-- [sql-lint: invalid-truncate-option]
+TRUNCATE something g;
+-- [sql-lint: invalid-alter-option]
+ALTER mlady TEST;
+-- [sql-lint: odd-code-point]
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE '�';
+-- [sql-lint: invalid-limit-argument]
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS LIMIT 'test';
 
--- Valid option for CREATE
-CREATE TABLE person;
-
+-- [ER_NO_DB_ERROR]
+SELECT  * FROM    PERSON  WHERE age > 5 ;
+-- [ER_PARSE_ERROR]
+UPDATE symfony.gig SET id = 4;
+-- [ER_NO_SUCH_TABLE]
+select * FROM symfony.dont_exist;

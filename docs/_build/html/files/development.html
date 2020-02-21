@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checks.html">Checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-check">Adding a check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#typeerror-checkmap-check-is-not-a-constructor"><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">checkMap[check]</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">constructor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-code">Testing the code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-docker-container">Using the Docker container</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-sql-lint-to-the-docker-container">Connecting sql-lint to the Docker container</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#this-documentation">This documentation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/development.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>If you’re interested in helping further the development of <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> then read
+on. Casual users can ignore this section.</p>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>A raw query (either from stdin, a file, or a string) hits <code class="docutils literal notranslate"><span class="pre">main.ts</span></code>.
+This query then gets categorised into the type of statement it is (<code class="docutils literal notranslate"><span class="pre">SELECT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">INSERT</span></code>, <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> etc…), as the SQL grammar is pretty damn huge, there is
+a lexer per statement. This adds redundancy but increases flexibility.</p>
+<p>Once a query has been categorised, it is then lexxed by the relevant lexer. See the
+<code class="docutils literal notranslate"><span class="pre">src/lexer</span></code> directory for the inner workings.</p>
+<p>i.e. if we have the statement</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">name</span> <span class="n">FROM</span> <span class="n">user</span>
+</pre></div>
+</div>
+<p>This will hit the lexer which will categorise this as a <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement which
+the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> lexer will then tokenise. The tokenised string is then
+passed through to every checker to look for any linting errors.</p>
+</div>
+<div class="section" id="adding-a-check">
+<h2>Adding a check<a class="headerlink" href="#adding-a-check" title="Permalink to this headline">¶</a></h2>
+<p>If you want to add your own check, read on. It’s quite simple but also verbose.</p>
+<p>This can probably be automated to make it WAY easier.</p>
+<p>Anyway, here are the steps.</p>
+<ul class="simple">
+<li>Create a check under <code class="docutils literal notranslate"><span class="pre">src/checker/checks</span></code><ul>
+<li>The name of the class is also the name of the checker so name it well</li>
+</ul>
+</li>
+<li>Add your check to <code class="docutils literal notranslate"><span class="pre">src/barrel/checks.ts</span></code><ul>
+<li>All checks live here so we can import them all conveniently</li>
+</ul>
+</li>
+<li>Import your check in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
+<li>Add your check to the <code class="docutils literal notranslate"><span class="pre">checkMap</span></code> in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
+<li>Increment the splice last two spliced numbers in <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code> otherwise it
+will remove the wrong things. Gross I know and needs to be fixed</li>
+<li>Add it to the README.md so people know it’s a thing</li>
+<li>Add it to <code class="docutils literal notranslate"><span class="pre">configuration.md</span></code>. This is an exhaustive list of the checks</li>
+<li>Add tests. The name of the test should match the name of the check</li>
+</ul>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="typeerror-checkmap-check-is-not-a-constructor">
+<h3><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">checkMap[check]</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">constructor</span></code><a class="headerlink" href="#typeerror-checkmap-check-is-not-a-constructor" title="Permalink to this headline">¶</a></h3>
+<p>Your check is not being picked up by the <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code>. log out what the value
+of <code class="docutils literal notranslate"><span class="pre">checks</span></code> is in <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code> <strong>after</strong> the <code class="docutils literal notranslate"><span class="pre">splice</span></code>ing.</p>
+</div>
+</div>
+<div class="section" id="testing-the-code">
+<h2>Testing the code<a class="headerlink" href="#testing-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Testing requires sql-lint and auto-changelog to be installed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="n">auto</span><span class="o">-</span><span class="n">changelog</span>
+<span class="o">./</span><span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="o">//</span><span class="n">This</span> <span class="n">will</span> <span class="n">run</span> <span class="n">more</span> <span class="n">than</span> <span class="n">just</span> <span class="n">the</span> <span class="n">tests</span> <span class="p">(</span><span class="n">recommended</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-docker-container">
+<h2>Using the Docker container<a class="headerlink" href="#using-the-docker-container" title="Permalink to this headline">¶</a></h2>
+<p>First, make sure port <code class="docutils literal notranslate"><span class="pre">3306</span></code> is available locally.  (You can do this by
+inspecting the output of <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">lsof</span> <span class="pre">-i</span> <span class="pre">:3306</span></code> and <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code> and <code class="docutils literal notranslate"><span class="pre">kill</span></code>ing
+anything using that port) Now do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">--</span><span class="n">build</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">recreate</span>
+</pre></div>
+</div>
+<p>At this point the container(s) will be up and ready to use.  You can login with
+the following credentials: <code class="docutils literal notranslate"><span class="pre">mysql</span> <span class="pre">-u</span> <span class="pre">root</span> <span class="pre">-ppassword</span></code>.</p>
+<p>Here’s an example of a query:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">sqllint_mysql_1</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">ppassword</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;SHOW DATABASES&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="connecting-sql-lint-to-the-docker-container">
+<h3>Connecting sql-lint to the Docker container<a class="headerlink" href="#connecting-sql-lint-to-the-docker-container" title="Permalink to this headline">¶</a></h3>
+<p>Change your config file in <code class="docutils literal notranslate"><span class="pre">~/.config/sql-lint/config.json</span></code> to have the following values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">3306</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="this-documentation">
+<h2>This documentation<a class="headerlink" href="#this-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This documentation is built on <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> and <code class="docutils literal notranslate"><span class="pre">readthedocs</span></code>. To run it locally,
+you will need the following:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> repository (documentation lies in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">sphinx</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code>)</li>
+<li><code class="docutils literal notranslate"><span class="pre">recommonmark</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">recommonmark</span></code>)</li>
+</ul>
+<p>Once those prerequisites are met, you can edit the files and see them exactly
+how they would appear on readthedocs.</p>
+<p>installed.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

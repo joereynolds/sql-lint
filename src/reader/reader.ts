@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import { Line } from "./line";
 import { Query } from "./query";
+import { Keyword } from "../syntax/keywords";
 
 /**
  * Grabs the querie(s) from the --file flag
@@ -15,7 +16,7 @@ export function putContentIntoLines(contents: string): Query[] {
   const queriesFromFile: Query[] = [];
   let currentQueryContent: string = "";
   let query = new Query();
-  const skipChars = ["", "\n", "\r\n"];
+  const skipChars = ["", Keyword.Newline, Keyword.WindowsNewline];
 
   contents = stripComments(contents);
 
@@ -24,7 +25,7 @@ export function putContentIntoLines(contents: string): Query[] {
       currentQueryContent += contents[i];
     }
 
-    if (contents[i] === "\n") {
+    if (contents[i] === Keyword.Newline) {
       if (currentQueryContent.length > 0) {
         query.lines.push(new Line(currentQueryContent, lineNumber));
       }
@@ -51,20 +52,19 @@ export function putContentIntoLines(contents: string): Query[] {
  * 3. Rejoin the lines together as a single string.
  */
 function stripComments(content: string): string {
-  return content
-    .split("\n")
-    .map(line => {
-      if (
-        line.startsWith("--") ||
-        line.startsWith("#") ||
-        line.startsWith("/*")
-      ) {
-        return "";
-      } else {
-        return line;
-      }
-    })
-    .join("\n");
+  const contentInLines = content.split(Keyword.Newline);
+
+  for (let i = 0; i < contentInLines.length; i++) {
+    if (
+      contentInLines[i].startsWith(Keyword.CommentDash) ||
+      contentInLines[i].startsWith(Keyword.CommentHash) ||
+      contentInLines[i].startsWith(Keyword.CommentMultiLineStart)
+    ) {
+      contentInLines[i] = "";
+    }
+  }
+
+  return contentInLines.join(Keyword.Newline);
 }
 
 /**

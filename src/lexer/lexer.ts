@@ -1,5 +1,5 @@
 import { Query } from "../reader/query";
-import { Keyword } from "./tokens";
+import { Keyword } from "../syntax/keywords";
 import { StatementFactory } from "./statementFactory";
 
 function categorise(query: string) {

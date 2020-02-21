@@ -18,11 +18,13 @@ program
     .option("-f, --file <path>", "The .sql file to lint")
     .option("--fix <string>", "The .sql string to fix")
     .option("-q, --query <string>", "The query to lint")
+    .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
     .option("--host <string>", "The host for the connection")
     .option("--user <string>", "The user for the connection")
     .option("--password <string>", "The password for the connection")
+    .option("--port <string>", "The port for the connection")
     .parse(process.argv);
 let queries = [];
 let prefix = "";
@@ -31,7 +33,6 @@ const format = formatterFactory.build(program.format);
 const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
-let runSimpleChecks = false;
 if (program.query) {
     queries = reader_1.getQueryFromLine(program.query);
     prefix = "query";
@@ -56,16 +57,16 @@ if (!program.file && !program.query) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
+let omittedErrors = [];
+if (configuration !== null && "ignore-errors" in configuration) {
+    omittedErrors = configuration["ignore-errors"] || [];
+}
 if (configuration === null) {
     printer.warnAboutFileNotFound(config_1.file);
-    runSimpleChecks = true;
+    runner.run(queries, printer, prefix, omittedErrors);
+    process.exit(0);
 }
-if (runSimpleChecks) {
-    runner.run(queries, printer, prefix);
-}
-else {
-    const db = new database_1.Database(program.host || configuration.host, program.user || configuration.user, program.password || configuration.password);
-    runner.run(queries, printer, prefix, db);
-    db.connection.end();
-}
+const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password, program.port || configuration.port || "3306");
+runner.run(queries, printer, prefix, omittedErrors, db);
+db.connection.end();
 //# sourceMappingURL=main.js.map

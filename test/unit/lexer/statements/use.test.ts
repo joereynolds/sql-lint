@@ -1,5 +1,6 @@
 import { Use } from "../../../../src/lexer/statements/use";
 import { putContentIntoLines } from "../../../../src/reader/reader";
+import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
@@ -9,7 +10,7 @@ test.each([
         {
           content: "USE ;",
           num: 1,
-          tokens: [["keyword", "use"]]
+          tokens: [new Token("keyword", "use")]
         }
       ]
     }
@@ -22,7 +23,10 @@ test.each([
         {
           content: "USE symfony ;",
           num: 1,
-          tokens: [["keyword", "use"], ["table_reference", "symfony"]]
+          tokens: [
+            new Token("keyword", "use"),
+            new Token("table_reference", "symfony")
+          ]
         }
       ]
     }
@@ -36,9 +40,9 @@ test.each([
           content: "use symfony pricing ;",
           num: 1,
           tokens: [
-            ["keyword", "use"],
-            ["table_reference", "symfony"],
-            ["table_reference", "pricing"]
+            new Token("keyword", "use"),
+            new Token("table_reference", "symfony"),
+            new Token("table_reference", "pricing")
           ]
         }
       ]

@@ -1,7 +1,9 @@
 import { Query } from "../../reader/query";
 import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
-import { Keyword, Types } from "../tokens";
+import { Keyword } from "../../syntax/keywords";
+import { Types } from "../types";
+import { Token } from "../token";
 
 class Drop implements ILexer {
   public options: string[] = [
@@ -26,12 +28,14 @@ class Drop implements ILexer {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Drop) {
-          line.tokens.push([Types.Keyword, item]);
+          line.tokens.push(new Token(Types.Keyword, item));
         } else if (lastToken === Keyword.Drop) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
-            line.tokens.push([Types.Option, cleanUnquotedIdentifier(item)]);
+            line.tokens.push(
+              new Token(Types.Option, cleanUnquotedIdentifier(item))
+            );
           }
         }
         lastToken = item;

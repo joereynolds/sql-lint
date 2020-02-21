@@ -1,70 +1,46 @@
+import * as fs from "fs";
+import * as path from "path";
+import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
-import { Keyword } from "../lexer/tokens";
 import { categorise, tokenise } from "../lexer/lexer";
-import {
-  MySqlError,
-  MissingWhere,
-  OddCodePoint,
-  DatabaseNotFound,
-  InvalidCreateOption,
-  InvalidDropOption
-} from "../barrel/checks";
+import { MySqlError } from "../barrel/checks";
 
 /**
  * Runs all the checks.
  */
 class CheckerRunner {
-  /**
-   * Simple checks are ones that don't require a database connection
-   */
-  public runSimpleChecks(
-    printer: Printer,
-    prefix: string,
-    category: string,
-    tokenised: Query,
-    checks: any
-  ) {
-    if (category === Keyword.Select) {
-      printer.printCheck(checks.oddCodePoint, tokenised, prefix);
-    } else if (category === Keyword.Delete) {
-      printer.printCheck(checks.missingWhere, tokenised, prefix);
-    } else if (category === Keyword.Drop) {
-      printer.printCheck(checks.invalidDropOption, tokenised, prefix);
-    } else if (category === Keyword.Create) {
-      printer.printCheck(checks.invalidCreateOption, tokenised, prefix);
-    }
-  }
-
-  public runDatabaseChecks(
-    database: Database,
-    printer: Printer,
-    prefix: string,
-    category: string,
-    tokenised: Query,
-    content: string
-  ) {
-    database.lintQuery(database.connection, content, (results: any) => {
-      const checker = new MySqlError(results);
-      printer.printCheck(checker, tokenised, prefix);
-    });
-
-    if (category === Keyword.Use) {
-      database.getDatabases(database.connection, (results: any) => {
-        const checker = new DatabaseNotFound(results);
-        printer.printCheck(checker, tokenised, prefix);
-      });
-    }
-  }
-
   public run(
     sqlQueries: Query[],
     printer: Printer,
     prefix: string,
+    omittedErrors: string[],
     database?: Database
   ) {
-    const checks = this.getSqlLintChecks();
+    const checks = fs
+      .readdirSync(__dirname + "/checks")
+      .map(check => {
+        return path.parse(check).name;
+      })
+      .filter(item => {
+        const ignoredChecks = [
+          "invalidOption",
+          "tableNotFound",
+          "databaseNotFound"
+        ];
+
+        // We ignore the 3 above checks.
+        // invalidOption - This is a base class and does actually have any checks
+        // tableNotFound - This is built into most SQL servers so is redundant
+        // databaseNotFound - This is built into most SQL servers so is redundant
+        // .js - There seems to be a discrepancy with filenames when using the compiled
+        //       version of sql-lint (./dist/src/main.js). They are finding checks and
+        //       including the .js. We ignore those too
+        return !ignoredChecks.includes(item) && !item.endsWith(".js");
+      });
+
+    const factory = new CheckFactory();
 
     sqlQueries.forEach((query: any) => {
       const content = query.getContent().trim();
@@ -72,30 +48,31 @@ class CheckerRunner {
       if (content) {
         const category = categorise(content);
         const tokenised: Query = tokenise(query);
-        if (database) {
-          this.runDatabaseChecks(
-            database,
-            printer,
-            prefix,
-            category,
-            tokenised,
-            content
-          );
-          this.runSimpleChecks(printer, prefix, category, tokenised, checks);
-        } else {
-          this.runSimpleChecks(printer, prefix, category, tokenised, checks);
-        }
+        checks.forEach(check => {
+          const checker = factory.build(check);
+
+          // Simple checks
+          if (
+            checker.appliesTo.includes(category) &&
+            !checker.requiresConnection
+          ) {
+            printer.printCheck(checker, tokenised, prefix);
+          }
+
+          // DB server checks
+          if (
+            checker.requiresConnection &&
+            database &&
+            checker.appliesTo.includes(category)
+          ) {
+            database.lintQuery(database.connection, content, (results: any) => {
+              const sqlChecker = new MySqlError(results);
+              printer.printCheck(sqlChecker, tokenised, prefix);
+            });
+          }
+        });
       }
     });
-  }
-
-  private getSqlLintChecks() {
-    return {
-      oddCodePoint: new OddCodePoint(),
-      missingWhere: new MissingWhere(),
-      invalidDropOption: new InvalidDropOption(),
-      invalidCreateOption: new InvalidCreateOption()
-    };
   }
 }
 

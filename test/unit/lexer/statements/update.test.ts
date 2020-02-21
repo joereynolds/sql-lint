@@ -1,5 +1,6 @@
 import { Update } from "../../../../src/lexer/statements/update";
 import { putContentIntoLines } from "../../../../src/reader/reader";
+import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
@@ -9,7 +10,7 @@ test.each([
         {
           content: "UPDATE ;",
           num: 1,
-          tokens: [["keyword", "update"]]
+          tokens: [new Token("keyword", "update")]
         }
       ]
     }
@@ -22,7 +23,10 @@ test.each([
         {
           content: "UPDATE symfony.gig ;",
           num: 1,
-          tokens: [["keyword", "update"], ["table_reference", "symfony.gig"]]
+          tokens: [
+            new Token("keyword", "update"),
+            new Token("table_reference", "symfony.gig")
+          ]
         }
       ]
     }

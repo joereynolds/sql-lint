@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const tokens_1 = require("./tokens");
+const keywords_1 = require("../syntax/keywords");
 const statementFactory_1 = require("./statementFactory");
 function categorise(query) {
     query = query.trim().toLowerCase();
     // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
-    const keywordLookup = tokens_1.Keyword;
-    const result = Object.keys(tokens_1.Keyword).find(keyword => query.startsWith(keywordLookup[keyword]));
+    const keywordLookup = keywords_1.Keyword;
+    const result = Object.keys(keywords_1.Keyword).find(keyword => query.startsWith(keywordLookup[keyword]));
     if (result) {
         return keywordLookup[result];
     }
-    throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(tokens_1.Keyword)}`);
+    throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(keywords_1.Keyword)}`);
 }
 exports.categorise = categorise;
 function tokenise(query) {

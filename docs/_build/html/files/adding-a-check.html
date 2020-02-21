@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting &mdash; sql-lint 0.0.11 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sql-lint
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#typeerror-checkmap-check-is-not-a-constructor"><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">checkMap[check]</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">constructor</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sql-lint</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Troubleshooting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/files/adding-a-check.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>This can probably be automated to make it WAY easier.</p>
+<p>Anyway, here are the steps.</p>
+<ul class="simple">
+<li>Create a check under <code class="docutils literal notranslate"><span class="pre">src/checker/checks</span></code><ul>
+<li>The name of the class is also the name of the checker so name it well</li>
+</ul>
+</li>
+<li>Add your check to <code class="docutils literal notranslate"><span class="pre">src/barrel/checks.ts</span></code><ul>
+<li>All checks live here so we can import them all conveniently</li>
+</ul>
+</li>
+<li>Import your check in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
+<li>Add your check to the <code class="docutils literal notranslate"><span class="pre">checkMap</span></code> in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
+<li>Increment the splice last two spliced numbers in <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code> otherwise it
+will remove the wrong things. Gross I know and needs to be fixed</li>
+<li>Add it to the README.md so people know it’s a thing</li>
+<li>Add it to <code class="docutils literal notranslate"><span class="pre">configuration.md</span></code>. This is an exhaustive list of the checks</li>
+<li>Add tests. The name of the test should match the name of the check</li>
+</ul>
+<div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="typeerror-checkmap-check-is-not-a-constructor">
+<h2><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">checkMap[check]</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">constructor</span></code><a class="headerlink" href="#typeerror-checkmap-check-is-not-a-constructor" title="Permalink to this headline">¶</a></h2>
+<p>Your check is not being picked up by the <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code>. log out what the value
+of <code class="docutils literal notranslate"><span class="pre">checks</span></code> is in <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code> <strong>after</strong> the <code class="docutils literal notranslate"><span class="pre">splice</span></code>ing.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Joe Reynolds
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

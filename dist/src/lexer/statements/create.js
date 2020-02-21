@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lexer_1 = require("../lexer");
-const tokens_1 = require("../tokens");
+const keywords_1 = require("../../syntax/keywords");
+const types_1 = require("../types");
+const token_1 = require("../token");
 class Create {
     constructor() {
         this.options = [
@@ -11,6 +13,7 @@ class Create {
             "event",
             "function",
             "index",
+            "or",
             "procedure",
             "server",
             "table",
@@ -18,6 +21,7 @@ class Create {
             "temporary",
             "trigger",
             "user",
+            "unique",
             "view"
         ];
     }
@@ -26,13 +30,13 @@ class Create {
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {
                 let item = word.toLowerCase().trim();
-                if (item === tokens_1.Keyword.Create) {
-                    line.tokens.push([tokens_1.Types.Keyword, item]);
+                if (item === keywords_1.Keyword.Create) {
+                    line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));
                 }
-                else if (lastToken === tokens_1.Keyword.Create) {
+                else if (lastToken === keywords_1.Keyword.Create) {
                     item = lexer_1.cleanUnquotedIdentifier(item);
                     if (item.length > 0) {
-                        line.tokens.push([tokens_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)]);
+                        line.tokens.push(new token_1.Token(types_1.Types.Option, lexer_1.cleanUnquotedIdentifier(item)));
                     }
                 }
                 lastToken = item;

@@ -1,7 +1,9 @@
 import { Query } from "../../reader/query";
 import { ILexer } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
-import { Keyword, Types } from "../tokens";
+import { Keyword } from "../../syntax/keywords";
+import { Types } from "../types";
+import { Token } from "../token";
 
 class Create implements ILexer {
   public options: string[] = [
@@ -11,6 +13,7 @@ class Create implements ILexer {
     "event",
     "function",
     "index",
+    "or",
     "procedure",
     "server",
     "table",
@@ -18,6 +21,7 @@ class Create implements ILexer {
     "temporary",
     "trigger",
     "user",
+    "unique",
     "view"
   ];
 
@@ -28,12 +32,14 @@ class Create implements ILexer {
       line.content.split(" ").forEach(word => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Create) {
-          line.tokens.push([Types.Keyword, item]);
+          line.tokens.push(new Token(Types.Keyword, item));
         } else if (lastToken === Keyword.Create) {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
-            line.tokens.push([Types.Option, cleanUnquotedIdentifier(item)]);
+            line.tokens.push(
+              new Token(Types.Option, cleanUnquotedIdentifier(item))
+            );
           }
         }
         lastToken = item;

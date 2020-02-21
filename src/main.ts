@@ -24,6 +24,10 @@ program
   .option("--fix <string>", "The .sql string to fix")
   .option("-q, --query <string>", "The query to lint")
   .option(
+    "-d, --driver <string>",
+    "The driver to use, must be one of ['mysql', 'postgres']"
+  )
+  .option(
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated"
   )
@@ -35,6 +39,7 @@ program
   .option("--host <string>", "The host for the connection")
   .option("--user <string>", "The user for the connection")
   .option("--password <string>", "The password for the connection")
+  .option("--port <string>", "The port for the connection")
   .parse(process.argv);
 
 let queries: Query[] = [];
@@ -45,7 +50,6 @@ const format = formatterFactory.build(program.format);
 const printer: Printer = new Printer(program.verbose, format);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
-let runSimpleChecks: boolean = false;
 
 if (program.query) {
   queries = getQueryFromLine(program.query);
@@ -76,19 +80,25 @@ if (!program.file && !program.query) {
   prefix = "stdin";
 }
 
-if (configuration === null) {
-  printer.warnAboutFileNotFound(file);
-  runSimpleChecks = true;
+let omittedErrors: string[] = [];
+if (configuration !== null && "ignore-errors" in configuration) {
+  omittedErrors = configuration["ignore-errors"] || [];
 }
 
-if (runSimpleChecks) {
-  runner.run(queries, printer, prefix);
-} else {
-  const db = new Database(
-    program.host || configuration.host,
-    program.user || configuration.user,
-    program.password || configuration.password
-  );
-  runner.run(queries, printer, prefix, db);
-  db.connection.end();
+if (configuration === null) {
+  printer.warnAboutFileNotFound(file);
+  runner.run(queries, printer, prefix, omittedErrors);
+  process.exit(0);
 }
+
+const db = new Database(
+  program.driver || configuration.driver || "mysql",
+  program.host || configuration.host,
+  program.user || configuration.user,
+  program.password || configuration.password,
+  program.port || configuration.port || "3306"
+);
+
+runner.run(queries, printer, prefix, omittedErrors, db);
+
+db.connection.end();

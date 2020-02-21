@@ -13,10 +13,10 @@ class Fixer {
 
     query.lines.forEach(line => {
       line.tokens.forEach(token => {
-        if (token[0] === "keyword") {
-          fixed += `${token[1].toUpperCase()}\n`;
+        if (token.type === "keyword") {
+          fixed += `${token.value.toUpperCase()}\n`;
         } else {
-          fixed += token[1] + "\n";
+          fixed += token.value + "\n";
         }
       });
     });

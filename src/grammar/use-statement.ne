@@ -1,3 +1,5 @@
+@preprocessor typescript
+
 @builtin "whitespace.ne" # `_` means arbitrary amount of whitespace
 
 use -> "use " _ table _ terminator {%

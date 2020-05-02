@@ -3,14 +3,18 @@
         "sql-lint": "./dist/src/main.js"
     },
     "dependencies": {
+        "@types/moo": "^0.5.3",
         "@types/mysql": "^2.15.9",
+        "@types/nearley": "^2.11.1",
         "@types/node": "^10.14.2",
         "@types/sprintf-js": "^1.1.2",
         "any-db": "^2.2.1",
         "any-db-mysql": "^2.1.2",
         "any-db-postgres": "^2.1.5",
         "commander": "^2.17.1",
+        "moo": "^0.5.1",
         "mysql": "^2.16.0",
+        "nearley": "^2.19.2",
         "param-case": "^2.1.1",
         "sprintf-js": "^1.1.2"
     },

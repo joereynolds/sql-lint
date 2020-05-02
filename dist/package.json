@@ -3,7 +3,8 @@
         "sql-lint": "./dist/src/main.js"
     },
     "dependencies": {
-        "@types/mysql": "^2.15.5",
+        "@types/moo": "^0.5.3",
+        "@types/mysql": "^2.15.9",
         "@types/node": "^10.14.2",
         "@types/sprintf-js": "^1.1.2",
         "any-db": "^2.2.1",
@@ -26,7 +27,7 @@
         "tslint": "^5.14.0",
         "tslint-config-prettier": "^1.18.0",
         "tslint-sonarts": "^1.9.0",
-        "typescript": "^3.5.1"
+        "typescript": "^3.8.2"
     },
     "homepage": "https://github.com/joereynolds/sql-lint",
     "jest": {

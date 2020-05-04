@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path = require("path");
 const checkFactory_1 = require("./checkFactory");
-const lexer_1 = require("../lexer/lexer");
+const lexer_1 = require("../parser/lexer");
 const checks_1 = require("../barrel/checks");
 /**
  * Runs all the checks.

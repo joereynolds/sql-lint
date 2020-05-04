@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../checkerResult");
-const types_1 = require("../../lexer/types");
+const types_1 = require("../../parser/types");
 const sprintf_js_1 = require("sprintf-js");
 const check_1 = require("../check");
 class DatabaseNotFound extends check_1.Check {

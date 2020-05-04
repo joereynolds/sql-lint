@@ -1,20 +1,8 @@
-import { Drop } from "../../../../src/parser/statements/drop";
+import { Drop } from "../../../../src/parser/statements/drop/drop";
 import { putContentIntoLines } from "../../../../src/reader/reader";
 import { Token } from "../../../../src/parser/token";
 
 test.each([
-  [
-    "DROP ;",
-    {
-      lines: [
-        {
-          content: "DROP ;",
-          num: 1,
-          tokens: [new Token("keyword", "drop")]
-        }
-      ]
-    }
-  ],
   [
     "DROP TABLE ;",
     {

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const lexer_1 = require("../../lexer/lexer");
+const lexer_1 = require("../../parser/lexer");
 const checkerResult_1 = require("../checkerResult");
-const types_1 = require("../../lexer/types");
+const types_1 = require("../../parser/types");
 const sprintf_js_1 = require("sprintf-js");
 class TableNotFound {
     constructor(tables) {

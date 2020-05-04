@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const checkerResult_1 = require("../checkerResult");
 const check_1 = require("../check");
 const sprintf_js_1 = require("sprintf-js");
-const types_1 = require("../../lexer/types");
+const types_1 = require("../../parser/types");
 class InvalidLimitQuantifier extends check_1.Check {
     constructor() {
         super(...arguments);

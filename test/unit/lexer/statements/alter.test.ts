@@ -1,20 +1,8 @@
-import { Alter } from "../../../../src/parser/statements/alter";
+import { Alter } from "../../../../src/parser/statements/alter/alter";
 import { putContentIntoLines } from "../../../../src/reader/reader";
 import { Token } from "../../../../src/parser/token";
 
 test.each([
-  [
-    "ALTER ;",
-    {
-      lines: [
-        {
-          content: "ALTER ;",
-          num: 1,
-          tokens: [new Token("keyword", "alter")]
-        }
-      ]
-    }
-  ],
   [
     "ALTER TABLE ;",
     {

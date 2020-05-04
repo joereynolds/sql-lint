@@ -15,6 +15,7 @@ WHERE something;
 -- [sql-lint: unmatched-parentheses]
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE ')';
 -- [sql-lint: database-not-found]
+-- Note this is currently turned off since the SQL servers can do this for you
 USE test;
 -- [sql-lint: missing-where]
 DELETE  FROM    person;

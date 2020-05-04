@@ -37,6 +37,6 @@ test.each([
 ])("It tokenises a `use` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Use();
-  const actual = tokeniser.tokenise(q[0]);
+  const actual = tokeniser.parse(q[0]);
   expect(expected).toEqual(actual);
 });

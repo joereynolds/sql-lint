@@ -25,7 +25,7 @@ class Create implements IParser {
     "view"
   ];
 
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
     let lastToken = "";
 
     query.lines.forEach(line => {

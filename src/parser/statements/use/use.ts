@@ -9,7 +9,7 @@ import {Types} from "../../types";
 
 class Use implements IParser {
   public options: string[] = [];
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(use_grammar.default));
     const ast = parser.feed(query.getContent());
 

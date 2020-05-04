@@ -33,6 +33,6 @@ test.each([
 ])("It tokenises a `drop` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Drop();
-  const actual = tokeniser.tokenise(q[0]);
+  const actual = tokeniser.parse(q[0]);
   expect(actual).toEqual(expected);
 });

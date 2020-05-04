@@ -45,6 +45,6 @@ test.each([
 ])("It tokenises a `create` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Create();
-  const actual = tokeniser.tokenise(q[0]);
+  const actual = tokeniser.parse(q[0]);
   expect(actual).toEqual(expected);
 });

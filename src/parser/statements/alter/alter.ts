@@ -21,7 +21,7 @@ class Alter implements IParser {
     "view"
   ];
 
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(alter_grammar.default));
     const ast = parser.feed(query.getContent());
 

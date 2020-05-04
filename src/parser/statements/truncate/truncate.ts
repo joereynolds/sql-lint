@@ -10,7 +10,7 @@ import { Token } from "../../token";
 class Truncate implements IParser {
   public options: string[] = ["table"];
 
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar.default));
     const ast = parser.feed(query.getContent());
 

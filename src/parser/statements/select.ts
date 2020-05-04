@@ -8,7 +8,7 @@ import { Token } from "../token";
 class Select implements IParser {
   public options: string[] = [];
 
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
     const keywords = Object.keys(Keyword).map(keyword => keyword.toLowerCase());
     let lastToken = "";
     query.lines.forEach(line => {

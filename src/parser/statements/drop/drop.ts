@@ -22,7 +22,7 @@ class Drop implements IParser {
     "trigger"
   ];
 
-  public tokenise(query: Query): Query {
+  public parse(query: Query): Query {
 
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(drop_grammar.default));
     const ast = parser.feed(query.getContent());

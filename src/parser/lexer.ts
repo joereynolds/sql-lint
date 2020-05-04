@@ -30,7 +30,7 @@ function tokenise(query: Query): Query {
 
   query.category = category;
 
-  return statement.tokenise(query);
+  return statement.parse(query);
 }
 
 /*

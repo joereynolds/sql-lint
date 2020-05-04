@@ -83,6 +83,6 @@ test.each([
 ])("It tokenises a `select` correctly", (query, expected) => {
   const tokeniser = new Select();
   const q = putContentIntoLines(query);
-  const actual = tokeniser.tokenise(q[0]);
+  const actual = tokeniser.parse(q[0]);
   expect(actual).toMatchObject(expected);
 });

@@ -18,6 +18,6 @@ test.each([
 ])("It tokenises a `alter` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Alter();
-  const actual = tokeniser.tokenise(q[0]);
+  const actual = tokeniser.parse(q[0]);
   expect(actual).toEqual(expected);
 });

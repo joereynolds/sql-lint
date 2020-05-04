@@ -1,4 +1,4 @@
-import { Use } from "../../../../src/lexer/statements/use";
+import { Use } from "../../../../src/lexer/statements/use/use";
 import { putContentIntoLines } from "../../../../src/reader/reader";
 import { Token } from "../../../../src/lexer/token";
 

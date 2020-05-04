@@ -1,9 +1,9 @@
-import { Query } from "../../reader/query";
-import { ILexer } from "../interface";
+import { Query } from "../../../reader/query";
+import { ILexer } from "../../interface";
 import * as nearley from "nearley";
-import * as use_grammar from "../../grammar/use";
-import {Token} from "../token";
-import {Types} from "../types";
+import * as use_grammar from "./useGrammar";
+import {Token} from "../../token";
+import {Types} from "../../types";
 
 // Testing: npm run build && ./dist/src/main.js -q "use test;"
 

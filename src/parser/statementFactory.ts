@@ -1,4 +1,4 @@
-import { ILexer } from "./interface";
+import { IParser } from "./interface";
 import {
   Alter,
   Select,
@@ -9,10 +9,10 @@ import {
 } from "../barrel/statements";
 
 class StatementFactory {
-  public build(statement: string): ILexer {
+  public build(statement: string): IParser {
     let builtStatement = new Select();
 
-    const statementMap: { [key: string]: ILexer } = {
+    const statementMap: { [key: string]: IParser } = {
       select: new Select(),
       use: new Use(),
       drop: new Drop(),

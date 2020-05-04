@@ -14,11 +14,11 @@ import { IChecker } from "../interface";
 import { Types } from "../../parser/types";
 import { sprintf } from "sprintf-js";
 import { Check } from "../check";
-import { ILexer } from "../../parser/interface";
+import { IParser } from "../../parser/interface";
 
 class InvalidOption extends Check implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'.";
-  public checker: ILexer;
+  public checker: IParser;
   public requiresConnection = false;
   public appliesTo = ["select", "create", "update", "drop", "insert"];
 

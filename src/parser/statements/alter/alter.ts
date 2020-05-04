@@ -1,12 +1,12 @@
 import { Query } from "../../../reader/query";
-import { ILexer } from "../../interface";
+import { IParser } from "../../interface";
 import { Types } from "../../types";
 import * as nearley from "nearley";
 import * as alter_grammar from "./alterGrammar";
 import { Keyword } from "../../../syntax/keywords";
 import { Token } from "../../token";
 
-class Alter implements ILexer {
+class Alter implements IParser {
   public options: string[] = [
     "online",
     "offline",

@@ -1,5 +1,5 @@
 import { Query } from "../../../reader/query";
-import { ILexer } from "../../interface";
+import { IParser } from "../../interface";
 import { cleanUnquotedIdentifier } from "../../lexer";
 import { Keyword } from "../../../syntax/keywords";
 import * as nearley from "nearley";
@@ -7,7 +7,7 @@ import * as grammar from "./grammar";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class Truncate implements ILexer {
+class Truncate implements IParser {
   public options: string[] = ["table"];
 
   public tokenise(query: Query): Query {

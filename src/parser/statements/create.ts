@@ -1,11 +1,11 @@
 import { Query } from "../../reader/query";
-import { ILexer } from "../interface";
+import { IParser } from "../interface";
 import { cleanUnquotedIdentifier } from "../lexer";
 import { Keyword } from "../../syntax/keywords";
 import { Types } from "../types";
 import { Token } from "../token";
 
-class Create implements ILexer {
+class Create implements IParser {
   public options: string[] = [
     "algorithm",
     "database",

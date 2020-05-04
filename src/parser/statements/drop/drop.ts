@@ -1,12 +1,12 @@
 import { Query } from "../../../reader/query";
-import { ILexer } from "../../interface";
+import { IParser } from "../../interface";
 import * as nearley from "nearley";
 import * as drop_grammar from "./dropGrammar";
 import { Types } from "../../types";
 import { Token } from "../../token";
 import * as moo from "moo";
 
-class Drop implements ILexer {
+class Drop implements IParser {
   public options: string[] = [
     "database",
     "event",

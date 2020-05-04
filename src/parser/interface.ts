@@ -1,8 +1,8 @@
 import { Query } from "../reader/query";
 
-interface ILexer {
+interface IParser {
   options: string[];
   tokenise(query: Query): Query;
 }
 
-export { ILexer };
+export { IParser };

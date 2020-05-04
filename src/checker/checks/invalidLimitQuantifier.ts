@@ -4,14 +4,14 @@ import { IChecker } from "../interface";
 import { Check } from "../check";
 import { sprintf } from "sprintf-js";
 import { Types } from "../../parser/types";
-import { ILexer } from "../../parser/interface";
+import { IParser } from "../../parser/interface";
 
 class InvalidLimitQuantifier extends Check implements IChecker {
   public message: string =
     "Argument '%s' is not a valid quantifier for LIMIT clause.";
   public requiresConnection = false;
   public appliesTo = ["select", "update", "delete", "insert"];
-  public checker: ILexer;
+  public checker: IParser;
 
   public check(query: Query): CheckerResult {
     for (const line of query.lines) {

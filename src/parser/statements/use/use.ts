@@ -1,5 +1,5 @@
 import { Query } from "../../../reader/query";
-import { ILexer } from "../../interface";
+import { IParser } from "../../interface";
 import * as nearley from "nearley";
 import * as use_grammar from "./useGrammar";
 import {Token} from "../../token";
@@ -7,7 +7,7 @@ import {Types} from "../../types";
 
 // Testing: npm run build && ./dist/src/main.js -q "use test;"
 
-class Use implements ILexer {
+class Use implements IParser {
   public options: string[] = [];
   public tokenise(query: Query): Query {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(use_grammar.default));

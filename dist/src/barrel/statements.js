@@ -7,6 +7,6 @@ __export(require("../parser/statements/alter/alter"));
 __export(require("../parser/statements/create"));
 __export(require("../parser/statements/drop/drop"));
 __export(require("../parser/statements/select"));
-__export(require("../parser/statements/truncate"));
+__export(require("../parser/statements/truncate/truncate"));
 __export(require("../parser/statements/use/use"));
 //# sourceMappingURL=statements.js.map

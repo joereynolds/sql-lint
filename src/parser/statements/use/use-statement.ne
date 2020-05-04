@@ -2,7 +2,20 @@
 
 @builtin "whitespace.ne" # `_` means arbitrary amount of whitespace
 
-use_statement -> keyword _ table _ terminator {%
+@{%
+    const moo = require("moo");
+
+    const lexer = moo.compile({
+      keyword: ['use', 'USE'],
+      ws: /[ \t]+/,
+      table_reference: /[A-z]+/,
+      terminator: ";"
+    });
+%}
+
+@lexer lexer
+
+statement -> %keyword _ %table_reference _ %terminator {%
     function(data) {
         return {
             keyword: data[0],
@@ -10,10 +23,3 @@ use_statement -> keyword _ table _ terminator {%
         };
     }
 %}
-
-# Very basic, but it will do for the `use` statement
-keyword -> "use"i {% (word) => word.join("") %}
-
-table -> [A-z]:+ {% (word) => word[0].join("") %}
-
-terminator -> ";"

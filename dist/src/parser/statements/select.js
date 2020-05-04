@@ -8,7 +8,7 @@ class Select {
     constructor() {
         this.options = [];
     }
-    tokenise(query) {
+    parse(query) {
         const keywords = Object.keys(keywords_1.Keyword).map(keyword => keyword.toLowerCase());
         let lastToken = "";
         query.lines.forEach(line => {

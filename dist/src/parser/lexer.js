@@ -18,7 +18,7 @@ function tokenise(query) {
     const statementFactory = new statementFactory_1.StatementFactory();
     const statement = statementFactory.build(category);
     query.category = category;
-    return statement.tokenise(query);
+    return statement.parse(query);
 }
 exports.tokenise = tokenise;
 /*

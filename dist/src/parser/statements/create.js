@@ -25,7 +25,7 @@ class Create {
             "view"
         ];
     }
-    tokenise(query) {
+    parse(query) {
         let lastToken = "";
         query.lines.forEach(line => {
             line.content.split(" ").forEach(word => {

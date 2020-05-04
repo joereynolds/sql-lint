@@ -2,18 +2,18 @@
 
 @builtin "whitespace.ne" # `_` means arbitrary amount of whitespace
 
-use -> "use " _ table _ terminator {%
+use_statement -> keyword _ table _ terminator {%
     function(data) {
         return {
-            table: data[2]
+            keyword: data[0],
+            table_reference: data[2],
         };
     }
 %}
 
-table -> [a-z]:+ {%
-    function(data) {
-        return data[0].join("");
-    }
-%}
+# Very basic, but it will do for the `use` statement
+keyword -> "use"i {% (word) => word.join("") %}
+
+table -> [A-z]:+ {% (word) => word[0].join("") %}
 
 terminator -> ";"

@@ -4,19 +4,6 @@ import { Token } from "../../../../src/lexer/token";
 
 test.each([
   [
-    "USE ;",
-    {
-      lines: [
-        {
-          content: "USE ;",
-          num: 1,
-          tokens: [new Token("keyword", "use")]
-        }
-      ]
-    }
-  ],
-
-  [
     "USE symfony ;",
     {
       lines: [
@@ -33,16 +20,15 @@ test.each([
   ],
 
   [
-    "use symfony pricing ;",
+    "use symfony_pricing ;",
     {
       lines: [
         {
-          content: "use symfony pricing ;",
+          content: "use symfony_pricing ;",
           num: 1,
           tokens: [
             new Token("keyword", "use"),
-            new Token("table_reference", "symfony"),
-            new Token("table_reference", "pricing")
+            new Token("table_reference", "symfony_pricing")
           ]
         }
       ]
@@ -52,5 +38,5 @@ test.each([
   const q = putContentIntoLines(query);
   const tokeniser = new Use();
   const actual = tokeniser.tokenise(q[0]);
-  expect(actual).toEqual(expected);
+  expect(expected).toEqual(actual);
 });

@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// All types are defined in here so we have a well defined set
+// to use in our grammars instead of hardcoded strings
 var Types;
 (function (Types) {
     Types["Keyword"] = "keyword";

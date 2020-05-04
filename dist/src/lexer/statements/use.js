@@ -1,28 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const lexer_1 = require("../lexer");
-const keywords_1 = require("../../syntax/keywords");
-const types_1 = require("../types");
+const nearley = require("nearley");
+const use_grammar = require("../../grammar/use");
 const token_1 = require("../token");
+const types_1 = require("../types");
+// Testing: npm run build && ./dist/src/main.js -q "use test;"
 class Use {
     constructor() {
         this.options = [];
     }
     tokenise(query) {
-        query.lines.forEach(line => {
-            line.content.split(" ").forEach(word => {
-                let item = word.toLowerCase().trim();
-                if (item === keywords_1.Keyword.Use) {
-                    line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));
-                }
-                else {
-                    item = lexer_1.cleanUnquotedIdentifier(item);
-                    if (item.length > 0) {
-                        line.tokens.push(new token_1.Token(types_1.Types.TableReference, lexer_1.cleanUnquotedIdentifier(item)));
-                    }
-                }
-            });
-        });
+        const parser = new nearley.Parser(nearley.Grammar.fromCompiled(use_grammar.default));
+        const ast = parser.feed(query.getContent());
+        query.lines[0].tokens.push(new token_1.Token(types_1.Types.Keyword, ast.results[0].keyword.toLowerCase().trim()));
+        query.lines[0].tokens.push(new token_1.Token(types_1.Types.TableReference, ast.results[0].table_reference));
         return query;
     }
 }

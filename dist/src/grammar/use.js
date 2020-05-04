@@ -19,22 +19,21 @@ const grammar = {
         { "name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": (d) => d[0].concat([d[1]]) },
         { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": function (d) { return null; } },
         { "name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id },
-        { "name": "use$string$1", "symbols": [{ "literal": "u" }, { "literal": "s" }, { "literal": "e" }, { "literal": " " }], "postprocess": (d) => d.join('') },
-        { "name": "use", "symbols": ["use$string$1", "_", "table", "_", "terminator"], "postprocess": function (data) {
+        { "name": "use_statement", "symbols": ["keyword", "_", "table", "_", "terminator"], "postprocess": function (data) {
                 return {
-                    table: data[2]
+                    keyword: data[0],
+                    table_reference: data[2],
                 };
             }
         },
-        { "name": "table$ebnf$1", "symbols": [/[a-z]/] },
-        { "name": "table$ebnf$1", "symbols": ["table$ebnf$1", /[a-z]/], "postprocess": (d) => d[0].concat([d[1]]) },
-        { "name": "table", "symbols": ["table$ebnf$1"], "postprocess": function (data) {
-                return data[0].join("");
-            }
-        },
+        { "name": "keyword$subexpression$1", "symbols": [/[uU]/, /[sS]/, /[eE]/], "postprocess": function (d) { return d.join(""); } },
+        { "name": "keyword", "symbols": ["keyword$subexpression$1"], "postprocess": (word) => word.join("") },
+        { "name": "table$ebnf$1", "symbols": [/[A-z]/] },
+        { "name": "table$ebnf$1", "symbols": ["table$ebnf$1", /[A-z]/], "postprocess": (d) => d[0].concat([d[1]]) },
+        { "name": "table", "symbols": ["table$ebnf$1"], "postprocess": (word) => word[0].join("") },
         { "name": "terminator", "symbols": [{ "literal": ";" }] }
     ],
-    ParserStart: "use",
+    ParserStart: "use_statement",
 };
 exports.default = grammar;
 //# sourceMappingURL=use.js.map

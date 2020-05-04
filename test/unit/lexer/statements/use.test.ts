@@ -1,6 +1,6 @@
-import { Use } from "../../../../src/lexer/statements/use/use";
+import { Use } from "../../../../src/parser/statements/use/use";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

@@ -1,6 +1,6 @@
-import { Truncate } from "../../../../src/lexer/statements/truncate";
+import { Truncate } from "../../../../src/parser/statements/truncate";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

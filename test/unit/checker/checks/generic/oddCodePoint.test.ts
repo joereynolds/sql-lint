@@ -1,5 +1,5 @@
 import { OddCodePoint } from "../../../../../src/checker/checks/oddCodePoint";
-import { tokenise } from "../../../../../src/lexer/lexer";
+import { tokenise } from "../../../../../src/parser/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 
 test.each([

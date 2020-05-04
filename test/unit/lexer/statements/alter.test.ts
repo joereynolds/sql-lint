@@ -1,6 +1,6 @@
-import { Alter } from "../../../../src/lexer/statements/alter";
+import { Alter } from "../../../../src/parser/statements/alter";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

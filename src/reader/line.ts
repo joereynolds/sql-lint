@@ -1,4 +1,4 @@
-import { Token } from "../lexer/token";
+import { Token } from "../parser/token";
 
 class Line {
   public num: number;

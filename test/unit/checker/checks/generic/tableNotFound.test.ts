@@ -1,5 +1,5 @@
 import { TableNotFound } from "../../../../../src/checker/checks/tableNotFound";
-import { tokenise } from "../../../../../src/lexer/lexer";
+import { tokenise } from "../../../../../src/parser/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 import { CheckerResult } from "../../../../../src/checker/checkerResult";
 import { Query } from "../../../../../src/reader/query";

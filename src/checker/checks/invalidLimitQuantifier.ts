@@ -3,8 +3,8 @@ import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
 import { Check } from "../check";
 import { sprintf } from "sprintf-js";
-import { Types } from "../../lexer/types";
-import { ILexer } from "../../lexer/interface";
+import { Types } from "../../parser/types";
+import { ILexer } from "../../parser/interface";
 
 class InvalidLimitQuantifier extends Check implements IChecker {
   public message: string =

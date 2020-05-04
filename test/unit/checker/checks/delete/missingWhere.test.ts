@@ -1,5 +1,5 @@
 import { MissingWhere } from "../../../../../src/checker/checks/missingWhere";
-import { tokenise } from "../../../../../src/lexer/lexer";
+import { tokenise } from "../../../../../src/parser/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 
 test.each([

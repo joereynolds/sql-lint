@@ -4,7 +4,7 @@ import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
 import { Database } from "../database";
 import { Printer } from "../printer";
-import { categorise, tokenise } from "../lexer/lexer";
+import { categorise, tokenise } from "../parser/lexer";
 import { MySqlError } from "../barrel/checks";
 
 /**

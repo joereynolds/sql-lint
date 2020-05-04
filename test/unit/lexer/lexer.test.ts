@@ -1,4 +1,4 @@
-import { categorise, extractTableReference } from "../../../src/lexer/lexer";
+import { categorise, extractTableReference } from "../../../src/parser/lexer";
 
 test.each([
   // SELECT statements

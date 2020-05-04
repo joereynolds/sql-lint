@@ -1,6 +1,6 @@
-import { Select } from "../../../../src/lexer/statements/select";
+import { Select } from "../../../../src/parser/statements/select";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

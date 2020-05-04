@@ -1,4 +1,4 @@
-import { StatementFactory } from "../../../src/lexer/statementFactory";
+import { StatementFactory } from "../../../src/parser/statementFactory";
 import { Select, Use, Drop, Create } from "../../../src/barrel/statements";
 
 test.each([

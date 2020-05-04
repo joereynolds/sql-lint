@@ -1,6 +1,6 @@
-import { Create } from "../../../../src/lexer/statements/create";
+import { Create } from "../../../../src/parser/statements/create";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

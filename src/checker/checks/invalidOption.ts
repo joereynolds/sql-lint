@@ -11,10 +11,10 @@
 import { Query } from "../../reader/query";
 import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
-import { Types } from "../../lexer/types";
+import { Types } from "../../parser/types";
 import { sprintf } from "sprintf-js";
 import { Check } from "../check";
-import { ILexer } from "../../lexer/interface";
+import { ILexer } from "../../parser/interface";
 
 class InvalidOption extends Check implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'.";

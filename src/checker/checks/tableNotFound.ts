@@ -1,8 +1,8 @@
-import { extractTableReference } from "../../lexer/lexer";
+import { extractTableReference } from "../../parser/lexer";
 import { Query } from "../../reader/query";
 import { CheckerResult } from "../checkerResult";
 import { IChecker } from "../interface";
-import { Types } from "../../lexer/types";
+import { Types } from "../../parser/types";
 import { sprintf } from "sprintf-js";
 
 class TableNotFound implements IChecker {

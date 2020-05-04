@@ -1,6 +1,6 @@
-import { Drop } from "../../../../src/lexer/statements/drop";
+import { Drop } from "../../../../src/parser/statements/drop";
 import { putContentIntoLines } from "../../../../src/reader/reader";
-import { Token } from "../../../../src/lexer/token";
+import { Token } from "../../../../src/parser/token";
 
 test.each([
   [

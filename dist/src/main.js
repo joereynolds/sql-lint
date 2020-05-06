@@ -14,9 +14,8 @@ const package_json_1 = require("../package.json");
 const fixer_1 = require("./fixer");
 program
     .version(package_json_1.version)
-    .option("-i, --init", "Start an interactive session to create your configuration file")
     .option("-f, --file <path>", "The .sql file to lint")
-    .option("--fix <string>", "The .sql string to fix")
+    .option("--fix [string]", "The .sql string to fix")
     .option("-q, --query <string>", "The query to lint")
     .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
@@ -47,7 +46,16 @@ if (program.file) {
 }
 if (program.fix) {
     const fixer = new fixer_1.Fixer();
-    const query = reader_1.getQueryFromLine(program.fix);
+    let query;
+    // Read from stdin if nothing is specified.
+    // We default to '-'' if no argument is supplied to --fix
+    // so we don't nag the user
+    if (typeof program.fix === 'boolean') {
+        query = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
+    }
+    else {
+        query = reader_1.getQueryFromLine(program.fix);
+    }
     const fixed = fixer.fix(query[0]);
     console.log(fixed);
     process.exit(0);

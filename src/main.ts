@@ -17,7 +17,7 @@ import { Fixer } from "./fixer";
 program
   .version(version)
   .option("-f, --file <path>", "The .sql file to lint")
-  .option("--fix <string>", "The .sql string to fix")
+  .option("--fix [string]", "The .sql string to fix")
   .option("-q, --query <string>", "The query to lint")
   .option(
     "-d, --driver <string>",
@@ -64,7 +64,17 @@ if (program.file) {
 
 if (program.fix) {
   const fixer = new Fixer();
-  const query = getQueryFromLine(program.fix);
+  let query: Query[];
+
+  // Read from stdin if nothing is specified.
+  // We default to '-'' if no argument is supplied to --fix
+  // so we don't nag the user
+  if (typeof program.fix === 'boolean') {
+      query = getQueryFromLine(fs.readFileSync(0).toString());
+  } else {
+      query = getQueryFromLine(program.fix);
+  }
+
   const fixed = fixer.fix(query[0]);
   console.log(fixed);
   process.exit(0);

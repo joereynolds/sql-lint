@@ -24,6 +24,20 @@ xtest("it works with stdin", done => {
     .end(done);
 });
 
+test("--fix works with stdin", done => {
+  shelltest()
+    .cmd(`echo 'DELETE FROM person ;' | ${sqlLint} --fix`)
+    .expect("stdout", /.*DELETE.*/)
+    .end(done);
+});
+
+test("--fix works with an option", done => {
+  shelltest()
+    .cmd(`${sqlLint} --fix "DELETE FROM person;"`)
+    .expect("stdout", /.*DELETE.*/)
+    .end(done);
+});
+
 // Skipping because the travis build complains about a missing configuration file.
 // Should work fine locally assuming you have the config file.
 xtest("it can lint a use correctly", done => {

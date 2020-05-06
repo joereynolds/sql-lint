@@ -16,10 +16,6 @@ import { Fixer } from "./fixer";
 
 program
   .version(version)
-  .option(
-    "-i, --init",
-    "Start an interactive session to create your configuration file"
-  )
   .option("-f, --file <path>", "The .sql file to lint")
   .option("--fix <string>", "The .sql string to fix")
   .option("-q, --query <string>", "The query to lint")

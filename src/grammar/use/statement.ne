@@ -2,18 +2,10 @@
 
 @builtin "whitespace.ne" # `_` means arbitrary amount of whitespace
 
-use -> "use " _ table _ terminator {%
-    function(data) {
-        return {
-            table: data[2]
-        };
-    }
-%}
+statement -> use_statement _ terminator
 
-table -> [a-z]:+ {%
-    function(data) {
-        return data[0].join("");
-    }
-%}
+use_statement -> use name
 
+use -> "USE"i __
+name -> [a-z]:+
 terminator -> ";"

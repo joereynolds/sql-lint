@@ -12,7 +12,6 @@ drop_event -> keyword event clause_if_exists name
 drop_function -> keyword function name
 drop_view -> keyword view clause_if_exists name_list clause_end_options
 
-
 keyword -> "DROP"i __  {% (word) => word.join("") %}
 temporary -> null | "TEMPORARY"i __
 table -> "TABLE"i __ 

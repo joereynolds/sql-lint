@@ -1,4 +1,4 @@
-# @preprocessor typescript
+@preprocessor typescript
 
 @builtin "whitespace.ne" # `_` means arbitrary amount of whitespace
 

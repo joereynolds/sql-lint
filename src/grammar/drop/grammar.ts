@@ -1,15 +1,43 @@
 // Generated automatically by nearley, version 2.19.2
 // http://github.com/Hardmath123/nearley
-(function () {
-function id(x) { return x[0]; }
-var grammar = {
-    Lexer: undefined,
-    ParserRules: [
+// Bypasses TS6133. Allow declared but unused functions.
+// @ts-ignore
+function id(d: any[]): any { return d[0]; }
+
+interface NearleyToken {  value: any;
+  [key: string]: any;
+};
+
+interface NearleyLexer {
+  reset: (chunk: string, info: any) => void;
+  next: () => NearleyToken | undefined;
+  save: () => any;
+  formatError: (token: NearleyToken) => string;
+  has: (tokenType: string) => boolean;
+};
+
+interface NearleyRule {
+  name: string;
+  symbols: NearleySymbol[];
+  postprocess?: (d: any[], loc?: number, reject?: {}) => any;
+};
+
+type NearleySymbol = string | { literal: any } | { test: (token: any) => boolean };
+
+interface Grammar {
+  Lexer: NearleyLexer | undefined;
+  ParserRules: NearleyRule[];
+  ParserStart: string;
+};
+
+const grammar: Grammar = {
+  Lexer: undefined,
+  ParserRules: [
     {"name": "_$ebnf$1", "symbols": []},
-    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", "wschar"], "postprocess": (d) => d[0].concat([d[1]])},
     {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "__$ebnf$1", "symbols": ["wschar"]},
-    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": (d) => d[0].concat([d[1]])},
     {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id},
     {"name": "statement", "symbols": ["drop_statements", "_", "terminator"]},
@@ -49,20 +77,16 @@ var grammar = {
     {"name": "clause_end_options$subexpression$2", "symbols": [/[cC]/, /[aA]/, /[sS]/, /[cC]/, /[aA]/, /[dD]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "clause_end_options", "symbols": ["clause_end_options$subexpression$2", "__"]},
     {"name": "name$ebnf$1", "symbols": [/[a-z]/]},
-    {"name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[a-z]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[a-z]/], "postprocess": (d) => d[0].concat([d[1]])},
     {"name": "name", "symbols": ["name$ebnf$1"]},
     {"name": "name_list", "symbols": ["name"]},
     {"name": "name_list", "symbols": ["name_list", "__", {"literal":","}, "name_list", "_"]},
     {"name": "drop_database_specifier$ebnf$1", "symbols": [/[a-z]/]},
-    {"name": "drop_database_specifier$ebnf$1", "symbols": ["drop_database_specifier$ebnf$1", /[a-z]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "drop_database_specifier$ebnf$1", "symbols": ["drop_database_specifier$ebnf$1", /[a-z]/], "postprocess": (d) => d[0].concat([d[1]])},
     {"name": "drop_database_specifier", "symbols": ["drop_database_specifier$ebnf$1"]},
     {"name": "terminator", "symbols": [{"literal":";"}]}
-]
-  , ParserStart: "statement"
-}
-if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
-   module.exports = grammar;
-} else {
-   window.grammar = grammar;
-}
-})();
+  ],
+  ParserStart: "statement",
+};
+
+export default grammar;

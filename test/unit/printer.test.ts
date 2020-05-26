@@ -21,6 +21,14 @@ test("It calls console.log if a file is not found", () => {
   expect(console).toHaveBeenCalledTimes(1);
 });
 
+test("It calls console.log if a config file is not found", () => {
+  const console = jest.spyOn(global.console, "log");
+  const format = new SimpleFormat();
+  const printer = new Printer(1, format);
+  printer.warnAboutNoConfiguration("some-file");
+  expect(console).toHaveBeenCalled();
+});
+
 test("It does not console log if the checker is undefined", () => {
   const format = new SimpleFormat();
   const query = new Query();

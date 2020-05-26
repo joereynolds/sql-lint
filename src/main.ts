@@ -92,7 +92,7 @@ if (configuration !== null && "ignore-errors" in configuration) {
 }
 
 if (configuration === null) {
-  printer.warnAboutFileNotFound(file);
+  printer.warnAboutNoConfiguration(file);
   runner.run(queries, printer, prefix, omittedErrors);
   process.exit(0);
 }

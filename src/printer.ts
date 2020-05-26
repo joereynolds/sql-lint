@@ -50,6 +50,15 @@ class Printer {
   public warnAboutFileNotFound(file: string) {
     console.log(`Can't open file ${file}. Does it exist?`);
   }
+
+  public warnAboutNoConfiguration(file: string) {
+    console.log(
+        `Can't open file ${file}. Does it exist?` + 
+        "\nA configuration file will enable errors from your DB server and give better error reporting." + 
+        "\nRead more here: https://sql-lint.readthedocs.io/en/latest/files/configuration.html" +
+        "\n"
+    );
+  }
 }
 
 export { Printer };

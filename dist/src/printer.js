@@ -35,6 +35,12 @@ class Printer {
     warnAboutFileNotFound(file) {
         console.log(`Can't open file ${file}. Does it exist?`);
     }
+    warnAboutNoConfiguration(file) {
+        console.log(`Can't open file ${file}. Does it exist?` +
+            "\nA configuration file will enable errors from your DB server and give better error reporting." +
+            "\nRead more here: https://sql-lint.readthedocs.io/en/latest/files/configuration.html" +
+            "\n");
+    }
 }
 exports.Printer = Printer;
 //# sourceMappingURL=printer.js.map

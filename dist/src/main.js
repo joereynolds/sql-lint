@@ -70,7 +70,7 @@ if (configuration !== null && "ignore-errors" in configuration) {
     omittedErrors = configuration["ignore-errors"] || [];
 }
 if (configuration === null) {
-    printer.warnAboutFileNotFound(config_1.file);
+    printer.warnAboutNoConfiguration(config_1.file);
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);
 }

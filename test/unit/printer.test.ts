@@ -3,12 +3,12 @@ import { NullChecker } from "../../src/checker/nullChecker";
 import { Query } from "../../src/reader/query";
 import { SimpleFormat } from "../../src/formatter/formats/simple";
 
-test("It gets the queries content when the verbose option is set", () => {
+test("It gets the queries content when the verbose option is set above 1", () => {
   const format = new SimpleFormat();
   const checker = new NullChecker();
   const query = new Query();
   const getContentFn = (Query.prototype.getContent = jest.fn());
-  const printer = new Printer(1, format);
+  const printer = new Printer(2, format);
   printer.printCheck(checker, query, "");
   expect(getContentFn).toHaveBeenCalledTimes(1);
 });

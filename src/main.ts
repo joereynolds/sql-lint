@@ -14,6 +14,10 @@ import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 import { version } from "../package.json";
 import { Fixer } from "./fixer";
 
+function increaseVerbosity(v: any, total: any) {
+  return total + 1;
+}
+
 program
   .version(version)
   .option("-f, --file <path>", "The .sql file to lint")
@@ -25,7 +29,9 @@ program
   )
   .option(
     "-v, --verbose",
-    "Brings back information on the what it's linting and the tokens generated"
+    "Brings back information on the what it's linting and the tokens generated",
+    increaseVerbosity,
+    0
   )
   .option(
     "--format <string>",
@@ -69,10 +75,10 @@ if (program.fix) {
   // Read from stdin if nothing is specified.
   // We default to '-'' if no argument is supplied to --fix
   // so we don't nag the user
-  if (typeof program.fix === 'boolean') {
-      query = getQueryFromLine(fs.readFileSync(0).toString());
+  if (typeof program.fix === "boolean") {
+    query = getQueryFromLine(fs.readFileSync(0).toString());
   } else {
-      query = getQueryFromLine(program.fix);
+    query = getQueryFromLine(program.fix);
   }
 
   const fixed = fixer.fix(query[0]);

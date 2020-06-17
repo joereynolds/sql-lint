@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Check = void 0;
 /* tslint:disable-next-line */
 const paramCase = require("param-case");
 class Check {

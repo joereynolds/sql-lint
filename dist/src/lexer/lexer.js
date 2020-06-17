@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.cleanUnquotedIdentifier = exports.extractTableReference = exports.tokenise = exports.categorise = void 0;
 const keywords_1 = require("../syntax/keywords");
 const statementFactory_1 = require("./statementFactory");
 function categorise(query) {

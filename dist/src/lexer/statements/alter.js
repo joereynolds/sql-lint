@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Alter = void 0;
 const lexer_1 = require("../lexer");
 const types_1 = require("../types");
 const keywords_1 = require("../../syntax/keywords");
@@ -7,6 +8,7 @@ const token_1 = require("../token");
 class Alter {
     constructor() {
         this.options = [
+            "column",
             "online",
             "offline",
             "ignore",

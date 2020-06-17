@@ -53,7 +53,7 @@ if (program.fix) {
     // Read from stdin if nothing is specified.
     // We default to '-'' if no argument is supplied to --fix
     // so we don't nag the user
-    if (typeof program.fix === 'boolean') {
+    if (typeof program.fix === "boolean") {
         query = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     }
     else {

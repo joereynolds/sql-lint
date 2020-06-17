@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatementFactory = void 0;
 const statements_1 = require("../barrel/statements");
 class StatementFactory {
     build(statement) {

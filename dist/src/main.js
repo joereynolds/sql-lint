@@ -12,13 +12,16 @@ const config_1 = require("./config");
 const reader_1 = require("./reader/reader");
 const package_json_1 = require("../package.json");
 const fixer_1 = require("./fixer");
+function increaseVerbosity(v, total) {
+    return total + 1;
+}
 program
     .version(package_json_1.version)
     .option("-f, --file <path>", "The .sql file to lint")
     .option("--fix [string]", "The .sql string to fix")
     .option("-q, --query <string>", "The query to lint")
     .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
-    .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated")
+    .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated", increaseVerbosity, 0)
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
     .option("--host <string>", "The host for the connection")
     .option("--user <string>", "The user for the connection")

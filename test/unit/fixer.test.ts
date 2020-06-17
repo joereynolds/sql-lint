@@ -26,10 +26,7 @@ test.each([
 test.each([
   [new Line("select", 1), "SELECT"],
   [new Line("delete from", 1), "DELETE\nFROM"],
-  [
-      new Line("delete from person", 1),
-      "DELETE\nFROM\nperson"
-  ]
+  [new Line("delete from person", 1), "DELETE\nFROM\nperson"]
 ])("A keyword is uppercased", (input, expected) => {
   const inputQuery = new Query();
   inputQuery.lines = [input];

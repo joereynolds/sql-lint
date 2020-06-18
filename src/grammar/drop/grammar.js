@@ -1,43 +1,15 @@
 // Generated automatically by nearley, version 2.19.4
 // http://github.com/Hardmath123/nearley
-// Bypasses TS6133. Allow declared but unused functions.
-// @ts-ignore
-function id(d: any[]): any { return d[0]; }
-
-interface NearleyToken {  value: any;
-  [key: string]: any;
-};
-
-interface NearleyLexer {
-  reset: (chunk: string, info: any) => void;
-  next: () => NearleyToken | undefined;
-  save: () => any;
-  formatError: (token: NearleyToken) => string;
-  has: (tokenType: string) => boolean;
-};
-
-interface NearleyRule {
-  name: string;
-  symbols: NearleySymbol[];
-  postprocess?: (d: any[], loc?: number, reject?: {}) => any;
-};
-
-type NearleySymbol = string | { literal: any } | { test: (token: any) => boolean };
-
-interface Grammar {
-  Lexer: NearleyLexer | undefined;
-  ParserRules: NearleyRule[];
-  ParserStart: string;
-};
-
-const grammar: Grammar = {
-  Lexer: undefined,
-  ParserRules: [
+(function () {
+function id(x) { return x[0]; }
+var grammar = {
+    Lexer: undefined,
+    ParserRules: [
     {"name": "_$ebnf$1", "symbols": []},
-    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", "wschar"], "postprocess": (d) => d[0].concat([d[1]])},
+    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "__$ebnf$1", "symbols": ["wschar"]},
-    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": (d) => d[0].concat([d[1]])},
+    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id},
     {"name": "clause_database_or_schema$subexpression$1", "symbols": [/[dD]/, /[aA]/, /[tT]/, /[aA]/, /[bB]/, /[aA]/, /[sS]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
@@ -54,7 +26,7 @@ const grammar: Grammar = {
     {"name": "clause_if_not_exists$subexpression$3", "symbols": [/[eE]/, /[xX]/, /[iI]/, /[sS]/, /[tT]/, /[sS]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "clause_if_not_exists", "symbols": ["clause_if_not_exists$subexpression$1", "__", "clause_if_not_exists$subexpression$2", "__", "clause_if_not_exists$subexpression$3", "__"]},
     {"name": "name$ebnf$1", "symbols": [/[a-z]/]},
-    {"name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[a-z]/], "postprocess": (d) => d[0].concat([d[1]])},
+    {"name": "name$ebnf$1", "symbols": ["name$ebnf$1", /[a-z]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "name", "symbols": ["name$ebnf$1"]},
     {"name": "name_list", "symbols": ["name"]},
     {"name": "name_list", "symbols": ["name_list", "__", {"literal":","}, "name_list", "_"]},
@@ -70,12 +42,15 @@ const grammar: Grammar = {
     {"name": "drop_statements", "symbols": ["drop_function"]},
     {"name": "drop_statements", "symbols": ["drop_event"]},
     {"name": "drop_statements", "symbols": ["drop_view"]},
+    {"name": "drop_statements", "symbols": ["drop_server"]},
+    {"name": "drop_statements", "symbols": ["drop_spatial_reference_system"]},
     {"name": "drop_table", "symbols": ["keyword", "temporary", "table", "clause_if_exists", "name_list", "clause_end_options"]},
     {"name": "drop_database", "symbols": ["keyword", "clause_database_or_schema", "_", "clause_if_exists", "name"]},
     {"name": "drop_event", "symbols": ["keyword", "event", "clause_if_exists", "name"]},
     {"name": "drop_function", "symbols": ["keyword", "function", "name"]},
     {"name": "drop_view", "symbols": ["keyword", "view", "clause_if_exists", "name_list", "clause_end_options"]},
     {"name": "drop_server", "symbols": ["keyword", "server", "clause_if_exists", "name"]},
+    {"name": "drop_spatial_reference_system", "symbols": ["keyword", "spatial_reference_system", "clause_if_exists", "name"]},
     {"name": "keyword$subexpression$1", "symbols": [/[dD]/, /[rR]/, /[oO]/, /[pP]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "keyword", "symbols": ["keyword$subexpression$1", "__"], "postprocess": (word) => word.join("")},
     {"name": "temporary", "symbols": []},
@@ -91,13 +66,21 @@ const grammar: Grammar = {
     {"name": "view", "symbols": ["view$subexpression$1", "__"]},
     {"name": "server$subexpression$1", "symbols": [/[sS]/, /[eE]/, /[rR]/, /[vV]/, /[eE]/, /[rR]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "server", "symbols": ["server$subexpression$1", "__"]},
+    {"name": "spatial_reference_system$subexpression$1", "symbols": [/[sS]/, /[pP]/, /[aA]/, /[tT]/, /[iI]/, /[aA]/, /[lL]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "spatial_reference_system$subexpression$2", "symbols": [/[rR]/, /[eE]/, /[fF]/, /[eE]/, /[rR]/, /[eE]/, /[nN]/, /[cC]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "spatial_reference_system$subexpression$3", "symbols": [/[sS]/, /[yY]/, /[sS]/, /[tT]/, /[eE]/, /[mM]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "spatial_reference_system", "symbols": ["spatial_reference_system$subexpression$1", "__", "spatial_reference_system$subexpression$2", "__", "spatial_reference_system$subexpression$3", "__"]},
     {"name": "clause_end_options", "symbols": []},
     {"name": "clause_end_options$subexpression$1", "symbols": [/[rR]/, /[eE]/, /[sS]/, /[tT]/, /[rR]/, /[iI]/, /[cC]/, /[tT]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "clause_end_options", "symbols": ["__", "clause_end_options$subexpression$1", "__"]},
     {"name": "clause_end_options$subexpression$2", "symbols": [/[cC]/, /[aA]/, /[sS]/, /[cC]/, /[aA]/, /[dD]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
     {"name": "clause_end_options", "symbols": ["clause_end_options$subexpression$2", "__"]}
-  ],
-  ParserStart: "statement",
-};
-
-export default grammar;
+]
+  , ParserStart: "statement"
+}
+if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
+   module.exports = grammar;
+} else {
+   window.grammar = grammar;
+}
+})();

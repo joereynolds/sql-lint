@@ -5,6 +5,7 @@ import { Check } from "../check";
 
 class MissingWhere extends Check implements IChecker {
   public message: string = "DELETE statement missing WHERE clause.";
+  public additionalInformation = "DELETE statements are highly destructive. You should specify a WHERE if you want to limit what the statement operates on.";
   public requiresConnection = false;
   public appliesTo = ["delete"];
 

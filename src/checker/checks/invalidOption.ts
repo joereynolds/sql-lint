@@ -18,6 +18,7 @@ import { ILexer } from "../../lexer/interface";
 
 class InvalidOption extends Check implements IChecker {
   public message = "Option '%s' is not a valid option, must be one of '%s'.";
+  public additionalInformation = "";
   public checker: ILexer;
   public requiresConnection = false;
   public appliesTo = ["select", "create", "update", "drop", "insert"];

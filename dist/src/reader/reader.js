@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getQueryFromLine = exports.putContentIntoLines = exports.getQueryFromFile = void 0;
 const fs = require("fs");
 const line_1 = require("./line");
 const query_1 = require("./query");

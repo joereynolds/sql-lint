@@ -9,6 +9,7 @@
  *   DROP TABLE test;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.InvalidDropOption = void 0;
 const statements_1 = require("../../barrel/statements");
 const invalidOption_1 = require("./invalidOption");
 class InvalidDropOption extends invalidOption_1.InvalidOption {

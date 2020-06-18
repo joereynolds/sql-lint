@@ -1,1 +1,1 @@
-{"version":3,"file":"checkerResult.js","sourceRoot":"","sources":["../../../src/checker/checkerResult.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,MAAM,aAAa;IAWjB,YAAY,IAAY,EAAE,OAAe;QACvC,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IACzB,CAAC;CACF;AAEQ,sCAAa"}
+{"version":3,"file":"checkerResult.js","sourceRoot":"","sources":["../../../src/checker/checkerResult.ts"],"names":[],"mappings":";;;AAAA;;GAEG;AACH,MAAM,aAAa;IAWjB,YAAY,IAAY,EAAE,OAAe;QACvC,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IACzB,CAAC;CACF;AAEQ,sCAAa"}

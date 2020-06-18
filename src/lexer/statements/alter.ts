@@ -7,6 +7,7 @@ import { Token } from "../token";
 
 class Alter implements ILexer {
   public options: string[] = [
+    "column",
     "online",
     "offline",
     "ignore",

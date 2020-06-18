@@ -7,6 +7,7 @@ const sprintf_js_1 = require("sprintf-js");
 class TableNotFound {
     constructor(tables) {
         this.message = "Table '%s' does not exist in database '%s'.";
+        this.additionalInformation = "";
         this.appliesTo = ["select", "create", "update", "drop", "insert"];
         this.requiresConnection = false;
         this.tables = this.cleanTables(tables);

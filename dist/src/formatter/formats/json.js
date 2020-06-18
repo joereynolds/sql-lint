@@ -1,12 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class JsonFormat {
-    getMessage(prefix, result) {
+    getMessage(prefix, result, verbosity) {
         const message = {
             source: prefix,
             error: result.content,
-            line: result.line
+            line: result.line,
+            additionalInformation: ''
         };
+        if (verbosity) {
+            message.additionalInformation = result.additionalInformation;
+        }
         return JSON.stringify(message);
     }
 }

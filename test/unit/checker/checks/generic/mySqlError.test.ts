@@ -12,7 +12,11 @@ test("It brings back the error from the server", () => {
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);
 
-  const expected = { content: "[test code] You have an error.", line: 1 };
+  const expected = {
+    additionalInformation: "",
+    content: "[test code] You have an error.",
+    line: 1
+  };
   const actual = checker.check(tokenised);
   expect(actual).toEqual(expected);
 });
@@ -23,6 +27,6 @@ test("It only lints select, delete, insert, replace, and update", () => {
   const tokenised = tokenise(queryObj[0]);
   const checker = new MySqlError({});
   const actual = checker.check(tokenised);
-  const expected = { content: "", line: 0 };
+  const expected = { additionalInformation: "", content: "", line: 0 };
   expect(actual).toEqual(expected);
 });

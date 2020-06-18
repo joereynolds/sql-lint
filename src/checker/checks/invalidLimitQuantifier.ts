@@ -9,6 +9,7 @@ import { ILexer } from "../../lexer/interface";
 class InvalidLimitQuantifier extends Check implements IChecker {
   public message: string =
     "Argument '%s' is not a valid quantifier for LIMIT clause.";
+  public additionalInformation = "";
   public requiresConnection = false;
   public appliesTo = ["select", "update", "delete", "insert"];
   public checker: ILexer;

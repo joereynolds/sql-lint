@@ -11,6 +11,7 @@ class MySqlError implements IChecker {
   public message = "";
 
   public appliesTo = ["select", "create", "update", "drop", "insert"];
+  public additionalInformation = "";
 
   constructor(errors: any) {
     this.errors = errors;

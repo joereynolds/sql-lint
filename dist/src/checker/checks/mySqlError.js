@@ -8,6 +8,7 @@ class MySqlError {
         // since the error message is dynamically generated.
         this.message = "";
         this.appliesTo = ["select", "create", "update", "drop", "insert"];
+        this.additionalInformation = "";
         this.errors = errors;
     }
     check(query) {

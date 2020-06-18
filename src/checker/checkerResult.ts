@@ -12,9 +12,15 @@ class CheckerResult {
    */
   public content: string;
 
-  constructor(line: number, content: string) {
+  /**
+   *  The additionalInformation for the current line
+   */
+  public additionalInformation: string;
+
+  constructor(line: number, content: string, additionalInformation?: string) {
     this.line = line;
     this.content = content;
+    this.additionalInformation = additionalInformation ?? '';
   }
 }
 

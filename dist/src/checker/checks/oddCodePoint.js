@@ -6,6 +6,7 @@ class OddCodePoint extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "Unexpected code point.";
+        this.additionalInformation = "Certain programs will inject unexpected characters into your queries causing them to fail";
         this.requiresConnection = false;
         this.appliesTo = ["select", "create", "update", "drop", "insert"];
     }
@@ -15,7 +16,7 @@ class OddCodePoint extends check_1.Check {
             const codePoint = char.codePointAt(0);
             if (codePoint !== undefined && badCodePoints.includes(codePoint)) {
                 const lineNumber = query.lines[0].num;
-                return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message);
+                return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message, this.additionalInformation);
             }
         }
         return new checkerResult_1.CheckerResult(0, "");

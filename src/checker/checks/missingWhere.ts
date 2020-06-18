@@ -18,7 +18,11 @@ class MissingWhere extends Check implements IChecker {
         .includes("where")
     ) {
       const lineNumber = query.lines[0].num;
-      return new CheckerResult(lineNumber, this.prefix + this.message);
+      return new CheckerResult(
+          lineNumber, 
+          this.prefix + this.message, 
+          this.additionalInformation
+      );
     }
     return new CheckerResult(0, "");
   }

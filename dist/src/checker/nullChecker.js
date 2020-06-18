@@ -6,6 +6,7 @@ class NullChecker {
         this.message = "";
         this.requiresConnection = false;
         this.appliesTo = [];
+        this.additionalInformation = "";
     }
     check(query) {
         return new checkerResult_1.CheckerResult(0, this.message);

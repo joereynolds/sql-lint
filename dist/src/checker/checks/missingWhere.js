@@ -6,6 +6,7 @@ class MissingWhere extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "DELETE statement missing WHERE clause.";
+        this.additionalInformation = "DELETE statements are highly destructive. You should specify a WHERE if you want to limit what the statement operates on.";
         this.requiresConnection = false;
         this.appliesTo = ["delete"];
     }
@@ -16,7 +17,7 @@ class MissingWhere extends check_1.Check {
             .toLowerCase()
             .includes("where")) {
             const lineNumber = query.lines[0].num;
-            return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message);
+            return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message, this.additionalInformation);
         }
         return new checkerResult_1.CheckerResult(0, "");
     }

@@ -17,6 +17,7 @@ class InvalidOption extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "Option '%s' is not a valid option, must be one of '%s'.";
+        this.additionalInformation = "";
         this.requiresConnection = false;
         this.appliesTo = ["select", "create", "update", "drop", "insert"];
     }

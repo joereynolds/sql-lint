@@ -8,6 +8,7 @@ class InvalidLimitQuantifier extends check_1.Check {
     constructor() {
         super(...arguments);
         this.message = "Argument '%s' is not a valid quantifier for LIMIT clause.";
+        this.additionalInformation = "";
         this.requiresConnection = false;
         this.appliesTo = ["select", "update", "delete", "insert"];
     }

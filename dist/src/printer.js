@@ -23,7 +23,7 @@ class Printer {
             console.log(tokenisedForPrint);
         }
         if (result.content) {
-            console.log(this.format.getMessage(prefix, result));
+            console.log(this.format.getMessage(prefix, result, this.verbosity));
             // If there are any errors whatsoever, we want to exit
             // with 1 for build scripts and the like.
             process.exitCode = 1;

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OddCodePoint = void 0;
 const checkerResult_1 = require("../checkerResult");
 const check_1 = require("../check");
 class OddCodePoint extends check_1.Check {

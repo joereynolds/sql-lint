@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Printer = void 0;
 class Printer {
     constructor(verbosity, format) {
         this.verbosity = verbosity;

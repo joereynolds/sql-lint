@@ -9,7 +9,6 @@
  *   CREATE TABLE test;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvalidCreateOption = void 0;
 const statements_1 = require("../../barrel/statements");
 const invalidOption_1 = require("./invalidOption");
 class InvalidCreateOption extends invalidOption_1.InvalidOption {

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvalidTruncateOption = void 0;
 const statements_1 = require("../../barrel/statements");
 const invalidOption_1 = require("./invalidOption");
 class InvalidTruncateOption extends invalidOption_1.InvalidOption {

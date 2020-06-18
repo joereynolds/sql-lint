@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConfiguration = exports.file = void 0;
 const fs = require("fs");
 const os = require("os");
 exports.file = `${os.homedir}/.config/sql-lint/config.json`;

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JsonFormat = void 0;
 class JsonFormat {
     getMessage(prefix, result) {
         const message = {

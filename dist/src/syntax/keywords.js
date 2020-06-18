@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Keyword = void 0;
 var Keyword;
 (function (Keyword) {
     Keyword["Alter"] = "alter";

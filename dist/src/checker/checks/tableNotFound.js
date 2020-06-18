@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TableNotFound = void 0;
 const lexer_1 = require("../../lexer/lexer");
 const checkerResult_1 = require("../checkerResult");
 const types_1 = require("../../lexer/types");

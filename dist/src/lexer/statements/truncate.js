@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Truncate = void 0;
 const lexer_1 = require("../lexer");
 const keywords_1 = require("../../syntax/keywords");
 const types_1 = require("../types");

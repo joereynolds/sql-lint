@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckerRunner = void 0;
 const fs = require("fs");
 const path = require("path");
 const checkFactory_1 = require("./checkFactory");

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckFactory = void 0;
 const checks_1 = require("../barrel/checks");
 class CheckFactory {
     build(check) {

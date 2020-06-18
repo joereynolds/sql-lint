@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Fixer = void 0;
 const lexer_1 = require("./lexer/lexer");
 class Fixer {
     fix(query) {

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormatterFactory = void 0;
 const simple_1 = require("./formats/simple");
 const json_1 = require("./formats/json");
 class FormatterFactory {

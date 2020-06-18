@@ -12,7 +12,11 @@ test("It brings back the error from the server", () => {
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);
 
-  const expected = { additionalInformation: "", content: "[test code] You have an error.", line: 1 };
+  const expected = {
+    additionalInformation: "",
+    content: "[test code] You have an error.",
+    line: 1
+  };
   const actual = checker.check(tokenised);
   expect(actual).toEqual(expected);
 });

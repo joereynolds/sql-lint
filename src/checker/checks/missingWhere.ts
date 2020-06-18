@@ -5,7 +5,8 @@ import { Check } from "../check";
 
 class MissingWhere extends Check implements IChecker {
   public message: string = "DELETE statement missing WHERE clause.";
-  public additionalInformation = "DELETE statements are highly destructive. You should specify a WHERE if you want to limit what the statement operates on.";
+  public additionalInformation =
+    "DELETE statements are highly destructive. You should specify a WHERE if you want to limit what the statement operates on.";
   public requiresConnection = false;
   public appliesTo = ["delete"];
 
@@ -19,9 +20,9 @@ class MissingWhere extends Check implements IChecker {
     ) {
       const lineNumber = query.lines[0].num;
       return new CheckerResult(
-          lineNumber, 
-          this.prefix + this.message, 
-          this.additionalInformation
+        lineNumber,
+        this.prefix + this.message,
+        this.additionalInformation
       );
     }
     return new CheckerResult(0, "");

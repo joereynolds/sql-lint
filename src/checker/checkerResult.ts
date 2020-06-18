@@ -20,7 +20,7 @@ class CheckerResult {
   constructor(line: number, content: string, additionalInformation?: string) {
     this.line = line;
     this.content = content;
-    this.additionalInformation = additionalInformation ?? '';
+    this.additionalInformation = additionalInformation ?? "";
   }
 }
 

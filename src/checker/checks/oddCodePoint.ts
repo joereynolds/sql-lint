@@ -5,7 +5,8 @@ import { Check } from "../check";
 
 class OddCodePoint extends Check implements IChecker {
   public message = "Unexpected code point.";
-  public additionalInformation = "Certain programs will inject unexpected characters into your queries causing them to fail.";
+  public additionalInformation =
+    "Certain programs will inject unexpected characters into your queries causing them to fail.";
   public requiresConnection = false;
   public appliesTo = ["select", "create", "update", "drop", "insert"];
   public check(query: Query): CheckerResult {
@@ -16,7 +17,11 @@ class OddCodePoint extends Check implements IChecker {
 
       if (codePoint !== undefined && badCodePoints.includes(codePoint)) {
         const lineNumber = query.lines[0].num;
-        return new CheckerResult(lineNumber, this.prefix + this.message, this.additionalInformation);
+        return new CheckerResult(
+          lineNumber,
+          this.prefix + this.message,
+          this.additionalInformation
+        );
       }
     }
     return new CheckerResult(0, "");

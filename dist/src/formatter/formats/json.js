@@ -6,7 +6,7 @@ class JsonFormat {
             source: prefix,
             error: result.content,
             line: result.line,
-            additionalInformation: ''
+            additionalInformation: ""
         };
         if (verbosity) {
             message.additionalInformation = result.additionalInformation;

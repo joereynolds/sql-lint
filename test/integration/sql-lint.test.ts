@@ -5,14 +5,14 @@ const sqlLint = "./dist/src/main.js";
 
 xtest("it warns us if it can't find a configuration file", done => {
   shelltest()
-    .cmd(`${sqlLint} -f test/test-files/test.sql`)
+    .cmd(`${sqlLint} test/test-files/test.sql`)
     .expect("stdout", /Can't open file .*config\.json.*/)
     .end(done);
 });
 
 test("it tells us if it can't find a file", done => {
   shelltest()
-    .cmd(`${sqlLint} -f non-existent-file`)
+    .cmd(`${sqlLint} non-existent-file`)
     .expect("stdout", "Can't open file non-existent-file. Does it exist?\n")
     .end(done);
 });

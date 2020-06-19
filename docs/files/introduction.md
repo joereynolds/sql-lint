@@ -10,7 +10,7 @@ these errors are more verbose and specific than those coming from an SQL server.
 Here's a small excerpt of its use:
 
 ```
-: sql-lint -f test/test-files//test.sql 
+: sql-lint test/test-files//test.sql 
 test/test-files//test.sql:16 [sql-lint: unmatched-parentheses] Unmatched parentheses.
 test/test-files//test.sql:20 [sql-lint: missing-where] DELETE statement missing WHERE clause.
 test/test-files//test.sql:22 [sql-lint: invalid-drop-option] Option 'thing' is not a valid option, must be one of '["database","event","function","index","logfile","procedure","schema","server","table","view","tablespace","trigger"]'.
@@ -35,7 +35,7 @@ echo "DELETE FROM person;" | sql-lint
 ### With a file
 
 ```
-sql-lint -f test-file.sql
+sql-lint test-file.sql
 ```
 
 ## Command line options
@@ -48,15 +48,6 @@ Useful for bug reports and confirming what features are available to you.
 ```
 sql-lint --version
 > 0.0.11
-```
-
-### -f --file
-
-Specifies the file to be linted
-
-```
-sql-lint --file "test.sql"
-> ...
 ```
 
 ### -d --driver
@@ -131,7 +122,6 @@ Usage: sql-lint [options]
 
 Options:
   -V, --version          output the version number
-  -f, --file <path>      The .sql file to lint
   -d, --driver <string>  The driver to use, must be one of ['mysql', 'postgres']
   -v, --verbose          Brings back information on the what it's linting and the tokens generated
   --format <string>      The format of the output, can be one of ['simple', 'json'] (default: "simple")

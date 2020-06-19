@@ -27,10 +27,6 @@ program
     "The driver to use, must be one of ['mysql', 'postgres']"
   )
   .option(
-    "-r, --recurse",
-    "Instructs sql-lint to recurse into all .sql files and lint them"
-  )
-  .option(
     "-v, --verbose",
     "Brings back information on the what it's linting and the tokens generated",
     increaseVerbosity,
@@ -75,18 +71,13 @@ if (program.fix) {
   process.exit(0);
 }
 
-if (programFile) {
-  if (!fs.existsSync(programFile)) {
-    printer.warnAboutFileNotFound(programFile);
-    process.exit(0);
-  }
-
-  queries = getQueryFromFile(programFile);
-  prefix = programFile;
+if (programFile && !fs.existsSync(programFile)) {
+  printer.warnAboutFileNotFound(programFile);
+  process.exit(0);
 }
 
 // Read from stdin if no args are supplied
-if (!programFile && !program.recurse) {
+if (!programFile) {
   queries = getQueryFromLine(fs.readFileSync(0).toString());
   prefix = "stdin";
 }
@@ -110,15 +101,19 @@ const db = new Database(
   program.port || configuration?.port || "3306"
 );
 
-if (program.recurse) {
-  const sqlFiles = findByExtension(".", "sql");
-  sqlFiles.forEach(sqlFile => {
-    queries = getQueryFromFile(sqlFile);
-    prefix = sqlFile;
-    runner.run(queries, printer, prefix, omittedErrors, db);
-  });
-} else {
-  runner.run(queries, printer, prefix, omittedErrors, db);
+if (programFile) {
+    if (programFile === '.' || fs.lstatSync(programFile).isDirectory()) {
+      const sqlFiles = findByExtension(programFile, "sql");
+      sqlFiles.forEach(sqlFile => {
+        queries = getQueryFromFile(sqlFile);
+        prefix = sqlFile;
+        runner.run(queries, printer, prefix, omittedErrors, db);
+      });
+    } else {
+      queries = getQueryFromFile(programFile);
+      prefix = programFile;
+    }
 }
 
+runner.run(queries, printer, prefix, omittedErrors, db);
 db.connection.end();

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 "use strict";
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const fs = require("fs");
@@ -20,7 +21,6 @@ program
     .version(package_json_1.version)
     .option("--fix [string]", "The .sql string to fix")
     .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
-    .option("-r, --recurse", "Instructs sql-lint to recurse into all .sql files and lint them")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated", increaseVerbosity, 0)
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
     .option("--host <string>", "The host for the connection")
@@ -52,16 +52,12 @@ if (program.fix) {
     console.log(fixed);
     process.exit(0);
 }
-if (programFile) {
-    if (!fs.existsSync(programFile)) {
-        printer.warnAboutFileNotFound(programFile);
-        process.exit(0);
-    }
-    queries = reader_1.getQueryFromFile(programFile);
-    prefix = programFile;
+if (programFile && !fs.existsSync(programFile)) {
+    printer.warnAboutFileNotFound(programFile);
+    process.exit(0);
 }
 // Read from stdin if no args are supplied
-if (!programFile && !program.recurse) {
+if (!programFile) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
@@ -74,17 +70,21 @@ if (configuration === null) {
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);
 }
-const db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
-if (program.recurse) {
-    const sqlFiles = file_1.findByExtension(".", "sql");
-    sqlFiles.forEach(sqlFile => {
-        queries = reader_1.getQueryFromFile(sqlFile);
-        prefix = sqlFile;
-        runner.run(queries, printer, prefix, omittedErrors, db);
-    });
+const db = new database_1.Database(program.driver || ((_a = configuration) === null || _a === void 0 ? void 0 : _a.driver) || "mysql", program.host || ((_b = configuration) === null || _b === void 0 ? void 0 : _b.host), program.user || ((_c = configuration) === null || _c === void 0 ? void 0 : _c.user), program.password || ((_d = configuration) === null || _d === void 0 ? void 0 : _d.password), program.port || ((_e = configuration) === null || _e === void 0 ? void 0 : _e.port) || "3306");
+if (programFile) {
+    if (programFile === '.' || fs.lstatSync(programFile).isDirectory()) {
+        const sqlFiles = file_1.findByExtension(programFile, "sql");
+        sqlFiles.forEach(sqlFile => {
+            queries = reader_1.getQueryFromFile(sqlFile);
+            prefix = sqlFile;
+            runner.run(queries, printer, prefix, omittedErrors, db);
+        });
+    }
+    else {
+        queries = reader_1.getQueryFromFile(programFile);
+        prefix = programFile;
+    }
 }
-else {
-    runner.run(queries, printer, prefix, omittedErrors, db);
-}
+runner.run(queries, printer, prefix, omittedErrors, db);
 db.connection.end();
 //# sourceMappingURL=main.js.map

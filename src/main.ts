@@ -22,7 +22,6 @@ program
   .version(version)
   .option("-f, --file <path>", "The .sql file to lint")
   .option("--fix [string]", "The .sql string to fix")
-  .option("-q, --query <string>", "The query to lint")
   .option(
     "-d, --driver <string>",
     "The driver to use, must be one of ['mysql', 'postgres']"
@@ -53,11 +52,6 @@ const printer: Printer = new Printer(program.verbose, format);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
 
-if (program.query) {
-  queries = getQueryFromLine(program.query);
-  prefix = "query";
-}
-
 if (program.file) {
   if (!fs.existsSync(program.file) && program.file !== 0) {
     printer.warnAboutFileNotFound(program.file);
@@ -87,7 +81,7 @@ if (program.fix) {
 }
 
 // Read from stdin if no args are supplied
-if (!program.file && !program.query) {
+if (!program.file) {
   queries = getQueryFromLine(fs.readFileSync(0).toString());
   prefix = "stdin";
 }

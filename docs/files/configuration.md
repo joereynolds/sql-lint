@@ -8,7 +8,7 @@ ways:
 ## Via CLI
 
 ```
-sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2" --query="SELECT 1;"
+sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2"
 ```
 
 ## Via `config.json`

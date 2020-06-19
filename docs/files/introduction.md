@@ -38,12 +38,6 @@ echo "DELETE FROM person;" | sql-lint
 sql-lint -f test-file.sql
 ```
 
-### With a string
-
-```
-sql-lint --query="DELETE FROM person;"
-```
-
 ## Command line options
 
 ### -V --version
@@ -62,15 +56,6 @@ Specifies the file to be linted
 
 ```
 sql-lint --file "test.sql"
-> ...
-```
-
-### -q --query
-
-Specifies an SQL query string to be linted. Note that it must end with a ';'.
-
-```
-sql-lint --query "SELECT * FROM person WHERE name = 'John';"
 > ...
 ```
 
@@ -104,17 +89,17 @@ The output format of `sql-lint`.
  the format unless you have a reason to.
 
  ```
- sql-lint --query "DELETE FROM person;"
-> query:1 [sql-lint: missing-where] DELETE statement missing WHERE clause.
+ echo 'DELETE FROM person;' | sql-lint
+> stdin:1 [sql-lint: missing-where] DELETE statement missing WHERE clause.
  ```
 
 `json` can be used if you wish. Usually this is done for editor
 integration or for consumption via some other service.
 
 ```
-sql-lint --query "DELETE FROM person;" --format json
+echo 'DELETE FROM person;' | sql-lint --format json
 > {
-     "source":"query",
+     "source":"stdin",
      "error":"[sql-lint: missing-where] DELETE statement missing WHERE clause.",
      "line":1
 }
@@ -147,7 +132,6 @@ Usage: sql-lint [options]
 Options:
   -V, --version          output the version number
   -f, --file <path>      The .sql file to lint
-  -q, --query <string>   The query to lint
   -d, --driver <string>  The driver to use, must be one of ['mysql', 'postgres']
   -v, --verbose          Brings back information on the what it's linting and the tokens generated
   --format <string>      The format of the output, can be one of ['simple', 'json'] (default: "simple")

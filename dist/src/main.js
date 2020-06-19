@@ -74,7 +74,7 @@ if (configuration === null) {
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);
 }
-const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password, program.port || configuration.port || "3306");
+const db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
 if (program.recurse) {
     const sqlFiles = file_1.findByExtension(".", "sql");
     sqlFiles.forEach(sqlFile => {

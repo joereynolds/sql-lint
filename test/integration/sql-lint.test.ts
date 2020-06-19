@@ -17,6 +17,7 @@ test("it tells us if it can't find a file", done => {
     .end(done);
 });
 
+// Doesn't work for some reason, output is empty
 xtest("it works with stdin", done => {
   shelltest()
     .cmd(`echo 'DELETE FROM person ;' | ${sqlLint}`)

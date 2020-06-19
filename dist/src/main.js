@@ -12,6 +12,7 @@ const config_1 = require("./config");
 const reader_1 = require("./reader/reader");
 const package_json_1 = require("../package.json");
 const fixer_1 = require("./fixer");
+const file_1 = require("./file");
 function increaseVerbosity(v, total) {
     return total + 1;
 }
@@ -19,6 +20,7 @@ program
     .version(package_json_1.version)
     .option("--fix [string]", "The .sql string to fix")
     .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
+    .option("-r, --recurse", "Instructs sql-lint to recurse into all .sql files and lint them")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated", increaseVerbosity, 0)
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
     .option("--host <string>", "The host for the connection")
@@ -33,7 +35,7 @@ const format = formatterFactory.build(program.format);
 const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
-const programFile = process.argv[2];
+const programFile = program.args[0];
 if (program.fix) {
     const fixer = new fixer_1.Fixer();
     let query;
@@ -50,7 +52,7 @@ if (program.fix) {
     console.log(fixed);
     process.exit(0);
 }
-if (programFile && !programFile.startsWith('--')) {
+if (programFile) {
     if (!fs.existsSync(programFile)) {
         printer.warnAboutFileNotFound(programFile);
         process.exit(0);
@@ -59,7 +61,7 @@ if (programFile && !programFile.startsWith('--')) {
     prefix = programFile;
 }
 // Read from stdin if no args are supplied
-if (!programFile) {
+if (!programFile && !program.recurse) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }
@@ -73,6 +75,16 @@ if (configuration === null) {
     process.exit(0);
 }
 const db = new database_1.Database(program.driver || configuration.driver || "mysql", program.host || configuration.host, program.user || configuration.user, program.password || configuration.password, program.port || configuration.port || "3306");
-runner.run(queries, printer, prefix, omittedErrors, db);
+if (program.recurse) {
+    const sqlFiles = file_1.findByExtension(".", "sql");
+    sqlFiles.forEach(sqlFile => {
+        queries = reader_1.getQueryFromFile(sqlFile);
+        prefix = sqlFile;
+        runner.run(queries, printer, prefix, omittedErrors, db);
+    });
+}
+else {
+    runner.run(queries, printer, prefix, omittedErrors, db);
+}
 db.connection.end();
 //# sourceMappingURL=main.js.map

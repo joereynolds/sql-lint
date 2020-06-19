@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-function recFindByExt(
+export function findByExtension(
   base: string,
   ext: string,
   files?: string[],
@@ -13,7 +13,7 @@ function recFindByExt(
   files.forEach(file => {
     const newbase = path.join(base, file);
     if (fs.statSync(newbase).isDirectory()) {
-      result = recFindByExt(newbase, ext, fs.readdirSync(newbase), result);
+      result = findByExtension(newbase, ext, fs.readdirSync(newbase), result);
     } else {
       if (
         file.substr(-1 * (ext.length + 1)) === "." + ext &&
@@ -25,6 +25,3 @@ function recFindByExt(
   });
   return result;
 }
-
-const Sqlfiles = recFindByExt("test", "sql");
-console.log(Sqlfiles);

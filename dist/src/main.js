@@ -17,9 +17,7 @@ function increaseVerbosity(v, total) {
 }
 program
     .version(package_json_1.version)
-    .option("-f, --file <path>", "The .sql file to lint")
     .option("--fix [string]", "The .sql string to fix")
-    .option("-q, --query <string>", "The query to lint")
     .option("-d, --driver <string>", "The driver to use, must be one of ['mysql', 'postgres']")
     .option("-v, --verbose", "Brings back information on the what it's linting and the tokens generated", increaseVerbosity, 0)
     .option("--format <string>", "The format of the output, can be one of ['simple', 'json']", "simple")
@@ -35,18 +33,7 @@ const format = formatterFactory.build(program.format);
 const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
-if (program.query) {
-    queries = reader_1.getQueryFromLine(program.query);
-    prefix = "query";
-}
-if (program.file) {
-    if (!fs.existsSync(program.file) && program.file !== 0) {
-        printer.warnAboutFileNotFound(program.file);
-        process.exit(0);
-    }
-    queries = reader_1.getQueryFromFile(program.file);
-    prefix = program.file;
-}
+const programFile = process.argv[2];
 if (program.fix) {
     const fixer = new fixer_1.Fixer();
     let query;
@@ -63,8 +50,16 @@ if (program.fix) {
     console.log(fixed);
     process.exit(0);
 }
+if (programFile && !programFile.startsWith('--')) {
+    if (!fs.existsSync(programFile)) {
+        printer.warnAboutFileNotFound(programFile);
+        process.exit(0);
+    }
+    queries = reader_1.getQueryFromFile(programFile);
+    prefix = programFile;
+}
 // Read from stdin if no args are supplied
-if (!program.file && !program.query) {
+if (!programFile) {
     queries = reader_1.getQueryFromLine(fs.readFileSync(0).toString());
     prefix = "stdin";
 }

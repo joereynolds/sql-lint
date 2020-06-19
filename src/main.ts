@@ -20,7 +20,6 @@ function increaseVerbosity(v: any, total: any) {
 
 program
   .version(version)
-  .option("-f, --file <path>", "The .sql file to lint")
   .option("--fix [string]", "The .sql string to fix")
   .option(
     "-d, --driver <string>",
@@ -51,16 +50,7 @@ const format = formatterFactory.build(program.format);
 const printer: Printer = new Printer(program.verbose, format);
 const configuration = getConfiguration(file);
 const runner = new CheckerRunner();
-
-if (program.file) {
-  if (!fs.existsSync(program.file) && program.file !== 0) {
-    printer.warnAboutFileNotFound(program.file);
-    process.exit(0);
-  }
-
-  queries = getQueryFromFile(program.file);
-  prefix = program.file;
-}
+const programFile = process.argv[2];
 
 if (program.fix) {
   const fixer = new Fixer();
@@ -80,8 +70,18 @@ if (program.fix) {
   process.exit(0);
 }
 
+if (programFile && !programFile.startsWith('--')) {
+  if (!fs.existsSync(programFile)) {
+    printer.warnAboutFileNotFound(programFile);
+    process.exit(0);
+  }
+
+  queries = getQueryFromFile(programFile);
+  prefix = programFile;
+}
+
 // Read from stdin if no args are supplied
-if (!program.file) {
+if (!programFile) {
   queries = getQueryFromLine(fs.readFileSync(0).toString());
   prefix = "stdin";
 }

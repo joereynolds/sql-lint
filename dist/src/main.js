@@ -65,6 +65,20 @@ if (configuration !== null && "ignore-errors" in configuration) {
     omittedErrors = configuration["ignore-errors"] || [];
 }
 if (configuration === null) {
+    if (programFile) {
+        if (fs.lstatSync(programFile).isDirectory()) {
+            const sqlFiles = file_1.findByExtension(programFile, "sql");
+            sqlFiles.forEach(sqlFile => {
+                queries = reader_1.getQueryFromFile(sqlFile);
+                prefix = sqlFile;
+                runner.run(queries, printer, prefix, omittedErrors);
+            });
+        }
+        else {
+            queries = reader_1.getQueryFromFile(programFile);
+            prefix = programFile;
+        }
+    }
     printer.warnAboutNoConfiguration(config_1.file);
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);

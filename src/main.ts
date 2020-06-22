@@ -88,6 +88,20 @@ if (configuration !== null && "ignore-errors" in configuration) {
 }
 
 if (configuration === null) {
+  if (programFile) {
+      if (fs.lstatSync(programFile).isDirectory()) {
+        const sqlFiles = findByExtension(programFile, "sql");
+        sqlFiles.forEach(sqlFile => {
+          queries = getQueryFromFile(sqlFile);
+          prefix = sqlFile;
+          runner.run(queries, printer, prefix, omittedErrors);
+        });
+      } else {
+        queries = getQueryFromFile(programFile);
+        prefix = programFile;
+      }
+  }
+
   printer.warnAboutNoConfiguration(file);
   runner.run(queries, printer, prefix, omittedErrors);
   process.exit(0);

@@ -70,3 +70,14 @@ Shown when you specify something other than a number to the `LIMIT` statement.
 ```
 test/test-files//test.sql:32 [sql-lint: invalid-limit-quantifier] Argument 'test' is not a valid quantifier for LIMIT clause.
 ```
+
+### hungarian-notation
+
+Shown when the string `sp_` or `tbl_` is present in the query.
+
+#### Example output
+
+```
+test/test-files//test.sql:32 [sql-lint: hungarian-notation] Query uses hungarian
+notation.
+```

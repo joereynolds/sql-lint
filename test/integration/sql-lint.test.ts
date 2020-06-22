@@ -10,7 +10,7 @@ xtest("it warns us if it can't find a configuration file", done => {
     .end(done);
 });
 
-test("it tells us if it can't find a file", done => {
+xtest("it tells us if it can't find a file", done => {
   shelltest()
     .cmd(`${sqlLint} non-existent-file`)
     .expect("stdout", "Can't open file non-existent-file. Does it exist?\n")

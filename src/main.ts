@@ -89,45 +89,49 @@ if (configuration !== null && "ignore-errors" in configuration) {
 
 if (configuration === null) {
   if (programFile) {
-      if (fs.lstatSync(programFile).isDirectory()) {
-        const sqlFiles = findByExtension(programFile, "sql");
-        sqlFiles.forEach(sqlFile => {
-          queries = getQueryFromFile(sqlFile);
-          prefix = sqlFile;
-          runner.run(queries, printer, prefix, omittedErrors);
-        });
-      } else {
-        queries = getQueryFromFile(programFile);
-        prefix = programFile;
-      }
-  }
-
-  printer.warnAboutNoConfiguration(file);
-  runner.run(queries, printer, prefix, omittedErrors);
-  process.exit(0);
-}
-
-const db = new Database(
-  program.driver || configuration?.driver || "mysql",
-  program.host || configuration?.host,
-  program.user || configuration?.user,
-  program.password || configuration?.password,
-  program.port || configuration?.port || "3306"
-);
-
-if (programFile) {
     if (fs.lstatSync(programFile).isDirectory()) {
       const sqlFiles = findByExtension(programFile, "sql");
       sqlFiles.forEach(sqlFile => {
         queries = getQueryFromFile(sqlFile);
         prefix = sqlFile;
-        runner.run(queries, printer, prefix, omittedErrors, db);
+        runner.run(queries, printer, prefix, omittedErrors);
       });
     } else {
       queries = getQueryFromFile(programFile);
       prefix = programFile;
     }
+  }
+  printer.warnAboutNoConfiguration(file);
+}
+
+let db: any;
+
+if (program.host || configuration?.host) {
+  db = new Database(
+    program.driver || configuration?.driver || "mysql",
+    program.host || configuration?.host,
+    program.user || configuration?.user,
+    program.password || configuration?.password,
+    program.port || configuration?.port || "3306"
+  );
+}
+
+if (programFile) {
+  if (fs.lstatSync(programFile).isDirectory()) {
+    const sqlFiles = findByExtension(programFile, "sql");
+    sqlFiles.forEach(sqlFile => {
+      queries = getQueryFromFile(sqlFile);
+      prefix = sqlFile;
+      runner.run(queries, printer, prefix, omittedErrors, db);
+    });
+  } else {
+    queries = getQueryFromFile(programFile);
+    prefix = programFile;
+  }
 }
 
 runner.run(queries, printer, prefix, omittedErrors, db);
-db.connection.end();
+
+if (program.host || configuration?.host) {
+  db.connection.end();
+}

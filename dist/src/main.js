@@ -80,10 +80,11 @@ if (configuration === null) {
         }
     }
     printer.warnAboutNoConfiguration(config_1.file);
-    runner.run(queries, printer, prefix, omittedErrors);
-    process.exit(0);
 }
-const db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
+let db;
+if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
+    db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
+}
 if (programFile) {
     if (fs.lstatSync(programFile).isDirectory()) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");
@@ -99,5 +100,7 @@ if (programFile) {
     }
 }
 runner.run(queries, printer, prefix, omittedErrors, db);
-db.connection.end();
+if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
+    db.connection.end();
+}
 //# sourceMappingURL=main.js.map

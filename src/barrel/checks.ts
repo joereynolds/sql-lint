@@ -1,4 +1,5 @@
 export * from "../checker/checks/databaseNotFound";
+export * from "../checker/checks/hungarianNotation";
 export * from "../checker/checks/invalidAlterOption";
 export * from "../checker/checks/invalidCreateOption";
 export * from "../checker/checks/invalidDropOption";

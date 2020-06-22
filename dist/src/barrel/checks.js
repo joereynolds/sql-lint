@@ -4,6 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("../checker/checks/databaseNotFound"));
+__export(require("../checker/checks/hungarianNotation"));
 __export(require("../checker/checks/invalidAlterOption"));
 __export(require("../checker/checks/invalidCreateOption"));
 __export(require("../checker/checks/invalidDropOption"));

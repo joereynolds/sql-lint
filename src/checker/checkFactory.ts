@@ -9,7 +9,8 @@ import {
   UnmatchedParentheses,
   InvalidTruncateOption,
   InvalidLimitQuantifier,
-  DatabaseNotFound
+  DatabaseNotFound,
+  HungarianNotation
 } from "../barrel/checks";
 
 class CheckFactory {
@@ -25,7 +26,8 @@ class CheckFactory {
       missingWhere: MissingWhere,
       mySqlError: MySqlError,
       oddCodePoint: OddCodePoint,
-      unmatchedParentheses: UnmatchedParentheses
+      unmatchedParentheses: UnmatchedParentheses,
+      hungarianNotation: HungarianNotation
     };
 
     return new checkMap[check]();

@@ -15,6 +15,7 @@ as well as custom errors written for sql-lint.
 - DROP/TRUNCATE/ALTER/CREATE statements with invalid options specified
 - Odd code points in queries
 - Invalid arguments to the LIMIT clause
+- Hungarian notation being used (e.g. `tbl_person`)
 - Any SQL server errors
 
 \* `sql-lint` brings back errors from the supported servers too. It will catch **any** error from the server.

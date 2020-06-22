@@ -30,6 +30,8 @@ ALTER mlady TEST;
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE '�';
 -- [sql-lint: invalid-limit-argument]
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS LIMIT 'test';
+-- [sql-lint: hungarian-notation]
+CREATE TABLE tbl_person;
 
 -- [ER_NO_DB_ERROR]
 SELECT  * FROM    PERSON  WHERE age > 5 ;

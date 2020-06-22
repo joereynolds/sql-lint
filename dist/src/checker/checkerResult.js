@@ -7,7 +7,7 @@ class CheckerResult {
     constructor(line, content, additionalInformation) {
         this.line = line;
         this.content = content;
-        this.additionalInformation = (additionalInformation !== null && additionalInformation !== void 0 ? additionalInformation : "");
+        this.additionalInformation = additionalInformation !== null && additionalInformation !== void 0 ? additionalInformation : "";
     }
 }
 exports.CheckerResult = CheckerResult;

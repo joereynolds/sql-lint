@@ -73,7 +73,7 @@ if (program.fix) {
 
 if (programFile && !fs.existsSync(programFile)) {
   printer.warnAboutFileNotFound(programFile);
-  process.exit(0);
+  process.exit(1);
 }
 
 // Read from stdin if no args are supplied

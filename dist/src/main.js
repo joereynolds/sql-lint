@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 "use strict";
-var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 const program = require("commander");
 const fs = require("fs");
@@ -54,7 +53,7 @@ if (program.fix) {
 }
 if (programFile && !fs.existsSync(programFile)) {
     printer.warnAboutFileNotFound(programFile);
-    process.exit(0);
+    process.exit(1);
 }
 // Read from stdin if no args are supplied
 if (!programFile) {
@@ -70,7 +69,7 @@ if (configuration === null) {
     runner.run(queries, printer, prefix, omittedErrors);
     process.exit(0);
 }
-const db = new database_1.Database(program.driver || ((_a = configuration) === null || _a === void 0 ? void 0 : _a.driver) || "mysql", program.host || ((_b = configuration) === null || _b === void 0 ? void 0 : _b.host), program.user || ((_c = configuration) === null || _c === void 0 ? void 0 : _c.user), program.password || ((_d = configuration) === null || _d === void 0 ? void 0 : _d.password), program.port || ((_e = configuration) === null || _e === void 0 ? void 0 : _e.port) || "3306");
+const db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
 if (programFile) {
     if (programFile === '.' || fs.lstatSync(programFile).isDirectory()) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");

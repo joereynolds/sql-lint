@@ -71,7 +71,7 @@ if (configuration === null) {
 }
 const db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
 if (programFile) {
-    if (programFile === '.' || fs.lstatSync(programFile).isDirectory()) {
+    if (fs.lstatSync(programFile).isDirectory()) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");
         sqlFiles.forEach(sqlFile => {
             queries = reader_1.getQueryFromFile(sqlFile);

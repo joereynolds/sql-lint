@@ -102,7 +102,7 @@ const db = new Database(
 );
 
 if (programFile) {
-    if (programFile === '.' || fs.lstatSync(programFile).isDirectory()) {
+    if (fs.lstatSync(programFile).isDirectory()) {
       const sqlFiles = findByExtension(programFile, "sql");
       sqlFiles.forEach(sqlFile => {
         queries = getQueryFromFile(sqlFile);

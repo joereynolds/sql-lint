@@ -45,9 +45,9 @@ class Printer {
   }
 
   public printFix(query: Query[]) {
-      const fixer = new Fixer();
-      const fixed = fixer.fix(query[0]);
-      console.log(fixed);
+    const fixer = new Fixer();
+    const fixed = fixer.fix(query[0]);
+    console.log(fixed);
   }
 
   public warnAboutFileNotFound(file: string) {

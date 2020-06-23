@@ -35,7 +35,6 @@ const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 const programFile = program.args[0];
 if (program.fix) {
-    /* const fixer = new Fixer(); */
     let query;
     // Read from stdin if nothing is specified.
     // We default to '-'' if no argument is supplied to --fix
@@ -47,8 +46,6 @@ if (program.fix) {
         query = reader_1.getQueryFromLine(program.fix);
     }
     printer.printFix(query);
-    /* const fixed = fixer.fix(query[0]); */
-    /* console.log(fixed); */
     process.exit(0);
 }
 if (programFile && !fs.existsSync(programFile)) {

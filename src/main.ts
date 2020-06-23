@@ -65,7 +65,7 @@ if (program.fix) {
     query = getQueryFromLine(program.fix);
   }
 
-  printer.printFix(query)
+  printer.printFix(query);
   process.exit(0);
 }
 
@@ -95,7 +95,7 @@ if (program.host || configuration?.host) {
   db = new Database(
     program.driver || configuration?.driver || "mysql",
     program.host || configuration?.host || "localhost",
-    program.user || configuration?.user || "root", //bad practice but unfortunately common, make it easier for the user 
+    program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || configuration?.password,
     program.port || configuration?.port || "3306"
   );

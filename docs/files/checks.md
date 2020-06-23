@@ -23,27 +23,49 @@ Shown when a `DELETE` statement is missing a `WHERE` clause.
 
 #### Example output
 
+```
+test/test-files/test.sql:20 [sql-lint: missing-where] DELETE statement missing WHERE clause.
+```
+
 ### invalid-drop-option
 
 Shown when an invalid option is given to the `DROP` statement.
 
 #### Example output
 
+```
+test/test-files/test.sql:22 [sql-lint: invalid-drop-option] Option 'thing' is not a valid option, must be one of '["database","event","function","index","logfile","procedure","schema","server","table","view","tablespace","trigger"]'.
+```
+
 ### invalid-create-option
+
 Shown when an invalid option is given to the `CREATE` statement.
 
 #### Example output
 
+```
+:24 [sql-lint: invalid-create-option] Option 'test' is not a valid option, must be one of '["algorithm","database","definer","event","function","index","or","procedure","server","table","tablespace","temporary","trigger","user","unique","view"]'.
+```
+
 ### invalid-truncate-option
+
 Shown when an invalid option is given to the `TRUNCATE` statement.
 
 #### Example output
+
+```
+test/test-files/test.sql:26 [sql-lint: invalid-truncate-option] Option 'something' is not a valid option, must be one of '["table"]'.
+```
 
 ### invalid-alter-option
 
 Shown when an invalid option is given to the `ALTER` statement.
 
 #### Example output
+
+```
+test/test-files/test.sql:28 [sql-lint: invalid-alter-option] Option 'mlady' is not a valid option, must be one of '["column","online","offline","ignore","database","event","function","procedure","server","table","tablespace","view"]'.
+```
 
 ### odd-code-point
 
@@ -59,7 +81,6 @@ realising.</small>
 ```
 test/test-files//test.sql:30 [sql-lint: odd-code-point] Unexpected code point.
 ```
-
 
 ### invalid-limit-quantifier
 
@@ -78,6 +99,5 @@ Shown when the string `sp_` or `tbl_` is present in the query.
 #### Example output
 
 ```
-test/test-files//test.sql:32 [sql-lint: hungarian-notation] Query uses hungarian
-notation.
+test/test-files/test.sql:34 [sql-lint: hungarian-notation] Hungarian notation present in query
 ```

@@ -41,7 +41,7 @@ below.
 Optional, default is `mysql`.
 
 The driver to be used to check for errors.
-Accepted ones are `mysql` and `psql`.
+Accepted ones are `mysql` and `postgres`.
 
 ### `host`
 

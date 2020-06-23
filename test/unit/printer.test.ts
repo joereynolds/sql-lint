@@ -13,12 +13,24 @@ test("It gets the queries content when the verbose option is set above 1", () =>
   expect(getContentFn).toHaveBeenCalledTimes(1);
 });
 
+test("it calls console.log to output a fixed query", () => {
+  const console = jest.spyOn(global.console, "log");
+  const format = new SimpleFormat();
+  const checker = new NullChecker();
+  const query = new Query();
+  const getContentFn = (Query.prototype.getContent = jest.fn());
+  getContentFn.mockReturnValue("delete from person;");
+  const printer = new Printer(2, format);
+  printer.printFix([query]);
+  expect(console).toHaveBeenCalled();
+});
+
 test("It calls console.log if a file is not found", () => {
   const console = jest.spyOn(global.console, "log");
   const format = new SimpleFormat();
   const printer = new Printer(1, format);
   printer.warnAboutFileNotFound("some-file");
-  expect(console).toHaveBeenCalledTimes(1);
+  expect(console).toHaveBeenCalled();
 });
 
 test("It calls console.log if a config file is not found", () => {

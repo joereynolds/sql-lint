@@ -11,7 +11,6 @@ const printer_1 = require("./printer");
 const config_1 = require("./config");
 const reader_1 = require("./reader/reader");
 const package_json_1 = require("../package.json");
-const fixer_1 = require("./fixer");
 const file_1 = require("./file");
 function increaseVerbosity(v, total) {
     return total + 1;
@@ -36,7 +35,7 @@ const configuration = config_1.getConfiguration(config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 const programFile = program.args[0];
 if (program.fix) {
-    const fixer = new fixer_1.Fixer();
+    /* const fixer = new Fixer(); */
     let query;
     // Read from stdin if nothing is specified.
     // We default to '-'' if no argument is supplied to --fix
@@ -47,8 +46,9 @@ if (program.fix) {
     else {
         query = reader_1.getQueryFromLine(program.fix);
     }
-    const fixed = fixer.fix(query[0]);
-    console.log(fixed);
+    printer.printFix(query);
+    /* const fixed = fixer.fix(query[0]); */
+    /* console.log(fixed); */
     process.exit(0);
 }
 if (programFile && !fs.existsSync(programFile)) {
@@ -64,34 +64,20 @@ let omittedErrors = [];
 if (configuration !== null && "ignore-errors" in configuration) {
     omittedErrors = configuration["ignore-errors"] || [];
 }
+let db;
 if (configuration === null) {
-    if (programFile) {
-        if (fs.lstatSync(programFile).isDirectory()) {
-            const sqlFiles = file_1.findByExtension(programFile, "sql");
-            sqlFiles.forEach(sqlFile => {
-                queries = reader_1.getQueryFromFile(sqlFile);
-                prefix = sqlFile;
-                runner.run(queries, printer, prefix, omittedErrors);
-            });
-        }
-        else {
-            queries = reader_1.getQueryFromFile(programFile);
-            prefix = programFile;
-        }
-    }
     printer.warnAboutNoConfiguration(config_1.file);
 }
-let db;
 if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
-    db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host), program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user), program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
+    db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host) || "localhost", program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user) || "root", //bad practice but unfortunately common, make it easier for the user 
+    program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
 }
 if (programFile) {
     if (fs.lstatSync(programFile).isDirectory()) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");
         sqlFiles.forEach(sqlFile => {
             queries = reader_1.getQueryFromFile(sqlFile);
-            prefix = sqlFile;
-            runner.run(queries, printer, prefix, omittedErrors, db);
+            runner.run(queries, printer, sqlFile, omittedErrors, db);
         });
     }
     else {

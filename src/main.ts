@@ -54,7 +54,6 @@ const runner = new CheckerRunner();
 const programFile = program.args[0];
 
 if (program.fix) {
-  const fixer = new Fixer();
   let query: Query[];
 
   // Read from stdin if nothing is specified.
@@ -66,8 +65,7 @@ if (program.fix) {
     query = getQueryFromLine(program.fix);
   }
 
-  const fixed = fixer.fix(query[0]);
-  console.log(fixed);
+  printer.printFix(query)
   process.exit(0);
 }
 
@@ -87,30 +85,17 @@ if (configuration !== null && "ignore-errors" in configuration) {
   omittedErrors = configuration["ignore-errors"] || [];
 }
 
+let db: any;
+
 if (configuration === null) {
-  if (programFile) {
-    if (fs.lstatSync(programFile).isDirectory()) {
-      const sqlFiles = findByExtension(programFile, "sql");
-      sqlFiles.forEach(sqlFile => {
-        queries = getQueryFromFile(sqlFile);
-        prefix = sqlFile;
-        runner.run(queries, printer, prefix, omittedErrors);
-      });
-    } else {
-      queries = getQueryFromFile(programFile);
-      prefix = programFile;
-    }
-  }
   printer.warnAboutNoConfiguration(file);
 }
-
-let db: any;
 
 if (program.host || configuration?.host) {
   db = new Database(
     program.driver || configuration?.driver || "mysql",
-    program.host || configuration?.host,
-    program.user || configuration?.user,
+    program.host || configuration?.host || "localhost",
+    program.user || configuration?.user || "root", //bad practice but unfortunately common, make it easier for the user 
     program.password || configuration?.password,
     program.port || configuration?.port || "3306"
   );
@@ -121,8 +106,7 @@ if (programFile) {
     const sqlFiles = findByExtension(programFile, "sql");
     sqlFiles.forEach(sqlFile => {
       queries = getQueryFromFile(sqlFile);
-      prefix = sqlFile;
-      runner.run(queries, printer, prefix, omittedErrors, db);
+      runner.run(queries, printer, sqlFile, omittedErrors, db);
     });
   } else {
     queries = getQueryFromFile(programFile);

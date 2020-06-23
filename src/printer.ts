@@ -1,6 +1,7 @@
 import { IChecker } from "./checker/interface";
 import { Query } from "./reader/query";
 import { IFormat } from "./formatter/interface";
+import { Fixer } from "./fixer";
 
 class Printer {
   public verbosity: number;
@@ -41,6 +42,12 @@ class Printer {
       // with 1 for build scripts and the like.
       process.exitCode = 1;
     }
+  }
+
+  public printFix(query: Query[]) {
+      const fixer = new Fixer();
+      const fixed = fixer.fix(query[0]);
+      console.log(fixed);
   }
 
   public warnAboutFileNotFound(file: string) {

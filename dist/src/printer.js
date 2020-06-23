@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fixer_1 = require("./fixer");
 class Printer {
     constructor(verbosity, format) {
         this.verbosity = verbosity;
@@ -28,6 +29,11 @@ class Printer {
             // with 1 for build scripts and the like.
             process.exitCode = 1;
         }
+    }
+    printFix(query) {
+        const fixer = new fixer_1.Fixer();
+        const fixed = fixer.fix(query[0]);
+        console.log(fixed);
     }
     warnAboutFileNotFound(file) {
         console.log(`Can't open file ${file}. Does it exist?`);

@@ -80,5 +80,5 @@
         "postinstall": "./build/postinstall.sh",
         "nearley": "nearleyc"
     },
-    "version": "0.0.13"
+    "version": "0.0.14"
 }

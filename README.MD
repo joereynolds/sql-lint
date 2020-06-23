@@ -2,9 +2,9 @@
 
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
+![Imgur](https://i.imgur.com/rJ3h34b.png)
 
 ![Imgur](https://i.imgur.com/nqi1MnT.gif)
-
 
 sql-lint is a linter for SQL, it brings back any error from the supported servers
 as well as custom errors written for sql-lint.
@@ -26,11 +26,29 @@ these include but are not limited to:
 - A non existent table
 - Syntax errors
 
+## Usage
+
+`sql-lint` works on files, directories and stdin.
+
+```
+# Will lint all .sql files recursively from the current directory
+sql-lint .
+
+# Lints the create-person.sql file
+sql-lint create-person.sql
+
+# Lints stdin
+echo 'DELETE FROM person;' | sql-lint
+```
 
 ## Installation
 
 There are binaries on the [releases
 page](https://github.com/joereynolds/sql-lint/releases) for Mac, Linux and
-Windows.  Or you can do `npm install -g sql-lint`
+Windows, this is the recommended way to install sql-lint.  
+
+You can also do `npm install -g sql-lint`.
+
+## Read more
 
 To find out more, [read the documentation](https://sql-lint.readthedocs.io/)

@@ -9,8 +9,8 @@ class Update implements ILexer {
   public options: string[] = [];
   public tokenise(query: Query): Query {
     let lastToken = "";
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
 
         if (item === Keyword.Update) {

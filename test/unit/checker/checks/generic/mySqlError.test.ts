@@ -6,7 +6,7 @@ test("It brings back the error from the server", () => {
   const query = "SELECT stuff FROM things ;";
   const checker = new MySqlError({
     code: "test code",
-    sqlMessage: "You have an error."
+    sqlMessage: "You have an error.",
   });
 
   const queryObj = putContentIntoLines(query);
@@ -15,7 +15,7 @@ test("It brings back the error from the server", () => {
   const expected = {
     additionalInformation: "",
     content: "[test code] You have an error.",
-    line: 1
+    line: 1,
   };
   const actual = checker.check(tokenised);
   expect(actual).toEqual(expected);

@@ -14,20 +14,14 @@ class HungarianNotation extends Check implements IChecker {
     "insert",
     "drop",
     "truncate",
-    "alter"
+    "alter",
   ];
 
   public check(query: Query): CheckerResult {
     this.getName();
     if (
-      query
-        .getContent()
-        .toLowerCase()
-        .includes("sp_") ||
-      query
-        .getContent()
-        .toLowerCase()
-        .includes("tbl_")
+      query.getContent().toLowerCase().includes("sp_") ||
+      query.getContent().toLowerCase().includes("tbl_")
     ) {
       const lineNumber = query.lines[0].num;
       return new CheckerResult(

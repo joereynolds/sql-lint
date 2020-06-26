@@ -10,10 +10,10 @@ test.each([
         {
           content: "UPDATE ;",
           num: 1,
-          tokens: [new Token("keyword", "update")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "update")],
+        },
+      ],
+    },
   ],
 
   [
@@ -25,12 +25,12 @@ test.each([
           num: 1,
           tokens: [
             new Token("keyword", "update"),
-            new Token("table_reference", "symfony.gig")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("table_reference", "symfony.gig"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises an `update` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Update();

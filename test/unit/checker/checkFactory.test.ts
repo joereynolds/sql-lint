@@ -9,13 +9,13 @@ import {
   TableNotFound,
   UnmatchedParentheses,
   InvalidTruncateOption,
-  DatabaseNotFound
+  DatabaseNotFound,
 } from "../../../src/barrel/checks";
 
 test.each([
   ["missingWhere", MissingWhere],
   ["mySqlError", MySqlError],
-  ["oddCodePoint", OddCodePoint]
+  ["oddCodePoint", OddCodePoint],
 ])("The CheckFactory builds the correct check", (format: string, expected) => {
   const factory = new CheckFactory();
   const actual = factory.build(format);

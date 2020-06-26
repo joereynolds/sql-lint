@@ -8,7 +8,7 @@ class FormatterFactory {
         let formatter = new simple_1.SimpleFormat();
         const formatMap = {
             simple: new simple_1.SimpleFormat(),
-            json: new json_1.JsonFormat()
+            json: new json_1.JsonFormat(),
         };
         if (Object.keys(formatMap).includes(format)) {
             formatter = formatMap[format];

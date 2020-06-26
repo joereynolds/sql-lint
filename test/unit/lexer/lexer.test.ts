@@ -39,7 +39,7 @@ test.each([
 
   // USE statements
   ["USE symfony", "use"],
-  ["use symfony;", "use"]
+  ["use symfony;", "use"],
 ])("Queries are categorised correctly", (query, expected) => {
   const actual = categorise(query);
   expect(actual).toEqual(expected);
@@ -51,22 +51,22 @@ test.each([
     {
       database: "symfony",
       table: "gigs",
-      column: "venue"
-    }
+      column: "venue",
+    },
   ],
   [
     "gigs",
     {
-      table: "gigs"
-    }
+      table: "gigs",
+    },
   ],
   [
     "symfony.gigs",
     {
       database: "symfony",
-      table: "gigs"
-    }
-  ]
+      table: "gigs",
+    },
+  ],
 ])("Table references are correctly categorised", (tableReference, expected) => {
   const actual = extractTableReference(tableReference);
   expect(actual).toMatchObject(expected);

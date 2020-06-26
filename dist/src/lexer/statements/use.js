@@ -10,8 +10,8 @@ class Use {
         this.options = [];
     }
     tokenise(query) {
-        query.lines.forEach(line => {
-            line.content.split(" ").forEach(word => {
+        query.lines.forEach((line) => {
+            line.content.split(" ").forEach((word) => {
                 let item = word.toLowerCase().trim();
                 if (item === keywords_1.Keyword.Use) {
                     line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));

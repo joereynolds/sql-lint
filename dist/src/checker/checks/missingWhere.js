@@ -13,10 +13,7 @@ class MissingWhere extends check_1.Check {
     }
     check(query) {
         this.getName();
-        if (!query
-            .getContent()
-            .toLowerCase()
-            .includes("where")) {
+        if (!query.getContent().toLowerCase().includes("where")) {
             const lineNumber = query.lines[0].num;
             return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message, this.additionalInformation);
         }

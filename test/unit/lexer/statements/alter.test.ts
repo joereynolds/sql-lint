@@ -10,10 +10,10 @@ test.each([
         {
           content: "ALTER ;",
           num: 1,
-          tokens: [new Token("keyword", "alter")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "alter")],
+        },
+      ],
+    },
   ],
   [
     "ALTER TABLE ;",
@@ -22,11 +22,11 @@ test.each([
         {
           content: "ALTER TABLE ;",
           num: 1,
-          tokens: [new Token("keyword", "alter"), new Token("option", "table")]
-        }
-      ]
-    }
-  ]
+          tokens: [new Token("keyword", "alter"), new Token("option", "table")],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `alter` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Alter();

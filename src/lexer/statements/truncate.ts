@@ -11,8 +11,8 @@ class Truncate implements ILexer {
   public tokenise(query: Query): Query {
     let lastToken = "";
 
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Truncate) {
           line.tokens.push(new Token(Types.Keyword, item));

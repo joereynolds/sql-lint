@@ -10,10 +10,10 @@ test.each([
         {
           content: "TRUNCATE ;",
           num: 1,
-          tokens: [new Token("keyword", "truncate")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "truncate")],
+        },
+      ],
+    },
   ],
   [
     "TRUNCATE TABLE ;",
@@ -24,12 +24,12 @@ test.each([
           num: 1,
           tokens: [
             new Token("keyword", "truncate"),
-            new Token("option", "table")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("option", "table"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `truncate` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Truncate();

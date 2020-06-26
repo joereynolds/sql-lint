@@ -6,7 +6,7 @@ const path = require("path");
 function findByExtension(base, ext, files, result) {
     files = files || fs.readdirSync(base);
     result = result || [];
-    files.forEach(file => {
+    files.forEach((file) => {
         const newbase = path.join(base, file);
         if (fs.statSync(newbase).isDirectory()) {
             result = findByExtension(newbase, ext, fs.readdirSync(newbase), result);

@@ -8,7 +8,7 @@ function categorise(query: string) {
   // Cast the Keyword enum so we can to lookups on it without TypeScript complaining.
   const keywordLookup: { [keywordName: string]: string } = Keyword as any;
 
-  const result = Object.keys(Keyword).find(keyword =>
+  const result = Object.keys(Keyword).find((keyword) =>
     query.startsWith(keywordLookup[keyword])
   );
 
@@ -66,15 +66,15 @@ function extractTableReference(tableReference: string) {
     3: {
       database: references[0],
       table: references[1],
-      column: references[2]
+      column: references[2],
     },
     2: {
       database: references[0],
-      table: references[1]
+      table: references[1],
     },
     1: {
-      table: references[0]
-    }
+      table: references[0],
+    },
   };
 
   return extractedReferences[references.length];

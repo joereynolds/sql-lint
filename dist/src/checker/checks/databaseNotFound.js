@@ -12,7 +12,7 @@ class DatabaseNotFound extends check_1.Check {
         this.additionalInformation = "";
         this.requiresConnection = true;
         this.appliesTo = ["select", "create", "update", "drop", "insert"];
-        this.databases = databases.map(result => result.Database);
+        this.databases = databases.map((result) => result.Database);
     }
     check(query) {
         for (const line of query.lines) {

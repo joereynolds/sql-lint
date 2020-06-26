@@ -18,14 +18,14 @@ class Drop implements ILexer {
     "table",
     "view",
     "tablespace",
-    "trigger"
+    "trigger",
   ];
 
   public tokenise(query: Query): Query {
     let lastToken = "";
 
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Drop) {
           line.tokens.push(new Token(Types.Keyword, item));

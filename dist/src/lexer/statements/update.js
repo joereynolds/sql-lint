@@ -11,8 +11,8 @@ class Update {
     }
     tokenise(query) {
         let lastToken = "";
-        query.lines.forEach(line => {
-            line.content.split(" ").forEach(word => {
+        query.lines.forEach((line) => {
+            line.content.split(" ").forEach((word) => {
                 let item = word.toLowerCase().trim();
                 if (item === keywords_1.Keyword.Update) {
                     line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));

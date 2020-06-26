@@ -13,14 +13,14 @@ class CheckerRunner {
     run(sqlQueries, printer, prefix, omittedErrors, database) {
         const checks = fs
             .readdirSync(__dirname + "/checks")
-            .map(check => {
+            .map((check) => {
             return path.parse(check).name;
         })
-            .filter(item => {
+            .filter((item) => {
             const ignoredChecks = [
                 "invalidOption",
                 "tableNotFound",
-                "databaseNotFound"
+                "databaseNotFound",
             ];
             // We ignore the 3 above checks.
             // invalidOption - This is a base class and does actually have any checks
@@ -37,7 +37,7 @@ class CheckerRunner {
             if (content) {
                 const category = lexer_1.categorise(content);
                 const tokenised = lexer_1.tokenise(query);
-                checks.forEach(check => {
+                checks.forEach((check) => {
                     const checker = factory.build(check);
                     // Simple checks
                     if (checker.appliesTo.includes(category) &&

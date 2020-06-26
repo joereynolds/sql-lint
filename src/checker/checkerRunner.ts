@@ -20,14 +20,14 @@ class CheckerRunner {
   ) {
     const checks = fs
       .readdirSync(__dirname + "/checks")
-      .map(check => {
+      .map((check) => {
         return path.parse(check).name;
       })
-      .filter(item => {
+      .filter((item) => {
         const ignoredChecks = [
           "invalidOption",
           "tableNotFound",
-          "databaseNotFound"
+          "databaseNotFound",
         ];
 
         // We ignore the 3 above checks.
@@ -48,7 +48,7 @@ class CheckerRunner {
       if (content) {
         const category = categorise(content);
         const tokenised: Query = tokenise(query);
-        checks.forEach(check => {
+        checks.forEach((check) => {
           const checker = factory.build(check);
 
           // Simple checks

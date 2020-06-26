@@ -10,10 +10,10 @@ test.each([
         {
           content: "DROP ;",
           num: 1,
-          tokens: [new Token("keyword", "drop")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "drop")],
+        },
+      ],
+    },
   ],
   [
     "DROP TABLE ;",
@@ -22,10 +22,10 @@ test.each([
         {
           content: "DROP TABLE ;",
           num: 1,
-          tokens: [new Token("keyword", "drop"), new Token("option", "table")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "drop"), new Token("option", "table")],
+        },
+      ],
+    },
   ],
   [
     "DROP DATABASE ;",
@@ -36,12 +36,12 @@ test.each([
           num: 1,
           tokens: [
             new Token("keyword", "drop"),
-            new Token("option", "database")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("option", "database"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `drop` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Drop();

@@ -8,8 +8,8 @@ import { Token } from "../token";
 class Use implements ILexer {
   public options: string[] = [];
   public tokenise(query: Query): Query {
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Use) {
           line.tokens.push(new Token(Types.Keyword, item));

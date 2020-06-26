@@ -10,10 +10,10 @@ class Select {
         this.options = [];
     }
     tokenise(query) {
-        const keywords = Object.keys(keywords_1.Keyword).map(keyword => keyword.toLowerCase());
+        const keywords = Object.keys(keywords_1.Keyword).map((keyword) => keyword.toLowerCase());
         let lastToken = "";
-        query.lines.forEach(line => {
-            line.content.split(" ").forEach(word => {
+        query.lines.forEach((line) => {
+            line.content.split(" ").forEach((word) => {
                 let item = word.toLowerCase();
                 if (keywords.includes(item)) {
                     line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));

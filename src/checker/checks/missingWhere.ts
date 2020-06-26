@@ -12,12 +12,7 @@ class MissingWhere extends Check implements IChecker {
 
   public check(query: Query): CheckerResult {
     this.getName();
-    if (
-      !query
-        .getContent()
-        .toLowerCase()
-        .includes("where")
-    ) {
+    if (!query.getContent().toLowerCase().includes("where")) {
       const lineNumber = query.lines[0].num;
       return new CheckerResult(
         lineNumber,

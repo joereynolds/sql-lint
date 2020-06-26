@@ -10,10 +10,10 @@ test.each([
         {
           content: "CREATE ;",
           num: 1,
-          tokens: [new Token("keyword", "create")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "create")],
+        },
+      ],
+    },
   ],
   [
     "CREATE TABLE ;",
@@ -22,10 +22,13 @@ test.each([
         {
           content: "CREATE TABLE ;",
           num: 1,
-          tokens: [new Token("keyword", "create"), new Token("option", "table")]
-        }
-      ]
-    }
+          tokens: [
+            new Token("keyword", "create"),
+            new Token("option", "table"),
+          ],
+        },
+      ],
+    },
   ],
   [
     "CREATE DATABASE ;",
@@ -36,12 +39,12 @@ test.each([
           num: 1,
           tokens: [
             new Token("keyword", "create"),
-            new Token("option", "database")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("option", "database"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `create` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Create();

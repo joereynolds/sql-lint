@@ -9,10 +9,12 @@ class Select implements ILexer {
   public options: string[] = [];
 
   public tokenise(query: Query): Query {
-    const keywords = Object.keys(Keyword).map(keyword => keyword.toLowerCase());
+    const keywords = Object.keys(Keyword).map((keyword) =>
+      keyword.toLowerCase()
+    );
     let lastToken = "";
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase();
 
         if (keywords.includes(item)) {

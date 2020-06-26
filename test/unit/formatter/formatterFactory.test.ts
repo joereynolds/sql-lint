@@ -6,7 +6,7 @@ test.each([
   ["an-invalid-format", SimpleFormat],
   ["simple", SimpleFormat],
   ["", SimpleFormat],
-  ["json", JsonFormat]
+  ["json", JsonFormat],
 ])(
   "The FormatterFactory builds the correct Format",
   (format: string, expected) => {

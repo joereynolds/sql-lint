@@ -7,8 +7,8 @@ test.each([
   ["SELECT name FROM person WHERE name ='Jane Doe';", ""],
   [
     "SELECT name FROM person WHERE name ='�';",
-    "[sql-lint: odd-code-point] Unexpected code point."
-  ]
+    "[sql-lint: odd-code-point] Unexpected code point.",
+  ],
 ])("it finds bad codepoints in a query", (query, expected) => {
   const checker = new OddCodePoint();
 

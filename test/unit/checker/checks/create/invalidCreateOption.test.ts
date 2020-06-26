@@ -6,10 +6,10 @@ test.each([
   ["CREATE TABLE person;", ""],
   [
     "CREATE JIBBERISH person;",
-    /Option 'jibberish' is not a valid option, must be one of .*/
+    /Option 'jibberish' is not a valid option, must be one of .*/,
   ],
   ["CREATE OR REPLACE some_table;", ""],
-  ["CREATE UNIQUE INDEX some_index;", ""]
+  ["CREATE UNIQUE INDEX some_index;", ""],
 ])("it warns about invalid options in CREATEs", (query, expected) => {
   const checker = new InvalidCreateOption();
 

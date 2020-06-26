@@ -18,14 +18,14 @@ class Alter implements ILexer {
     "server",
     "table",
     "tablespace",
-    "view"
+    "view",
   ];
 
   public tokenise(query: Query): Query {
     let lastToken = "";
 
-    query.lines.forEach(line => {
-      line.content.split(" ").forEach(word => {
+    query.lines.forEach((line) => {
+      line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
         if (item === Keyword.Alter) {
           line.tokens.push(new Token(Types.Keyword, item));

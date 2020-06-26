@@ -16,19 +16,13 @@ class HungarianNotation extends check_1.Check {
             "insert",
             "drop",
             "truncate",
-            "alter"
+            "alter",
         ];
     }
     check(query) {
         this.getName();
-        if (query
-            .getContent()
-            .toLowerCase()
-            .includes("sp_") ||
-            query
-                .getContent()
-                .toLowerCase()
-                .includes("tbl_")) {
+        if (query.getContent().toLowerCase().includes("sp_") ||
+            query.getContent().toLowerCase().includes("tbl_")) {
             const lineNumber = query.lines[0].num;
             return new checkerResult_1.CheckerResult(lineNumber, this.prefix + this.message, this.additionalInformation);
         }

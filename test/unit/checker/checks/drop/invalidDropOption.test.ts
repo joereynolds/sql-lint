@@ -6,8 +6,8 @@ test.each([
   ["DROP TABLE person;", ""],
   [
     "DROP JIBBERISH person;",
-    /Option 'jibberish' is not a valid option, must be one of .*/
-  ]
+    /Option 'jibberish' is not a valid option, must be one of .*/,
+  ],
 ])("it warns about invalid options in DROPs", (query, expected) => {
   const checker = new InvalidDropOption();
 

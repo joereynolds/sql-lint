@@ -7,14 +7,14 @@ test.each([
     "test-extra",
     new CheckerResult(1, "some content", "more"),
     "test-extra:1 some content",
-    0
+    0,
   ],
   [
     "test-again",
     new CheckerResult(1, "some content", "more"),
     "test-again:1 some content more",
-    1
-  ]
+    1,
+  ],
 ])(
   "The format returns the message in the correct format",
   (prefix, result, expected, verbosity) => {

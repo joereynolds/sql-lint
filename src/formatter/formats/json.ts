@@ -7,7 +7,7 @@ class JsonFormat implements IFormat {
       source: prefix,
       error: result.content,
       line: result.line,
-      additionalInformation: ""
+      additionalInformation: "",
     };
 
     if (verbosity) {

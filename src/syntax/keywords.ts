@@ -32,5 +32,5 @@ export enum Keyword {
   CommentMultiLineEnd = "*/",
 
   Newline = "\n",
-  WindowsNewline = "\r\n"
+  WindowsNewline = "\r\n",
 }

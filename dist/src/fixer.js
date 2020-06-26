@@ -9,8 +9,8 @@ class Fixer {
     fixKeywords(query) {
         query = lexer_1.tokenise(query);
         let fixed = "";
-        query.lines.forEach(line => {
-            line.tokens.forEach(token => {
+        query.lines.forEach((line) => {
+            line.tokens.forEach((token) => {
                 if (token.type === "keyword") {
                     fixed += `${token.value.toUpperCase()}\n`;
                 }

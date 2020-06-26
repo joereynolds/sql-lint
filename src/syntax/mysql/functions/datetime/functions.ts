@@ -58,5 +58,5 @@ export enum Function {
   Weekday = "WEEKDAY",
   WeekOfYear = "WEEKOFYEAR",
   Year = "YEAR",
-  YearWeek = "YEARWEEK"
+  YearWeek = "YEARWEEK",
 }

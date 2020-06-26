@@ -10,10 +10,10 @@ test.each([
         {
           content: "USE ;",
           num: 1,
-          tokens: [new Token("keyword", "use")]
-        }
-      ]
-    }
+          tokens: [new Token("keyword", "use")],
+        },
+      ],
+    },
   ],
 
   [
@@ -25,11 +25,11 @@ test.each([
           num: 1,
           tokens: [
             new Token("keyword", "use"),
-            new Token("table_reference", "symfony")
-          ]
-        }
-      ]
-    }
+            new Token("table_reference", "symfony"),
+          ],
+        },
+      ],
+    },
   ],
 
   [
@@ -42,12 +42,12 @@ test.each([
           tokens: [
             new Token("keyword", "use"),
             new Token("table_reference", "symfony"),
-            new Token("table_reference", "pricing")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("table_reference", "pricing"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `use` correctly", (query, expected) => {
   const q = putContentIntoLines(query);
   const tokeniser = new Use();

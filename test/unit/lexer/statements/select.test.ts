@@ -14,11 +14,11 @@ test.each([
             new Token("keyword", "select"),
             new Token("table_reference", "*"),
             new Token("keyword", "from"),
-            new Token("table_reference", "person")
-          ]
-        }
-      ]
-    }
+            new Token("table_reference", "person"),
+          ],
+        },
+      ],
+    },
   ],
   [
     "SELECT last_name FROM person;",
@@ -32,11 +32,11 @@ test.each([
             new Token("keyword", "select"),
             new Token("table_reference", "last_name"),
             new Token("keyword", "from"),
-            new Token("table_reference", "person")
-          ]
-        }
-      ]
-    }
+            new Token("table_reference", "person"),
+          ],
+        },
+      ],
+    },
   ],
   [
     "SELECT * FROM person LIMIT 73;",
@@ -52,11 +52,11 @@ test.each([
             new Token("keyword", "from"),
             new Token("table_reference", "person"),
             new Token("keyword", "limit"),
-            new Token("row_count", "73")
-          ]
-        }
-      ]
-    }
+            new Token("row_count", "73"),
+          ],
+        },
+      ],
+    },
   ],
   [
     "SELECT * FROM person WHERE name = 'test';",
@@ -74,12 +74,12 @@ test.each([
             new Token("keyword", "where"),
             new Token("???", "name"),
             new Token("???", "="),
-            new Token("???", "'test';")
-          ]
-        }
-      ]
-    }
-  ]
+            new Token("???", "'test';"),
+          ],
+        },
+      ],
+    },
+  ],
 ])("It tokenises a `select` correctly", (query, expected) => {
   const tokeniser = new Select();
   const q = putContentIntoLines(query);

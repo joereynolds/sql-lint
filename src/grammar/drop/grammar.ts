@@ -43,27 +43,27 @@ const grammar: Grammar = {
     {
       name: "_$ebnf$1",
       symbols: ["_$ebnf$1", "wschar"],
-      postprocess: d => d[0].concat([d[1]])
+      postprocess: (d) => d[0].concat([d[1]]),
     },
     {
       name: "_",
       symbols: ["_$ebnf$1"],
       postprocess(d) {
         return null;
-      }
+      },
     },
     { name: "__$ebnf$1", symbols: ["wschar"] },
     {
       name: "__$ebnf$1",
       symbols: ["__$ebnf$1", "wschar"],
-      postprocess: d => d[0].concat([d[1]])
+      postprocess: (d) => d[0].concat([d[1]]),
     },
     {
       name: "__",
       symbols: ["__$ebnf$1"],
       postprocess(d) {
         return null;
-      }
+      },
     },
     { name: "wschar", symbols: [/[ \t\n\v\f]/], postprocess: id },
     {
@@ -71,22 +71,22 @@ const grammar: Grammar = {
       symbols: [/[dD]/, /[aA]/, /[tT]/, /[aA]/, /[bB]/, /[aA]/, /[sS]/, /[eE]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_database_or_schema",
-      symbols: ["clause_database_or_schema$subexpression$1", "__"]
+      symbols: ["clause_database_or_schema$subexpression$1", "__"],
     },
     {
       name: "clause_database_or_schema$subexpression$2",
       symbols: [/[sS]/, /[cC]/, /[hH]/, /[eE]/, /[mM]/, /[aA]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_database_or_schema",
-      symbols: ["clause_database_or_schema$subexpression$2", "__"]
+      symbols: ["clause_database_or_schema$subexpression$2", "__"],
     },
     { name: "clause_if_exists", symbols: [] },
     {
@@ -94,14 +94,14 @@ const grammar: Grammar = {
       symbols: [/[iI]/, /[fF]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_if_exists$subexpression$2",
       symbols: [/[eE]/, /[xX]/, /[iI]/, /[sS]/, /[tT]/, /[sS]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_if_exists",
@@ -109,8 +109,8 @@ const grammar: Grammar = {
         "clause_if_exists$subexpression$1",
         "__",
         "clause_if_exists$subexpression$2",
-        "__"
-      ]
+        "__",
+      ],
     },
     { name: "clause_if_not_exists", symbols: [] },
     {
@@ -118,21 +118,21 @@ const grammar: Grammar = {
       symbols: [/[iI]/, /[fF]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_if_not_exists$subexpression$2",
       symbols: [/[nN]/, /[oO]/, /[tT]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_if_not_exists$subexpression$3",
       symbols: [/[eE]/, /[xX]/, /[iI]/, /[sS]/, /[tT]/, /[sS]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_if_not_exists",
@@ -142,20 +142,20 @@ const grammar: Grammar = {
         "clause_if_not_exists$subexpression$2",
         "__",
         "clause_if_not_exists$subexpression$3",
-        "__"
-      ]
+        "__",
+      ],
     },
     { name: "name$ebnf$1", symbols: [/[a-z]/] },
     {
       name: "name$ebnf$1",
       symbols: ["name$ebnf$1", /[a-z]/],
-      postprocess: d => d[0].concat([d[1]])
+      postprocess: (d) => d[0].concat([d[1]]),
     },
     { name: "name", symbols: ["name$ebnf$1"] },
     { name: "name_list", symbols: ["name"] },
     {
       name: "name_list",
-      symbols: ["name_list", "__", { literal: "," }, "name_list", "_"]
+      symbols: ["name_list", "__", { literal: "," }, "name_list", "_"],
     },
     { name: "terminator", symbols: [{ literal: ";" }] },
     { name: "equals", symbols: [{ literal: "=" }] },
@@ -177,8 +177,8 @@ const grammar: Grammar = {
         "table",
         "clause_if_exists",
         "name_list",
-        "clause_end_options"
-      ]
+        "clause_end_options",
+      ],
     },
     {
       name: "drop_database",
@@ -187,12 +187,12 @@ const grammar: Grammar = {
         "clause_database_or_schema",
         "_",
         "clause_if_exists",
-        "name"
-      ]
+        "name",
+      ],
     },
     {
       name: "drop_event",
-      symbols: ["keyword", "event", "clause_if_exists", "name"]
+      symbols: ["keyword", "event", "clause_if_exists", "name"],
     },
     { name: "drop_function", symbols: ["keyword", "function", "name"] },
     {
@@ -202,24 +202,24 @@ const grammar: Grammar = {
         "view",
         "clause_if_exists",
         "name_list",
-        "clause_end_options"
-      ]
+        "clause_end_options",
+      ],
     },
     {
       name: "drop_server",
-      symbols: ["keyword", "server", "clause_if_exists", "name"]
+      symbols: ["keyword", "server", "clause_if_exists", "name"],
     },
     {
       name: "keyword$subexpression$1",
       symbols: [/[dD]/, /[rR]/, /[oO]/, /[pP]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "keyword",
       symbols: ["keyword$subexpression$1", "__"],
-      postprocess: word => word.join("")
+      postprocess: (word) => word.join(""),
     },
     { name: "temporary", symbols: [] },
     {
@@ -233,11 +233,11 @@ const grammar: Grammar = {
         /[rR]/,
         /[aA]/,
         /[rR]/,
-        /[yY]/
+        /[yY]/,
       ],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "temporary", symbols: ["temporary$subexpression$1", "__"] },
     {
@@ -245,7 +245,7 @@ const grammar: Grammar = {
       symbols: [/[tT]/, /[aA]/, /[bB]/, /[lL]/, /[eE]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "table", symbols: ["table$subexpression$1", "__"] },
     {
@@ -253,7 +253,7 @@ const grammar: Grammar = {
       symbols: [/[eE]/, /[vV]/, /[eE]/, /[nN]/, /[tT]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "event", symbols: ["event$subexpression$1", "__"] },
     {
@@ -261,7 +261,7 @@ const grammar: Grammar = {
       symbols: [/[fF]/, /[uU]/, /[nN]/, /[cC]/, /[tT]/, /[iI]/, /[oO]/, /[nN]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "function", symbols: ["function$subexpression$1", "__"] },
     {
@@ -269,7 +269,7 @@ const grammar: Grammar = {
       symbols: [/[vV]/, /[iI]/, /[eE]/, /[wW]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "view", symbols: ["view$subexpression$1", "__"] },
     {
@@ -277,7 +277,7 @@ const grammar: Grammar = {
       symbols: [/[sS]/, /[eE]/, /[rR]/, /[vV]/, /[eE]/, /[rR]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     { name: "server", symbols: ["server$subexpression$1", "__"] },
     { name: "clause_end_options", symbols: [] },
@@ -286,25 +286,25 @@ const grammar: Grammar = {
       symbols: [/[rR]/, /[eE]/, /[sS]/, /[tT]/, /[rR]/, /[iI]/, /[cC]/, /[tT]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_end_options",
-      symbols: ["__", "clause_end_options$subexpression$1", "__"]
+      symbols: ["__", "clause_end_options$subexpression$1", "__"],
     },
     {
       name: "clause_end_options$subexpression$2",
       symbols: [/[cC]/, /[aA]/, /[sS]/, /[cC]/, /[aA]/, /[dD]/, /[eE]/],
       postprocess(d) {
         return d.join("");
-      }
+      },
     },
     {
       name: "clause_end_options",
-      symbols: ["clause_end_options$subexpression$2", "__"]
-    }
+      symbols: ["clause_end_options$subexpression$2", "__"],
+    },
   ],
-  ParserStart: "statement"
+  ParserStart: "statement",
 };
 
 export default grammar;

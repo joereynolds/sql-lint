@@ -7,7 +7,7 @@ class Query {
     }
     getContent() {
         let content = "";
-        this.lines.forEach(line => {
+        this.lines.forEach((line) => {
             content += line.content;
         });
         return content;

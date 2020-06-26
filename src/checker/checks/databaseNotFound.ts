@@ -13,7 +13,7 @@ class DatabaseNotFound extends Check implements IChecker {
   public databases: string[];
   constructor(databases: any[]) {
     super();
-    this.databases = databases.map(result => result.Database);
+    this.databases = databases.map((result) => result.Database);
   }
   public check(query: Query): CheckerResult {
     for (const line of query.lines) {

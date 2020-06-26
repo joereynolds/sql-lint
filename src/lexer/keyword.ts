@@ -22,5 +22,5 @@ export enum Keyword {
   Truncate = "truncate",
   Update = "update",
   Use = "use",
-  Where = "where"
+  Where = "where",
 }

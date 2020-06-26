@@ -9,9 +9,9 @@ test.each([
     "SELECT * FROM symfony.dont_exist ;",
     {
       content: "Table 'dont_exist' does not exist in database 'symfony'.",
-      line: 1
-    }
-  ]
+      line: 1,
+    },
+  ],
 ])("It finds tables that don't exist", (query, expected) => {
   const checker = new TableNotFound([{ Table: "non_existent_table" }]);
 
@@ -32,7 +32,7 @@ test("It brings back an empty checkerResult for an empty query", () => {
 
 test.each([
   ["non_existent_table", ["non_existent_table"]],
-  ["", []]
+  ["", []],
 ])("It correctly cleans a table name", (table, expected) => {
   const checker = new TableNotFound([{ Table: table }]);
   const actual = checker.tables;

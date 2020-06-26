@@ -1,6 +1,6 @@
 import {
   putContentIntoLines,
-  getQueryFromLine
+  getQueryFromLine,
 } from "../../../src/reader/reader";
 import { Query } from "../../../src/reader/query";
 import { Line } from "../../../src/reader/line";
@@ -11,7 +11,7 @@ beforeEach(() => {
     new Line("DELETE", 1),
     new Line(" FROM ", 2),
     new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 5)
+    new Line(" age > 5;", 5),
   ];
 
   this.queryWithComments = new Query();
@@ -19,7 +19,7 @@ beforeEach(() => {
     new Line("DELETE", 1),
     new Line(" FROM ", 2),
     new Line(" person WHERE ", 4),
-    new Line(" age > 5;", 6)
+    new Line(" age > 5;", 6),
   ];
 });
 
@@ -38,8 +38,8 @@ test.each([
   ["DELETE\n FROM \n\n person WHERE \n# Remove old people\n age > 5;"],
 
   // We ignore '/*' comments on a single line
-  ["DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;"]
-])("We ignore comments in files", input => {
+  ["DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;"],
+])("We ignore comments in files", (input) => {
   const actual = putContentIntoLines(input);
   expect(actual).toEqual([this.queryWithComments]);
 });

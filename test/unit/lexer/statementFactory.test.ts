@@ -9,7 +9,7 @@ test.each([
   ["drop", Drop],
   ["create", Create],
   // Empty options default to Select
-  ["", Select]
+  ["", Select],
 ])(
   "The StatementFactory builds the correct statement",
   (format: string, expected) => {

@@ -6,8 +6,8 @@ test.each([
   ["DELETE FROM person WHERE name = 'Jon';", ""],
   [
     "DELETE FROM person;",
-    "[sql-lint: missing-where] DELETE statement missing WHERE clause."
-  ]
+    "[sql-lint: missing-where] DELETE statement missing WHERE clause.",
+  ],
 ])("it finds missing WHEREs in DELETEs", (query, expected) => {
   const checker = new MissingWhere();
 

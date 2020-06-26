@@ -10,7 +10,7 @@ export function findByExtension(
   files = files || fs.readdirSync(base);
   result = result || [];
 
-  files.forEach(file => {
+  files.forEach((file) => {
     const newbase = path.join(base, file);
     if (fs.statSync(newbase).isDirectory()) {
       result = findByExtension(newbase, ext, fs.readdirSync(newbase), result);

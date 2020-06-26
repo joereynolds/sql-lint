@@ -8,7 +8,7 @@ class FormatterFactory {
 
     const formatMap: { [key: string]: IFormat } = {
       simple: new SimpleFormat(),
-      json: new JsonFormat()
+      json: new JsonFormat(),
     };
 
     if (Object.keys(formatMap).includes(format)) {

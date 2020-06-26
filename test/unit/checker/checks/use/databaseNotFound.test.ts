@@ -8,19 +8,19 @@ test.each([
     {
       content:
         "[sql-lint: database-not-found] Database 'non_existent_db' does not exist.",
-      line: 1
-    }
+      line: 1,
+    },
   ],
   [
     "USE other_db;",
     {
       content:
         "[sql-lint: database-not-found] Database 'other_db' does not exist.",
-      line: 1
-    }
+      line: 1,
+    },
   ],
   ["USE existing_db ;", { content: "", line: 0 }],
-  ["USE existing_db;", { content: "", line: 0 }]
+  ["USE existing_db;", { content: "", line: 0 }],
 ])("it finds databases that don't exist", (query, expected) => {
   const checker = new DatabaseNotFound([{ Database: "existing_db" }]);
 

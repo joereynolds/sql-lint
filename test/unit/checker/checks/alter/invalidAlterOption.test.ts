@@ -6,8 +6,8 @@ test.each([
   ["ALTER TABLE person;", ""],
   [
     "ALTER JIBBERISH person;",
-    /Option 'jibberish' is not a valid option, must be one of .*/
-  ]
+    /Option 'jibberish' is not a valid option, must be one of .*/,
+  ],
 ])("it warns about invalid options in ALTERs", (query, expected) => {
   const checker = new InvalidAlterOption();
 

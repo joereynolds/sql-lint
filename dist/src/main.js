@@ -72,7 +72,7 @@ if (program.host || (configuration === null || configuration === void 0 ? void 0
 if (programFile) {
     if (fs.lstatSync(programFile).isDirectory()) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");
-        sqlFiles.forEach(sqlFile => {
+        sqlFiles.forEach((sqlFile) => {
             queries = reader_1.getQueryFromFile(sqlFile);
             runner.run(queries, printer, sqlFile, omittedErrors, db);
         });

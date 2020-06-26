@@ -13,7 +13,7 @@ test.each([
   // A query with a non-keyword in it
   [new Line("DELETE FROM some_table", 1), "DELETE\nFROM\nsome_table"],
   // Select *
-  [new Line("SELECT * FROM test", 1), "SELECT\n*\nFROM\ntest"]
+  [new Line("SELECT * FROM test", 1), "SELECT\n*\nFROM\ntest"],
 ])("A keyword is given its own line", (input, expected) => {
   const inputQuery = new Query();
   inputQuery.lines = [input];
@@ -26,7 +26,7 @@ test.each([
 test.each([
   [new Line("select", 1), "SELECT"],
   [new Line("delete from", 1), "DELETE\nFROM"],
-  [new Line("delete from person", 1), "DELETE\nFROM\nperson"]
+  [new Line("delete from person", 1), "DELETE\nFROM\nperson"],
 ])("A keyword is uppercased", (input, expected) => {
   const inputQuery = new Query();
   inputQuery.lines = [input];

@@ -104,7 +104,7 @@ if (program.host || configuration?.host) {
 if (programFile) {
   if (fs.lstatSync(programFile).isDirectory()) {
     const sqlFiles = findByExtension(programFile, "sql");
-    sqlFiles.forEach(sqlFile => {
+    sqlFiles.forEach((sqlFile) => {
       queries = getQueryFromFile(sqlFile);
       runner.run(queries, printer, sqlFile, omittedErrors, db);
     });

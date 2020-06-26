@@ -23,13 +23,13 @@ class Create {
             "trigger",
             "user",
             "unique",
-            "view"
+            "view",
         ];
     }
     tokenise(query) {
         let lastToken = "";
-        query.lines.forEach(line => {
-            line.content.split(" ").forEach(word => {
+        query.lines.forEach((line) => {
+            line.content.split(" ").forEach((word) => {
                 let item = word.toLowerCase().trim();
                 if (item === keywords_1.Keyword.Create) {
                     line.tokens.push(new token_1.Token(types_1.Types.Keyword, item));

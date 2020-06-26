@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CheckerResult = void 0;
 /**
  * Every 'checker' brings back a result of type CheckerResult.
  */

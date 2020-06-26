@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.HungarianNotation = void 0;
 const checkerResult_1 = require("../checkerResult");
 const check_1 = require("../check");
 class HungarianNotation extends check_1.Check {

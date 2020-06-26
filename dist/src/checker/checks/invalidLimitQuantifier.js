@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.InvalidLimitQuantifier = void 0;
 const checkerResult_1 = require("../checkerResult");
 const check_1 = require("../check");
 const sprintf_js_1 = require("sprintf-js");

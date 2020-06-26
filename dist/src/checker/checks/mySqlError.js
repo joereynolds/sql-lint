@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MySqlError = void 0;
 const checkerResult_1 = require("../checkerResult");
 class MySqlError {
     constructor(errors) {

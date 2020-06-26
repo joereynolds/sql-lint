@@ -1,5 +1,4 @@
-/* tslint:disable-next-line */
-const paramCase = require("param-case");
+import * as p from "param-case";
 
 abstract class Check {
   public prefix: string = `[sql-lint: ${this.getName()}] `;
@@ -9,7 +8,7 @@ abstract class Check {
    * class name.
    */
   public getName() {
-    return paramCase(this.constructor.name);
+    return p.paramCase(this.constructor.name);
   }
 }
 

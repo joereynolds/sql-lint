@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* tslint:disable-next-line */
-const paramCase = require("param-case");
+exports.Check = void 0;
+const p = require("param-case");
 class Check {
     constructor() {
         this.prefix = `[sql-lint: ${this.getName()}] `;
@@ -11,7 +11,7 @@ class Check {
      * class name.
      */
     getName() {
-        return paramCase(this.constructor.name);
+        return p.paramCase(this.constructor.name);
     }
 }
 exports.Check = Check;

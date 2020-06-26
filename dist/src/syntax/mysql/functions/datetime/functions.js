@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Function = void 0;
 var Function;
 (function (Function) {
     Function["AddDate"] = "ADDDATE";

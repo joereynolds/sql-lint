@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Printer = void 0;
 const fixer_1 = require("./fixer");
 class Printer {
     constructor(verbosity, format) {

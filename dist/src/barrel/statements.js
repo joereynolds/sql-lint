@@ -1,12 +1,19 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("../lexer/statements/alter"));
-__export(require("../lexer/statements/create"));
-__export(require("../lexer/statements/drop"));
-__export(require("../lexer/statements/select"));
-__export(require("../lexer/statements/truncate"));
-__export(require("../lexer/statements/use"));
+__exportStar(require("../lexer/statements/alter"), exports);
+__exportStar(require("../lexer/statements/create"), exports);
+__exportStar(require("../lexer/statements/drop"), exports);
+__exportStar(require("../lexer/statements/select"), exports);
+__exportStar(require("../lexer/statements/truncate"), exports);
+__exportStar(require("../lexer/statements/use"), exports);
 //# sourceMappingURL=statements.js.map

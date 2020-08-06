@@ -41,6 +41,7 @@ program
   .option("--user <string>", "The user for the connection")
   .option("--password <string>", "The password for the connection")
   .option("--port <string>", "The port for the connection")
+  .option("--config <string>", "The path to the configuration file")
   .parse(process.argv);
 
 let queries: Query[] = [];
@@ -49,7 +50,7 @@ let prefix: string = "";
 const formatterFactory = new FormatterFactory();
 const format = formatterFactory.build(program.format);
 const printer: Printer = new Printer(program.verbose, format);
-const configuration = getConfiguration(file);
+const configuration = getConfiguration(program.config || file);
 const runner = new CheckerRunner();
 const programFile = program.args[0];
 

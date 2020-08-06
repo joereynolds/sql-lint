@@ -25,15 +25,17 @@ program
     .option("--user <string>", "The user for the connection")
     .option("--password <string>", "The password for the connection")
     .option("--port <string>", "The port for the connection")
+    .option("--config <string>", "The path to the configuration file")
     .parse(process.argv);
 let queries = [];
 let prefix = "";
 const formatterFactory = new formatterFactory_1.FormatterFactory();
 const format = formatterFactory.build(program.format);
 const printer = new printer_1.Printer(program.verbose, format);
-const configuration = config_1.getConfiguration(config_1.file);
+const configuration = config_1.getConfiguration(program.config || config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 const programFile = program.args[0];
+console.log(configuration);
 if (program.fix) {
     let query;
     // Read from stdin if nothing is specified.

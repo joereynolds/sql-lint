@@ -16,7 +16,8 @@ sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2"
 A configuration file for `sql-lint` can reside in
 `~/.config/sql-lint/config.json`.  It follows the [XDG Base Directory
 Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
-Specifically, it uses `$HOME/.config`.
+Specifically, it uses `$HOME/.config`. (You can specify a different path for the
+config with the `-c`/`--config` flag)
 
 You should put the following in there for more intelligent errors to come through
 
@@ -38,10 +39,10 @@ below.
 
 ### `driver`
 
-Optional, default is `mysql`.
-
 The driver to be used to check for errors.
 Accepted ones are `mysql` and `postgres`.
+
+Optional, default is `mysql`.
 
 ### `host`
 
@@ -60,6 +61,12 @@ The password for the database server.
 The port to connect to.
 
 Optional, default is `3306`.
+
+### `config`
+
+The path for the configuration file.
+
+Optional, default is `$HOME/.config/sql-lint/config.json`
 
 ### `ignore-errors`
 

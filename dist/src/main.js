@@ -35,7 +35,6 @@ const printer = new printer_1.Printer(program.verbose, format);
 const configuration = config_1.getConfiguration(program.config || config_1.file);
 const runner = new checkerRunner_1.CheckerRunner();
 const programFile = program.args[0];
-console.log(configuration);
 if (program.fix) {
     let query;
     // Read from stdin if nothing is specified.

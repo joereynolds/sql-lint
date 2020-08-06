@@ -68,6 +68,12 @@ sql-lint --verbose
 > ...
 ```
 
+### -c --config
+
+The path for the configuration file.
+
+Default is `$HOME/.config/sql-lint/config.json`
+
 ### --format
 
 `simple` | `json`
@@ -122,6 +128,7 @@ Usage: sql-lint [options]
 
 Options:
   -V, --version          output the version number
+  --fix [string]         The .sql string to fix
   -d, --driver <string>  The driver to use, must be one of ['mysql', 'postgres']
   -v, --verbose          Brings back information on the what it's linting and the tokens generated
   --format <string>      The format of the output, can be one of ['simple', 'json'] (default: "simple")
@@ -129,5 +136,6 @@ Options:
   --user <string>        The user for the connection
   --password <string>    The password for the connection
   --port <string>        The port for the connection
-  -h, --help             output usage information
+  --config <string>      The path to the configuration file
+  -h, --help             display help for command
 ```

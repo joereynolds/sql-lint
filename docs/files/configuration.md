@@ -62,12 +62,6 @@ The port to connect to.
 
 Optional, default is `3306`.
 
-### `config`
-
-The path for the configuration file.
-
-Optional, default is `$HOME/.config/sql-lint/config.json`
-
 ### `ignore-errors`
 
 Don't want to be warned about a particular error? 

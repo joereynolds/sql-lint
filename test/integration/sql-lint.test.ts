@@ -59,6 +59,13 @@ test("--port is a valid option", (done) => {
     .end(done);
 });
 
+test("--config is a valid option", (done) => {
+  shelltest()
+    .cmd(`${sqlLint} --help`)
+    .expect("stdout", /.*--config.*/)
+    .end(done);
+});
+
 test("Good queries exit with 0", (done) => {
   shelltest()
     .cmd(`echo 'DELETE FROM person WHERE 1=1;' | ${sqlLint}`)

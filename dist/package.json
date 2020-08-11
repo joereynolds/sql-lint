@@ -77,7 +77,6 @@
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "start": "./build/build.sh",
         "test": "jest test --coverage --silent",
-        "postinstall": "./build/postinstall.sh",
         "nearley": "nearleyc"
     },
     "version": "0.0.14"

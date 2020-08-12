@@ -58,11 +58,17 @@ test("We correctly read a file", () => {
 });
 
 test.each([
-  // Test we ignore '--' comments
+  // Test we ignore '--' comments on separate lines
   ["DELETE\n FROM \n\n person WHERE \n-- Remove old people\n age > 5;"],
 
-  // We ignore '#' comments
+  // Test we ignore '--' comments inline
+  ["DELETE\n FROM \n\n person WHERE \n\n age > 5;-- Remove old people"],
+
+  // We ignore '#' comments on separate lines
   ["DELETE\n FROM \n\n person WHERE \n# Remove old people\n age > 5;"],
+
+  // We ignore '#' comments inline
+  ["DELETE\n FROM \n\n person WHERE \n\n age > 5;# Remove old people"],
 
   // We ignore '/*' comments on a single line
   ["DELETE\n FROM \n\n person WHERE \n/* Remove old people*/\n age > 5;"],

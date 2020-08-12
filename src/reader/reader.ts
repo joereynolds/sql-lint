@@ -21,10 +21,6 @@ export function putContentIntoLines(contents: string): Query[] {
   let query = new Query();
   const skipChars = ["", Keyword.Newline, Keyword.WindowsNewline];
 
-  if (!contents.match(/;[\s\n]*$/)) {
-    contents = contents + ";";
-  }
-
   // Clean up the query as best we can to leave raw SQL behind to be lexed.
   // Note this currently does it in a very simplistic fashion using regexs so
   // will be prone to error for more complex files.
@@ -54,6 +50,17 @@ export function putContentIntoLines(contents: string): Query[] {
       queriesFromFile.push(query);
       query = new Query();
       currentQueryContent = "";
+    }
+
+    // Once at the end of the file, push the current query even if it
+    // doesn't end in a semi-colon.
+    if (i + 1 === contents.length) {
+      if (currentQueryContent.length > 0) {
+        query.lines.push(new Line(currentQueryContent, lineNumber));
+      }
+      if (query.lines.length > 0) {
+        queriesFromFile.push(query);
+      }
     }
   }
 
@@ -197,7 +204,7 @@ function sanitiseQuotes(content: string): string {
   // Then remove any ; from within single quotes
   const singleQuoteRegex = /('[^']*?')/gs;
   while ((result = singleQuoteRegex.exec(content)) !== null) {
-    const matchedQuote = result[0] + "";
+    const matchedQuote = result[0];
     const sanitisedResult = matchedQuote.replace(/;/gs, "");
     if (matchedQuote !== sanitisedResult) {
       // We do a split/join rather than replace in case we have special chars

@@ -51,13 +51,8 @@ function putContentIntoLines(contents) {
         }
         // Once at the end of the file, push the current query even if it
         // doesn't end in a semi-colon.
-        if (i + 1 === contents.length) {
-            if (currentQueryContent.length > 0) {
-                query.lines.push(new line_1.Line(currentQueryContent, lineNumber));
-            }
-            if (query.lines.length > 0) {
-                queriesFromFile.push(query);
-            }
+        if (i + 1 === contents.length && query.lines.length > 0) {
+            queriesFromFile.push(query);
         }
     }
     return queriesFromFile;
@@ -115,7 +110,7 @@ function multiLineReplace(content, startRegex, startDelimiter, endDelimiter) {
  */
 function stripComments(content) {
     // Add a new line to end in case not there to make regex matching easier
-    if (content[-1] != "\n") {
+    if (content[-1] !== "\n") {
         content = content + "\n";
     }
     // Remove any content after a dash comment until end of line

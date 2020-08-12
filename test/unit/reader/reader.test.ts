@@ -14,6 +14,14 @@ beforeEach(() => {
     new Line(" age > 5;", 5),
   ];
 
+  this.queryWithoutSemiColon = new Query();
+  this.queryWithoutSemiColon.lines = [
+    new Line("DELETE", 1),
+    new Line(" FROM ", 2),
+    new Line(" person WHERE ", 4),
+    new Line(" age > 5", 5),
+  ];
+
   this.queryWithComments = new Query();
   this.queryWithComments.lines = [
     new Line("DELETE", 1),
@@ -122,3 +130,12 @@ test("We correctly construct lines in a query from a string", () => {
   const actual = getQueryFromLine(input);
   expect(actual).toEqual(expected);
 });
+
+test("We correctly construct lines in a query from a string without a semi-colon", () => {
+  const expected: any = [this.queryWithoutSemiColon];
+
+  const input = "DELETE\n FROM \n\n person WHERE \n age > 5";
+  const actual = getQueryFromLine(input);
+  expect(actual).toEqual(expected);
+});
+

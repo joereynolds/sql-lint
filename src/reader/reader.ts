@@ -54,13 +54,8 @@ export function putContentIntoLines(contents: string): Query[] {
 
     // Once at the end of the file, push the current query even if it
     // doesn't end in a semi-colon.
-    if (i + 1 === contents.length) {
-      if (currentQueryContent.length > 0) {
-        query.lines.push(new Line(currentQueryContent, lineNumber));
-      }
-      if (query.lines.length > 0) {
-        queriesFromFile.push(query);
-      }
+    if (i + 1 === contents.length && query.lines.length > 0) {
+      queriesFromFile.push(query);
     }
   }
 
@@ -130,7 +125,7 @@ function multiLineReplace(
  */
 function stripComments(content: string): string {
   // Add a new line to end in case not there to make regex matching easier
-  if (content[-1] != "\n") {
+  if (content[-1] !== "\n") {
     content = content + "\n";
   }
 

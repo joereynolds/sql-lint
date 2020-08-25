@@ -20,7 +20,6 @@ default -> "DEFAULT"i __
 character_set -> "CHARACTER"i __ "SET"i _
 collate -> "COLLATE"i __
 encryption -> "ENCRYPTION"i __
-trigger -> "TRIGGER"i __
 foreachrow -> "FOR"i __ "EACH"i __ "ROW"i __
 
 character_set_choice -> (null | default) character_set (null | equals) name

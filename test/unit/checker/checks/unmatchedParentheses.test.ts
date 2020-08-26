@@ -1,6 +1,6 @@
-import { UnmatchedParentheses } from "../../../../../src/checker/checks/unmatchedParentheses";
-import { tokenise } from "../../../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
+import { UnmatchedParentheses } from "../../../../src/checker/checks/unmatchedParentheses";
+import { tokenise } from "../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   ["SELECT name FROM person WHERE (SELECT age > 4);", ""],

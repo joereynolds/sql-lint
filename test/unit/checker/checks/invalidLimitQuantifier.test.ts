@@ -1,6 +1,6 @@
-import { InvalidLimitQuantifier } from "../../../../../src/checker/checks/invalidLimitQuantifier";
-import { tokenise } from "../../../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
+import { InvalidLimitQuantifier } from "../../../../src/checker/checks/invalidLimitQuantifier";
+import { tokenise } from "../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   ["SELECT name FROM person LIMIT 5;", ""],

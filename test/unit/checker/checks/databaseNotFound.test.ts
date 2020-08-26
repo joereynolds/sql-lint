@@ -1,6 +1,6 @@
-import { DatabaseNotFound } from "../../../../../src/checker/checks/databaseNotFound";
-import { tokenise } from "../../../../..//src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
+import { DatabaseNotFound } from "../../../../src/checker/checks/databaseNotFound";
+import { tokenise } from "../../../..//src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   [

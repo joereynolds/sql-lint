@@ -1,6 +1,6 @@
-import { OddCodePoint } from "../../../../../src/checker/checks/oddCodePoint";
-import { tokenise } from "../../../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
+import { OddCodePoint } from "../../../../src/checker/checks/oddCodePoint";
+import { tokenise } from "../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   ["SELECT 1;", ""],

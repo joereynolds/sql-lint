@@ -1,8 +1,8 @@
-import { TableNotFound } from "../../../../../src/checker/checks/tableNotFound";
-import { tokenise } from "../../../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
-import { CheckerResult } from "../../../../../src/checker/checkerResult";
-import { Query } from "../../../../../src/reader/query";
+import { TableNotFound } from "../../../../src/checker/checks/tableNotFound";
+import { tokenise } from "../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
+import { CheckerResult } from "../../../../src/checker/checkerResult";
+import { Query } from "../../../../src/reader/query";
 
 test.each([
   [

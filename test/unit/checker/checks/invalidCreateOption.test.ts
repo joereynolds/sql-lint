@@ -1,6 +1,6 @@
-import { InvalidCreateOption } from "../../../../../src/checker/checks/invalidCreateOption";
-import { tokenise } from "../../../../../src/lexer/lexer";
-import { putContentIntoLines } from "../../../../../src/reader/reader";
+import { InvalidCreateOption } from "../../../../src/checker/checks/invalidCreateOption";
+import { tokenise } from "../../../../src/lexer/lexer";
+import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   ["CREATE TABLE person;", ""],

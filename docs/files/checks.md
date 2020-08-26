@@ -96,8 +96,19 @@ test/test-files//test.sql:32 [sql-lint: invalid-limit-quantifier] Argument 'test
 
 Shown when the string `sp_` or `tbl_` is present in the query.
 
+
 #### Example output
 
 ```
 test/test-files/test.sql:34 [sql-lint: hungarian-notation] Hungarian notation present in query
+```
+
+### trailing-whitespace
+
+Shown when a query has trailing whitespace.
+
+#### Example output
+
+```
+test/test-files/test.sql:34 [sql-lint: trailing-whitespace] Trailing whitespace
 ```

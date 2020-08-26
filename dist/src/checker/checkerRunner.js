@@ -32,6 +32,7 @@ class CheckerRunner {
             return !ignoredChecks.includes(item) && !item.endsWith(".js");
         });
         const factory = new checkFactory_1.CheckFactory();
+        console.log(checks);
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {

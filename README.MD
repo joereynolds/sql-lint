@@ -118,6 +118,13 @@ Shown when the string `sp_` or `tbl_` is present in the query.
 test/test-files/test.sql:34 [sql-lint: hungarian-notation] Hungarian notation present in query
 ```
 
+### trailing-whitespace
+
+Shown when a query has trailing whitespace.
+
+```
+test/test-files/test.sql:34 [sql-lint: trailing-whitespace] Trailing whitespace
+```
 
 ## Read more
 

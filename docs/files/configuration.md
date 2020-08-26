@@ -102,7 +102,9 @@ The below configuration contains every option available.
         "invalid-drop-option",
         "invalid-create-option",
         "invalid-truncate-option",
-        "invalid-alter-option"
+        "invalid-alter-option",
+        "hungarian-notation",
+        "trailing-whitespace"
     ]
 }
 ```

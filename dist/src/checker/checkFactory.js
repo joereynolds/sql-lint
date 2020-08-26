@@ -15,6 +15,7 @@ class CheckFactory {
             missingWhere: checks_1.MissingWhere,
             mySqlError: checks_1.MySqlError,
             oddCodePoint: checks_1.OddCodePoint,
+            trailingWhitespace: checks_1.TrailingWhitespace,
             unmatchedParentheses: checks_1.UnmatchedParentheses,
             hungarianNotation: checks_1.HungarianNotation,
         };

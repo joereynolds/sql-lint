@@ -22,4 +22,5 @@ __exportStar(require("../checker/checks/mySqlError"), exports);
 __exportStar(require("../checker/checks/oddCodePoint"), exports);
 __exportStar(require("../checker/checks/tableNotFound"), exports);
 __exportStar(require("../checker/checks/unmatchedParentheses"), exports);
+__exportStar(require("../checker/checks/trailingWhitespace"), exports);
 //# sourceMappingURL=checks.js.map

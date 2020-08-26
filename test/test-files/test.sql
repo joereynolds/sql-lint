@@ -12,6 +12,12 @@ FROM
 PERSON  
 WHERE something;
 
+
+-- [sql-lint: trailing-whitespace]
+DELETE 
+FROM 
+PERSON WHERE 1=1;
+
 -- [sql-lint: unmatched-parentheses]
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE ')';
 -- [sql-lint: database-not-found]

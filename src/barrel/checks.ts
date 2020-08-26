@@ -10,3 +10,4 @@ export * from "../checker/checks/mySqlError";
 export * from "../checker/checks/oddCodePoint";
 export * from "../checker/checks/tableNotFound";
 export * from "../checker/checks/unmatchedParentheses";
+export * from "../checker/checks/trailingWhitespace";

@@ -4,6 +4,7 @@ import {
   InvalidCreateOption,
   MissingWhere,
   InvalidDropOption,
+  TrailingWhitespace,
   MySqlError,
   OddCodePoint,
   UnmatchedParentheses,
@@ -26,6 +27,7 @@ class CheckFactory {
       missingWhere: MissingWhere,
       mySqlError: MySqlError,
       oddCodePoint: OddCodePoint,
+      trailingWhitespace: TrailingWhitespace,
       unmatchedParentheses: UnmatchedParentheses,
       hungarianNotation: HungarianNotation,
     };

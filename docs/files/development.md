@@ -41,6 +41,7 @@ Anyway, here are the steps.
 - Add it to the README.md so people know it's a thing
 - Add it to `configuration.md`. This is an exhaustive list of the checks
 - Add tests. The name of the test should match the name of the check
+- Add it to `checks.md`, the main documentation for checks
 - `npm run build` to compile the changes
 
 ## Troubleshooting

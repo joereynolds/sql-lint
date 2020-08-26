@@ -7,7 +7,7 @@ test.each([
       "DELETE \nFROM person WHERE name = 'Jon';", 
       "[sql-lint: trailing-whitespace] Trailing whitespace",
   ]
-])("it finds missing WHEREs in DELETEs", (query, expected) => {
+])("it warns about trailing whitespace", (query, expected) => {
   const checker = new TrailingWhitespace();
 
   const queryObj = putContentIntoLines(query);

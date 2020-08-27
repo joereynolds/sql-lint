@@ -6,6 +6,10 @@ test.each([
   [
       "DELETE \nFROM person WHERE name = 'Jon';", 
       "[sql-lint: trailing-whitespace] Trailing whitespace",
+  ],
+  [
+      "DELETE\nFROM person WHERE name = 'Jon';", 
+      "",
   ]
 ])("it warns about trailing whitespace", (query, expected) => {
   const checker = new TrailingWhitespace();

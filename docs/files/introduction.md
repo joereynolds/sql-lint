@@ -68,7 +68,7 @@ sql-lint --verbose
 > ...
 ```
 
-### -c --config
+### --config
 
 The path for the configuration file.
 

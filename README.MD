@@ -2,7 +2,7 @@
 
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
-`sql-lint` will do sanity checks on your query as well as bring errors back from the DB.
+`sql-lint` will do sanity checks on your queries as well as bring errors back from the DB.
 If you worry about forgetting `WHERE`s on a `DELETE` or borking your data with unexpected characters, then `sql-lint` is for you.
 
 A complete list of the checks it does is below.
@@ -33,6 +33,24 @@ sql-lint create-person.sql
 
 # Lints stdin
 echo 'DELETE FROM person;' | sql-lint
+```
+
+## Editor Integration
+
+If your editor supports external tools, then it supports `sql-lint`.
+Below is the list that have direct support for `sql-lint` either through plugins or configuration.
+
+### (Neo)Vim
+
+(Neo)Vim can be configured to use `sql-lint` on `.sql` files.
+
+[Ale](https://github.com/dense-analysis/ale/) ships with `sql-lint` support out the box.
+
+If you do not want to use a plugin,
+a much more lightweight solution is to run the following in an `.sql` file:
+
+```
+:!sql-lint %
 ```
 
 ## Checks

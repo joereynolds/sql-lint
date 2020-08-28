@@ -17,7 +17,7 @@ A configuration file for `sql-lint` can reside in
 `~/.config/sql-lint/config.json`.  It follows the [XDG Base Directory
 Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
 Specifically, it uses `$HOME/.config`. (You can specify a different path for the
-config with the `-c`/`--config` flag)
+config with the `--config` flag)
 
 You should put the following in there for more intelligent errors to come through
 
@@ -122,15 +122,12 @@ doing. Stick it in your global `.gitignore` to be safe.
 
 #### Ale
 
-`sql-lint` can be integrated into (Neo)Vim if you add this
-[patch](https://github.com/dense-analysis/ale/pull/2988/commits/07080066e49d68910dccc19e4d95167300fb9422)
-to Ale.
-
+`sql-lint` can be integrated into (Neo)Vim with [Ale](https://github.com/dense-analysis/ale/).
 
 #### Vanilla
 
 If you want to go without a plugin, the simplest option is to run the following:
 
 ```
-:!sql-lint -f %
+:!sql-lint %
 ```

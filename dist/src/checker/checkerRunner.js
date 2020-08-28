@@ -32,11 +32,13 @@ class CheckerRunner {
             return !ignoredChecks.includes(item) && !item.endsWith(".js");
         });
         const factory = new checkFactory_1.CheckFactory();
-        console.log(checks);
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();
             if (content) {
                 const category = lexer_1.categorise(content);
+                if (!category) {
+                    printer.warnAboutUncategoriseableQuery(content);
+                }
                 const tokenised = lexer_1.tokenise(query);
                 checks.forEach((check) => {
                     const checker = factory.build(check);

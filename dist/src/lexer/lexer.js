@@ -11,7 +11,7 @@ function categorise(query) {
     if (result) {
         return keywordLookup[result];
     }
-    throw new Error(`Unable to categorise query: ${query}. The query must start with one of ${Object.keys(keywords_1.Keyword)}`);
+    return '';
 }
 exports.categorise = categorise;
 function tokenise(query) {

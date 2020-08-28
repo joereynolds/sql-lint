@@ -12,7 +12,6 @@ FROM
 PERSON  
 WHERE something;
 
-
 -- [sql-lint: trailing-whitespace]
 DELETE 
 FROM 

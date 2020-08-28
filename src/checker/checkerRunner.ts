@@ -47,7 +47,13 @@ class CheckerRunner {
 
       if (content) {
         const category = categorise(content);
+
+        if (!category) {
+            printer.warnAboutUncategoriseableQuery(content);
+        }
+
         const tokenised: Query = tokenise(query);
+
         checks.forEach((check) => {
           const checker = factory.build(check);
 

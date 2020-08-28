@@ -147,3 +147,9 @@ test/test-files/test.sql:34 [sql-lint: trailing-whitespace] Trailing whitespace
 ## Read more
 
 To find out more, [read the documentation](https://sql-lint.readthedocs.io/)
+
+## Need help?
+
+There's a room on [gitter](https://gitter.im/joereynolds/sql-lint) for sql-lint.
+
+Come by and I'll do my best to help.

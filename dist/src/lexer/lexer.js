@@ -11,7 +11,7 @@ function categorise(query) {
     if (result) {
         return keywordLookup[result];
     }
-    return '';
+    return "";
 }
 exports.categorise = categorise;
 function tokenise(query) {

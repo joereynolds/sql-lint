@@ -10,12 +10,21 @@ class TrailingWhitespace extends check_1.Check {
         this.message = "";
         this.additionalInformation = "";
         this.requiresConnection = false;
-        this.appliesTo = ["select", "create", "delete", "update", "drop", "insert", "alter", "truncate"];
+        this.appliesTo = [
+            "select",
+            "create",
+            "delete",
+            "update",
+            "drop",
+            "insert",
+            "alter",
+            "truncate",
+        ];
     }
     check(query) {
         this.getName();
         for (const line of query.lines) {
-            if (line.content.endsWith(' ')) {
+            if (line.content.endsWith(" ")) {
                 return new checkerResult_1.CheckerResult(line.num, sprintf_js_1.sprintf(this.prefix + "Trailing whitespace"));
             }
         }

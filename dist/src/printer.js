@@ -37,9 +37,9 @@ class Printer {
         console.log(fixed);
     }
     warnAboutUncategoriseableQuery(content) {
-        const title = 'Unable to lint query';
+        const title = "Unable to lint query";
         const url = encodeURI(`https://github.com/joereynolds/sql-lint/issues/new?title=${title}&body=${content}`);
-        console.log(`sql-lint was unable to lint the following query ${content}.` +
+        console.log(`sql-lint was unable to lint the following query "${content}".` +
             `This could be a bug with sql-lint. Visit this URL to create a bug report: ${url}`);
     }
     warnAboutFileNotFound(file) {

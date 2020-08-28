@@ -49,7 +49,7 @@ class CheckerRunner {
         const category = categorise(content);
 
         if (!category) {
-            printer.warnAboutUncategoriseableQuery(content);
+          printer.warnAboutUncategoriseableQuery(content);
         }
 
         const tokenised: Query = tokenise(query);

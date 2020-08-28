@@ -16,7 +16,7 @@ function categorise(query: string) {
     return keywordLookup[result];
   }
 
-  return '';
+  return "";
 }
 
 function tokenise(query: Query): Query {

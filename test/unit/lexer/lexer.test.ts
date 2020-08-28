@@ -72,9 +72,7 @@ test.each([
   expect(actual).toMatchObject(expected);
 });
 
-test("We throw an exception on a query that cannot be categorised", () => {
+test("We return an empty string on a query that cannot be categorised", () => {
   const query = "Not a query SELECT * FROM l";
-  expect(() => {
-    categorise(query);
-  }).toThrow(Error);
+  expect(categorise(query)).toEqual("");
 });

@@ -3,7 +3,6 @@ import { Line } from "../../src/reader/line";
 import { Query } from "../../src/reader/query";
 
 test.each([
-
   // Single keyword
   [new Line("SELECT", 1), "SELECT"],
 
@@ -43,7 +42,7 @@ test.each([
 
 test.each([
   // A query with extra spaces
-  [new Line("DELETE     FROM   some_table", 1), "DELETE\nFROM\nsome_table"]
+  [new Line("DELETE     FROM   some_table", 1), "DELETE\nFROM\nsome_table"],
 ])("Trailing whitespace is removed", (input, expected) => {
   const inputQuery = new Query();
   inputQuery.lines = [input];

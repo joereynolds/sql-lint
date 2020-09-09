@@ -16,6 +16,7 @@ class Create implements ILexer {
     "or",
     "procedure",
     "server",
+    "schema",
     "table",
     "tablespace",
     "temporary",

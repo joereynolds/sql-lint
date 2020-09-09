@@ -4,6 +4,7 @@ import { putContentIntoLines } from "../../../../src/reader/reader";
 
 test.each([
   ["CREATE TABLE person;", ""],
+  ["CREATE SCHEMA person;", ""],
   [
     "CREATE JIBBERISH person;",
     /Option 'jibberish' is not a valid option, must be one of .*/,

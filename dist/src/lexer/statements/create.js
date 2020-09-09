@@ -17,6 +17,7 @@ class Create {
             "or",
             "procedure",
             "server",
+            "schema",
             "table",
             "tablespace",
             "temporary",

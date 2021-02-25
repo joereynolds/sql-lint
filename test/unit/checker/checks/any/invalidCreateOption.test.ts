@@ -24,6 +24,7 @@ test.each([
 // MySQL
 test.each([
   ["CREATE ROLE blah;", ""],
+  ["CREATE TYPE blah;", ""],
 ])("it warns about mysql specific invalid options in CREATEs", (query, expected) => {
   const checker = new InvalidCreateOption();
 
@@ -31,7 +32,7 @@ test.each([
   const tokenised = tokenise(queryObj[0]);
 
   const actual = checker.check(tokenised);
-  expect(actual.content).toMatch(expected);
+  expect(actual.content).toEqual(
+      expect.stringContaining(expected)
+  )
 });
-
-

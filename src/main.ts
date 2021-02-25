@@ -92,9 +92,11 @@ if (configuration === null) {
   printer.warnAboutNoConfiguration(file);
 }
 
+const driver = program.driver || configuration?.driver || "mysql";
+
 if (program.host || configuration?.host) {
   db = new Database(
-    program.driver || configuration?.driver || "mysql",
+    driver,
     program.host || configuration?.host || "localhost",
     program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || configuration?.password,
@@ -115,7 +117,7 @@ if (programFile) {
   }
 }
 
-runner.run(queries, printer, prefix, omittedErrors, db);
+runner.run(queries, printer, prefix, omittedErrors, driver, db);
 
 if (program.host || configuration?.host) {
   db.connection.end();

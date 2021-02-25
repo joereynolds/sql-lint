@@ -16,10 +16,11 @@ class CheckerRunner {
     printer: Printer,
     prefix: string,
     omittedErrors: string[],
+    driver: string,
     database?: Database
   ) {
     const checks = fs
-      .readdirSync(__dirname + "/checks")
+      .readdirSync(`${__dirname}/checks/any`)
       .map((check) => {
         return path.parse(check).name;
       })
@@ -39,6 +40,14 @@ class CheckerRunner {
         //       including the .js. We ignore those too
         return !ignoredChecks.includes(item) && !item.endsWith(".js");
       });
+
+    const driverSpecificChecks = fs
+      .readdirSync(`${__dirname}/checks/${driver}`)
+      .map((check) => {
+        return path.parse(check).name;
+      })
+
+    checks.push(...driverSpecificChecks);
 
     const factory = new CheckFactory();
 

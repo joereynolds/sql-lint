@@ -46,6 +46,9 @@ class CheckerRunner {
       .map((check) => {
         return path.parse(check).name;
       })
+      .filter((item) => {
+        return !item.endsWith(".js");
+      });
 
     checks.push(...driverSpecificChecks);
 

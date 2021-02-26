@@ -66,8 +66,9 @@ let db;
 if (configuration === null) {
     printer.warnAboutNoConfiguration(config_1.file);
 }
+const driver = program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql";
 if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
-    db = new database_1.Database(program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql", program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host) || "localhost", program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user) || "root", // bad practice but unfortunately common, make it easier for the user
+    db = new database_1.Database(driver, program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host) || "localhost", program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user) || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
 }
 if (programFile) {
@@ -75,7 +76,7 @@ if (programFile) {
         const sqlFiles = file_1.findByExtension(programFile, "sql");
         sqlFiles.forEach((sqlFile) => {
             queries = reader_1.getQueryFromFile(sqlFile);
-            runner.run(queries, printer, sqlFile, omittedErrors, db);
+            runner.run(queries, printer, sqlFile, omittedErrors, driver, db);
         });
     }
     else {
@@ -83,7 +84,7 @@ if (programFile) {
         prefix = programFile;
     }
 }
-runner.run(queries, printer, prefix, omittedErrors, db);
+runner.run(queries, printer, prefix, omittedErrors, driver, db);
 if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
     db.connection.end();
 }

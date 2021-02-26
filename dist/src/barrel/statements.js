@@ -10,10 +10,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("../lexer/statements/alter"), exports);
-__exportStar(require("../lexer/statements/create"), exports);
-__exportStar(require("../lexer/statements/drop"), exports);
-__exportStar(require("../lexer/statements/select"), exports);
-__exportStar(require("../lexer/statements/truncate"), exports);
-__exportStar(require("../lexer/statements/use"), exports);
+__exportStar(require("../lexer/statements/mysql/alter"), exports);
+__exportStar(require("../lexer/statements/mysql/create"), exports);
+__exportStar(require("../lexer/statements/mysql/drop"), exports);
+__exportStar(require("../lexer/statements/mysql/select"), exports);
+__exportStar(require("../lexer/statements/mysql/truncate"), exports);
+__exportStar(require("../lexer/statements/mysql/use"), exports);
 //# sourceMappingURL=statements.js.map

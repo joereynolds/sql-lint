@@ -10,9 +10,9 @@ const checks_1 = require("../barrel/checks");
  * Runs all the checks.
  */
 class CheckerRunner {
-    run(sqlQueries, printer, prefix, omittedErrors, database) {
+    run(sqlQueries, printer, prefix, omittedErrors, driver, database) {
         const checks = fs
-            .readdirSync(__dirname + "/checks")
+            .readdirSync(`${__dirname}/checks/any`)
             .map((check) => {
             return path.parse(check).name;
         })
@@ -31,6 +31,15 @@ class CheckerRunner {
             //       including the .js. We ignore those too
             return !ignoredChecks.includes(item) && !item.endsWith(".js");
         });
+        const driverSpecificChecks = fs
+            .readdirSync(`${__dirname}/checks/${driver}`)
+            .map((check) => {
+            return path.parse(check).name;
+        })
+            .filter((item) => {
+            return !item.endsWith(".js");
+        });
+        checks.push(...driverSpecificChecks);
         const factory = new checkFactory_1.CheckFactory();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();

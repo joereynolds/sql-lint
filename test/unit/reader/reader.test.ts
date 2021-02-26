@@ -59,7 +59,8 @@ test("We correctly construct lines in a query from a string", () => {
 });
 
 test("We should ignore multiline comments", () => {
-  const input = "/*\n * catpants\n*/DELETE\n FROM \n\n person /*comment */WHERE \n/*\n\n this is useless*/ age > 5;";
+  const input =
+    "/*\n * catpants\n*/DELETE\n FROM \n\n person /*comment */WHERE \n/*\n\n this is useless*/ age > 5;";
 
   expect(getQueryFromLine(input)).toEqual([this.query]);
 });

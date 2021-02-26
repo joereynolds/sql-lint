@@ -109,7 +109,7 @@ if (programFile) {
     const sqlFiles = findByExtension(programFile, "sql");
     sqlFiles.forEach((sqlFile) => {
       queries = getQueryFromFile(sqlFile);
-      runner.run(queries, printer, sqlFile, omittedErrors, db);
+      runner.run(queries, printer, sqlFile, omittedErrors, driver, db);
     });
   } else {
     queries = getQueryFromFile(programFile);

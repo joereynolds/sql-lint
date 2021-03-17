@@ -24,6 +24,7 @@ class Create implements ILexer {
     "user",
     "unique",
     "view",
+    "external"
   ];
 
   public tokenise(query: Query): Query {

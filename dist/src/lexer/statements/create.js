@@ -25,6 +25,7 @@ class Create {
             "user",
             "unique",
             "view",
+            "external"
         ];
     }
     tokenise(query) {

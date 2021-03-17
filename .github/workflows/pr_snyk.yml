@@ -24,4 +24,4 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: ${{ env.IMAGE_NAME }}
-          args: --file=Dockerfile --severity-threshold=high --exclude-base-image-vulns --org=dwp-dataworks
+          args: --file=ci/Dockerfile --severity-threshold=high --exclude-base-image-vulns --org=dwp-dataworks

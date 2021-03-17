@@ -86,4 +86,4 @@ jobs:
         with:
           command: monitor
           image: ${{ env.IMAGE_NAME }}
-          args: --file=Dockerfile --org=dwp-dataworks
+          args: --file=ci/Dockerfile --org=dwp-dataworks

@@ -10,5 +10,11 @@ services:
       MYSQL_ROOT_PASSWORD: password
     ports:
       - 3306:3306
+
+  sql-lint:
+    build:
+      context: ./
+      dockerfile: ./ci/Dockerfile
+
 volumes:
   mysql: ~

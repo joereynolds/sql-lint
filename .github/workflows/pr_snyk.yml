@@ -1,0 +1,27 @@
+name: Perform Snyk Scan
+
+on:
+  pull_request:
+    paths-ignore:
+      - ".circleci/**"
+      - ".github/workflows/**"
+
+env:
+  IMAGE_NAME: dwpdigital/sql-lint
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.IMAGE_NAME }}:latest .
+
+      - name: Run Snyk to check image for high vulnerabilities
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          args: --file=Dockerfile --severity-threshold=high --exclude-base-image-vulns --org=dwp-dataworks

@@ -5,7 +5,7 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class Drop implements ILexer {
+class PostgresDrop implements ILexer {
   public options: string[] = [
     "database",
     "event",
@@ -46,4 +46,4 @@ class Drop implements ILexer {
   }
 }
 
-export { Drop };
+export { PostgresDrop };

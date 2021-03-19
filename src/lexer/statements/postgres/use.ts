@@ -5,7 +5,7 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class Use implements ILexer {
+class PostgresUse implements ILexer {
   public options: string[] = [];
   public tokenise(query: Query): Query {
     query.lines.forEach((line) => {
@@ -29,4 +29,4 @@ class Use implements ILexer {
   }
 }
 
-export { Use };
+export { PostgresUse };

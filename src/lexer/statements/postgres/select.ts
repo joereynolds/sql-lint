@@ -5,7 +5,7 @@ import { Types } from "../../types";
 import { Keyword } from "../../../syntax/keywords";
 import { Token } from "../../token";
 
-class Select implements ILexer {
+class PostgresSelect implements ILexer {
   public options: string[] = [];
 
   public tokenise(query: Query): Query {
@@ -46,4 +46,4 @@ class Select implements ILexer {
   }
 }
 
-export { Select };
+export { PostgresSelect };

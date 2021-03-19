@@ -1,4 +1,4 @@
-import { InvalidAlterOption } from "../../../../../src/checker/checks/any/invalidAlterOption";
+import { InvalidAlterOption } from "../../../../../src/checker/checks/mysql/invalidAlterOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 

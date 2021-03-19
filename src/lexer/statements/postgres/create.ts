@@ -5,7 +5,7 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class Create implements ILexer {
+class PostgresCreate implements ILexer {
   public options: string[] = [
     "algorithm",
     "database",
@@ -53,4 +53,4 @@ class Create implements ILexer {
   }
 }
 
-export { Create };
+export { PostgresCreate };

@@ -5,7 +5,7 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class Truncate implements ILexer {
+class PostgresTruncate implements ILexer {
   public options: string[] = ["table"];
 
   public tokenise(query: Query): Query {
@@ -33,4 +33,4 @@ class Truncate implements ILexer {
   }
 }
 
-export { Truncate };
+export { PostgresTruncate };

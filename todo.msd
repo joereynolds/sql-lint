@@ -1,0 +1,1 @@
+- Make sure the appliesTo category on checks still works even if they've been naed to 'PostgresCreate' instead of 'create' (I think it should)

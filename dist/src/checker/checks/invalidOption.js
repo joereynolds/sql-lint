@@ -1,13 +1,4 @@
 "use strict";
-/**
- * This error is triggered when a DROP statement
- * has an invalid option following the 'DROP'.
- *
- * It would trigger for this:
- *   DROP RUBBISH thing;
- * It wouldn't trigger for this:
- *   DROP TABLE test;
- */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InvalidOption = void 0;
 const checkerResult_1 = require("../checkerResult");

@@ -7,17 +7,21 @@ class CheckFactory {
         // any is actually IChecker
         const checkMap = {
             databaseNotFound: checks_1.DatabaseNotFound,
-            invalidAlterOption: checks_1.InvalidAlterOption,
-            invalidCreateOption: checks_1.InvalidCreateOption,
-            invalidDropOption: checks_1.InvalidDropOption,
+            hungarianNotation: checks_1.HungarianNotation,
             invalidLimitQuantifier: checks_1.InvalidLimitQuantifier,
-            invalidTruncateOption: checks_1.InvalidTruncateOption,
             missingWhere: checks_1.MissingWhere,
             mySqlError: checks_1.MySqlError,
             oddCodePoint: checks_1.OddCodePoint,
             trailingWhitespace: checks_1.TrailingWhitespace,
             unmatchedParentheses: checks_1.UnmatchedParentheses,
-            hungarianNotation: checks_1.HungarianNotation,
+            mySqlInvalidAlterOption: checks_1.MySqlInvalidAlterOption,
+            mySqlInvalidCreateOption: checks_1.MySqlInvalidCreateOption,
+            mySqlInvalidDropOption: checks_1.MySqlInvalidDropOption,
+            mySqlInvalidTruncateOption: checks_1.MySqlInvalidTruncateOption,
+            postgresInvalidAlterOption: checks_1.PostgresInvalidAlterOption,
+            postgresInvalidCreateOption: checks_1.PostgresInvalidCreateOption,
+            postgresInvalidDropOption: checks_1.PostgresInvalidDropOption,
+            postgresInvalidTruncateOption: checks_1.PostgresInvalidTruncateOption,
         };
         return new checkMap[check]();
     }

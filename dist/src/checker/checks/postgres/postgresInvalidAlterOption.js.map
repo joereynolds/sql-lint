@@ -1,0 +1,1 @@
+{"version":3,"file":"postgresInvalidAlterOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/postgres/postgresInvalidAlterOption.ts"],"names":[],"mappings":";;;AACA,2DAAmD;AACnD,oDAAiD;AAEjD,MAAM,0BAA2B,SAAQ,6BAAa;IAAtD;;QACS,YAAO,GAAG,IAAI,kBAAK,EAAE,CAAC;QACtB,cAAS,GAAG,CAAC,OAAO,CAAC,CAAC;IAC/B,CAAC;CAAA;AAEQ,gEAA0B"}

@@ -16,19 +16,16 @@ class CheckerRunner {
     printer: Printer,
     prefix: string,
     omittedErrors: string[],
+    driver: string,
     database?: Database
   ) {
     const checks = fs
-      .readdirSync(__dirname + "/checks")
+      .readdirSync(`${__dirname}/checks/any`)
       .map((check) => {
         return path.parse(check).name;
       })
       .filter((item) => {
-        const ignoredChecks = [
-          "invalidOption",
-          "tableNotFound",
-          "databaseNotFound",
-        ];
+        const ignoredChecks = ["tableNotFound", "databaseNotFound"];
 
         // We ignore the 3 above checks.
         // invalidOption - This is a base class and does actually have any checks
@@ -39,6 +36,17 @@ class CheckerRunner {
         //       including the .js. We ignore those too
         return !ignoredChecks.includes(item) && !item.endsWith(".js");
       });
+
+    const driverSpecificChecks = fs
+      .readdirSync(`${__dirname}/checks/${driver}`)
+      .map((check) => {
+        return path.parse(check).name;
+      })
+      .filter((item) => {
+        return !item.endsWith(".js");
+      });
+
+    checks.push(...driverSpecificChecks);
 
     const factory = new CheckFactory();
 

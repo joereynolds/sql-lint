@@ -1,0 +1,1 @@
+{"version":3,"file":"postgresInvalidDropOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/postgres/postgresInvalidDropOption.ts"],"names":[],"mappings":";AAAA;;;;;;;;GAQG;;;AAGH,2DAAkD;AAClD,oDAAiD;AAEjD,MAAM,yBAA0B,SAAQ,6BAAa;IAArD;;QACS,YAAO,GAAG,IAAI,iBAAI,EAAE,CAAC;QACrB,cAAS,GAAG,CAAC,MAAM,CAAC,CAAC;IAC9B,CAAC;CAAA;AAEQ,8DAAyB"}

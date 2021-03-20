@@ -10,18 +10,14 @@ const checks_1 = require("../barrel/checks");
  * Runs all the checks.
  */
 class CheckerRunner {
-    run(sqlQueries, printer, prefix, omittedErrors, database) {
+    run(sqlQueries, printer, prefix, omittedErrors, driver, database) {
         const checks = fs
-            .readdirSync(__dirname + "/checks")
+            .readdirSync(`${__dirname}/checks/any`)
             .map((check) => {
             return path.parse(check).name;
         })
             .filter((item) => {
-            const ignoredChecks = [
-                "invalidOption",
-                "tableNotFound",
-                "databaseNotFound",
-            ];
+            const ignoredChecks = ["tableNotFound", "databaseNotFound"];
             // We ignore the 3 above checks.
             // invalidOption - This is a base class and does actually have any checks
             // tableNotFound - This is built into most SQL servers so is redundant
@@ -31,6 +27,17 @@ class CheckerRunner {
             //       including the .js. We ignore those too
             return !ignoredChecks.includes(item) && !item.endsWith(".js");
         });
+        const driverSpecificChecks = fs
+            .readdirSync(`${__dirname}/checks/${driver}`)
+            .map((check) => {
+            return path.parse(check).name;
+        })
+            .filter((item) => {
+            const ignoredChecks = ["invalidOption"];
+            return !ignoredChecks.includes(item) && !item.endsWith(".js");
+        });
+        checks.push(...driverSpecificChecks);
+        console.log(driver);
         const factory = new checkFactory_1.CheckFactory();
         sqlQueries.forEach((query) => {
             const content = query.getContent().trim();

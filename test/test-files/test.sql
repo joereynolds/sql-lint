@@ -38,6 +38,8 @@ SELECT * FROM INFORMATION_SCHEMA.COLUMNS LIMIT 'test';
 -- [sql-lint: hungarian-notation]
 CREATE TABLE tbl_person;
 
+CREATE TYPE twat;
+
 -- [ER_NO_DB_ERROR]
 SELECT  * FROM    PERSON  WHERE age > 5 ;
 -- [ER_PARSE_ERROR]

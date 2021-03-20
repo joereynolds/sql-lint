@@ -1,15 +1,8 @@
 import { CheckFactory } from "../../../src/checker/checkFactory";
 import {
-  InvalidAlterOption,
-  InvalidCreateOption,
   MissingWhere,
-  InvalidDropOption,
   MySqlError,
   OddCodePoint,
-  TableNotFound,
-  UnmatchedParentheses,
-  InvalidTruncateOption,
-  DatabaseNotFound,
 } from "../../../src/barrel/checks";
 
 test.each([

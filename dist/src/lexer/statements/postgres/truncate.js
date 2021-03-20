@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Truncate = void 0;
+exports.PostgresTruncate = void 0;
 const lexer_1 = require("../../lexer");
 const keywords_1 = require("../../../syntax/keywords");
 const types_1 = require("../../types");
 const token_1 = require("../../token");
-class Truncate {
+class PostgresTruncate {
     constructor() {
         this.options = ["table"];
     }
@@ -29,5 +29,5 @@ class Truncate {
         return query;
     }
 }
-exports.Truncate = Truncate;
+exports.PostgresTruncate = PostgresTruncate;
 //# sourceMappingURL=truncate.js.map

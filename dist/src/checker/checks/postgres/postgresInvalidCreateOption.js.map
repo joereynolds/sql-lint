@@ -1,0 +1,1 @@
+{"version":3,"file":"postgresInvalidCreateOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/postgres/postgresInvalidCreateOption.ts"],"names":[],"mappings":";AAAA;;;;;;;;GAQG;;;AAGH,2DAA4D;AAC5D,oDAAiD;AAEjD,MAAM,2BAA4B,SAAQ,6BAAa;IAAvD;;QACS,YAAO,GAAG,IAAI,2BAAc,EAAE,CAAC;QAC/B,cAAS,GAAG,CAAC,QAAQ,CAAC,CAAC;IAChC,CAAC;CAAA;AAEQ,kEAA2B"}

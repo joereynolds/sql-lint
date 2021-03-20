@@ -10,11 +10,11 @@
 
 import { IChecker } from "../../interface";
 import { Drop } from "../../../barrel/statements";
-import { InvalidOption } from "./invalidOption";
+import { InvalidOption } from "../invalidOption";
 
-class InvalidDropOption extends InvalidOption implements IChecker {
+class PostgresInvalidDropOption extends InvalidOption implements IChecker {
   public checker = new Drop();
   public appliesTo = ["drop"];
 }
 
-export { InvalidDropOption };
+export { PostgresInvalidDropOption };

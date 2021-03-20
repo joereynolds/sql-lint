@@ -17,10 +17,7 @@ test.each([
   expect(actual.content).toBeFalsy();
 });
 
-test.each([
-  ["CREATE JIBBERISH person;"], 
-  ["CREATE TYPE blah;"],
-])(
+test.each([["CREATE JIBBERISH person;"], ["CREATE TYPE blah;"]])(
   "it warns about mysql specific invalid options in CREATEs",
   (query) => {
     const checker = new InvalidCreateOption();

@@ -12,15 +12,19 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("../checker/checks/any/databaseNotFound"), exports);
 __exportStar(require("../checker/checks/any/hungarianNotation"), exports);
-__exportStar(require("../checker/checks/any/invalidAlterOption"), exports);
-__exportStar(require("../checker/checks/any/invalidCreateOption"), exports);
-__exportStar(require("../checker/checks/any/invalidDropOption"), exports);
-__exportStar(require("../checker/checks/any/invalidTruncateOption"), exports);
 __exportStar(require("../checker/checks/any/invalidLimitQuantifier"), exports);
 __exportStar(require("../checker/checks/any/missingWhere"), exports);
-__exportStar(require("../checker/checks/mysql/mySqlError"), exports);
 __exportStar(require("../checker/checks/any/oddCodePoint"), exports);
 __exportStar(require("../checker/checks/any/tableNotFound"), exports);
 __exportStar(require("../checker/checks/any/unmatchedParentheses"), exports);
 __exportStar(require("../checker/checks/any/trailingWhitespace"), exports);
+__exportStar(require("../checker/checks/mysql/mySqlInvalidAlterOption"), exports);
+__exportStar(require("../checker/checks/mysql/mySqlInvalidCreateOption"), exports);
+__exportStar(require("../checker/checks/mysql/mySqlInvalidDropOption"), exports);
+__exportStar(require("../checker/checks/mysql/mySqlInvalidTruncateOption"), exports);
+__exportStar(require("../checker/checks/mysql/mySqlError"), exports);
+__exportStar(require("../checker/checks/postgres/postgresInvalidAlterOption"), exports);
+__exportStar(require("../checker/checks/postgres/postgresInvalidCreateOption"), exports);
+__exportStar(require("../checker/checks/postgres/postgresInvalidDropOption"), exports);
+__exportStar(require("../checker/checks/postgres/postgresInvalidTruncateOption"), exports);
 //# sourceMappingURL=checks.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"mySqlInvalidTruncateOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/mysql/mySqlInvalidTruncateOption.ts"],"names":[],"mappings":";;;AACA,2DAAsD;AACtD,oDAAiD;AAEjD,MAAM,0BAA2B,SAAQ,6BAAa;IAAtD;;QACS,YAAO,GAAG,IAAI,qBAAQ,EAAE,CAAC;QACzB,cAAS,GAAG,CAAC,UAAU,CAAC,CAAC;IAClC,CAAC;CAAA;AAEQ,gEAA0B"}

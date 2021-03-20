@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Drop = void 0;
+exports.PostgresDrop = void 0;
 const lexer_1 = require("../../lexer");
 const keywords_1 = require("../../../syntax/keywords");
 const types_1 = require("../../types");
 const token_1 = require("../../token");
-class Drop {
+class PostgresDrop {
     constructor() {
         this.options = [
             "database",
@@ -42,5 +42,5 @@ class Drop {
         return query;
     }
 }
-exports.Drop = Drop;
+exports.PostgresDrop = PostgresDrop;
 //# sourceMappingURL=drop.js.map

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Use = void 0;
+exports.PostgresUse = void 0;
 const lexer_1 = require("../../lexer");
 const keywords_1 = require("../../../syntax/keywords");
 const types_1 = require("../../types");
 const token_1 = require("../../token");
-class Use {
+class PostgresUse {
     constructor() {
         this.options = [];
     }
@@ -27,5 +27,5 @@ class Use {
         return query;
     }
 }
-exports.Use = Use;
+exports.PostgresUse = PostgresUse;
 //# sourceMappingURL=use.js.map

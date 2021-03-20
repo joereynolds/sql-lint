@@ -16,4 +16,9 @@ __exportStar(require("../lexer/statements/mysql/drop"), exports);
 __exportStar(require("../lexer/statements/mysql/select"), exports);
 __exportStar(require("../lexer/statements/mysql/truncate"), exports);
 __exportStar(require("../lexer/statements/mysql/use"), exports);
+__exportStar(require("../lexer/statements/postgres/create"), exports);
+__exportStar(require("../lexer/statements/postgres/drop"), exports);
+__exportStar(require("../lexer/statements/postgres/select"), exports);
+__exportStar(require("../lexer/statements/postgres/truncate"), exports);
+__exportStar(require("../lexer/statements/postgres/use"), exports);
 //# sourceMappingURL=statements.js.map

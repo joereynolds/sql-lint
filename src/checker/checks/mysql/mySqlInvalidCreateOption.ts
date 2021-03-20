@@ -9,12 +9,12 @@
  */
 
 import { IChecker } from "../../interface";
-import { PostgresCreate } from "../../../barrel/statements";
-import { InvalidOption } from "./invalidOption";
+import { Create } from "../../../barrel/statements";
+import { InvalidOption } from "../invalidOption";
 
-class InvalidCreateOption extends InvalidOption implements IChecker {
-  public checker = new PostgresCreate();
+class MySqlInvalidCreateOption extends InvalidOption implements IChecker {
+  public checker = new Create();
   public appliesTo = ["create"];
 }
 
-export { InvalidCreateOption };
+export { MySqlInvalidCreateOption };

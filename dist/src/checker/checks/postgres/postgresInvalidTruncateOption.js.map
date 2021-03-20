@@ -1,0 +1,1 @@
+{"version":3,"file":"postgresInvalidTruncateOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/postgres/postgresInvalidTruncateOption.ts"],"names":[],"mappings":";;;AACA,2DAAsD;AACtD,oDAAiD;AAEjD,MAAM,6BAA8B,SAAQ,6BAAa;IAAzD;;QACS,YAAO,GAAG,IAAI,qBAAQ,EAAE,CAAC;QACzB,cAAS,GAAG,CAAC,UAAU,CAAC,CAAC;IAClC,CAAC;CAAA;AAEQ,sEAA6B"}

@@ -25,11 +25,7 @@ class CheckerRunner {
         return path.parse(check).name;
       })
       .filter((item) => {
-        const ignoredChecks = [
-          "invalidOption",
-          "tableNotFound",
-          "databaseNotFound",
-        ];
+        const ignoredChecks = ["tableNotFound", "databaseNotFound"];
 
         // We ignore the 3 above checks.
         // invalidOption - This is a base class and does actually have any checks
@@ -47,10 +43,13 @@ class CheckerRunner {
         return path.parse(check).name;
       })
       .filter((item) => {
-        return !item.endsWith(".js");
+        const ignoredChecks = ["invalidOption"];
+
+        return !ignoredChecks.includes(item) && !item.endsWith(".js");
       });
 
     checks.push(...driverSpecificChecks);
+    console.log(driver);
 
     const factory = new CheckFactory();
 

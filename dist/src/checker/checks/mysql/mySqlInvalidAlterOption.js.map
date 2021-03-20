@@ -1,0 +1,1 @@
+{"version":3,"file":"mySqlInvalidAlterOption.js","sourceRoot":"","sources":["../../../../../src/checker/checks/mysql/mySqlInvalidAlterOption.ts"],"names":[],"mappings":";;;AACA,2DAAmD;AACnD,oDAAiD;AAEjD,MAAM,uBAAwB,SAAQ,6BAAa;IAAnD;;QACS,YAAO,GAAG,IAAI,kBAAK,EAAE,CAAC;QACtB,cAAS,GAAG,CAAC,OAAO,CAAC,CAAC;IAC/B,CAAC;CAAA;AAEQ,0DAAuB"}

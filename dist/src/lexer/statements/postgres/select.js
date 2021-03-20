@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Select = void 0;
+exports.PostgresSelect = void 0;
 const lexer_1 = require("../../lexer");
 const types_1 = require("../../types");
 const keywords_1 = require("../../../syntax/keywords");
 const token_1 = require("../../token");
-class Select {
+class PostgresSelect {
     constructor() {
         this.options = [];
     }
@@ -39,5 +39,5 @@ class Select {
         return query;
     }
 }
-exports.Select = Select;
+exports.PostgresSelect = PostgresSelect;
 //# sourceMappingURL=select.js.map

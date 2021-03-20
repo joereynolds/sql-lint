@@ -16,9 +16,7 @@ test.each([
   expect(actual.content).toBeFalsy();
 });
 
-test.each([
-  ["CREATE JIBBERISH person;"], 
-])(
+test.each([["CREATE JIBBERISH person;"]])(
   "it warns about postgres specific invalid options in CREATEs",
   (query) => {
     const checker = new InvalidCreateOption();

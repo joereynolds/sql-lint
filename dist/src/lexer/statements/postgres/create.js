@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Create = void 0;
+exports.PostgresCreate = void 0;
 const lexer_1 = require("../../lexer");
 const keywords_1 = require("../../../syntax/keywords");
 const types_1 = require("../../types");
 const token_1 = require("../../token");
-class Create {
+class PostgresCreate {
     constructor() {
         this.options = [
             "algorithm",
@@ -49,5 +49,5 @@ class Create {
         return query;
     }
 }
-exports.Create = Create;
+exports.PostgresCreate = PostgresCreate;
 //# sourceMappingURL=create.js.map

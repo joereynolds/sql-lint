@@ -50,7 +50,7 @@ exports.putContentIntoLines = putContentIntoLines;
  * 3. Rejoin the lines together as a single string.
  */
 function stripComments(content) {
-    content = content.replace(reMultilineComments, '');
+    content = content.replace(reMultilineComments, "");
     const contentInLines = content.split(keywords_1.Keyword.Newline);
     for (let i = 0; i < contentInLines.length; i++) {
         if (contentInLines[i].startsWith(keywords_1.Keyword.CommentDash) ||

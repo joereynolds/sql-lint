@@ -1,4 +1,4 @@
-import { InvalidCreateOption } from "../../../../../src/checker/checks/mysql/invalidCreateOption";
+import { MySqlInvalidCreateOption } from "../../../../../src/checker/checks/mysql/mySqlInvalidCreateOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 
@@ -8,7 +8,7 @@ test.each([
   ["CREATE OR REPLACE some_table;"],
   ["CREATE UNIQUE INDEX some_index;"],
 ])("it does not warn about valid CREATE options", (query) => {
-  const checker = new InvalidCreateOption();
+  const checker = new MySqlInvalidCreateOption();
 
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);
@@ -20,7 +20,7 @@ test.each([
 test.each([["CREATE JIBBERISH person;"], ["CREATE TYPE blah;"]])(
   "it warns about mysql specific invalid options in CREATEs",
   (query) => {
-    const checker = new InvalidCreateOption();
+    const checker = new MySqlInvalidCreateOption();
 
     const queryObj = putContentIntoLines(query);
     const tokenised = tokenise(queryObj[0]);

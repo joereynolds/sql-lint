@@ -1,4 +1,4 @@
-import { InvalidDropOption } from "../../../../../src/checker/checks/mysql/invalidDropOption";
+import { MySqlInvalidDropOption } from "../../../../../src/checker/checks/mysql/mySqlInvalidDropOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 
@@ -9,7 +9,7 @@ test.each([
     /Option 'jibberish' is not a valid option, must be one of .*/,
   ],
 ])("it warns about invalid options in DROPs", (query, expected) => {
-  const checker = new InvalidDropOption();
+  const checker = new MySqlInvalidDropOption();
 
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);

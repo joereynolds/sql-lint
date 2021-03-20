@@ -43,13 +43,10 @@ class CheckerRunner {
         return path.parse(check).name;
       })
       .filter((item) => {
-        const ignoredChecks = ["invalidOption"];
-
-        return !ignoredChecks.includes(item) && !item.endsWith(".js");
+        return !item.endsWith(".js");
       });
 
     checks.push(...driverSpecificChecks);
-    console.log(driver);
 
     const factory = new CheckFactory();
 

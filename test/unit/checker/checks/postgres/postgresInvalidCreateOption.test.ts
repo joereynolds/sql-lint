@@ -1,4 +1,4 @@
-import { InvalidCreateOption } from "../../../../../src/checker/checks/postgres/invalidCreateOption";
+import { PostgresInvalidCreateOption } from "../../../../../src/checker/checks/postgres/postgresInvalidCreateOption";
 import { tokenise } from "../../../../../src/lexer/lexer";
 import { putContentIntoLines } from "../../../../../src/reader/reader";
 
@@ -7,7 +7,7 @@ test.each([
   ["CREATE SCHEMA person;"],
   ["CREATE TYPE blah;"],
 ])("it does not warn about valid CREATE options", (query) => {
-  const checker = new InvalidCreateOption();
+  const checker = new PostgresInvalidCreateOption();
 
   const queryObj = putContentIntoLines(query);
   const tokenised = tokenise(queryObj[0]);
@@ -19,7 +19,7 @@ test.each([
 test.each([["CREATE JIBBERISH person;"]])(
   "it warns about postgres specific invalid options in CREATEs",
   (query) => {
-    const checker = new InvalidCreateOption();
+    const checker = new PostgresInvalidCreateOption();
 
     const queryObj = putContentIntoLines(query);
     const tokenised = tokenise(queryObj[0]);

@@ -100,7 +100,7 @@ if (program.host || configuration?.host) {
     program.host || configuration?.host || "localhost",
     program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || configuration?.password,
-    program.port || configuration?.port || 3306
+    program.port || configuration?.port || undefined
   );
 }
 

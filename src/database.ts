@@ -1,4 +1,4 @@
-import * as mysql from 'mysql2';
+import * as mysql from "mysql2";
 
 class Database {
   public connection: mysql.Connection;
@@ -8,11 +8,14 @@ class Database {
     host: string,
     user: string,
     password: string,
-    port?: string
+    port?: number
   ) {
-    this.connection = mysql.createConnection(
-      `${driver}://${user}:${password}@${host}:${port}`
-    );
+    this.connection = mysql.createConnection({
+      host,
+      password,
+      port,
+      user,
+    });
   }
 
   public getDatabases(connection: any, callback: any): void {

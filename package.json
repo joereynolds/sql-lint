@@ -9,6 +9,7 @@
         "@types/sprintf-js": "^1.1.2",
         "commander": "^5.1.0",
         "moo": "^0.5.1",
+        "mysql2": "^2.2.5",
         "nearley": "^2.19.3",
         "param-case": "^3.0.3",
         "sprintf-js": "^1.1.2"

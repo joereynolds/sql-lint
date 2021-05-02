@@ -1,7 +1,8 @@
+import { Pool } from "pg";
 import * as mysql from "mysql2";
 
 class Database {
-  public connection: mysql.Connection;
+  public connection: mysql.Connection|Pool;
 
   constructor(
     driver: string,
@@ -10,12 +11,23 @@ class Database {
     password: string,
     port?: number
   ) {
-    this.connection = mysql.createConnection({
+    const config = {
       host,
       password,
       port,
       user,
-    });
+    };
+
+    switch (driver) {
+      case 'mysql':
+        this.connection = mysql.createConnection(config);
+        break;
+      case 'postgres':
+        this.connection = new Pool(config);
+        break;
+      default:
+        throw new Error(`${driver} driver is unsupported`);
+    }
   }
 
   public getDatabases(connection: any, callback: any): void {
@@ -33,11 +45,23 @@ class Database {
    * which is what we want.
    */
   public lintQuery(
-    connection: mysql.Connection,
     query: string,
     callback: any
   ): void {
-    connection.query(`EXPLAIN ${query}`, [], (error, results) => {
+    if (this.connection instanceof Pool) {
+      this.connection.query(`EXPLAIN ${query}`, error => {
+        if (error) {
+          callback({
+            code: error.name,
+            sqlMessage: error.message,
+          })
+        }
+      });
+
+      return;
+    }
+
+    this.connection.query(`EXPLAIN ${query}`, error => {
       if (error) {
         callback(error);
       }

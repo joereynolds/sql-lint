@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
-import { Database } from "../database";
+import { IDatabase } from "../database";
 import { Printer } from "../printer";
 import { categorise, tokenise } from "../lexer/lexer";
 import { MySqlError } from "../barrel/checks";
@@ -17,7 +17,7 @@ class CheckerRunner {
     prefix: string,
     omittedErrors: string[],
     driver: string,
-    database?: Database
+    database?: IDatabase
   ) {
     const checks = fs
       .readdirSync(`${__dirname}/checks/any`)

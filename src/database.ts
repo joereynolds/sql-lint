@@ -1,62 +1,68 @@
 import { Pool } from "pg";
 import * as mysql from "mysql2";
 
-class Database {
-  public connection: mysql.Connection|Pool;
-
-  constructor(
-    driver: string,
-    host: string,
-    user: string,
-    password: string,
-    port?: number
-  ) {
-    const config = {
-      host,
-      password,
-      port,
-      user,
-    };
-
-    switch (driver) {
-      case 'mysql':
-        this.connection = mysql.createConnection(config);
-        break;
-      case 'postgres':
-        this.connection = new Pool(config);
-        break;
-      default:
-        throw new Error(`${driver} driver is unsupported`);
-    }
+export default function databaseFactory(
+  driver: string,
+  config: any,
+): IDatabase {
+  switch (driver) {
+    case 'mysql':
+      return new MySqlDatabase(config);
+    case 'postgres':
+      return new PostgresDatabase(config);
+    default:
+      throw new Error(`${driver} driver is unsupported`);
   }
+}
 
+export interface IDatabase {
   /**
    * Runs an EXPLAIN on the query. If it doesn't run successfully, errors will come through,
    * which is what we want.
    */
-  public lintQuery(
-    query: string,
-    callback: any
-  ): void {
-    if (this.connection instanceof Pool) {
-      this.connection.query(`EXPLAIN ${query}`, error => {
-        if (error) {
-          callback({
-            code: error.name,
-            sqlMessage: error.message,
-          })
-        }
-      });
+  lintQuery(query: string, callback: any): void
+  end(): void
+}
 
-      return;
-    }
+class MySqlDatabase implements IDatabase {
+  private connection: mysql.Connection;
 
-    this.connection.query(`EXPLAIN ${query}`, error => {
-      if (error) {
-        callback(error);
+  constructor (config) {
+    this.connection = mysql.createConnection(config);
+  }
+
+  public lintQuery(query: string, callback: any): void {
+    this.connection.query(`EXPLAIN ${query}`, err => {
+      if (err) {
+        callback(err);
       }
     });
   }
+
+  public end() {
+    this.connection.end();
+  }
 }
 
-export { Database };
+class PostgresDatabase implements IDatabase {
+  private pool: Pool;
+
+  constructor(config) {
+    this.pool = new Pool(config);
+  }
+
+  public lintQuery(query: string, callback: any): void {
+    this.pool.query(`EXPLAIN ${query}`, err => {
+      if (err) {
+        callback({
+          code: err.name,
+          sqlMessage: err.message,
+        });
+      }
+    });
+  }
+
+  public end() {
+    this.pool.end();
+  }
+}

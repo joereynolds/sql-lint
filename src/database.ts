@@ -1,7 +1,7 @@
-import * as anyDB from "any-db";
+import * as mysql from 'mysql2';
 
 class Database {
-  public connection: any;
+  public connection: mysql.Connection;
 
   constructor(
     driver: string,
@@ -10,7 +10,7 @@ class Database {
     password: string,
     port?: string
   ) {
-    this.connection = anyDB.createConnection(
+    this.connection = mysql.createConnection(
       `${driver}://${user}:${password}@${host}:${port}`
     );
   }
@@ -30,7 +30,7 @@ class Database {
    * which is what we want.
    */
   public lintQuery(
-    connection: anyDB.Connection,
+    connection: mysql.Connection,
     query: string,
     callback: any
   ): void {

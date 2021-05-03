@@ -26,7 +26,7 @@ export default class MySqlDatabase implements IDatabase {
     });
   }
 
-  public end() {
+  public end(): void {
     this.connection.end();
   }
 }

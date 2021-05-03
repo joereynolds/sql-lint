@@ -29,7 +29,7 @@ export default class PostgresDatabase implements IDatabase {
     });
   }
 
-  public end() {
+  public end(): void {
     this.pool.end();
   }
 }

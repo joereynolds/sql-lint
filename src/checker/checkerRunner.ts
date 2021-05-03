@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
-import { IDatabase } from "../database";
+import IDatabase from "../database/interface";
 import { Printer } from "../printer";
 import { categorise, tokenise } from "../lexer/lexer";
 import { MySqlError } from "../barrel/checks";

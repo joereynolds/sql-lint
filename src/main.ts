@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as process from "process";
 
 import { CheckerRunner } from "./checker/checkerRunner";
-import { Database } from "./database";
+import databaseFactory from "./database/databaseFactory";
 import { FormatterFactory } from "./formatter/formatterFactory";
 import { Printer } from "./printer";
 import { Query } from "./reader/query";
@@ -95,12 +95,12 @@ if (configuration === null) {
 const driver = program.driver || configuration?.driver || "mysql";
 
 if (program.host || configuration?.host) {
-  db = new Database(
-    driver,
+  db = databaseFactory(
+    driver, 
     program.host || configuration?.host || "localhost",
     program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || configuration?.password,
-    program.port || configuration?.port || "3306"
+    program.port || configuration?.port || undefined // let mysql2 or pg figure out the default port
   );
 }
 
@@ -120,5 +120,5 @@ if (programFile) {
 runner.run(queries, printer, prefix, omittedErrors, driver, db);
 
 if (program.host || configuration?.host) {
-  db.connection.end();
+  db.end();
 }

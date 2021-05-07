@@ -76,5 +76,5 @@
         "test": "jest test --coverage --silent",
         "nearley": "nearleyc"
     },
-    "version": "0.0.16"
+    "version": "0.0.17"
 }

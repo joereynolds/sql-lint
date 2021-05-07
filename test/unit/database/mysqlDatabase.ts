@@ -27,9 +27,9 @@ test("it calls createConnection", () => {
 
 test("it calls callback if there is an error", () => {
   const db = new MySqlDatabase("localhost", "user", "password", 3306);
-  db.lintQuery("SELECT some_column FROM some_table WHERE id = 1", err => {
+  db.lintQuery("SELECT some_column FROM some_table WHERE id = 1", (err) => {
     expect(err.sqlMessage).toEqual("table does not exist");
-  })
+  });
 });
 
 test("it calls end on connection", () => {
@@ -39,7 +39,7 @@ test("it calls end on connection", () => {
 
 test("it does not call callback if there is no error", () => {
   const callback = jest.fn(() => true);
-  
+
   jest.mock("mysql2", () => {
     const mock = {
       createConnection: () => mock,

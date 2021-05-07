@@ -1,6 +1,6 @@
-import IDatabase from './interface';
-import MySqlDatabase from './mySqlDatabase';
-import PostgresDatabase from './postgresDatabase';
+import IDatabase from "./interface";
+import MySqlDatabase from "./mySqlDatabase";
+import PostgresDatabase from "./postgresDatabase";
 
 export default function databaseFactory(
   driver: string,
@@ -10,9 +10,9 @@ export default function databaseFactory(
   port?: number
 ): IDatabase {
   switch (driver) {
-    case 'mysql':
+    case "mysql":
       return new MySqlDatabase(host, user, password, port);
-    case 'postgres':
+    case "postgres":
       return new PostgresDatabase(host, user, password, port);
     default:
       throw new Error(`${driver} driver is unsupported`);

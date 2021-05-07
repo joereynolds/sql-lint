@@ -28,10 +28,10 @@ test("it calls createConnection", () => {
 
 test("it calls callback if there is an error", () => {
   const db = new PostgresDatabase("localhost", "user", "password", 5432);
-  db.lintQuery("SELECT some_column FROM some_table WHERE id = 1", err => {
+  db.lintQuery("SELECT some_column FROM some_table WHERE id = 1", (err) => {
     expect(err.sqlMessage).toEqual("table does not exist");
     expect(err.code).toEqual("name");
-  })
+  });
 });
 
 test("it calls end on connection", () => {
@@ -41,7 +41,7 @@ test("it calls end on connection", () => {
 
 test("it does not call callback if there is no error", () => {
   const callback = jest.fn(() => true);
-  
+
   jest.mock("pg", () => {
     const mock = {
       createConnection: () => mock,

@@ -56,7 +56,7 @@ class CheckerRunner {
                     if (checker.requiresConnection &&
                         database &&
                         checker.appliesTo.includes(category)) {
-                        database.lintQuery(database.connection, content, (results) => {
+                        database.lintQuery(content, (results) => {
                             const sqlChecker = new checks_1.MySqlError(results);
                             printer.printCheck(sqlChecker, tokenised, prefix);
                         });

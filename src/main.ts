@@ -96,7 +96,7 @@ const driver = program.driver || configuration?.driver || "mysql";
 
 if (program.host || configuration?.host) {
   db = databaseFactory(
-    driver, 
+    driver,
     program.host || configuration?.host || "localhost",
     program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
     program.password || configuration?.password,

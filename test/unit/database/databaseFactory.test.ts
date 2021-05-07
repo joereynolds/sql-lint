@@ -22,18 +22,25 @@ test.each([
   ["mysql", MySqlDatabase],
   ["postgres", PostgresDatabase],
 ])("it returns correct instance for driver", (driver, expected) => {
-  const database = databaseFactory(driver, "localhost", "user", "password", 3306);
+  const database = databaseFactory(
+    driver,
+    "localhost",
+    "user",
+    "password",
+    3306
+  );
   expect(database).toBeInstanceOf(expected);
 });
 
 test("it throws an exception if driver is not supported", () => {
-  const t = () => databaseFactory("mongodb", "localhost", "user", "password", 3306);
+  const t = () =>
+    databaseFactory("mongodb", "localhost", "user", "password", 3306);
   expect(t).toThrow(Error);
 });
 
 test("it does not call callback if there is no error", () => {
   const callback = jest.fn(() => true);
-  
+
   jest.mock("mysql2", () => {
     const mock = {
       createConnection: () => mock,

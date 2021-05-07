@@ -5,7 +5,7 @@ const program = require("commander");
 const fs = require("fs");
 const process = require("process");
 const checkerRunner_1 = require("./checker/checkerRunner");
-const database_1 = require("./database");
+const databaseFactory_1 = require("./database/databaseFactory");
 const formatterFactory_1 = require("./formatter/formatterFactory");
 const printer_1 = require("./printer");
 const config_1 = require("./config");
@@ -68,8 +68,9 @@ if (configuration === null) {
 }
 const driver = program.driver || (configuration === null || configuration === void 0 ? void 0 : configuration.driver) || "mysql";
 if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
-    db = new database_1.Database(driver, program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host) || "localhost", program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user) || "root", // bad practice but unfortunately common, make it easier for the user
-    program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || "3306");
+    db = databaseFactory_1.default(driver, program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host) || "localhost", program.user || (configuration === null || configuration === void 0 ? void 0 : configuration.user) || "root", // bad practice but unfortunately common, make it easier for the user
+    program.password || (configuration === null || configuration === void 0 ? void 0 : configuration.password), program.port || (configuration === null || configuration === void 0 ? void 0 : configuration.port) || undefined // let mysql2 or pg figure out the default port
+    );
 }
 if (programFile) {
     if (fs.lstatSync(programFile).isDirectory()) {
@@ -86,6 +87,6 @@ if (programFile) {
 }
 runner.run(queries, printer, prefix, omittedErrors, driver, db);
 if (program.host || (configuration === null || configuration === void 0 ? void 0 : configuration.host)) {
-    db.connection.end();
+    db.end();
 }
 //# sourceMappingURL=main.js.map

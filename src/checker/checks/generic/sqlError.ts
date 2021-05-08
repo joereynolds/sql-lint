@@ -6,7 +6,7 @@ export default class SqlError implements IChecker {
   public errors: any;
   public requiresConnection = true;
 
-  // Note that we don't follow the interface correctly for MySQL Error
+  // Note that we don't follow the interface correctly for RDBMS Errors
   // since the error message is dynamically generated.
   public message = "";
 

@@ -1,6 +1,6 @@
 {
     "bin": {
-        "sql-lint": "./dist/src/main.js"
+        "sql-lint": "./dist/src/cli.js"
     },
     "dependencies": {
         "@types/moo": "^0.5.3",

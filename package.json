@@ -30,6 +30,7 @@
         "typescript": "^3.8.2"
     },
     "homepage": "https://github.com/joereynolds/sql-lint",
+    "main": "./dist/src/main.js",
     "jest": {
         "coverageThreshold": {
             "global": {

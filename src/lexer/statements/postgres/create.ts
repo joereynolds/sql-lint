@@ -11,6 +11,7 @@ class PostgresCreate implements ILexer {
     "database",
     "definer",
     "event",
+    "extension",
     "function",
     "index",
     "or",

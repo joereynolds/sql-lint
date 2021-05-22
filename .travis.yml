@@ -9,4 +9,4 @@ node_js:
 
 before_script:
     - npm run build
-    - chmod a+x ./dist/src/main.js
+    - chmod a+x ./dist/src/cli.js

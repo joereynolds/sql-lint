@@ -1,9 +1,10 @@
 import { Printer } from "./printer";
+import IDatabase from "./database/interface";
+import { IMessage } from "./formatter/interface";
 import { putContentIntoLines } from "./reader/reader";
 import { JsonFormat } from "./formatter/formats/json";
 import { CheckerRunner } from "./checker/checkerRunner";
 import databaseFactory from "./database/databaseFactory";
-import IDatabase from "./database/interface";
 
 interface Parameters {
   sql: string
@@ -25,7 +26,7 @@ export default ({
   password = '',
   verbosity = 0,
   driver = 'mysql',
-}: Parameters): void => {
+}: Parameters): IMessage[] => {
   const printer = new Printer(
     verbosity,
     new JsonFormat(),
@@ -55,6 +56,8 @@ export default ({
   if (db) {
     db.end();
   }
+
+  return printer.messages;
 }
 
 interface SqlLintError {

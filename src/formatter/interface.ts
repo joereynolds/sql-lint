@@ -1,7 +1,7 @@
 import { CheckerResult } from "../checker/checkerResult";
 
 interface IFormat {
-  getMessage(prefix: string, result: CheckerResult, verbosity: number): string|any;
+  getMessage(prefix: string, result: CheckerResult, verbosity: number): string|IMessage
 }
 
 interface IMessage {

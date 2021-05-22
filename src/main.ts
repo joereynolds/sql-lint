@@ -7,14 +7,14 @@ import { CheckerRunner } from "./checker/checkerRunner";
 import databaseFactory from "./database/databaseFactory";
 
 interface Parameters {
-  sql: string
-  host?: string
-  user?: string
-  port?: number
-  driver?: string
-  prefix?: string
-  password?: string
-  verbosity?: number
+  sql: string;
+  host?: string;
+  user?: string;
+  port?: number;
+  driver?: string;
+  prefix?: string;
+  password?: string;
+  verbosity?: number;
 }
 
 export default ({

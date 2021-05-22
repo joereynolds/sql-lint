@@ -11,6 +11,7 @@ class Printer {
     this.verbosity = verbosity;
     this.format = format;
   }
+
   public printCheck(
     checker: IChecker | undefined,
     tokenised: Query,

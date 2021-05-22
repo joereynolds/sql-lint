@@ -5,19 +5,34 @@ test.each([
   [
     "test",
     new CheckerResult(1, "some content"),
-    '{"source":"test","error":"some content","line":1,"additionalInformation":""}',
+    {
+      line:1,
+      source: "test",
+      error: "some content",
+      additionalInformation: "",
+    },
     1,
   ],
   [
     "test-another",
     new CheckerResult(1, "some content", "some extras"),
-    '{"source":"test-another","error":"some content","line":1,"additionalInformation":"some extras"}',
+    {
+      line: 1,
+      error: "some content",
+      source: "test-another",
+      additionalInformation: "some extras",
+    },
     1,
   ],
   [
     "test-more",
     new CheckerResult(1, "some content", "some extras"),
-    '{"source":"test-more","error":"some content","line":1,"additionalInformation":""}',
+    {
+      line: 1,
+      source: "test-more",
+      error: "some content",
+      additionalInformation: "" ,
+    },
     0,
   ],
 ])(
@@ -25,6 +40,6 @@ test.each([
   (prefix, result, expected, verbosity) => {
     const format = new JsonFormat();
     const actual = format.getMessage(prefix, result, verbosity);
-    expect(actual).toEqual(expected);
+    expect(actual).toMatchObject(expected);
   }
 );

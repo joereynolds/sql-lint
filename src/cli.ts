@@ -122,3 +122,8 @@ runner.run(queries, printer, prefix, omittedErrors, driver, db);
 if (program.host || configuration?.host) {
   db.end();
 }
+
+if (printer.messages.length) {
+  console.log(JSON.stringify(printer.messages));
+  process.exit(1);
+}

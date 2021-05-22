@@ -59,7 +59,3 @@ export default ({
 
   return printer.messages;
 }
-
-interface SqlLintError {
-
-}

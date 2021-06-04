@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import IDatabase from "./interface";
+import IDatabase, { sqlError } from "./interface";
 
 export default class PostgresDatabase implements IDatabase {
   private pool: Pool;
@@ -13,14 +13,16 @@ export default class PostgresDatabase implements IDatabase {
     });
   }
 
-  public lintQuery(query: string, callback: any): void {
-    this.pool.query(`EXPLAIN ${query}`, (err) => {
-      if (err) {
-        callback({
-          code: err.name,
-          sqlMessage: err.message,
-        });
-      }
+  public async lintQuery(query: string): Promise<sqlError|null> {
+    return new Promise<sqlError|null>(resolve => {
+      this.pool.query(`EXPLAIN ${query}`, err => {
+        if (err) {
+          resolve({
+            code: err.name,
+            sqlMessage: err.message,
+          });
+        }
+      });
     });
   }
 

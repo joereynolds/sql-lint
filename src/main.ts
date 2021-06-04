@@ -17,7 +17,7 @@ interface Parameters {
   verbosity?: number;
 }
 
-export default ({
+export default async ({
   sql,
   host,
   port,
@@ -26,7 +26,7 @@ export default ({
   password = '',
   verbosity = 0,
   driver = 'mysql',
-}: Parameters): IMessage[] => {
+}: Parameters): Promise<IMessage[]> => {
   const printer = new Printer(
     verbosity,
     new JsonFormat(),
@@ -44,7 +44,7 @@ export default ({
   }
 
   const runner = new CheckerRunner();
-  runner.run(
+  await runner.run(
     putContentIntoLines(sql),
     printer,
     prefix,

@@ -26,11 +26,13 @@ test("it calls createConnection", () => {
   const db = new PostgresDatabase("localhost", "user", "password", 5432);
 });
 
-test("it calls callback if there is an error", () => {
+test("it calls callback if there is an error", async () => {
   const db = new PostgresDatabase("localhost", "user", "password", 5432);
-  db.lintQuery("SELECT some_column FROM some_table WHERE id = 1", (err) => {
-    expect(err.sqlMessage).toEqual("table does not exist");
-    expect(err.code).toEqual("name");
+  const sql = "SELECT some_column FROM some_table WHERE id = 1";
+
+  expect(await db.lintQuery(sql)).toMatchObject({
+    sqlMessage: "table does not exist",
+    code: "name",
   });
 });
 

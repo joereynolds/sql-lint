@@ -27,21 +27,42 @@ test.each([
   ],
 ])(
   "it can run programmatically",
-  (sql, expected) => {
-    const errors = sqlLint({ sql: sql });
-    console.log(errors);
+  async (sql, expected) => {
+    const errors = await sqlLint({ sql: sql });
     expect(errors[0]).toMatchObject(expected);
   },
 );
 
-test("it can return multiple errors", () => {
+jest.mock("mysql2", () => {
+  const mock = {
+    createConnection: (config) => {
+      expect(config).toEqual({
+        port: 5000,
+        user: "user",
+        host: "localhost",
+        password: "password",
+      });
+      return mock;
+    },
+    query: (query, callback) => {
+      callback({
+        code: "name",
+        sqlMessage: "[ER_BAD_DB_ERROR] Unknown database 'my_database'",
+      });
+    },
+    end: () => true,
+  };
+  return mock;
+});
+
+test("it can return multiple errors", async () => {
   const sql = `
     DELETE FROM some_table;
     SELECT some_column FROM tbl_table;
     SELECT some_column 
     FROM some_table;
   `;
-  const errors = sqlLint({ sql: sql });
+  const errors = await sqlLint({ sql: sql });
   expect(errors).toHaveLength(3);
   expect(errors[0]).toMatchObject(    {
     line: 2,
@@ -57,10 +78,29 @@ test("it can return multiple errors", () => {
   });
 });
 
-test("it returns an empty array when there are no errors", () => {
-  const errors = sqlLint({
-    sql: "SELECT some_column FROM some_table",
+test("it returns an empty array when there are no errors", async () => {
+  const errors = await sqlLint({
+    sql: "SELECT some_column FROM some_table;",
   });
   expect(Array.isArray(errors)).toBe(true);
   expect(errors).toHaveLength(0);
 });
+
+test("it uses db connection is provided", async () => {
+  const params = {
+    port: 5000,
+    user: "user",
+    host: "localhost",
+    password: "password",
+    sql: "SELECT some_column FROM my_database.some_table;",
+  };
+
+  expect(await sqlLint(params)).toMatchObject([
+    {
+      line: 1,
+      error: "[name] [ER_BAD_DB_ERROR] Unknown database 'my_database'",
+    },
+  ]);
+});
+
+

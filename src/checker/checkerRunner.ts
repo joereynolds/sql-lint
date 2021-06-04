@@ -11,7 +11,7 @@ import { MySqlError } from "../barrel/checks";
  * Runs all the checks.
  */
 class CheckerRunner {
-  public run(
+  public async run(
     sqlQueries: Query[],
     printer: Printer,
     prefix: string,
@@ -50,7 +50,7 @@ class CheckerRunner {
 
     const factory = new CheckFactory();
 
-    sqlQueries.forEach((query: any) => {
+    for (const query of sqlQueries) {
       const content = query.getContent().trim();
 
       if (content) {
@@ -62,7 +62,7 @@ class CheckerRunner {
 
         const tokenised: Query = tokenise(query);
 
-        checks.forEach((check) => {
+        for (const check of checks) {
           const checker = factory.build(check);
 
           // Simple checks
@@ -79,14 +79,13 @@ class CheckerRunner {
             database &&
             checker.appliesTo.includes(category)
           ) {
-            database.lintQuery(content, (results: any) => {
-              const sqlChecker = new MySqlError(results);
-              printer.printCheck(sqlChecker, tokenised, prefix);
-            });
+            const results = await database.lintQuery(content);
+            const sqlChecker = new MySqlError(results);
+            printer.printCheck(sqlChecker, tokenised, prefix);
           }
-        });
+        }
       }
-    });
+    }
   }
 }
 

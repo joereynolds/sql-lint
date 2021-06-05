@@ -33,28 +33,6 @@ test.each([
   },
 );
 
-jest.mock("mysql2", () => {
-  const mock = {
-    createConnection: (config) => {
-      expect(config).toEqual({
-        port: 5000,
-        user: "user",
-        host: "localhost",
-        password: "password",
-      });
-      return mock;
-    },
-    query: (query, callback) => {
-      callback({
-        code: "name",
-        sqlMessage: "[ER_BAD_DB_ERROR] Unknown database 'my_database'",
-      });
-    },
-    end: () => true,
-  };
-  return mock;
-});
-
 test("it can return multiple errors", async () => {
   const sql = `
     DELETE FROM some_table;
@@ -86,6 +64,28 @@ test("it returns an empty array when there are no errors", async () => {
   expect(errors).toHaveLength(0);
 });
 
+jest.mock("mysql2", () => {
+  const mock = {
+    createConnection: (config) => {
+      expect(config).toEqual({
+        port: 5000,
+        user: "user",
+        host: "localhost",
+        password: "password",
+      });
+      return mock;
+    },
+    query: (query, callback) => {
+      callback({
+        code: "name",
+        sqlMessage: "[ER_BAD_DB_ERROR] Unknown database 'my_database'",
+      });
+    },
+    end: () => true,
+  };
+  return mock;
+});
+
 test("it uses db connection is provided", async () => {
   const params = {
     port: 5000,
@@ -103,4 +103,42 @@ test("it uses db connection is provided", async () => {
   ]);
 });
 
+jest.mock("pg", () => {
+  const mock = {
+    Pool: function (config) {
+      expect(config).toEqual({
+        host: "localhost",
+        user: "user",
+        password: "password",
+        port: 5432,
+      });
+      return mock;
+    },
+    query: (query, callback) => {
+      callback({
+        name: "name",
+        message: "[ER_BAD_DB_ERROR] Unknown database 'my_database'",
+      });
+    },
+    end: () => true,
+  };
+  return mock;
+});
 
+test("it uses correct driver when provided", async () => {
+  const params = {
+    driver: "postgres",
+    host: "localhost",
+    password: "password",
+    port: 5432,
+    sql: "SELECT some_column FROM my_database.some_table;",
+    user: "user",
+  };
+
+  expect(await sqlLint(params)).toMatchObject([
+    {
+      line: 1,
+      error: "[name] [ER_BAD_DB_ERROR] Unknown database 'my_database'",
+    },
+  ]);
+});

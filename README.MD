@@ -48,8 +48,18 @@ yarn add sql-lint
 ```
 import sqlLint from 'sql-lint'
 
-const errors = sqlLint({
+// using async/await
+
+const errors = await sqlLint({
   sql: 'SELECT my_column FROM my_table',
+})
+
+// or using promise
+
+sqlLint({ sql: 'SELECT my_column FROM my_table' }).then(errors => {
+  for (const error of errors) {
+    // do something
+  }
 })
 ```
 

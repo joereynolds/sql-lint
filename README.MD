@@ -15,7 +15,9 @@ A complete list of the checks it does is below.
 ## Installation
 
 ```
-npm install -g sql-lint
+npm i -g sql-lint
+# or
+yarn global add sql-lint
 ```
 
 Or download a [binary](https://github.com/joereynolds/sql-lint/releases)  
@@ -36,6 +38,13 @@ echo 'DELETE FROM person;' | sql-lint
 ```
 
 ## Programmatic Access
+
+```
+npm i sql-lint
+# or
+yarn add sql-lint
+```
+
 ```
 import sqlLint from 'sql-lint'
 

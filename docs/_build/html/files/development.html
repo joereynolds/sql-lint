@@ -1,38 +1,44 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Development &mdash; sql-lint 0.0.11 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
@@ -72,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,6 +113,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -140,18 +148,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Development</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/files/development.md.txt" rel="nofollow"> View page source</a>
           
         
@@ -191,21 +201,23 @@ passed through to every checker to look for any linting errors.</p>
 <p>This can probably be automated to make it WAY easier.</p>
 <p>Anyway, here are the steps.</p>
 <ul class="simple">
-<li>Create a check under <code class="docutils literal notranslate"><span class="pre">src/checker/checks</span></code><ul>
-<li>The name of the class is also the name of the checker so name it well</li>
+<li><p>Create a check under <code class="docutils literal notranslate"><span class="pre">src/checker/checks</span></code></p>
+<ul>
+<li><p>The name of the class is also the name of the checker so name it well</p></li>
 </ul>
 </li>
-<li>Add your check to <code class="docutils literal notranslate"><span class="pre">src/barrel/checks.ts</span></code><ul>
-<li>All checks live here so we can import them all conveniently</li>
+<li><p>Add your check to <code class="docutils literal notranslate"><span class="pre">src/barrel/checks.ts</span></code></p>
+<ul>
+<li><p>All checks live here so we can import them all conveniently</p></li>
 </ul>
 </li>
-<li>Import your check in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
-<li>Add your check to the <code class="docutils literal notranslate"><span class="pre">checkMap</span></code> in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></li>
-<li>Increment the splice last two spliced numbers in <code class="docutils literal notranslate"><span class="pre">checkerRunner</span></code> otherwise it
-will remove the wrong things. Gross I know and needs to be fixed</li>
-<li>Add it to the README.md so people know it’s a thing</li>
-<li>Add it to <code class="docutils literal notranslate"><span class="pre">configuration.md</span></code>. This is an exhaustive list of the checks</li>
-<li>Add tests. The name of the test should match the name of the check</li>
+<li><p>Import your check in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></p></li>
+<li><p>Add your check to the <code class="docutils literal notranslate"><span class="pre">checkMap</span></code> in <code class="docutils literal notranslate"><span class="pre">src/checker/checkFactory.ts</span></code></p></li>
+<li><p>Add it to the README.md so people know it’s a thing</p></li>
+<li><p>Add it to <code class="docutils literal notranslate"><span class="pre">configuration.md</span></code>. This is an exhaustive list of the checks</p></li>
+<li><p>Add tests. The name of the test should match the name of the check</p></li>
+<li><p>Add it to <code class="docutils literal notranslate"><span class="pre">checks.md</span></code>, the main documentation for checks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">run</span> <span class="pre">build</span></code> to compile the changes</p></li>
 </ul>
 </div>
 <div class="section" id="troubleshooting">
@@ -218,8 +230,8 @@ of <code class="docutils literal notranslate"><span class="pre">checks</span></c
 </div>
 <div class="section" id="testing-the-code">
 <h2>Testing the code<a class="headerlink" href="#testing-the-code" title="Permalink to this headline">¶</a></h2>
-<p>Testing requires sql-lint and auto-changelog to be installed.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span> <span class="n">auto</span><span class="o">-</span><span class="n">changelog</span>
+<p>Testing requires sql-lint to be installed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">sql</span><span class="o">-</span><span class="n">lint</span>
 <span class="o">./</span><span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="o">//</span><span class="n">This</span> <span class="n">will</span> <span class="n">run</span> <span class="n">more</span> <span class="n">than</span> <span class="n">just</span> <span class="n">the</span> <span class="n">tests</span> <span class="p">(</span><span class="n">recommended</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -257,10 +269,10 @@ the following credentials: <code class="docutils literal notranslate"><span clas
 <p>This documentation is built on <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> and <code class="docutils literal notranslate"><span class="pre">readthedocs</span></code>. To run it locally,
 you will need the following:</p>
 <ul class="simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> repository (documentation lies in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">sphinx</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">recommonmark</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">recommonmark</span></code>)</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sql-lint</span></code> repository (documentation lies in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recommonmark</span></code> to be installed (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">recommonmark</span></code>)</p></li>
 </ul>
 <p>Once those prerequisites are met, you can edit the files and see them exactly
 how they would appear on readthedocs.</p>
@@ -273,27 +285,28 @@ how they would appear on readthedocs.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Joe Reynolds
+        &#169; Copyright 2020, Joe Reynolds.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -301,7 +314,6 @@ how they would appear on readthedocs.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

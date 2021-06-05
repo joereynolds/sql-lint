@@ -38,11 +38,11 @@ Anyway, here are the steps.
     - All checks live here so we can import them all conveniently
 - Import your check in `src/checker/checkFactory.ts`
 - Add your check to the `checkMap` in `src/checker/checkFactory.ts`
-- Increment the splice last two spliced numbers in `checkerRunner` otherwise it
-  will remove the wrong things. Gross I know and needs to be fixed
 - Add it to the README.md so people know it's a thing
 - Add it to `configuration.md`. This is an exhaustive list of the checks
 - Add tests. The name of the test should match the name of the check
+- Add it to `checks.md`, the main documentation for checks
+- `npm run build` to compile the changes
 
 ## Troubleshooting
 
@@ -53,10 +53,10 @@ of `checks` is in `checkerRunner` **after** the `splice`ing.
 
 ## Testing the code
 
-Testing requires sql-lint and auto-changelog to be installed.
+Testing requires sql-lint to be installed.
 
 ```
-npm install -g sql-lint auto-changelog
+npm install -g sql-lint
 ./build/build.sh //This will run more than just the tests (recommended)
 ```
 

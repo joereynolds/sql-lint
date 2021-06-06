@@ -70,7 +70,7 @@
         "url": "https://github.com/joereynolds/sql-lint.git"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && chmod +x dist/src/cli.js",
         "format": "prettier --write {src,test}/**/*.ts",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "start": "./build/build.sh",

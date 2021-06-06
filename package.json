@@ -1,6 +1,6 @@
 {
     "bin": {
-        "sql-lint": "./dist/src/main.js"
+        "sql-lint": "./dist/src/cli.js"
     },
     "dependencies": {
         "@types/moo": "^0.5.3",
@@ -30,6 +30,7 @@
         "typescript": "^3.8.2"
     },
     "homepage": "https://github.com/joereynolds/sql-lint",
+    "main": "./dist/src/main.js",
     "jest": {
         "coverageThreshold": {
             "global": {
@@ -69,7 +70,7 @@
         "url": "https://github.com/joereynolds/sql-lint.git"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && chmod +x dist/src/cli.js",
         "format": "prettier --write {src,test}/**/*.ts",
         "lint": "tslint --fix -c tslint.json -p tsconfig.json",
         "start": "./build/build.sh",

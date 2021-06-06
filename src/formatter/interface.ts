@@ -1,7 +1,12 @@
 import { CheckerResult } from "../checker/checkerResult";
 
-interface IFormat {
-  getMessage(prefix: string, result: CheckerResult, verbosity: number): string;
+export interface IFormat {
+  getMessage(prefix: string, result: CheckerResult, verbosity: number): string|IMessage;
 }
 
-export { IFormat };
+export interface IMessage {
+  line: number;
+  error: string;
+  source: string;
+  additionalInformation: string;
+}

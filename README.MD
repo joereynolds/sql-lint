@@ -15,7 +15,9 @@ A complete list of the checks it does is below.
 ## Installation
 
 ```
-npm install -g sql-lint
+npm i -g sql-lint
+# or
+yarn global add sql-lint
 ```
 
 Or download a [binary](https://github.com/joereynolds/sql-lint/releases)  
@@ -33,6 +35,68 @@ sql-lint create-person.sql
 
 # Lints stdin
 echo 'DELETE FROM person;' | sql-lint
+```
+
+## Programmatic Access
+
+```
+npm i sql-lint
+# or
+yarn add sql-lint
+```
+
+```
+import sqlLint from 'sql-lint'
+
+// using async/await
+
+const errors = await sqlLint({
+  sql: 'SELECT my_column FROM my_table',
+})
+
+// or using promise
+
+sqlLint({ sql: 'SELECT my_column FROM my_table' }).then(errors => {
+  for (const error of errors) {
+    // do something
+  }
+})
+```
+
+### Parameters
+sql-lint accepts an object using the following interface as its only argument
+```
+{
+  sql: string
+  host?: string
+  user?: string
+  port?: number
+  driver?: string
+  prefix?: string
+  password?: string
+  verbosity?: number
+}
+```
+
+### Notes on some of the parameters
+`sql`: can have multiple queries separated by `;`
+
+`host`: if host is not provided `sql-lint` will only perform checks that do not require a connection
+
+`driver`: defaults to mysql
+
+`port`: if port is not provided it will use the default port for the driver you are using
+
+### Output
+sql-lint returns an `array` of objects with the following shape
+
+```
+{
+  line: number
+  error: string
+  source: string
+  additionalInformation: string
+}
 ```
 
 ## Editor Integration

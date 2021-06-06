@@ -2,7 +2,7 @@
 
 ## I'm not seeing any warnings
 
-Run `sql-lint -f your-file` and it will display the exception.
+Run `sql-lint your-file` and it will display the exception.
 Add the `-v` flag for more information.
 
 ## It's telling me there's a syntax error when there's clearly not.

@@ -7,5 +7,8 @@ experience.
 
 `sql-lint` supports Mac, Linux, and Windows.
 
-If you prefer, you can do `npm install sql-lint`.
+If you prefer, you can do `npm i -g sql-lint` or `yarn global add sql-lint` if you're using yarn.
 
+## Programmatic Access
+
+For programmatic access you'll want to instead install `sql-lint` into your node project with `npm i sql-lint` or `yarn add sql-lint`.

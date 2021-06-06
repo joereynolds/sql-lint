@@ -1,5 +1,5 @@
 import * as mysql from "mysql2";
-import IDatabase from "./interface";
+import IDatabase, { sqlError } from "./interface";
 
 export default class MySqlDatabase implements IDatabase {
   private connection: mysql.Connection;
@@ -13,11 +13,13 @@ export default class MySqlDatabase implements IDatabase {
     });
   }
 
-  public lintQuery(query: string, callback: any): void {
-    this.connection.query(`EXPLAIN ${query}`, (err) => {
-      if (err) {
-        callback(err);
-      }
+  public lintQuery(query: string): Promise<sqlError|null> {
+    return new Promise<sqlError|null>(resolve => {
+      this.connection.query(`EXPLAIN ${query}`, (err) => {
+        if (err) {
+          resolve(err as unknown as sqlError);
+        }
+      });
     });
   }
 

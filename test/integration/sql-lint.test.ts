@@ -1,7 +1,7 @@
 /* tslint:disable-next-line */
 const shelltest = require("shelltest");
 
-const sqlLint = "./dist/src/main.js";
+const sqlLint = "node ./dist/src/cli.js";
 
 xtest("it warns us if it can't find a configuration file", (done) => {
   shelltest()

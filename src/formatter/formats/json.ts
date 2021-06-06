@@ -14,7 +14,7 @@ class JsonFormat implements IFormat {
       message.additionalInformation = result.additionalInformation;
     }
 
-    return JSON.stringify(message);
+    return message;
   }
 }
 

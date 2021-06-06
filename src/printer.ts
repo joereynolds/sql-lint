@@ -1,16 +1,18 @@
 import { IChecker } from "./checker/interface";
 import { Query } from "./reader/query";
-import { IFormat } from "./formatter/interface";
+import { IFormat, IMessage } from "./formatter/interface";
 import { Fixer } from "./fixer";
 
 class Printer {
   public verbosity: number;
   public format: IFormat;
+  public readonly messages: IMessage[] = [];
 
   constructor(verbosity: number, format: IFormat) {
     this.verbosity = verbosity;
     this.format = format;
   }
+
   public printCheck(
     checker: IChecker | undefined,
     tokenised: Query,
@@ -36,7 +38,18 @@ class Printer {
     }
 
     if (result.content) {
-      console.log(this.format.getMessage(prefix, result, this.verbosity));
+      const message = this.format.getMessage(
+        prefix,
+        result,
+        this.verbosity,
+      );
+
+      if (typeof message !== "string") {
+        this.messages.push(message);
+        return;
+      }
+
+      console.log(message);
 
       // If there are any errors whatsoever, we want to exit
       // with 1 for build scripts and the like.

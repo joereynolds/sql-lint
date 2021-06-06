@@ -139,3 +139,60 @@ Options:
   --config <string>      The path to the configuration file
   -h, --help             display help for command
 ```
+
+## Programmatic Access
+
+```
+import sqlLint from 'sql-lint'
+
+// using async/await
+
+const errors = await sqlLint({
+  sql: 'SELECT my_column FROM my_table',
+})
+
+// or using promise
+
+sqlLint({ sql: 'SELECT my_column FROM my_table' }).then(errors => {
+  for (const error of errors) {
+    // do something
+  }
+})
+
+```
+
+### Parameters
+sql-lint accepts an object using the following interface as its only argument
+```
+{
+  sql: string
+  host?: string
+  user?: string
+  port?: number
+  driver?: string
+  prefix?: string
+  password?: string
+  verbosity?: number
+}
+```
+
+### Notes on some of the parameters
+`sql`: can have multiple queries separated by `;`
+
+`host`: if host is not provided `sql-lint` will only perform checks that do not require a connection
+
+`driver`: defaults to mysql
+
+`port`: if port is not provided it will use the default port for the driver you are using
+
+### Output
+sql-lint returns an `array` of objects with the following shape
+
+```
+{
+  line: number
+  error: string
+  source: string
+  additionalInformation: string
+}
+```

@@ -10,11 +10,13 @@ class MySqlDatabase {
             port,
         });
     }
-    lintQuery(query, callback) {
-        this.connection.query(`EXPLAIN ${query}`, err => {
-            if (err) {
-                callback(err);
-            }
+    lintQuery(query) {
+        return new Promise(resolve => {
+            this.connection.query(`EXPLAIN ${query}`, (err) => {
+                if (err) {
+                    resolve(err);
+                }
+            });
         });
     }
     end() {

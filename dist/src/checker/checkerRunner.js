@@ -10,7 +10,7 @@ const checks_1 = require("../barrel/checks");
  * Runs all the checks.
  */
 class CheckerRunner {
-    run(sqlQueries, printer, prefix, omittedErrors, driver, database) {
+    async run(sqlQueries, printer, prefix, omittedErrors, driver, database) {
         const checks = fs
             .readdirSync(`${__dirname}/checks/any`)
             .map((check) => {
@@ -37,7 +37,7 @@ class CheckerRunner {
         });
         checks.push(...driverSpecificChecks);
         const factory = new checkFactory_1.CheckFactory();
-        sqlQueries.forEach((query) => {
+        for (const query of sqlQueries) {
             const content = query.getContent().trim();
             if (content) {
                 const category = lexer_1.categorise(content);
@@ -45,7 +45,7 @@ class CheckerRunner {
                     printer.warnAboutUncategoriseableQuery(content);
                 }
                 const tokenised = lexer_1.tokenise(query);
-                checks.forEach((check) => {
+                for (const check of checks) {
                     const checker = factory.build(check);
                     // Simple checks
                     if (checker.appliesTo.includes(category) &&
@@ -56,14 +56,13 @@ class CheckerRunner {
                     if (checker.requiresConnection &&
                         database &&
                         checker.appliesTo.includes(category)) {
-                        database.lintQuery(content, (results) => {
-                            const sqlChecker = new checks_1.MySqlError(results);
-                            printer.printCheck(sqlChecker, tokenised, prefix);
-                        });
+                        const results = await database.lintQuery(content);
+                        const sqlChecker = new checks_1.MySqlError(results);
+                        printer.printCheck(sqlChecker, tokenised, prefix);
                     }
-                });
+                }
             }
-        });
+        }
     }
 }
 exports.CheckerRunner = CheckerRunner;

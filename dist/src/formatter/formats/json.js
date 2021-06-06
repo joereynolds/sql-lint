@@ -12,7 +12,7 @@ class JsonFormat {
         if (verbosity) {
             message.additionalInformation = result.additionalInformation;
         }
-        return JSON.stringify(message);
+        return message;
     }
 }
 exports.JsonFormat = JsonFormat;

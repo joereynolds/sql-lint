@@ -12,6 +12,7 @@ class PostgresCreate {
             "database",
             "definer",
             "event",
+            "extension",
             "function",
             "index",
             "or",

@@ -10,14 +10,16 @@ class PostgresDatabase {
             port,
         });
     }
-    lintQuery(query, callback) {
-        this.pool.query(`EXPLAIN ${query}`, err => {
-            if (err) {
-                callback({
-                    code: err.name,
-                    sqlMessage: err.message,
-                });
-            }
+    async lintQuery(query) {
+        return new Promise(resolve => {
+            this.pool.query(`EXPLAIN ${query}`, err => {
+                if (err) {
+                    resolve({
+                        code: err.name,
+                        sqlMessage: err.message,
+                    });
+                }
+            });
         });
     }
     end() {

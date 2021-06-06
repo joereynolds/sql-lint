@@ -7,13 +7,11 @@ import {
   OddCodePoint,
   TrailingWhitespace,
   UnmatchedParentheses,
-
   MySqlError,
   MySqlInvalidAlterOption,
   MySqlInvalidCreateOption,
   MySqlInvalidDropOption,
   MySqlInvalidTruncateOption,
-
   PostgresError,
   PostgresInvalidAlterOption,
   PostgresInvalidCreateOption,

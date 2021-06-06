@@ -13,9 +13,9 @@ export default class PostgresDatabase implements IDatabase {
     });
   }
 
-  public async lintQuery(query: string): Promise<sqlError|null> {
-    return new Promise<sqlError|null>(resolve => {
-      this.pool.query(`EXPLAIN ${query}`, err => {
+  public async lintQuery(query: string): Promise<sqlError | null> {
+    return new Promise<sqlError | null>((resolve) => {
+      this.pool.query(`EXPLAIN ${query}`, (err) => {
         if (err) {
           resolve({
             code: err.name,

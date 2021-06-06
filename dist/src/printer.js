@@ -4,6 +4,7 @@ exports.Printer = void 0;
 const fixer_1 = require("./fixer");
 class Printer {
     constructor(verbosity, format) {
+        this.messages = [];
         this.verbosity = verbosity;
         this.format = format;
     }
@@ -25,7 +26,12 @@ class Printer {
             console.log(tokenisedForPrint);
         }
         if (result.content) {
-            console.log(this.format.getMessage(prefix, result, this.verbosity));
+            const message = this.format.getMessage(prefix, result, this.verbosity);
+            if (typeof message !== "string") {
+                this.messages.push(message);
+                return;
+            }
+            console.log(message);
             // If there are any errors whatsoever, we want to exit
             // with 1 for build scripts and the like.
             process.exitCode = 1;

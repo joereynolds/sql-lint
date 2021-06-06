@@ -5,15 +5,16 @@ test.each([
     "DELETE FROM some_table;",
     {
       line: 1,
-      error: '[sql-lint: missing-where] DELETE statement missing WHERE clause.',
-    } 
+      error: "[sql-lint: missing-where] DELETE statement missing WHERE clause.",
+    },
   ],
   [
     "SELECT some_column FROM tbl_table;",
     {
       line: 1,
-      error: '[sql-lint: hungarian-notation] Hungarian notation present in query',
-    } 
+      error:
+        "[sql-lint: hungarian-notation] Hungarian notation present in query",
+    },
   ],
   [
     `
@@ -22,16 +23,13 @@ test.each([
     `,
     {
       line: 2,
-      error: '[sql-lint: trailing-whitespace] Trailing whitespace',
-    } 
+      error: "[sql-lint: trailing-whitespace] Trailing whitespace",
+    },
   ],
-])(
-  "it can run programmatically",
-  async (sql, expected) => {
-    const errors = await sqlLint({ sql: sql });
-    expect(errors[0]).toMatchObject(expected);
-  },
-);
+])("it can run programmatically", async (sql, expected) => {
+  const errors = await sqlLint({ sql: sql });
+  expect(errors[0]).toMatchObject(expected);
+});
 
 test("it can return multiple errors", async () => {
   const sql = `
@@ -42,17 +40,17 @@ test("it can return multiple errors", async () => {
   `;
   const errors = await sqlLint({ sql: sql });
   expect(errors).toHaveLength(3);
-  expect(errors[0]).toMatchObject(    {
+  expect(errors[0]).toMatchObject({
     line: 2,
-    error: '[sql-lint: missing-where] DELETE statement missing WHERE clause.',
+    error: "[sql-lint: missing-where] DELETE statement missing WHERE clause.",
   });
   expect(errors[1]).toMatchObject({
     line: 3,
-    error: '[sql-lint: hungarian-notation] Hungarian notation present in query',
+    error: "[sql-lint: hungarian-notation] Hungarian notation present in query",
   });
   expect(errors[2]).toMatchObject({
     line: 4,
-    error: '[sql-lint: trailing-whitespace] Trailing whitespace',
+    error: "[sql-lint: trailing-whitespace] Trailing whitespace",
   });
 });
 

@@ -13,11 +13,11 @@ export default class MySqlDatabase implements IDatabase {
     });
   }
 
-  public lintQuery(query: string): Promise<sqlError|null> {
-    return new Promise<sqlError|null>(resolve => {
+  public lintQuery(query: string): Promise<sqlError | null> {
+    return new Promise<sqlError | null>((resolve) => {
       this.connection.query(`EXPLAIN ${query}`, (err) => {
         if (err) {
-          resolve(err as unknown as sqlError);
+          resolve((err as unknown) as sqlError);
         }
       });
     });

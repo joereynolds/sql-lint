@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "declaration": true,
         "lib": [
             "es7",
             "es2017"

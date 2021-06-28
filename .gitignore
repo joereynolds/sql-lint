@@ -2,3 +2,6 @@ coverage
 dist
 node_modules
 tags
+sql-lint-linux
+sql-lint-macos
+sql-lint-win.exe

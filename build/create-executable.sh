@@ -1,2 +1,3 @@
 nvm use 8
-pkg .
+npm run build
+npx pkg .

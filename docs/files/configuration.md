@@ -11,13 +11,19 @@ ways:
 sql-lint --driver="mysql" --host="localhost" --user="root" --password="hunter2"
 ```
 
-## Via `config.json`
+## Via File
 
-A configuration file for `sql-lint` can reside in
+`sql-lint` will search the current working directory and its parent directories
+for a configuration file `.sql-lint.json`. This allows you to have
+directory-local configurations for different projects. If no `.sql-lint.json`
+is found, it will fall back to the global configuration file.
+
+A global configuration file for `sql-lint` can reside in
 `~/.config/sql-lint/config.json`.  It follows the [XDG Base Directory
 Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html).
-Specifically, it uses `$HOME/.config`. (You can specify a different path for the
-config with the `--config` flag)
+Specifically, it uses `$HOME/.config`.
+
+You can also manually specify a path for the config with the `--config` flag.
 
 You should put the following in there for more intelligent errors to come through
 

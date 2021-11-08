@@ -19,6 +19,7 @@ class PostgresDrop implements ILexer {
     "view",
     "tablespace",
     "trigger",
+    "type",
   ];
 
   public tokenise(query: Query): Query {

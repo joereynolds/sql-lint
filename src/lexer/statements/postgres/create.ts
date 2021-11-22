@@ -18,6 +18,7 @@ class PostgresCreate implements ILexer {
     "procedure",
     "role",
     "server",
+    "sequence",
     "schema",
     "table",
     "tablespace",

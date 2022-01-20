@@ -15,6 +15,7 @@ class Alter implements ILexer {
     "event",
     "function",
     "procedure",
+    "sequence",
     "server",
     "table",
     "tablespace",

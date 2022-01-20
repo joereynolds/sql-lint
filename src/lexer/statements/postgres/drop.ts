@@ -14,6 +14,7 @@ class PostgresDrop implements ILexer {
     "logfile",
     "procedure",
     "schema",
+    "sequence",
     "server",
     "table",
     "view",

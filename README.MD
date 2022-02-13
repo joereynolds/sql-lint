@@ -1,5 +1,7 @@
 # sql-lint
 
+**NOTE: This project _is_ maintained but it's sporadic when it's worked on. I have my fingers in about 304583409 pies and they're not all software related. Please keep raising issues/bug reports**
+
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
 `sql-lint` will do sanity checks on your queries as well as bring errors back from the DB.

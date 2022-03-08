@@ -22,7 +22,7 @@ npm i -g sql-lint
 yarn global add sql-lint
 ```
 
-Or download a [binary](https://github.com/joereynolds/sql-lint/releases)  
+Or download a [binary](https://github.com/joereynolds/sql-lint/releases)
 
 ## Usage
 
@@ -118,6 +118,10 @@ a much more lightweight solution is to run the following in an `.sql` file:
 ```
 :!sql-lint %
 ```
+
+### VSCode
+
+[Inline SQL](https://marketplace.visualstudio.com/items?itemName=qufiwefefwoyn.inline-sql-syntax) extension uses `sql-lint` to provide diagnostics for sql strings and optionally `.sql` files.
 
 ## Checks
 

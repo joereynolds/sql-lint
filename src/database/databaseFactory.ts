@@ -7,13 +7,14 @@ export default function databaseFactory(
   host: string,
   user: string,
   password: string,
+  database: string,
   port?: number
 ): IDatabase {
   switch (driver) {
     case "mysql":
-      return new MySqlDatabase(host, user, password, port);
+      return new MySqlDatabase(host, user, password, database, port);
     case "postgres":
-      return new PostgresDatabase(host, user, password, port);
+      return new PostgresDatabase(host, user, password, database, port);
     default:
       throw new Error(`${driver} driver is unsupported`);
   }

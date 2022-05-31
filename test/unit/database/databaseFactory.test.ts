@@ -27,6 +27,7 @@ test.each([
     "localhost",
     "user",
     "password",
+    "database",
     3306
   );
   expect(database).toBeInstanceOf(expected);
@@ -34,7 +35,14 @@ test.each([
 
 test("it throws an exception if driver is not supported", () => {
   const t = () =>
-    databaseFactory("mongodb", "localhost", "user", "password", 3306);
+    databaseFactory(
+      "mongodb",
+      "localhost",
+      "user",
+      "password",
+      "database",
+      3306
+    );
   expect(t).toThrow(Error);
 });
 

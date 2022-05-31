@@ -76,6 +76,7 @@ sql-lint accepts an object using the following interface as its only argument
   driver?: string
   prefix?: string
   password?: string
+  database?: string
   verbosity?: number
 }
 ```

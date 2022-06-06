@@ -5,13 +5,7 @@ class Query {
   public category: string;
 
   public getContent() {
-    let content: string = "";
-
-    this.lines.forEach((line) => {
-      content += line.content;
-    });
-
-    return content;
+    return this.lines.map(line => line.content.trim()).join(" ");
   }
 }
 

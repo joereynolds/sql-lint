@@ -34,9 +34,11 @@ class CheckerRunner {
         // .js - There seems to be a discrepancy with filenames when using the compiled
         //       version of sql-lint (./dist/src/main.js). They are finding checks and
         //       including the .js. We ignore those too
-        return !ignoredChecks.includes(item)
-          && !item.endsWith(".js")
-          && !item.endsWith(".d");
+        return (
+          !ignoredChecks.includes(item) &&
+          !item.endsWith(".js") &&
+          !item.endsWith(".d")
+        );
       });
 
     const driverSpecificChecks = fs
@@ -66,6 +68,11 @@ class CheckerRunner {
 
         for (const check of checks) {
           const checker = factory.build(check);
+
+          // Don't print out errors that should be ignored
+          if (omittedErrors.includes(checker.getName())) {
+            continue;
+          }
 
           // Simple checks
           if (

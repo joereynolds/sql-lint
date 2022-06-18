@@ -87,6 +87,19 @@ documentation](./checks.md)
 
 You cannot skip checks that are returned from the DB server itself, only the checks built into `sql-lint`.
 
+Note that this option is also available as a flag on the cli.
+i.e.
+
+```
+sql-lint --ignore-errors=trailing-whitespace some-sql-file.sql
+```
+
+Multiple errors can be comma separated:
+
+```
+sql-lint --ignore-errors=trailing-whitespace,missing-where,hungarian-notation some-sql-file.sql
+```
+
 ### Example configuration
 
 The below configuration contains every option available.

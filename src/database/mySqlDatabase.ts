@@ -18,7 +18,11 @@ export default class MySqlDatabase implements IDatabase {
       this.connection.query(`EXPLAIN ${query}`, (err) => {
         if (err) {
           resolve((err as unknown) as sqlError);
+          return;
         }
+
+        // resolve with null if there is no error.
+        resolve(null);
       });
     });
   }

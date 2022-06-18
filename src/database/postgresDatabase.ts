@@ -4,11 +4,18 @@ import IDatabase, { sqlError } from "./interface";
 export default class PostgresDatabase implements IDatabase {
   private pool: Pool;
 
-  constructor(host: string, user: string, password: string, port?: number) {
+  constructor(
+    host: string,
+    user: string,
+    password: string,
+    database: string,
+    port?: number
+  ) {
     this.pool = new Pool({
       host,
       user,
       password,
+      database,
       port,
     });
   }

@@ -39,7 +39,7 @@ import databaseFactory from "./database/databaseFactory";
     .option("--password <string>", "The password for the database connection")
     .option("--port <string>", "The port for the database connection")
     .option("--config <string>", "The path to the configuration file")
-    .requiredOption("--ignore-errors <string...>", "The errors to ignore (comma separated)")
+    .option("--ignore-errors <string...>", "The errors to ignore (comma separated)")
     .parse(process.argv);
 
   let queries: Query[] = [];

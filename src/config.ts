@@ -3,7 +3,7 @@ import * as os from "os";
 import * as path from "path";
 import * as process from "process";
 
-export const file_local = ".sql-lint.json";
+export const fileLocal = ".sql-lint.json";
 export const file = `${os.homedir}/.config/sql-lint/config.json`;
 
 export function getConfiguration(config: string) {
@@ -16,7 +16,7 @@ export function getConfiguration(config: string) {
 export function findConfiguration() {
   var dir = process.cwd();
   while (dir != "/") {
-    var config = path.join([dir, file_local]);
+    var config = path.join([dir, fileLocal]);
     if (fs.existsSync(config)) {
       return JSON.parse(fs.readFileSync(config, "utf8"));
     }

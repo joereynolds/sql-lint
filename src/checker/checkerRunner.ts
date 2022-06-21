@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { CheckFactory } from "./checkFactory";
 import { Query } from "../reader/query";
-import IDatabase from "../database/interface";
+import IDatabase, { sqlError } from "../database/interface";
 import { Printer } from "../printer";
 import { categorise, tokenise } from "../lexer/lexer";
 import { MySqlError } from "../barrel/checks";
@@ -34,9 +34,11 @@ class CheckerRunner {
         // .js - There seems to be a discrepancy with filenames when using the compiled
         //       version of sql-lint (./dist/src/main.js). They are finding checks and
         //       including the .js. We ignore those too
-        return !ignoredChecks.includes(item)
-          && !item.endsWith(".js")
-          && !item.endsWith(".d");
+        return (
+          !ignoredChecks.includes(item) &&
+          !item.endsWith(".js") &&
+          !item.endsWith(".d")
+        );
       });
 
     const driverSpecificChecks = fs
@@ -67,6 +69,11 @@ class CheckerRunner {
         for (const check of checks) {
           const checker = factory.build(check);
 
+          // Don't print out errors that should be ignored
+          if (omittedErrors.includes(checker.getName())) {
+            continue;
+          }
+
           // Simple checks
           if (
             checker.appliesTo.includes(category) &&
@@ -81,9 +88,13 @@ class CheckerRunner {
             database &&
             checker.appliesTo.includes(category)
           ) {
-            const results = await database.lintQuery(content);
-            const sqlChecker = new MySqlError(results);
-            printer.printCheck(sqlChecker, tokenised, prefix);
+            const results: sqlError | null = await database.lintQuery(content);
+
+            // Only `printCheck` if there was an error
+            if (results !== null) {
+              const sqlChecker = new MySqlError(results);
+              printer.printCheck(sqlChecker, tokenised, prefix);
+            }
           }
         }
       }

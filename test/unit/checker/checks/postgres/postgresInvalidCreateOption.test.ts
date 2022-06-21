@@ -7,6 +7,7 @@ test.each([
   ["CREATE SCHEMA person;"],
   ["CREATE TYPE blah;"],
   ["CREATE EXTENSION blah;"],
+  ["CREATE SEQUENCE blah;"],
 ])("it does not warn about valid CREATE options", (query) => {
   const checker = new PostgresInvalidCreateOption();
 

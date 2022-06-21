@@ -1,5 +1,7 @@
 # sql-lint
 
+**NOTE: This project _is_ maintained but it's sporadic when it's worked on. I have my fingers in about 304583409 pies and they're not all software related. Please keep raising issues/bug reports**
+
 ![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
 
 `sql-lint` will do sanity checks on your queries as well as bring errors back from the DB.
@@ -20,7 +22,7 @@ npm i -g sql-lint
 yarn global add sql-lint
 ```
 
-Or download a [binary](https://github.com/joereynolds/sql-lint/releases)  
+Or download a [binary](https://github.com/joereynolds/sql-lint/releases)
 
 ## Usage
 
@@ -116,6 +118,10 @@ a much more lightweight solution is to run the following in an `.sql` file:
 ```
 :!sql-lint %
 ```
+
+### VSCode
+
+[Inline SQL](https://marketplace.visualstudio.com/items?itemName=qufiwefefwoyn.inline-sql-syntax) extension uses `sql-lint` to provide diagnostics for sql strings and optionally `.sql` files.
 
 ## Checks
 

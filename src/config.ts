@@ -14,9 +14,9 @@ export function getConfiguration(config: string) {
 }
 
 export function findConfiguration() {
-  var dir = process.cwd();
-  while (dir != "/") {
-    var config = path.join([dir, fileLocal]);
+  let dir = process.cwd();
+  while (dir !== "/") {
+    const config = path.join(dir, fileLocal);
     if (fs.existsSync(config)) {
       return JSON.parse(fs.readFileSync(config, "utf8"));
     }

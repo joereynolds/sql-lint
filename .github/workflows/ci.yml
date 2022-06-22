@@ -3,7 +3,7 @@ name: CI Pipelines
 on: 
   push:
     branches: [ $default-branch ]
-  pull-request:
+  pull_request:
     branches: [ $default-branch ]
 
 jobs:
@@ -26,4 +26,3 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
-

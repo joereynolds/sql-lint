@@ -9,11 +9,11 @@
  */
 
 import { IChecker } from "../../interface";
-import { Drop } from "../../../barrel/statements";
+import { PostgresDrop } from "../../../barrel/statements";
 import { InvalidOption } from "../invalidOption";
 
 class PostgresInvalidDropOption extends InvalidOption implements IChecker {
-  public checker = new Drop();
+  public checker = new PostgresDrop();
   public appliesTo = ["drop"];
 }
 

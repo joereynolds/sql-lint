@@ -20,7 +20,7 @@ class StatementFactory {
       create: new Create(),
       alter: new Alter(),
       truncate: new Truncate(),
-      rename: new Rename()
+      rename: new Rename(),
     };
 
     if (Object.keys(statementMap).includes(statement)) {

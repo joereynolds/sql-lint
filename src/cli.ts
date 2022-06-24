@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as process from "process";
 
 import { CheckerRunner } from "./checker/checkerRunner";
-import { file, getConfiguration } from "./config";
+import { file, getConfiguration, findConfiguration } from "./config";
 import { findByExtension } from "./file";
 import { FormatterFactory } from "./formatter/formatterFactory";
 import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
@@ -48,7 +48,9 @@ import databaseFactory from "./database/databaseFactory";
   const formatterFactory = new FormatterFactory();
   const format = formatterFactory.build(program.format);
   const printer: Printer = new Printer(program.verbose, format);
-  const configuration = getConfiguration(program.config || file);
+  const configuration = (program.config)
+    ? getConfiguration(program.config)
+    : findConfiguration();
   const runner = new CheckerRunner();
   const programFile = program.args[0];
 
@@ -92,7 +94,11 @@ import databaseFactory from "./database/databaseFactory";
   let db: any;
 
   if (configuration === null) {
-    printer.warnAboutNoConfiguration(file);
+    if (program.config) {
+      printer.warnAboutFileNotFound(program.config);
+    } else {
+      printer.warnAboutNoConfiguration(file);
+    }
   }
 
   const driver = program.driver || configuration?.driver || "mysql";

@@ -75,6 +75,20 @@ class Printer {
     );
   }
 
+  public warnAboutNoStdinStream() {
+    console.log(
+`sql-lint requires either a file, directory or stdin as an argument
+file/directory example:
+    sql-lint .           # recurse from current directory
+    sql-lint db/         # lint the db/ directory
+    sql-lint my-file.sql # lint my-file.sql
+
+stdin example:
+    echo 'DELETE FROM person;' | sql-lint
+`
+    );
+  }
+
   public warnAboutFileNotFound(file: string) {
     console.log(`Can't open file ${file}. Does it exist?`);
   }

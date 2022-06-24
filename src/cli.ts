@@ -77,8 +77,12 @@ import databaseFactory from "./database/databaseFactory";
 
   // Read from stdin if no args are supplied
   if (!programFile) {
-    queries = getQueryFromLine(fs.readFileSync(0).toString());
-    prefix = "stdin";
+    try {
+        queries = getQueryFromLine(fs.readFileSync(0).toString());
+        prefix = "stdin";
+    } catch (error) {
+        printer.warnAboutNoStdinStream();
+    }
   }
 
 

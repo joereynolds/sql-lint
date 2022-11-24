@@ -14,7 +14,8 @@
         "nearley": "^2.19.3",
         "param-case": "^3.0.3",
         "pg": "^8.6.0",
-        "sprintf-js": "^1.1.2"
+        "sprintf-js": "^1.1.2",
+        "sqlite3": "^5.1.2"
     },
     "description": "An intelligent SQL linter and checker",
     "devDependencies": {

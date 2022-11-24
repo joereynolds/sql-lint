@@ -13,15 +13,18 @@ import { Printer } from "./printer";
 import { Query } from "./reader/query";
 import { version } from "../package.json";
 import databaseFactory from "./database/databaseFactory";
+import SqliteDatabase from "./database/sqliteDatabase";
 
 (async () => {
   program
     .version(version)
-    .description("Lint sql files and stdin for errors, oddities, and bad practices.")
+    .description(
+      "Lint sql files and stdin for errors, oddities, and bad practices."
+    )
     .option("--fix [string]", "The .sql string to fix (experimental and alpha)")
     .option(
       "-d, --driver <string>",
-      "The driver to use, must be one of ['mysql', 'postgres']"
+      "The driver to use, must be one of ['mysql', 'postgres', 'sqlite']"
     )
     .option(
       "-v, --verbose",
@@ -39,7 +42,11 @@ import databaseFactory from "./database/databaseFactory";
     .option("--password <string>", "The password for the database connection")
     .option("--port <string>", "The port for the database connection")
     .option("--config <string>", "The path to the configuration file")
-    .option("--ignore-errors <string...>", "The errors to ignore (comma separated)")
+    .option("--sqlite-path <string>", "The path to the sqlite database")
+    .option(
+      "--ignore-errors <string...>",
+      "The errors to ignore (comma separated)"
+    )
     .parse(process.argv);
 
   let queries: Query[] = [];
@@ -48,7 +55,7 @@ import databaseFactory from "./database/databaseFactory";
   const formatterFactory = new FormatterFactory();
   const format = formatterFactory.build(program.format);
   const printer: Printer = new Printer(program.verbose, format);
-  const configuration = (program.config)
+  const configuration = program.config
     ? getConfiguration(program.config)
     : findConfiguration();
   const runner = new CheckerRunner();
@@ -78,13 +85,12 @@ import databaseFactory from "./database/databaseFactory";
   // Read from stdin if no args are supplied
   if (!programFile) {
     try {
-        queries = getQueryFromLine(fs.readFileSync(0).toString());
-        prefix = "stdin";
+      queries = getQueryFromLine(fs.readFileSync(0).toString());
+      prefix = "stdin";
     } catch (error) {
-        printer.warnAboutNoStdinStream();
+      printer.warnAboutNoStdinStream();
     }
   }
-
 
   let omittedErrors: string[] = [];
   if (configuration !== null && "ignore-errors" in configuration) {
@@ -92,7 +98,7 @@ import databaseFactory from "./database/databaseFactory";
   }
 
   if (program.ignoreErrors) {
-      omittedErrors = program.ignoreErrors.split(',')
+    omittedErrors = program.ignoreErrors.split(",");
   }
 
   let db: any;
@@ -115,6 +121,11 @@ import databaseFactory from "./database/databaseFactory";
       program.password || configuration?.password,
       program.port || configuration?.port || undefined // let mysql2 or pg figure out the default port
     );
+  } else if (
+    driver == "sqlite" &&
+    (program.sqlitePath || configuration?.sqlitePath)
+  ) {
+    db = new SqliteDatabase(program.sqlitePath || configuration?.sqlitePath);
   }
 
   if (programFile) {

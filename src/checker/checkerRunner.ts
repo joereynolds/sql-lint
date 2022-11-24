@@ -40,17 +40,18 @@ class CheckerRunner {
           !item.endsWith(".d")
         );
       });
-
-    const driverSpecificChecks = fs
-      .readdirSync(`${__dirname}/checks/${driver}`)
-      .map((check) => {
-        return path.parse(check).name;
-      })
-      .filter((item) => {
-        return !item.endsWith(".js") && !item.endsWith(".d");
-      });
-
-    checks.push(...driverSpecificChecks);
+      
+    if (driver != "sqlite") {
+      const driverSpecificChecks = fs
+        .readdirSync(`${__dirname}/checks/${driver}`)
+        .map((check) => {
+          return path.parse(check).name;
+        })
+        .filter((item) => {
+          return !item.endsWith(".js") && !item.endsWith(".d");
+        });
+        checks.push(...driverSpecificChecks);
+    }
 
     const factory = new CheckFactory();
 

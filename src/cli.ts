@@ -4,20 +4,23 @@ import * as program from "commander";
 import * as fs from "fs";
 import * as process from "process";
 
+import { version } from "../package.json";
 import { CheckerRunner } from "./checker/checkerRunner";
-import { file, getConfiguration } from "./config";
+import { file, findConfiguration, getConfiguration } from "./config";
+import databaseFactory from "./database/databaseFactory";
 import { findByExtension } from "./file";
 import { FormatterFactory } from "./formatter/formatterFactory";
-import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 import { Printer } from "./printer";
 import { Query } from "./reader/query";
-import { version } from "../package.json";
-import databaseFactory from "./database/databaseFactory";
+import { getQueryFromFile, getQueryFromLine } from "./reader/reader";
 
 (async () => {
   program
     .version(version)
-    .option("--fix [string]", "The .sql string to fix")
+    .description(
+      "Lint sql files and stdin for errors, oddities, and bad practices."
+    )
+    .option("--fix [string]", "The .sql string to fix (experimental and alpha)")
     .option(
       "-d, --driver <string>",
       "The driver to use, must be one of ['mysql', 'postgres']"
@@ -39,6 +42,10 @@ import databaseFactory from "./database/databaseFactory";
     .option("--database <string>", "The database for the connection")
     .option("--port <string>", "The port for the connection")
     .option("--config <string>", "The path to the configuration file")
+    .option(
+      "--ignore-errors <string...>",
+      "The errors to ignore (comma separated)"
+    )
     .parse(process.argv);
 
   let queries: Query[] = [];
@@ -47,7 +54,9 @@ import databaseFactory from "./database/databaseFactory";
   const formatterFactory = new FormatterFactory();
   const format = formatterFactory.build(program.format);
   const printer: Printer = new Printer(program.verbose, format);
-  const configuration = getConfiguration(program.config || file);
+  const configuration = program.config
+    ? getConfiguration(program.config)
+    : findConfiguration();
   const runner = new CheckerRunner();
   const programFile = program.args[0];
 
@@ -74,8 +83,12 @@ import databaseFactory from "./database/databaseFactory";
 
   // Read from stdin if no args are supplied
   if (!programFile) {
-    queries = getQueryFromLine(fs.readFileSync(0).toString());
-    prefix = "stdin";
+    try {
+      queries = getQueryFromLine(fs.readFileSync(0).toString());
+      prefix = "stdin";
+    } catch (error) {
+      printer.warnAboutNoStdinStream();
+    }
   }
 
   let omittedErrors: string[] = [];
@@ -83,10 +96,18 @@ import databaseFactory from "./database/databaseFactory";
     omittedErrors = configuration["ignore-errors"] || [];
   }
 
+  if (program.ignoreErrors) {
+    omittedErrors = program.ignoreErrors.split(",");
+  }
+
   let db: any;
 
   if (configuration === null) {
-    printer.warnAboutNoConfiguration(file);
+    if (program.config) {
+      printer.warnAboutFileNotFound(program.config);
+    } else {
+      printer.warnAboutNoConfiguration(file);
+    }
   }
 
   const driver = program.driver || configuration?.driver || "mysql";

@@ -1,18 +1,13 @@
 # sql-lint
 
-**NOTE: This project _is_ maintained but it's sporadic when it's worked on. I have my fingers in about 304583409 pies and they're not all software related. Please keep raising issues/bug reports**
-
-![Build Status](https://travis-ci.org/joereynolds/sql-lint.svg?branch=typescript)
-
 `sql-lint` will do sanity checks on your queries as well as bring errors back from the DB.
 If you worry about forgetting `WHERE`s on a `DELETE` or borking your data with unexpected characters, then `sql-lint` is for you.
 
-A complete list of the checks it does is below.
+[Read the documentation for a complete walkthrough](https://sql-lint.readthedocs.io/en/latest/files/introduction.html)
 
 ![Imgur](https://i.imgur.com/rJ3h34b.png)
 
 ![Imgur](https://i.imgur.com/nqi1MnT.gif)
-
 
 ## Installation
 
@@ -39,7 +34,9 @@ sql-lint create-person.sql
 echo 'DELETE FROM person;' | sql-lint
 ```
 
-## Programmatic Access
+## Programmatically
+
+`sql-lint` can also be used within your js/ts files (though admittedly it's stronger as a cli command).
 
 ```
 npm i sql-lint
@@ -66,7 +63,9 @@ sqlLint({ sql: 'SELECT my_column FROM my_table' }).then(errors => {
 ```
 
 ### Parameters
+
 sql-lint accepts an object using the following interface as its only argument
+
 ```
 {
   sql: string
@@ -82,6 +81,7 @@ sql-lint accepts an object using the following interface as its only argument
 ```
 
 ### Notes on some of the parameters
+
 `sql`: can have multiple queries separated by `;`
 
 `host`: if host is not provided `sql-lint` will only perform checks that do not require a connection
@@ -91,6 +91,7 @@ sql-lint accepts an object using the following interface as its only argument
 `port`: if port is not provided it will use the default port for the driver you are using
 
 ### Output
+
 sql-lint returns an `array` of objects with the following shape
 
 ```
@@ -107,24 +108,16 @@ sql-lint returns an `array` of objects with the following shape
 If your editor supports external tools, then it supports `sql-lint`.
 Below is the list that have direct support for `sql-lint` either through plugins or configuration.
 
-### (Neo)Vim
-
-(Neo)Vim can be configured to use `sql-lint` on `.sql` files.
-
-[Ale](https://github.com/dense-analysis/ale/) ships with `sql-lint` support out the box.
-
-If you do not want to use a plugin,
-a much more lightweight solution is to run the following in an `.sql` file:
-
-```
-:!sql-lint %
-```
-
-### VSCode
-
-[Inline SQL](https://marketplace.visualstudio.com/items?itemName=qufiwefefwoyn.inline-sql-syntax) extension uses `sql-lint` to provide diagnostics for sql strings and optionally `.sql` files.
+| Editor  | Plugin                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------- |
+| Neovim  | [Ale](https://github.com/dense-analysis/ale/)                                                     |
+| Vim     | [Ale](https://github.com/dense-analysis/ale/)                                                     |
+| VS Code | [Inline SQL](https://marketplace.visualstudio.com/items?itemName=qufiwefefwoyn.inline-sql-syntax) |
 
 ## Checks
+
+A quick rundown of the checks is below but you should [read the documentation](https://sql-lint.readthedocs.io/en/latest/files/checks.html)
+for an exhaustive list.
 
 `sql-lint` comes with its own suite of checks. It
 also returns any errors from the SQL server you have connected to. Generally
@@ -132,7 +125,8 @@ you'll find that the errors from `sql-lint` are more informative than those from
 the server. That said, you will still want errors from the server as it covers
 more cases and will catch things that `sql-lint` does not.
 
-### unmatched-parentheses
+<details>
+  <summary>unmatched-parentheses</summary>
 
 Shown when a query has an unbalanced amount of parentheses.
 
@@ -140,7 +134,10 @@ Shown when a query has an unbalanced amount of parentheses.
 test/test-files//test.sql:16 [sql-lint: unmatched-parentheses] Unmatched parentheses.
 ```
 
-### missing-where
+</details>
+
+<details>
+  <summary>missing-where</summary>
 
 Shown when a `DELETE` statement is missing a `WHERE` clause.
 
@@ -148,7 +145,10 @@ Shown when a `DELETE` statement is missing a `WHERE` clause.
 test/test-files/test.sql:20 [sql-lint: missing-where] DELETE statement missing WHERE clause.
 ```
 
-### invalid-drop-option
+</details>
+
+<details>
+  <summary>invalid-drop-option</summary>
 
 Shown when an invalid option is given to the `DROP` statement.
 
@@ -156,7 +156,10 @@ Shown when an invalid option is given to the `DROP` statement.
 test/test-files/test.sql:22 [sql-lint: invalid-drop-option] Option 'thing' is not a valid option, must be one of '["database","event","function","index","logfile","procedure","schema","server","table","view","tablespace","trigger"]'.
 ```
 
-### invalid-create-option
+</details>
+
+<details>
+  <summary>invalid-create-option</summary>
 
 Shown when an invalid option is given to the `CREATE` statement.
 
@@ -164,7 +167,10 @@ Shown when an invalid option is given to the `CREATE` statement.
 :24 [sql-lint: invalid-create-option] Option 'test' is not a valid option, must be one of '["algorithm","database","definer","event","function","index","or","procedure","server","table","tablespace","temporary","trigger","user","unique","view"]'.
 ```
 
-### invalid-truncate-option
+</details>
+
+<details>
+  <summary>invalid-truncate-option</summary>
 
 Shown when an invalid option is given to the `TRUNCATE` statement.
 
@@ -172,7 +178,10 @@ Shown when an invalid option is given to the `TRUNCATE` statement.
 test/test-files/test.sql:26 [sql-lint: invalid-truncate-option] Option 'something' is not a valid option, must be one of '["table"]'.
 ```
 
-### invalid-alter-option
+</details>
+
+<details>
+  <summary>invalid-alter-option</summary>
 
 Shown when an invalid option is given to the `ALTER` statement.
 
@@ -180,11 +189,15 @@ Shown when an invalid option is given to the `ALTER` statement.
 test/test-files/test.sql:28 [sql-lint: invalid-alter-option] Option 'mlady' is not a valid option, must be one of '["column","online","offline","ignore","database","event","function","procedure","server","table","tablespace","view"]'.
 ```
 
-### odd-code-point
+</details>
 
-Shown when there are unsupported/unusual* code points in your code.
+<details>
 
-*<small>This check came about whilst working Microsoft Excel. Microsoft likes to
+  <summary>odd-code-point</summary>
+
+Shown when there are unsupported/unusual\* code points in your code.
+
+\*<small>This check came about whilst working Microsoft Excel. Microsoft likes to
 add a lot of zany characters which can subtly break your data without you
 realising.</small>
 
@@ -192,7 +205,13 @@ realising.</small>
 test/test-files//test.sql:30 [sql-lint: odd-code-point] Unexpected code point.
 ```
 
-### invalid-limit-quantifier
+</details>
+
+<details>
+
+  <summary>
+    invalid-limit-quantifier
+  </summary>
 
 Shown when you specify something other than a number to the `LIMIT` statement.
 
@@ -200,14 +219,26 @@ Shown when you specify something other than a number to the `LIMIT` statement.
 test/test-files//test.sql:32 [sql-lint: invalid-limit-quantifier] Argument 'test' is not a valid quantifier for LIMIT clause.
 ```
 
-### hungarian-notation
+</details>
+
+<details>
+
+<summary>
+hungarian-notation
+</summary>
 
 Shown when the string `sp_` or `tbl_` is present in the query.
+
 ```
 test/test-files/test.sql:34 [sql-lint: hungarian-notation] Hungarian notation present in query
 ```
 
-### trailing-whitespace
+</details>
+
+<details>
+<summary>
+trailing-whitespace
+</summary>
 
 Shown when a query has trailing whitespace.
 
@@ -215,6 +246,8 @@ Shown when a query has trailing whitespace.
 test/test-files/test.sql:34 [sql-lint: trailing-whitespace] Trailing whitespace
 ```
 
-## Read more
+</details>
+
+## Documentation
 
 To find out more, [read the documentation](https://sql-lint.readthedocs.io/)

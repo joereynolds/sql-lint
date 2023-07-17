@@ -5,6 +5,7 @@ interface IChecker {
   additionalInformation: string;
   requiresConnection: boolean;
   appliesTo: string[];
+  getName(): string;
   check(query: Query): any;
 }
 

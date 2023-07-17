@@ -63,15 +63,31 @@ class Printer {
     console.log(fixed);
   }
 
-  public warnAboutUncategoriseableQuery(content: string) {
+  public warnAboutUncategoriseableQuery(content: string, tokenised: Query, prefix: string) {
     const title = "Unable to lint query";
     const url = encodeURI(
       `https://github.com/joereynolds/sql-lint/issues/new?title=${title}&body=${content}`
     );
 
-    console.log(
-      `sql-lint was unable to lint the following query "${content}".` +
+    const lineNumber = tokenised.lines[0].num;
+
+    const errorMessage = `${prefix}:${lineNumber} sql-lint was unable to lint the following query "${content}".` +
         `This could be a bug with sql-lint. Visit this URL to create a bug report: ${url}`
+
+    console.log(errorMessage);
+  }
+
+  public warnAboutNoStdinStream() {
+    console.log(
+`sql-lint requires either a file, directory or stdin as an argument
+file/directory example:
+    sql-lint .           # recurse from current directory
+    sql-lint db/         # lint the db/ directory
+    sql-lint my-file.sql # lint my-file.sql
+
+stdin example:
+    echo 'DELETE FROM person;' | sql-lint
+`
     );
   }
 

@@ -6,6 +6,8 @@ test.each([
   ["CREATE TABLE person;"],
   ["CREATE SCHEMA person;"],
   ["CREATE TYPE blah;"],
+  ["CREATE MATERIALIZED VIEW blah;"],
+  ["CREATE VIEW blah;"],
   ["CREATE EXTENSION blah;"],
   ["CREATE SEQUENCE blah;"],
 ])("it does not warn about valid CREATE options", (query) => {

@@ -5,50 +5,26 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class PostgresCreate implements ILexer {
-  public options: string[] = [
-    "algorithm",
-    "database",
-    "definer",
-    "event",
-    "extension",
-    "function",
-    "index",
-    "materialized",
-    "or",
-    "procedure",
-    "role",
-    "sequence",
-    "server",
-    "schema",
-    "table",
-    "tablespace",
-    "temporary",
-    "trigger",
-    "type",
-    "user",
-    "unique",
-    "view",
-  ];
-
+class Rename implements ILexer {
+  public options: string[] = [];
   public tokenise(query: Query): Query {
-    let lastToken = "";
-
     query.lines.forEach((line) => {
       line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
-        if (item === Keyword.Create) {
+
+        if (item === Keyword.To) {
           line.tokens.push(new Token(Types.Keyword, item));
-        } else if (lastToken === Keyword.Create) {
+        } else if (item === Keyword.Rename) {
+          line.tokens.push(new Token(Types.Keyword, item));
+        } else {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
             line.tokens.push(
-              new Token(Types.Option, cleanUnquotedIdentifier(item))
+              new Token(Types.TableReference, cleanUnquotedIdentifier(item))
             );
           }
         }
-        lastToken = item;
       });
     });
 
@@ -56,4 +32,4 @@ class PostgresCreate implements ILexer {
   }
 }
 
-export { PostgresCreate };
+export { Rename };

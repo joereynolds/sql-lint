@@ -24,6 +24,7 @@ class PostgresCreate implements ILexer {
     "table",
     "tablespace",
     "temporary",
+    "temp",
     "trigger",
     "type",
     "user",

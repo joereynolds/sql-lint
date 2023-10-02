@@ -27,7 +27,7 @@ export function putContentIntoLines(contents: string): Query[] {
     }
 
     if (contents[i] === Keyword.Newline) {
-      if (currentQueryContent.length > 0) {
+      if (currentQueryContent.trim().length > 0) {
         query.lines.push(new Line(currentQueryContent, lineNumber));
       }
       currentQueryContent = "";
@@ -35,7 +35,7 @@ export function putContentIntoLines(contents: string): Query[] {
     }
 
     if (contents[i] === ";") {
-      if (currentQueryContent.length > 0) {
+      if (currentQueryContent.trim().length > 0) {
         query.lines.push(new Line(currentQueryContent, lineNumber));
       }
       queriesFromFile.push(query);
@@ -53,7 +53,7 @@ export function putContentIntoLines(contents: string): Query[] {
  * 3. Rejoin the lines together as a single string.
  */
 function stripComments(content: string): string {
-  content = content.replace(reMultilineComments, "");
+  content = content.replace(reMultilineComments, " ");
   const contentInLines = content.split(Keyword.Newline);
 
   for (let i = 0; i < contentInLines.length; i++) {

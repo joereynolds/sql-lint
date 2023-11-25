@@ -12,6 +12,7 @@ class Alter implements ILexer {
     "offline",
     "ignore",
     "database",
+    "default",
     "event",
     "function",
     "procedure",

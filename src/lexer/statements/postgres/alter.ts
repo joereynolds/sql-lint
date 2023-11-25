@@ -5,7 +5,7 @@ import { Types } from "../../types";
 import { Keyword } from "../../../syntax/keywords";
 import { Token } from "../../token";
 
-class Alter implements ILexer {
+class PostgresAlter implements ILexer {
   public options: string[] = [
     "column",
     "online",
@@ -47,4 +47,4 @@ class Alter implements ILexer {
   }
 }
 
-export { Alter };
+export { PostgresAlter };

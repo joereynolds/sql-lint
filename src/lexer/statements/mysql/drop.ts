@@ -16,6 +16,7 @@ class Drop implements ILexer {
     "schema",
     "server",
     "table",
+    "temporary",
     "view",
     "tablespace",
     "trigger",

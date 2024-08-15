@@ -60,11 +60,12 @@ class CheckerRunner {
       if (content) {
         const category = categorise(content);
 
+        const tokenised: Query = tokenise(query);
+
         if (!category) {
-          printer.warnAboutUncategoriseableQuery(content);
+          printer.warnAboutUncategoriseableQuery(content, tokenised, prefix);
         }
 
-        const tokenised: Query = tokenise(query);
 
         for (const check of checks) {
           const checker = factory.build(check);

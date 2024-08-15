@@ -17,6 +17,7 @@ class PostgresCreate implements ILexer {
     "materialized",
     "or",
     "procedure",
+    "publication",
     "role",
     "sequence",
     "server",

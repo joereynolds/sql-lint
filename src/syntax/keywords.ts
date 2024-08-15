@@ -2,6 +2,7 @@ export enum Keyword {
   Alter = "alter",
   Begin = "begin",
   Call = "call",
+  Commit = "commit",
   Create = "create",
   Declare = "declare",
   Delete = "delete",

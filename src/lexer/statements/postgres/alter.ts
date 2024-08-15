@@ -20,6 +20,7 @@ class PostgresAlter implements ILexer {
     "server",
     "table",
     "tablespace",
+    "type",
     "view",
   ];
 

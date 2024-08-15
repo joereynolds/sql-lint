@@ -15,6 +15,7 @@ test.each([
   ["ALTER server;"],
   ["ALTER table;"],
   ["ALTER tablespace;"],
+  ["ALTER TYPE blah;"],
   ["ALTER view;"],
 ])("it does not error about valid ALTER options", (query) => {
   const checker = new PostgresInvalidAlterOption();

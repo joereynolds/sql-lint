@@ -13,6 +13,7 @@ export enum Keyword {
   End = "end",
   Flush = "flush",
   From = "from",
+  Grant = "grant",
   Having = "having",
   If = "if",
   Insert = "insert",

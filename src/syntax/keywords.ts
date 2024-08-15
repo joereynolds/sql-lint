@@ -10,6 +10,7 @@ export enum Keyword {
   Drop = "drop",
   Else = "else",
   End = "end",
+  Flush = "flush",
   From = "from",
   Having = "having",
   If = "if",

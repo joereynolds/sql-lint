@@ -19,7 +19,7 @@
     "description": "An intelligent SQL linter and checker",
     "devDependencies": {
         "@types/jest": "^26.0.3",
-        "jest": "^26.1.0",
+        "jest": "^29.7.0",
         "pkg": "^5.3.0",
         "prettier": "^3.3.3",
         "shelltest": "^2.0.0",

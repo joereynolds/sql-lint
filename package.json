@@ -8,7 +8,7 @@
         "@types/node": "^22.4.0",
         "@types/pg": "^8.11.6",
         "@types/sprintf-js": "^1.1.2",
-        "commander": "^5.1.0",
+        "commander": "^11.0.0",
         "moo": "^0.5.1",
         "mysql2": "^3.9.8",
         "nearley": "^2.19.3",

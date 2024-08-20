@@ -5,7 +5,7 @@
     "dependencies": {
         "@types/moo": "^0.5.3",
         "@types/nearley": "^2.11.1",
-        "@types/node": "^14.0.14",
+        "@types/node": "^22.4.0",
         "@types/pg": "^8.11.6",
         "@types/sprintf-js": "^1.1.2",
         "commander": "^5.1.0",

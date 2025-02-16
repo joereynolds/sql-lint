@@ -21,12 +21,33 @@ export function putContentIntoLines(contents: string): Query[] {
 
   contents = stripComments(contents);
 
-  for (let i = 0; i < contents.length; i++) {
-    if (!skipChars.includes(contents[i])) {
-      currentQueryContent += contents[i];
+  let currentQuote: string | null = null;
+  let escape = false;
+
+  for (const char of contents) {
+    // \" and \' should be skipped
+    if (char === "\\") {
+      escape = true;
+      currentQueryContent += char;
+      continue;
+    }
+    
+    if (escape) {
+      escape = false;
+      currentQueryContent += char;
+      continue;
     }
 
-    if (contents[i] === Keyword.Newline) {
+    // Toggle string state
+    if (char === "'" || char === "\"") {
+      currentQuote = currentQuote === char ? null : char;
+    }
+
+    if (!skipChars.includes(char)) {
+      currentQueryContent += char;
+    }
+
+    if (char === Keyword.Newline) {
       if (currentQueryContent.length > 0) {
         query.lines.push(new Line(currentQueryContent, lineNumber));
       }
@@ -34,7 +55,7 @@ export function putContentIntoLines(contents: string): Query[] {
       lineNumber++;
     }
 
-    if (contents[i] === ";") {
+    if (char === ";" && currentQuote === null) {
       if (currentQueryContent.length > 0) {
         query.lines.push(new Line(currentQueryContent, lineNumber));
       }

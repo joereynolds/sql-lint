@@ -40,7 +40,12 @@ export function putContentIntoLines(contents: string): Query[] {
 
     // Toggle string state
     if (char === "'" || char === "\"") {
-      currentQuote = currentQuote === char ? null : char;
+      if (currentQuote === null) {
+        currentQuote = char;
+      } else if (currentQuote === char) {
+        currentQuote = null;
+      }
+      // If currentQuote is not null and doesn't match char, do nothing.
     }
 
     if (!skipChars.includes(char)) {

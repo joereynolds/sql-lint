@@ -73,3 +73,28 @@ test("We should ignore multiline comments", () => {
   const query = getTestQuery()
   expect(getQueryFromLine(input)).toEqual([query]);
 });
+
+test("Semicolons inside string literals do not split queries", () => {
+  const input =
+    "INSERT INTO table (col) VALUES ('hello; world'); SELECT * FROM table;";
+  const queries = getQueryFromLine(input);
+  expect(queries).toHaveLength(2);
+  expect(queries[0].getContent()).toEqual(
+    "INSERT INTO table (col) VALUES ('hello; world');"
+  );
+  expect(queries[1].getContent()).toEqual(" SELECT * FROM table;");
+});
+
+test("Escaped quotes and single quote in double quotes do not split queries", () => {
+  const input =
+    "INSERT INTO table (col) VALUES ('It\\'s a test; with escaped quote'); " +
+    "INSERT INTO table (col) VALUES (\"This string contains a 'single quote' and ; semicolon inside\");";
+  const queries = getQueryFromLine(input);
+  expect(queries).toHaveLength(2);
+  expect(queries[0].getContent()).toEqual(
+    "INSERT INTO table (col) VALUES ('It\\'s a test; with escaped quote');"
+  );
+  expect(queries[1].getContent()).toEqual(
+    " INSERT INTO table (col) VALUES (\"This string contains a 'single quote' and ; semicolon inside\");"
+  );
+});

@@ -25,7 +25,6 @@ function tokenise(query: Query): Query {
   const statement = statementFactory.build(category);
 
   query.category = category;
-
   return statement.tokenise(query);
 }
 

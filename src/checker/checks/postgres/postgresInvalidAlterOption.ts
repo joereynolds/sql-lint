@@ -1,9 +1,9 @@
 import { IChecker } from "../../interface";
-import { Alter } from "../../../barrel/statements";
+import { PostgresAlter } from "../../../barrel/statements";
 import { InvalidOption } from "../invalidOption";
 
 class PostgresInvalidAlterOption extends InvalidOption implements IChecker {
-  public checker = new Alter();
+  public checker = new PostgresAlter();
   public appliesTo = ["alter"];
 }
 

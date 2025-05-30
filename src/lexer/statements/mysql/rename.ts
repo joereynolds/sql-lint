@@ -5,42 +5,26 @@ import { Keyword } from "../../../syntax/keywords";
 import { Types } from "../../types";
 import { Token } from "../../token";
 
-class PostgresDrop implements ILexer {
-  public options: string[] = [
-    "database",
-    "event",
-    "function",
-    "index",
-    "logfile",
-    "procedure",
-    "schema",
-    "sequence",
-    "server",
-    "table",
-    "view",
-    "tablespace",
-    "trigger",
-    "type",
-  ];
-
+class Rename implements ILexer {
+  public options: string[] = [];
   public tokenise(query: Query): Query {
-    let lastToken = "";
-
     query.lines.forEach((line) => {
       line.content.split(" ").forEach((word) => {
         let item = word.toLowerCase().trim();
-        if (item === Keyword.Drop) {
+
+        if (item === Keyword.To) {
           line.tokens.push(new Token(Types.Keyword, item));
-        } else if (lastToken === Keyword.Drop) {
+        } else if (item === Keyword.Rename) {
+          line.tokens.push(new Token(Types.Keyword, item));
+        } else {
           item = cleanUnquotedIdentifier(item);
 
           if (item.length > 0) {
             line.tokens.push(
-              new Token(Types.Option, cleanUnquotedIdentifier(item))
+              new Token(Types.TableReference, cleanUnquotedIdentifier(item))
             );
           }
         }
-        lastToken = item;
       });
     });
 
@@ -48,4 +32,4 @@ class PostgresDrop implements ILexer {
   }
 }
 
-export { PostgresDrop };
+export { Rename };

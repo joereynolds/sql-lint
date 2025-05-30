@@ -4,8 +4,9 @@ import { CheckerResult } from "../../checkerResult";
 import { IChecker } from "../../interface";
 import { Types } from "../../../lexer/types";
 import { sprintf } from "sprintf-js";
+import { Check } from "../../check";
 
-class TableNotFound implements IChecker {
+class TableNotFound extends Check implements IChecker {
   public message = "Table '%s' does not exist in database '%s'.";
   public additionalInformation = "";
   public appliesTo = ["select", "create", "update", "drop", "insert"];
@@ -13,6 +14,7 @@ class TableNotFound implements IChecker {
 
   public tables: string[];
   constructor(tables: any[]) {
+    super();
     this.tables = this.cleanTables(tables);
   }
 

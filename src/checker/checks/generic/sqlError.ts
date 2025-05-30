@@ -28,6 +28,10 @@ export default class SqlError implements IChecker {
     return new CheckerResult(0, "");
   }
 
+  public getName(): string {
+      return '';
+  }
+
   private concatErrorObject(error: any) {
     return `[${error.code}] ${error.sqlMessage}`;
   }

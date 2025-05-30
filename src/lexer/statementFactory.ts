@@ -6,6 +6,7 @@ import {
   Create,
   Drop,
   Truncate,
+  Rename,
 } from "../barrel/statements";
 
 class StatementFactory {
@@ -19,6 +20,7 @@ class StatementFactory {
       create: new Create(),
       alter: new Alter(),
       truncate: new Truncate(),
+      rename: new Rename(),
     };
 
     if (Object.keys(statementMap).includes(statement)) {

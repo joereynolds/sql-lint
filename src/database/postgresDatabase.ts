@@ -28,7 +28,11 @@ export default class PostgresDatabase implements IDatabase {
             code: err.name,
             sqlMessage: err.message,
           });
+          return;
         }
+
+        // resolve with null if there is no error.
+        resolve(null);
       });
     });
   }

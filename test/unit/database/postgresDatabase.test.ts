@@ -7,8 +7,7 @@ jest.mock("pg", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        port: 5432,
-        database: undefined,
+        port: 5432
       });
       return mock;
     },
@@ -24,21 +23,11 @@ jest.mock("pg", () => {
 });
 
 test("it calls createConnection", () => {
-  const db = new PostgresDatabase(
-    "localhost",
-    "user",
-    "password",
-    5432
-  );
+  const db = new PostgresDatabase("localhost", "user", "password", 5432);
 });
 
 test("it calls callback if there is an error", async () => {
-  const db = new PostgresDatabase(
-    "localhost",
-    "user",
-    "password",
-    5432
-  );
+  const db = new PostgresDatabase("localhost", "user", "password", 5432);
   const sql = "SELECT some_column FROM some_table WHERE id = 1";
 
   expect(await db.lintQuery(sql)).toMatchObject({
@@ -48,12 +37,7 @@ test("it calls callback if there is an error", async () => {
 });
 
 test("it calls end on connection", () => {
-  const db = new PostgresDatabase(
-    "localhost",
-    "user",
-    "password",
-    5432
-  );
+  const db = new PostgresDatabase("localhost", "user", "password", 5432);
   db.end();
 });
 

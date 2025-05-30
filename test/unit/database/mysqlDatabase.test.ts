@@ -7,7 +7,6 @@ jest.mock("mysql2", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        database: undefined,
         port: 3306,
       });
       return mock;
@@ -23,21 +22,12 @@ jest.mock("mysql2", () => {
 });
 
 test("it calls createConnection", () => {
-  const db = new MySqlDatabase(
-    "localhost",
-    "user",
-    "password",
-    3306
+  const db = new MySqlDatabase("localhost", "user", "password", 3306
   );
 });
 
 test("it calls callback if there is an error", async () => {
-  const db = new MySqlDatabase(
-    "localhost",
-    "user",
-    "password",
-    3306
-  );
+  const db = new MySqlDatabase("localhost", "user", "password", 3306);
   const sql = "SELECT some_column FROM some_table WHERE id = 1";
   expect(await db.lintQuery(sql)).toHaveProperty(
     "sqlMessage",
@@ -46,12 +36,7 @@ test("it calls callback if there is an error", async () => {
 });
 
 test("it calls end on connection", () => {
-  const db = new MySqlDatabase(
-    "localhost",
-    "user",
-    "password",
-    3306
-  );
+  const db = new MySqlDatabase("localhost", "user", "password", 3306);
   db.end();
 });
 

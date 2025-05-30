@@ -70,7 +70,6 @@ jest.mock("mysql2", () => {
         user: "user",
         host: "localhost",
         password: "password",
-        database: undefined,
       });
       return mock;
     },
@@ -91,7 +90,6 @@ test("it uses db connection is provided", async () => {
     user: "user",
     host: "localhost",
     password: "password",
-    database: undefined,
     sql: "SELECT some_column FROM my_database.some_table;",
   };
 
@@ -110,7 +108,6 @@ jest.mock("pg", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        database: undefined,
         port: 5432,
       });
       return mock;
@@ -131,7 +128,6 @@ test("it uses correct driver when provided", async () => {
     driver: "postgres",
     host: "localhost",
     password: "password",
-    database: undefined,
     port: 5432,
     sql: "SELECT some_column FROM my_database.some_table;",
     user: "user",

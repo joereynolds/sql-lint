@@ -7,7 +7,7 @@ jest.mock("pg", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        port: 5432
+        port: 5432,
       });
       return mock;
     },

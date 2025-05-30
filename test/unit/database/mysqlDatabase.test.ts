@@ -22,17 +22,13 @@ jest.mock("mysql2", () => {
 });
 
 test("it calls createConnection", () => {
-  const db = new MySqlDatabase("localhost", "user", "password", 3306
-  );
+  const db = new MySqlDatabase("localhost", "user", "password", 3306);
 });
 
 test("it calls callback if there is an error", async () => {
   const db = new MySqlDatabase("localhost", "user", "password", 3306);
   const sql = "SELECT some_column FROM some_table WHERE id = 1";
-  expect(await db.lintQuery(sql)).toHaveProperty(
-    "sqlMessage",
-    "table does not exist"
-  );
+  expect(await db.lintQuery(sql)).toHaveProperty("sqlMessage", "table does not exist");
 });
 
 test("it calls end on connection", () => {

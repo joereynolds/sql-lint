@@ -52,19 +52,15 @@ test("it brings back a version number", (done) => {
   shelltest().cmd(`${sqlLint} --version`).expect("stdout", /^\d/).end(done);
 });
 
-test("--port is a valid option", (done) => {
-  shelltest()
-    .cmd(`${sqlLint} --help`)
-    .expect("stdout", /.*--port.*/)
-    .end(done);
-});
-
-test("--config is a valid option", (done) => {
-  shelltest()
-    .cmd(`${sqlLint} --help`)
-    .expect("stdout", /.*--config.*/)
-    .end(done);
-});
+test.each(["--port", "--config", "--database"])(
+  "%s is a valid option",
+  (option) => {
+    shelltest()
+      .cmd(`${sqlLint} --help`)
+      .expect("stdout", new RegExp(`.*${option}.*`))
+      .end();
+  }
+);
 
 test("Good queries exit with 0", (done) => {
   shelltest()

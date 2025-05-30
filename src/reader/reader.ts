@@ -31,7 +31,7 @@ export function putContentIntoLines(contents: string): Query[] {
       currentQueryContent += char;
       continue;
     }
-    
+
     if (escape) {
       escape = false;
       currentQueryContent += char;
@@ -39,7 +39,7 @@ export function putContentIntoLines(contents: string): Query[] {
     }
 
     // Toggle string state
-    if (char === "'" || char === "\"") {
+    if (char === "'" || char === '"') {
       if (currentQuote === null) {
         currentQuote = char;
       } else if (currentQuote === char) {

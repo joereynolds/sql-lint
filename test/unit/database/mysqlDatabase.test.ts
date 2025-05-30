@@ -7,7 +7,7 @@ jest.mock("mysql2", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        database: "database",
+        database: undefined,
         port: 3306,
       });
       return mock;
@@ -27,7 +27,6 @@ test("it calls createConnection", () => {
     "localhost",
     "user",
     "password",
-    "database",
     3306
   );
 });
@@ -37,7 +36,6 @@ test("it calls callback if there is an error", async () => {
     "localhost",
     "user",
     "password",
-    "database",
     3306
   );
   const sql = "SELECT some_column FROM some_table WHERE id = 1";
@@ -52,7 +50,6 @@ test("it calls end on connection", () => {
     "localhost",
     "user",
     "password",
-    "database",
     3306
   );
   db.end();

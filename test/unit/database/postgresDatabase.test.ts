@@ -7,8 +7,8 @@ jest.mock("pg", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        database: "database",
         port: 5432,
+        database: undefined,
       });
       return mock;
     },
@@ -28,7 +28,6 @@ test("it calls createConnection", () => {
     "localhost",
     "user",
     "password",
-    "database",
     5432
   );
 });
@@ -38,7 +37,6 @@ test("it calls callback if there is an error", async () => {
     "localhost",
     "user",
     "password",
-    "database",
     5432
   );
   const sql = "SELECT some_column FROM some_table WHERE id = 1";
@@ -54,7 +52,6 @@ test("it calls end on connection", () => {
     "localhost",
     "user",
     "password",
-    "database",
     5432
   );
   db.end();

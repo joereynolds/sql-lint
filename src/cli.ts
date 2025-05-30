@@ -114,8 +114,8 @@ import databaseFactory from "./database/databaseFactory";
       program.host || configuration?.host || "localhost",
       program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
       program.password || configuration?.password,
-      program.database || configuration?.database,
-      program.port || configuration?.port || undefined // let mysql2 or pg figure out the default port
+      program.port || configuration?.port || undefined, // let mysql2 or pg figure out the default port
+      program.database || configuration?.database || undefined,
     );
   }
 

@@ -27,7 +27,6 @@ test.each([
     "localhost",
     "user",
     "password",
-    "database",
     3306
   );
   expect(database).toBeInstanceOf(expected);
@@ -40,7 +39,6 @@ test("it throws an exception if driver is not supported", () => {
       "localhost",
       "user",
       "password",
-      "database",
       3306
     );
   expect(t).toThrow(Error);

@@ -8,15 +8,15 @@ export default class MySqlDatabase implements IDatabase {
     host: string,
     user: string,
     password: string,
-    database: string,
-    port?: number
+    port?: number,
+    database?: string
   ) {
     this.connection = mysql.createConnection({
       host,
       user,
       password,
-      database,
       port,
+      database,
     });
   }
 

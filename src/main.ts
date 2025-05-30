@@ -11,10 +11,10 @@ interface Parameters {
   host?: string;
   user?: string;
   port?: number;
+  database?: string;
   driver?: string;
   prefix?: string;
   password?: string;
-  database?: string;
   verbosity?: number;
 }
 
@@ -22,10 +22,10 @@ export default async ({
   sql,
   host,
   port,
+  database,
   user = "",
   prefix = "",
   password = "",
-  database = "",
   verbosity = 0,
   driver = "mysql",
 }: Parameters): Promise<IMessage[]> => {
@@ -33,7 +33,7 @@ export default async ({
 
   let db: IDatabase | undefined;
   if (host) {
-    db = databaseFactory(driver, host, user, password, database, port);
+    db = databaseFactory(driver, host, user, password, port, database);
   }
 
   const runner = new CheckerRunner();

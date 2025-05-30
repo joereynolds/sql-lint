@@ -8,15 +8,15 @@ export default class PostgresDatabase implements IDatabase {
     host: string,
     user: string,
     password: string,
-    database: string,
-    port?: number
+    port?: number,
+    database?: string
   ) {
     this.pool = new Pool({
       host,
       user,
       password,
-      database,
       port,
+      database,
     });
   }
 

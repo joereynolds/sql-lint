@@ -26,7 +26,7 @@ test.each([
       error: "[sql-lint: trailing-whitespace] Trailing whitespace",
     },
   ],
-])("it can run programmatically", async (sql, expected) => {
+])("it can run programmatically (%s)", async (sql, expected) => {
   const errors = await sqlLint({ sql: sql });
   expect(errors[0]).toMatchObject(expected);
 });
@@ -70,7 +70,7 @@ jest.mock("mysql2", () => {
         user: "user",
         host: "localhost",
         password: "password",
-        database: "database",
+        database: undefined,
       });
       return mock;
     },
@@ -91,7 +91,7 @@ test("it uses db connection is provided", async () => {
     user: "user",
     host: "localhost",
     password: "password",
-    database: "database",
+    database: undefined,
     sql: "SELECT some_column FROM my_database.some_table;",
   };
 
@@ -110,7 +110,7 @@ jest.mock("pg", () => {
         host: "localhost",
         user: "user",
         password: "password",
-        database: "database",
+        database: undefined,
         port: 5432,
       });
       return mock;
@@ -131,7 +131,7 @@ test("it uses correct driver when provided", async () => {
     driver: "postgres",
     host: "localhost",
     password: "password",
-    database: "database",
+    database: undefined,
     port: 5432,
     sql: "SELECT some_column FROM my_database.some_table;",
     user: "user",

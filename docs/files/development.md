@@ -93,6 +93,9 @@ Change your config file in `~/.config/sql-lint/config.json` to have the followin
 }
 ```
 
+Optionally, you can also add `"database": "your_database_name"` if you want to connect 
+to a specific database. However, most tests were written without this option.
+
 ## This documentation
 
 This documentation is built on `sphinx` and `readthedocs`. To run it locally,

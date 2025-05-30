@@ -66,7 +66,6 @@ class CheckerRunner {
           printer.warnAboutUncategoriseableQuery(content, tokenised, prefix);
         }
 
-
         for (const check of checks) {
           const checker = factory.build(check);
 

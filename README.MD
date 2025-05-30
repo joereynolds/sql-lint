@@ -76,7 +76,7 @@ Below is the list that have direct support for `sql-lint` either through plugins
 
 ## Checks
 
-A quick rundown of the checks is below but you should [read the documentation](https://sql-lint.readthedocs.io/en/latest/files/checks.html) 
+A quick rundown of the checks is below but you should [read the documentation](https://sql-lint.readthedocs.io/en/latest/files/checks.html)
 for an exhaustive list.
 
 `sql-lint` comes with its own suite of checks. It

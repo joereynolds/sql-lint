@@ -33,7 +33,8 @@ You should put the following in there for more intelligent errors to come throug
     "host": "localhost",
     "user": "root",
     "password": "hunter2",
-    "port": 3306
+    "port": 3306,
+    "database": "your_database"
 }
 ```
 
@@ -67,6 +68,12 @@ The password for the database server.
 The port to connect to.
 
 Optional, default is `3306`.
+
+### `database`
+
+The database to connect to.
+
+Optional, default is no database, where you will have to specify the database in your queries.
 
 ### `ignore-errors`
 
@@ -115,6 +122,8 @@ The below configuration contains every option available.
     "host": "localhost",
     "user": "root",
     "password": "password",
+    "port": 3306,
+    "database": "your_database",
     "ignore-errors": [
         "odd-code-point",
         "missing-where",

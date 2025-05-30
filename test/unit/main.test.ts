@@ -26,7 +26,7 @@ test.each([
       error: "[sql-lint: trailing-whitespace] Trailing whitespace",
     },
   ],
-])("it can run programmatically", async (sql, expected) => {
+])("it can run programmatically (%s)", async (sql, expected) => {
   const errors = await sqlLint({ sql: sql });
   expect(errors[0]).toMatchObject(expected);
 });

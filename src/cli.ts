@@ -37,6 +37,7 @@ import databaseFactory from "./database/databaseFactory";
     .option("--host <string>", "The host for the database connection")
     .option("--user <string>", "The user for the database connection")
     .option("--password <string>", "The password for the database connection")
+    .option("--database <string>", "The database for the database connection")
     .option("--port <string>", "The port for the database connection")
     .option("--config <string>", "The path to the configuration file")
     .option("--ignore-errors <string...>", "The errors to ignore (comma separated)")
@@ -113,7 +114,8 @@ import databaseFactory from "./database/databaseFactory";
       program.host || configuration?.host || "localhost",
       program.user || configuration?.user || "root", // bad practice but unfortunately common, make it easier for the user
       program.password || configuration?.password,
-      program.port || configuration?.port || undefined // let mysql2 or pg figure out the default port
+      program.port || configuration?.port || undefined, // let mysql2 or pg figure out the default port
+      program.database || configuration?.database || undefined,
     );
   }
 

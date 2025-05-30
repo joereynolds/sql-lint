@@ -11,6 +11,7 @@ interface Parameters {
   host?: string;
   user?: string;
   port?: number;
+  database?: string;
   driver?: string;
   prefix?: string;
   password?: string;
@@ -21,41 +22,26 @@ export default async ({
   sql,
   host,
   port,
-  user = '',
-  prefix = '',
-  password = '',
+  database,
+  user = "",
+  prefix = "",
+  password = "",
   verbosity = 0,
-  driver = 'mysql',
+  driver = "mysql",
 }: Parameters): Promise<IMessage[]> => {
-  const printer = new Printer(
-    verbosity,
-    new JsonFormat(),
-  );
+  const printer = new Printer(verbosity, new JsonFormat());
 
-  let db: IDatabase|undefined;
+  let db: IDatabase | undefined;
   if (host) {
-    db = databaseFactory(
-      driver,
-      host,
-      user,
-      password,
-      port,
-    )
+    db = databaseFactory(driver, host, user, password, port, database);
   }
 
   const runner = new CheckerRunner();
-  await runner.run(
-    putContentIntoLines(sql),
-    printer,
-    prefix,
-    [],
-    driver,
-    db,
-  )
+  await runner.run(putContentIntoLines(sql), printer, prefix, [], driver, db);
 
   if (db) {
     db.end();
   }
 
   return printer.messages;
-}
+};

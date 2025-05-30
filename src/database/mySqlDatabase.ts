@@ -4,12 +4,19 @@ import IDatabase, { sqlError } from "./interface";
 export default class MySqlDatabase implements IDatabase {
   private connection: mysql.Connection;
 
-  constructor(host: string, user: string, password: string, port?: number) {
+  constructor(
+    host: string,
+    user: string,
+    password: string,
+    port?: number,
+    database?: string
+  ) {
     this.connection = mysql.createConnection({
       host,
       user,
       password,
       port,
+      database,
     });
   }
 

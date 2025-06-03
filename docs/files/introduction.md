@@ -114,6 +114,10 @@ The user for the connection.
 
 The password for the connection.
 
+### --database
+
+The database for the connection.
+
 ### --port 
 
 Default is `3306`.

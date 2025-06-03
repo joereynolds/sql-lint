@@ -116,6 +116,8 @@ The password for the connection.
 
 ### --database
 
+Optional, default is no database, where you will have to specify the database in your queries.
+
 The database for the connection.
 
 ### --port 

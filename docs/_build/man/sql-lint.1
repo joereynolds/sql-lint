@@ -1,0 +1,742 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "SQL-LINT" "1" "Jun 03, 2025" "" "sql-lint"
+.SH NAME
+sql-lint \- sql-lint Documentation
+.SH INTRODUCTION
+.SS What is sql\-lint?
+.sp
+\fBsql\-lint\fP is a linter for SQL dialects. It currently supports MySQL and
+Postgres. It brings errors to your attention, suggests what\(aqs wrong with them,
+why it may be wrong, and what you can do as a developer to fix it. Generally
+these errors are more verbose and specific than those coming from an SQL server.
+.sp
+Here\(aqs a small excerpt of its use:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+: sql\-lint test/test\-files//test.sql 
+test/test\-files//test.sql:16 [sql\-lint: unmatched\-parentheses] Unmatched parentheses.
+test/test\-files//test.sql:20 [sql\-lint: missing\-where] DELETE statement missing WHERE clause.
+test/test\-files//test.sql:22 [sql\-lint: invalid\-drop\-option] Option \(aqthing\(aq is not a valid option, must be one of \(aq[\(dqdatabase\(dq,\(dqevent\(dq,\(dqfunction\(dq,\(dqindex\(dq,\(dqlogfile\(dq,\(dqprocedure\(dq,\(dqschema\(dq,\(dqserver\(dq,\(dqtable\(dq,\(dqview\(dq,\(dqtablespace\(dq,\(dqtrigger\(dq]\(aq.
+test/test\-files//test.sql:26 [sql\-lint: invalid\-truncate\-option] Option \(aqsomething\(aq is not a valid option, must be one of \(aq[\(dqtable\(dq]\(aq.
+test/test\-files//test.sql:30 [sql\-lint: odd\-code\-point] Unexpected code point.
+test/test\-files//test.sql:32 [sql\-lint: invalid\-limit\-quantifier] Argument \(aqtest\(aq is not a valid quantifier for LIMIT clause.
+test/test\-files//test.sql:24 [ER_PARSE_ERROR] You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \(aqCREATE test person\(aq at line 1
+test/test\-files//test.sql:39 [ER_NO_SUCH_TABLE] Table \(aqsymfony.dont_exist\(aq doesn\(aqt exist
+.EE
+.UNINDENT
+.UNINDENT
+.SS Usage
+.sp
+\fBsql\-lint\fP is used from the command line in several ways.
+.SS Via stdin
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+echo \(dqDELETE FROM person;\(dq | sql\-lint
+.EE
+.UNINDENT
+.UNINDENT
+.SS With a file
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint test\-file.sql
+.EE
+.UNINDENT
+.UNINDENT
+.SS Command line options
+.SS \-V \-\-version
+.sp
+The version of \fBsql\-lint\fP\&.
+Useful for bug reports and confirming what features are available to you.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint \-\-version
+> 0.0.11
+.EE
+.UNINDENT
+.UNINDENT
+.SS \-d \-\-driver
+.sp
+\fBmysql\fP | \fBpostgres\fP
+.sp
+Default is \fBmysql\fP\&.
+.sp
+The driver to use.
+.SS \-v \-\-verbose
+.sp
+How verbose to be with output. \fB\-v\fP will print out the output from the lexer.
+Usually you do not want any verbosity. Useful for bug reports and debugging.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint \-\-verbose
+> ...
+.EE
+.UNINDENT
+.UNINDENT
+.SS \-\-config
+.sp
+The path for the configuration file.
+.sp
+Default is \fB$HOME/.config/sql\-lint/config.json\fP
+.SS \-\-format
+.sp
+\fBsimple\fP | \fBjson\fP
+.sp
+Default is \fBsimple\fP\&.
+.sp
+The output format of \fBsql\-lint\fP\&.
+.sp
+\fBsimple\fP is the most user friendly and human readable. You won\(aqt usually change
+the format unless you have a reason to.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+echo \(aqDELETE FROM person;\(aq | sql\-lint
+> stdin:1 [sql\-lint: missing\-where] DELETE statement missing WHERE clause.
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+\fBjson\fP can be used if you wish. Usually this is done for editor
+integration or for consumption via some other service.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+echo \(aqDELETE FROM person;\(aq | sql\-lint \-\-format json
+> {
+     \(dqsource\(dq:\(dqstdin\(dq,
+     \(dqerror\(dq:\(dq[sql\-lint: missing\-where] DELETE statement missing WHERE clause.\(dq,
+     \(dqline\(dq:1
+}
+.EE
+.UNINDENT
+.UNINDENT
+.SS \-\-host
+.sp
+The host for the connection.
+.SS \-\-user
+.sp
+The user for the connection.
+.SS \-\-password
+.sp
+The password for the connection.
+.SS \-\-database
+.sp
+Optional, default is no database, where you will have to specify the database in your queries.
+.sp
+The database for the connection.
+.SS \-\-port
+.sp
+Default is \fB3306\fP\&.
+.sp
+The port for the connection.
+.SS \-h \-\-help
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+: sql\-lint \-h
+Usage: sql\-lint [options]
+
+Lint sql files and stdin for errors, oddities, and bad practices.
+
+Options:
+  \-V, \-\-version                output the version number
+  \-\-fix [string]               The .sql string to fix (experimental and alpha)
+  \-d, \-\-driver <string>        The driver to use, must be one of [\(aqmysql\(aq, \(aqpostgres\(aq]
+  \-v, \-\-verbose                Brings back information on the what it\(aqs linting and the tokens generated
+  \-\-format <string>            The format of the output, can be one of [\(aqsimple\(aq, \(aqjson\(aq] (default: \(dqsimple\(dq)
+  \-\-host <string>              The host for the database connection
+  \-\-user <string>              The user for the database connection
+  \-\-password <string>          The password for the database connection
+  \-\-database <string>          The database for the database connection
+  \-\-port <string>              The port for the database connection
+  \-\-config <string>            The path to the configuration file
+  \-\-ignore\-errors <string...>  The errors to ignore (comma separated)
+  \-h, \-\-help                   display help for command
+.EE
+.UNINDENT
+.UNINDENT
+.SS Programmatic Access
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+import sqlLint from \(aqsql\-lint\(aq
+
+// using async/await
+
+const errors = await sqlLint({
+  sql: \(aqSELECT my_column FROM my_table\(aq,
+})
+
+// or using promise
+
+sqlLint({ sql: \(aqSELECT my_column FROM my_table\(aq }).then(errors => {
+  for (const error of errors) {
+    // do something
+  }
+})
+
+.EE
+.UNINDENT
+.UNINDENT
+.SS Parameters
+.sp
+sql\-lint accepts an object using the following interface as its only argument
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+  sql: string
+  host?: string
+  user?: string
+  port?: number
+  driver?: string
+  prefix?: string
+  password?: string
+  verbosity?: number
+}
+.EE
+.UNINDENT
+.UNINDENT
+.SS Notes on some of the parameters
+.sp
+\fBsql\fP: can have multiple queries separated by \fB;\fP
+.sp
+\fBhost\fP: if host is not provided \fBsql\-lint\fP will only perform checks that do not require a connection
+.sp
+\fBdriver\fP: defaults to mysql
+.sp
+\fBport\fP: if port is not provided it will use the default port for the driver you are using
+.SS Output
+.sp
+sql\-lint returns an \fBarray\fP of objects with the following shape
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+  line: number
+  error: string
+  source: string
+  additionalInformation: string
+}
+.EE
+.UNINDENT
+.UNINDENT
+.SH INSTALLATION
+.sp
+Installation is simple. Download a pre\-built
+\X'tty: link https://github.com/joereynolds/sql-lint/releases'\fI\%binary\fP\X'tty: link' from Github. Once
+you\(aqve installed \fBsql\-lint\fP, you will want to \fI\%configure it\fP for the best
+experience.
+.sp
+\fBsql\-lint\fP supports Mac, Linux, and Windows.
+.sp
+If you prefer, you can do \fBnpm i \-g sql\-lint\fP or \fByarn global add sql\-lint\fP if you\(aqre using yarn.
+.SS Programmatic Access
+.sp
+For programmatic access you\(aqll want to instead install \fBsql\-lint\fP into your node project with \fBnpm i sql\-lint\fP or \fByarn add sql\-lint\fP\&.
+.SH CONFIGURATION
+.sp
+Configuring \fBsql\-lint\fP to connect to your database of choice allows even more
+errors to come through. Errors that \fBsql\-lint\fP wouldn\(aqt find itself. To do this
+is easy, simply supply the connection details to your database in one of two
+ways:
+.SS Via CLI
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint \-\-driver=\(dqmysql\(dq \-\-host=\(dqlocalhost\(dq \-\-user=\(dqroot\(dq \-\-password=\(dqhunter2\(dq
+.EE
+.UNINDENT
+.UNINDENT
+.SS Via File
+.sp
+\fBsql\-lint\fP will search the current working directory and its parent directories
+for a configuration file \fB\&.sql\-lint.json\fP\&. This allows you to have
+directory\-local configurations for different projects. If no \fB\&.sql\-lint.json\fP
+is found, it will fall back to the global configuration file.
+.sp
+A global configuration file for \fBsql\-lint\fP can reside in
+\fB~/.config/sql\-lint/config.json\fP\&.  It follows the \X'tty: link https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html'\fI\%XDG Base Directory
+Specification\fP\X'tty: link'\&.
+Specifically, it uses \fB$HOME/.config\fP\&.
+.sp
+You can also manually specify a path for the config with the \fB\-\-config\fP flag.
+.sp
+You should put the following in there for more intelligent errors to come through
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+    \(dqdriver\(dq: \(dqmysql\(dq,
+    \(dqhost\(dq: \(dqlocalhost\(dq,
+    \(dquser\(dq: \(dqroot\(dq,
+    \(dqpassword\(dq: \(dqhunter2\(dq,
+    \(dqport\(dq: 3306,
+    \(dqdatabase\(dq: \(dqyour_database\(dq
+}
+.EE
+.UNINDENT
+.UNINDENT
+.SS Configuration options
+.sp
+An exhaustive list of the configuration options for your \fBconfig.json\fP file are
+below.
+.SS \fBdriver\fP
+.sp
+The driver to be used to check for errors.
+Accepted ones are \fBmysql\fP and \fBpostgres\fP\&.
+.sp
+Optional, default is \fBmysql\fP\&.
+.SS \fBhost\fP
+.sp
+The host of the database server.
+.SS \fBuser\fP
+.sp
+The user for the database server.
+.SS \fBpassword\fP
+.sp
+The password for the database server.
+.SS \fBport\fP
+.sp
+The port to connect to.
+.sp
+Optional, default is \fB3306\fP\&.
+.SS \fBdatabase\fP
+.sp
+The database to connect to.
+.sp
+Optional, default is no database, where you will have to specify the database in your queries.
+.SS \fBignore\-errors\fP
+.sp
+Don\(aqt want to be warned about a particular error?
+In that case add it to the \fBignore\-errors\fP array in \fB~/.config/sql\-lint/config.json\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+    \(dqhost\(dq: \(dqlocalhost\(dq,
+    \(dquser\(dq: \(dqroot\(dq,
+    \(dqpassword\(dq: \(dqpassword\(dq,
+    \(dqignore\-errors\(dq: [
+        \(dqodd\-code\-point\(dq,
+        \(dqmissing\-where\(dq
+    ]
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+The example above will skip checks for odd code points and \fBDELETE\fP statements with missing \fBWHERE\fP clauses.
+.sp
+For a full list of all available checks, see \fI\%the check
+documentation\fP
+.sp
+You cannot skip checks that are returned from the DB server itself, only the checks built into \fBsql\-lint\fP\&.
+.sp
+Note that this option is also available as a flag on the cli.
+i.e.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint \-\-ignore\-errors=trailing\-whitespace some\-sql\-file.sql
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Multiple errors can be comma separated:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+sql\-lint \-\-ignore\-errors=trailing\-whitespace,missing\-where,hungarian\-notation some\-sql\-file.sql
+.EE
+.UNINDENT
+.UNINDENT
+.SS Example configuration
+.sp
+The below configuration contains every option available.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+    \(dqhost\(dq: \(dqlocalhost\(dq,
+    \(dquser\(dq: \(dqroot\(dq,
+    \(dqpassword\(dq: \(dqpassword\(dq,
+    \(dqport\(dq: 3306,
+    \(dqdatabase\(dq: \(dqyour_database\(dq,
+    \(dqignore\-errors\(dq: [
+        \(dqodd\-code\-point\(dq,
+        \(dqmissing\-where\(dq,
+        \(dqinvalid\-drop\-option\(dq,
+        \(dqinvalid\-create\-option\(dq,
+        \(dqinvalid\-truncate\-option\(dq,
+        \(dqinvalid\-alter\-option\(dq,
+        \(dqhungarian\-notation\(dq,
+        \(dqtrailing\-whitespace\(dq
+    ]
+}
+.EE
+.UNINDENT
+.UNINDENT
+.SS A word of warning
+.sp
+Do not version control your configuration file unless you know what you\(aqre
+doing. Stick it in your global \fB\&.gitignore\fP to be safe.
+.SS Editor Integration
+.sp
+\fBsql\-lint\fP can integrate with any editor that supports external plugins.
+.SS Vim / Neovim
+.SS Ale
+.sp
+\fBsql\-lint\fP can be integrated into (Neo)Vim with \X'tty: link https://github.com/dense-analysis/ale/'\fI\%Ale\fP\X'tty: link'\&.
+.SS Vanilla
+.sp
+If you want to go without a plugin, the simplest option is to run the following:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+:!sql\-lint %
+.EE
+.UNINDENT
+.UNINDENT
+.SH CHECKS
+.sp
+\fBsql\-lint\fP comes with its own suite of checks. Aside from its own checks, it
+also returns any errors from the SQL server you have connected to. Generally
+you\(aqll find that the errors from \fBsql\-lint\fP are more informative than those from
+the server. That said, you will still want errors from the server as it covers
+more cases and will catch things that \fBsql\-lint\fP does not.
+.SS Reference
+.SS unmatched\-parentheses
+.sp
+Shown when a query has an unbalanced amount of parentheses.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files//test.sql:16 [sql\-lint: unmatched\-parentheses] Unmatched parentheses.
+.EE
+.UNINDENT
+.UNINDENT
+.SS missing\-where
+.sp
+Shown when a \fBDELETE\fP statement is missing a \fBWHERE\fP clause.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:20 [sql\-lint: missing\-where] DELETE statement missing WHERE clause.
+.EE
+.UNINDENT
+.UNINDENT
+.SS invalid\-drop\-option
+.sp
+Shown when an invalid option is given to the \fBDROP\fP statement.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:22 [sql\-lint: invalid\-drop\-option] Option \(aqthing\(aq is not a valid option, must be one of \(aq[\(dqdatabase\(dq,\(dqevent\(dq,\(dqfunction\(dq,\(dqindex\(dq,\(dqlogfile\(dq,\(dqprocedure\(dq,\(dqschema\(dq,\(dqserver\(dq,\(dqtable\(dq,\(dqview\(dq,\(dqtablespace\(dq,\(dqtrigger\(dq]\(aq.
+.EE
+.UNINDENT
+.UNINDENT
+.SS invalid\-create\-option
+.sp
+Shown when an invalid option is given to the \fBCREATE\fP statement.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+:24 [sql\-lint: invalid\-create\-option] Option \(aqtest\(aq is not a valid option, must be one of \(aq[\(dqalgorithm\(dq,\(dqdatabase\(dq,\(dqdefiner\(dq,\(dqevent\(dq,\(dqfunction\(dq,\(dqindex\(dq,\(dqor\(dq,\(dqprocedure\(dq,\(dqserver\(dq,\(dqtable\(dq,\(dqtablespace\(dq,\(dqtemporary\(dq,\(dqtrigger\(dq,\(dquser\(dq,\(dqunique\(dq,\(dqview\(dq]\(aq.
+.EE
+.UNINDENT
+.UNINDENT
+.SS invalid\-truncate\-option
+.sp
+Shown when an invalid option is given to the \fBTRUNCATE\fP statement.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:26 [sql\-lint: invalid\-truncate\-option] Option \(aqsomething\(aq is not a valid option, must be one of \(aq[\(dqtable\(dq]\(aq.
+.EE
+.UNINDENT
+.UNINDENT
+.SS invalid\-alter\-option
+.sp
+Shown when an invalid option is given to the \fBALTER\fP statement.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:28 [sql\-lint: invalid\-alter\-option] Option \(aqmlady\(aq is not a valid option, must be one of \(aq[\(dqcolumn\(dq,\(dqonline\(dq,\(dqoffline\(dq,\(dqignore\(dq,\(dqdatabase\(dq,\(dqevent\(dq,\(dqfunction\(dq,\(dqprocedure\(dq,\(dqserver\(dq,\(dqtable\(dq,\(dqtablespace\(dq,\(dqview\(dq]\(aq.
+.EE
+.UNINDENT
+.UNINDENT
+.SS odd\-code\-point
+.sp
+Shown when there are unsupported/unusual* code points in your code.
+.sp
+*This check came about whilst working Microsoft Excel. Microsoft likes to
+add a lot of zany characters which can subtly break your data without you
+realising.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files//test.sql:30 [sql\-lint: odd\-code\-point] Unexpected code point.
+.EE
+.UNINDENT
+.UNINDENT
+.SS invalid\-limit\-quantifier
+.sp
+Shown when you specify something other than a number to the \fBLIMIT\fP statement.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files//test.sql:32 [sql\-lint: invalid\-limit\-quantifier] Argument \(aqtest\(aq is not a valid quantifier for LIMIT clause.
+.EE
+.UNINDENT
+.UNINDENT
+.SS hungarian\-notation
+.sp
+Shown when the string \fBsp_\fP or \fBtbl_\fP is present in the query.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:34 [sql\-lint: hungarian\-notation] Hungarian notation present in query
+.EE
+.UNINDENT
+.UNINDENT
+.SS trailing\-whitespace
+.sp
+Shown when a query has trailing whitespace.
+.SS Example output
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+test/test\-files/test.sql:34 [sql\-lint: trailing\-whitespace] Trailing whitespace
+.EE
+.UNINDENT
+.UNINDENT
+.SH TROUBLESHOOTING
+.SS I\(aqm not seeing any warnings
+.sp
+Run \fBsql\-lint your\-file\fP and it will display the exception.
+Add the \fB\-v\fP flag for more information.
+.SS It\(aqs telling me there\(aqs a syntax error when there\(aqs clearly not.
+.sp
+Chances are you\(aqre using an old(er) version of MySQL.
+\fBEXPLAIN\fPing on \fBINSERT|UPDATE|DELETE\fP was added in Mysql 5.6.
+.SH DEVELOPMENT
+.sp
+If you\(aqre interested in helping further the development of \fBsql\-lint\fP then read
+on. Casual users can ignore this section.
+.SS How it works
+.sp
+A raw query (either from stdin, a file, or a string) hits \fBmain.ts\fP\&.
+This query then gets categorised into the type of statement it is (\fBSELECT\fP,
+\fBINSERT\fP, \fBUPDATE\fP, \fBDELETE\fP etc...), as the SQL grammar is pretty damn huge, there is
+a lexer per statement. This adds redundancy but increases flexibility.
+.sp
+Once a query has been categorised, it is then lexxed by the relevant lexer. See the
+\fBsrc/lexer\fP directory for the inner workings.
+.sp
+i.e. if we have the statement
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+SELECT name FROM user
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+This will hit the lexer which will categorise this as a \fBSELECT\fP statement which
+the \fBSELECT\fP lexer will then tokenise. The tokenised string is then
+passed through to every checker to look for any linting errors.
+.SS Adding a check
+.sp
+If you want to add your own check, read on. It\(aqs quite simple but also verbose.
+.sp
+This can probably be automated to make it WAY easier.
+.sp
+Anyway, here are the steps.
+.INDENT 0.0
+.IP \(bu 2
+Create a check under \fBsrc/checker/checks\fP
+.INDENT 2.0
+.IP \(bu 2
+The name of the class is also the name of the checker so name it well
+.UNINDENT
+.IP \(bu 2
+Add your check to \fBsrc/barrel/checks.ts\fP
+.INDENT 2.0
+.IP \(bu 2
+All checks live here so we can import them all conveniently
+.UNINDENT
+.IP \(bu 2
+Import your check in \fBsrc/checker/checkFactory.ts\fP
+.IP \(bu 2
+Add your check to the \fBcheckMap\fP in \fBsrc/checker/checkFactory.ts\fP
+.IP \(bu 2
+Add it to the README.md so people know it\(aqs a thing
+.IP \(bu 2
+Add it to \fBconfiguration.md\fP\&. This is an exhaustive list of the checks
+.IP \(bu 2
+Add tests. The name of the test should match the name of the check
+.IP \(bu 2
+Add it to \fBchecks.md\fP, the main documentation for checks
+.IP \(bu 2
+\fBnpm run build\fP to compile the changes
+.UNINDENT
+.SS Troubleshooting
+.SS \fBTypeError: checkMap[check] is not a constructor\fP
+.sp
+Your check is not being picked up by the \fBcheckerRunner\fP\&. log out what the value
+of \fBchecks\fP is in \fBcheckerRunner\fP \fBafter\fP the \fBsplice\fPing.
+.SS Testing the code
+.sp
+Testing requires sql\-lint to be installed.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+npm install \-g sql\-lint
+\&./build/build.sh //This will run more than just the tests (recommended)
+.EE
+.UNINDENT
+.UNINDENT
+.SS Using the Docker container
+.sp
+First, make sure port \fB3306\fP is available locally.  (You can do this by
+inspecting the output of \fBsudo lsof \-i :3306\fP and \fBdocker ps\fP and \fBkill\fPing
+anything using that port) Now do:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+docker\-compose up \-\-build \-d \-\-force\-recreate
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+At this point the container(s) will be up and ready to use.  You can login with
+the following credentials: \fBmysql \-u root \-ppassword\fP\&.
+.sp
+Here\(aqs an example of a query:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+docker exec sqllint_mysql_1 mysql \-u root \-ppassword \-e \(dqSHOW DATABASES\(dq
+.EE
+.UNINDENT
+.UNINDENT
+.SS Connecting sql\-lint to the Docker container
+.sp
+Change your config file in \fB~/.config/sql\-lint/config.json\fP to have the following values:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+{
+    \(dqdriver\(dq: \(dqmysql\(dq,
+    \(dqhost\(dq: \(dqlocalhost\(dq,
+    \(dquser\(dq: \(dqroot\(dq,
+    \(dqpassword\(dq: \(dqpassword\(dq,
+    \(dqport\(dq: 3306
+}
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Optionally, you can also add \fB\(dqdatabase\(dq: \(dqyour_database_name\(dq\fP if you want to connect
+to a specific database. However, most tests were written without this option.
+.SS This documentation
+.sp
+This documentation is built on \fBsphinx\fP and \fBreadthedocs\fP\&. To run it locally,
+you will need the following:
+.INDENT 0.0
+.IP \(bu 2
+The \fBsql\-lint\fP repository (documentation lies in \fBdocs/\fP)
+.IP \(bu 2
+\fBsphinx\fP to be installed (\fBpip install sphinx\fP)
+.IP \(bu 2
+\fBsphinx\-rtd\-theme\fP to be installed (\fBpip install sphinx\-rtd\-theme\fP)
+.IP \(bu 2
+\fBrecommonmark\fP to be installed (\fBpip install recommonmark\fP)
+.UNINDENT
+.sp
+Once those prerequisites are met, you can edit the files and see them exactly
+how they would appear on readthedocs.
+.sp
+installed.
+.SH AUTHOR
+Joe Reynolds
+.SH COPYRIGHT
+2020, Joe Reynolds
+.\" Generated by docutils manpage writer.
+.

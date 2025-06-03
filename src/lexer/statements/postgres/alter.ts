@@ -11,6 +11,7 @@ class PostgresAlter implements ILexer {
     "online",
     "offline",
     "ignore",
+    "index",
     "database",
     "default",
     "event",

@@ -9,7 +9,7 @@ export default class PostgresDatabase implements IDatabase {
     user: string,
     password: string,
     port?: number,
-    database?: string
+    database?: string,
   ) {
     this.pool = new Pool({
       host,

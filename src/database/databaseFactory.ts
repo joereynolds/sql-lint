@@ -8,7 +8,7 @@ export default function databaseFactory(
   user: string,
   password: string,
   port?: number,
-  database?: string
+  database?: string,
 ): IDatabase {
   switch (driver) {
     case "mysql":

@@ -9,7 +9,7 @@ function categorise(query: string) {
   const keywordLookup: { [keywordName: string]: string } = Keyword as any;
 
   const result = Object.keys(Keyword).find((keyword) =>
-    query.startsWith(keywordLookup[keyword])
+    query.startsWith(keywordLookup[keyword]),
   );
 
   if (result) {

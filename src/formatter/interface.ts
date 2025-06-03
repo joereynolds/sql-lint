@@ -4,7 +4,7 @@ export interface IFormat {
   getMessage(
     prefix: string,
     result: CheckerResult,
-    verbosity: number
+    verbosity: number,
   ): string | IMessage;
 }
 

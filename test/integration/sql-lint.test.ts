@@ -59,7 +59,7 @@ test.each(["--port", "--config", "--database"])(
       .cmd(`${sqlLint} --help`)
       .expect("stdout", new RegExp(`.*${option}.*`))
       .end();
-  }
+  },
 );
 
 test("Good queries exit with 0", (done) => {

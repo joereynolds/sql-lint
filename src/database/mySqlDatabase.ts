@@ -9,7 +9,7 @@ export default class MySqlDatabase implements IDatabase {
     user: string,
     password: string,
     port?: number,
-    database?: string
+    database?: string,
   ) {
     this.connection = mysql.createConnection({
       host,
@@ -24,7 +24,7 @@ export default class MySqlDatabase implements IDatabase {
     return new Promise<sqlError | null>((resolve) => {
       this.connection.query(`EXPLAIN ${query}`, (err) => {
         if (err) {
-          resolve((err as unknown) as sqlError);
+          resolve(err as unknown as sqlError);
           return;
         }
 

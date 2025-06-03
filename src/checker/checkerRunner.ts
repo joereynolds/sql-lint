@@ -17,7 +17,7 @@ class CheckerRunner {
     prefix: string,
     omittedErrors: string[],
     driver: string,
-    database?: IDatabase
+    database?: IDatabase,
   ) {
     const checks = fs
       .readdirSync(`${__dirname}/checks/any`)

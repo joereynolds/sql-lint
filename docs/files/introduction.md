@@ -126,18 +126,22 @@ The port for the connection.
 : sql-lint -h
 Usage: sql-lint [options]
 
+Lint sql files and stdin for errors, oddities, and bad practices.
+
 Options:
-  -V, --version          output the version number
-  --fix [string]         The .sql string to fix
-  -d, --driver <string>  The driver to use, must be one of ['mysql', 'postgres']
-  -v, --verbose          Brings back information on the what it's linting and the tokens generated
-  --format <string>      The format of the output, can be one of ['simple', 'json'] (default: "simple")
-  --host <string>        The host for the connection
-  --user <string>        The user for the connection
-  --password <string>    The password for the connection
-  --port <string>        The port for the connection
-  --config <string>      The path to the configuration file
-  -h, --help             display help for command
+  -V, --version                output the version number
+  --fix [string]               The .sql string to fix (experimental and alpha)
+  -d, --driver <string>        The driver to use, must be one of ['mysql', 'postgres']
+  -v, --verbose                Brings back information on the what it's linting and the tokens generated
+  --format <string>            The format of the output, can be one of ['simple', 'json'] (default: "simple")
+  --host <string>              The host for the database connection
+  --user <string>              The user for the database connection
+  --password <string>          The password for the database connection
+  --database <string>          The database for the database connection
+  --port <string>              The port for the database connection
+  --config <string>            The path to the configuration file
+  --ignore-errors <string...>  The errors to ignore (comma separated)
+  -h, --help                   display help for command
 ```
 
 ## Programmatic Access

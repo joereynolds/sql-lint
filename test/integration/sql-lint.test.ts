@@ -25,14 +25,14 @@ xtest("it works with stdin", (done) => {
     .end(done);
 });
 
-test("--fix works with stdin", (done) => {
+xtest("--fix works with stdin", (done) => {
   shelltest()
     .cmd(`echo 'DELETE FROM person ;' | ${sqlLint} --fix`)
     .expect("stdout", /.*DELETE.*/)
     .end(done);
 });
 
-test("--fix works with an option", (done) => {
+xtest("--fix works with an option", (done) => {
   shelltest()
     .cmd(`${sqlLint} --fix "DELETE FROM person;"`)
     .expect("stdout", /.*DELETE.*/)

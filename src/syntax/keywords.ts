@@ -8,6 +8,7 @@ export enum Keyword {
   Declare = "declare",
   Delete = "delete",
   Delimiter = "delimiter",
+  Do = "do",
   Drop = "drop",
   Else = "else",
   End = "end",

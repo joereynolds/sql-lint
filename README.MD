@@ -45,7 +45,7 @@ npm i sql-lint
 yarn add sql-lint
 ```
 
-```
+```js
 import sqlLint from 'sql-lint'
 
 // using async/await
